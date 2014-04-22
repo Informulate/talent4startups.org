@@ -7,5 +7,7 @@ php:
 before_script:
   - composer install --dev --prefer-source --no-interaction
 
+script: vendor/bin/phpspec run
+
 notifications:
   slack: informulate:Io7yxfri2SwOzQ0h3KUG4OFB
