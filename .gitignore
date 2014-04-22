@@ -2,9 +2,9 @@
 /bootstrap/compiled.php
 /vendor
 composer.phar
-composer.lock
 .env.local.php
 .env.php
 .DS_Store
 .idea
 Thumbs.db
+_ide_helper.php
