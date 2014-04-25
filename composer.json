@@ -7,6 +7,7 @@
 		"laravel/framework": "4.1.*",
 		"laravelbook/ardent": "dev-master",
 		"zizaco/confide": "3.2.x",
+		"way/generators": "dev-master",
 		"barryvdh/laravel-ide-helper": "dev-master",
 		"phpspec/phpspec": "dev-develop",
 		"fzaninotto/faker": "1.4.*@dev"
