@@ -12,7 +12,8 @@ class CreateOccupationTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('occupations', function($table)
+
+		Schema::create('occupations', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
