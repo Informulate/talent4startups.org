@@ -74,4 +74,9 @@ class User extends ConfideUser implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 
+	public function occupations()
+	{
+		return $this->belongsToMany('Occupation')->withPivot('interest');
+	}
+
 }

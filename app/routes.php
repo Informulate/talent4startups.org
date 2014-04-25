@@ -19,10 +19,12 @@ Route::get('/', function()
 Route::group(['prefix' => 'api/v1'], function()
 {
 	Route::resource('occupations', 'OccupationController');
+	Route::resource('users', 'UserController');
 });
 
 // Confide routes
 Route::get( 'user/create',                 'UserController@create');
+Route::get( 'user/{id}',                   'UserController@show');
 Route::post('user',                        'UserController@store');
 Route::get( 'user/login',                  'UserController@login');
 Route::post('user/login',                  'UserController@do_login');
