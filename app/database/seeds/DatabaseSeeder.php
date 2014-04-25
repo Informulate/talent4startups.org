@@ -11,8 +11,15 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		User::truncate();
 		Occupation::truncate();
+		Tag::truncate();
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+		$this->call('UsersTableSeeder');
 		$this->call('OccupationsTableSeeder');
+		$this->call('TagsTableSeeder');
 	}
 
 }
