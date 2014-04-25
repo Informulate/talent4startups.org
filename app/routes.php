@@ -15,6 +15,12 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::group(['prefix' => 'api/v1'], function()
+{
+	Route::resource('occupations', 'OccupationController');
+});
+
 // Confide routes
 Route::get( 'user/create',                 'UserController@create');
 Route::post('user',                        'UserController@store');
