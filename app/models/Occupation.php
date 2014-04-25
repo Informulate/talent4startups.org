@@ -9,4 +9,9 @@ class Occupation extends Eloquent {
 	 */
 	protected $table = 'occupations';
 
+	public function users()
+	{
+		return $this->belongsToMany('User');
+	}
+
 }

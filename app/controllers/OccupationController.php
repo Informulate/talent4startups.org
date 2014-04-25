@@ -45,7 +45,7 @@ class OccupationController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return Occupation::find($id);
 	}
 
 	/**
