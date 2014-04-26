@@ -1,0 +1,83 @@
+<?php
+
+use Illuminate\Pagination\Paginator;
+
+class ApiController extends BaseController {
+
+	/**
+	 * @var int
+	 */
+	protected $statusCode = 200;
+
+	/**
+	 * @return mixed
+	 */
+	public function getStatusCode()
+	{
+		return $this->statusCode;
+	}
+
+	/**
+	 * @param int $statusCode
+	 * @return $this
+	 */
+	public function setStatusCode($statusCode)
+	{
+		$this->statusCode = $statusCode;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $message
+	 * @return mixed
+	 */
+	public function respondNotFound($message = 'Not found!')
+	{
+		return $this->setStatusCode(404)->respondWithError($message);
+	}
+
+	/**
+	 * @param $message
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function respondWithError($message)
+	{
+		return $this->respond([
+			'error' => [
+				'message' => $message,
+				'status_code' => $this->getStatusCode()
+			]
+		]);
+	}
+
+	/**
+	 * @param $data
+	 * @param array $headers
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function respond($data, $headers = [])
+	{
+		return Response::json($data, $this->getStatusCode(), $headers);
+	}
+
+	/**
+	 * @param Paginator $objects
+	 * @param $data
+	 * @return mixed
+	 */
+	public function respondWithPagination(Paginator $objects, $data)
+	{
+		$data = array_merge($data, [
+			'paginator' => [
+				'total_count'   => $objects->getTotal(),
+				'total_pages'   => ceil($objects->getTotal() / $objects->getPerPage()),
+				'current_page'  => $objects->getCurrentPage(),
+				'limit'         => $objects->getPerPage()
+			]
+		]);
+
+		return $this->respond($data);
+	}
+
+} 

@@ -1,6 +1,19 @@
 <?php
 
-class OccupationController extends \BaseController {
+use \Informulate\Transformers\OccupationsTransformer;
+
+class OccupationController extends ApiController {
+
+	/**
+	 * @var Informulate\Transformers\OccupationsTransformer
+	 */
+	protected $occupationTransformer;
+
+	function __construct(OccupationsTransformer $occupationTransformer)
+	{
+		$this->occupationTransformer = $occupationTransformer;
+	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -10,8 +23,14 @@ class OccupationController extends \BaseController {
 	 */
 	public function index()
 	{
-		// TODO: Really really bad... don't return all.
-		return Occupation::all();
+		$limit = Input::get('limit', 10);
+		$limit = $limit > 100 ? 10 : $limit; // limits the per page to 100.
+
+		$occupations = Occupation::paginate($limit);
+
+		return $this->respondWithPagination($occupations, [
+			'data' => $this->occupationTransformer->transformCollection($occupations->all()),
+		]);
 	}
 
 	/**
