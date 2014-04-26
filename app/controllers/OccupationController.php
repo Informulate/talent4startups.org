@@ -10,8 +10,10 @@ class OccupationController extends \BaseController {
 	 */
 	public function index()
 	{
-		// TODO: Really really bad... don't return all.
-		return Occupation::all();
+		$limit = Input::get('limit', 10);
+		$limit = $limit > 100 ? 10 : $limit;
+
+		return Occupation::paginate($limit);
 	}
 
 	/**
