@@ -64,7 +64,13 @@ class OccupationController extends ApiController {
 	 */
 	public function show($id)
 	{
-		return Occupation::find($id);
+		$occupation = Occupation::findByIdOrSlug($id);
+
+		if ($occupation) {
+			return $this->occupationTransformer->transform($occupation);
+		}
+
+		return $this->respondNotFound();
 	}
 
 	/**

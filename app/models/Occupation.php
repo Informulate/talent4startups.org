@@ -1,6 +1,6 @@
 <?php
 
-class Occupation extends Eloquent {
+class Occupation extends BaseModel {
 
 	/**
 	 * The database table used by the model.
