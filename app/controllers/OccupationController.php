@@ -9,6 +9,9 @@ class OccupationController extends ApiController {
 	 */
 	protected $occupationTransformer;
 
+	/**
+	 * @param OccupationsTransformer $occupationTransformer
+	 */
 	function __construct(OccupationsTransformer $occupationTransformer)
 	{
 		$this->occupationTransformer = $occupationTransformer;
@@ -67,7 +70,7 @@ class OccupationController extends ApiController {
 		$occupation = Occupation::findByIdOrSlug($id);
 
 		if ($occupation) {
-			return $this->occupationTransformer->transform($occupation);
+			return $this->respond($this->occupationTransformer->transform($occupation));
 		}
 
 		return $this->respondNotFound();

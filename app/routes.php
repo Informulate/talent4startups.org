@@ -20,6 +20,12 @@ Route::group(['prefix' => 'api/v1'], function()
 {
 	Route::resource('occupations', 'OccupationController');
 	Route::resource('users', 'UserController');
+	Route::group(['prefix' => 'user/{user}'], function()
+	{
+		Route::get('occupations', 'UserOccupationsController@index');
+		Route::get('occupations/experience', 'UserOccupationsController@experience');
+		Route::get('occupations/interest', 'UserOccupationsController@interest');
+	});
 });
 
 // Confide routes
