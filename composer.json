@@ -10,7 +10,8 @@
 		"way/generators": "dev-master",
 		"barryvdh/laravel-ide-helper": "dev-master",
 		"phpspec/phpspec": "dev-develop",
-		"fzaninotto/faker": "1.4.*@dev"
+		"fzaninotto/faker": "1.4.*@dev",
+		"ivanlemeshev/laravel4-cyrillic-slug": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

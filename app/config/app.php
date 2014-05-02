@@ -109,6 +109,7 @@ return array(
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
+		'Ivanlemeshev\Laravel4CyrillicSlug\SlugServiceProvider',
 
 	),
 
@@ -176,6 +177,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Confide'         => 'Zizaco\Confide\ConfideFacade',
+		'Slug'            => 'Ivanlemeshev\Laravel4CyrillicSlug\Facades\Slug',
 
 	),
 
