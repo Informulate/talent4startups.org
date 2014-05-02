@@ -27,10 +27,7 @@ class OccupationController extends ApiController {
 	 */
 	public function index()
 	{
-		$limit = Input::get('limit', 10);
-		$limit = $limit > 100 ? 10 : $limit; // limits the per page to 100.
-
-		$occupations = Occupation::paginate($limit);
+		$occupations = Occupation::paginate($this->getLimit());
 
 		return $this->respondWithPagination($occupations, [
 			'data' => $this->occupationTransformer->transformCollection($occupations->all()),
@@ -39,13 +36,21 @@ class OccupationController extends ApiController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /occupation/create
+	 * GET /occupations/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		//
+		$data = [
+			'form' => [
+				'string' => 'name'
+			],
+			'action' => URL::route('api.v1.occupations.store'),
+			'method' => 'POST'
+		];
+
+		return $this->respond(['data' => $data]);
 	}
 
 	/**
@@ -75,7 +80,7 @@ class OccupationController extends ApiController {
 	 */
 	public function occupationCreationSucceeds()
 	{
-		return $this->respond(['success' => true]);
+		return $this->respond(['data' => ['success' => true]]);
 	}
 
 	/**
@@ -98,14 +103,28 @@ class OccupationController extends ApiController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /occupation/{id}/edit
+	 * GET /occupations/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-		//
+		$occupation = Occupation::findByIdOrSlug($id);
+
+		if (! $occupation) {
+			return $this->respondNotFound();
+		}
+
+		$data = [
+			'form' => [
+				'name' => $occupation->name
+			],
+			'action' => URL::route('api.v1.occupations.update', ['occupation' => $id]),
+			'method' => 'PUT'
+		];
+
+		return $this->respond(['data' => $data]);
 	}
 
 	/**
@@ -122,7 +141,7 @@ class OccupationController extends ApiController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /occupation/{id}
+	 * DELETE /occupations/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

@@ -9,10 +9,19 @@ class Occupation extends BaseModel {
 	 */
 	protected $table = 'occupations';
 	protected $guarded = ['id'];
+	protected static $rules = ['name' => 'required'];
 
 	public function users()
 	{
 		return $this->belongsToMany('User');
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getValidations()
+	{
+		return self::$rules;
 	}
 
 }

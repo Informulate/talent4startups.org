@@ -8,6 +8,7 @@ class ApiController extends BaseController {
 	 * @var int
 	 */
 	protected $statusCode = 200;
+	protected $limit = 10;
 
 	/**
 	 * @return mixed
@@ -26,6 +27,17 @@ class ApiController extends BaseController {
 		$this->statusCode = $statusCode;
 
 		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getLimit()
+	{
+		$this->limit = Input::get('limit', 10);
+		$this->limit = $this->limit > 100 ? 10 : $this->limit; // limits the per page to 100.
+
+		return $this->limit;
 	}
 
 	/**
