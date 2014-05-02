@@ -8,6 +8,7 @@ class Occupation extends BaseModel {
 	 * @var string
 	 */
 	protected $table = 'occupations';
+	protected $guarded = ['id'];
 
 	public function users()
 	{
