@@ -39,7 +39,7 @@ class Creator
 	 */
 	public function create($input)
 	{
-		$validation = Validator::make($input, ['name' => 'required']);
+		$validation = Validator::make($input, Occupation::getValidations());
 
 		if ($validation->fails()) {
 			return $this->listener->occupationCreationFails($validation->messages());
