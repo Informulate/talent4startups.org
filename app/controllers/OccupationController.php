@@ -1,5 +1,6 @@
 <?php
 
+use Informulate\Occupation\Creator;
 use \Informulate\Transformers\OccupationsTransformer;
 
 class OccupationController extends ApiController {
@@ -55,7 +56,26 @@ class OccupationController extends ApiController {
 	 */
 	public function store()
 	{
-		//
+		$creator = new Creator($this);
+
+		return $creator->create(Input::all());
+	}
+
+	/**
+	 * @param $errors
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function occupationCreationFails($errors)
+	{
+		return $this->respondWithError($errors);
+	}
+
+	/**
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function occupationCreationSucceeds()
+	{
+		return $this->respond(['success' => true]);
 	}
 
 	/**
