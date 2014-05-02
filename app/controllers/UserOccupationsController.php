@@ -9,6 +9,9 @@ class UserOccupationsController extends ApiController
 	 */
 	protected $userOccupationTransformer;
 
+	/**
+	 * @param UserOccupationsTransformer $userOccupationTransformer
+	 */
 	function __construct(UserOccupationsTransformer $userOccupationTransformer)
 	{
 		$this->userOccupationTransformer = $userOccupationTransformer;
@@ -32,6 +35,10 @@ class UserOccupationsController extends ApiController
 		return $this->respond($this->userOccupationTransformer->transformCollection($user->occupations->toArray()));
 	}
 
+	/**
+	 * @param $user
+	 * @return \Illuminate\Http\JsonResponse|mixed
+	 */
 	public function experience($user)
 	{
 		$user = User::findByIdOrUsername($user);
@@ -47,6 +54,10 @@ class UserOccupationsController extends ApiController
 		return $this->respond($this->userOccupationTransformer->transformCollection($experience->toArray()));
 	}
 
+	/**
+	 * @param $user
+	 * @return \Illuminate\Http\JsonResponse|mixed
+	 */
 	public function interest($user)
 	{
 		$user = User::findByIdOrUsername($user);

@@ -9,6 +9,9 @@ class OccupationController extends ApiController {
 	 */
 	protected $occupationTransformer;
 
+	/**
+	 * @param OccupationsTransformer $occupationTransformer
+	 */
 	function __construct(OccupationsTransformer $occupationTransformer)
 	{
 		$this->occupationTransformer = $occupationTransformer;
