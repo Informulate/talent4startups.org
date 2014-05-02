@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder {
 		User::truncate();
 		Occupation::truncate();
 		Tag::truncate();
+		DB::table('occupation_user')->truncate();
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 		$this->call('UsersTableSeeder');
 		$this->call('OccupationsTableSeeder');
 		$this->call('TagsTableSeeder');
+		$this->call('OccupationUsersTableSeeder');
 	}
 
 }
