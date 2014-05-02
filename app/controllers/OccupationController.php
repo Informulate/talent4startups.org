@@ -27,10 +27,7 @@ class OccupationController extends ApiController {
 	 */
 	public function index()
 	{
-		$limit = Input::get('limit', 10);
-		$limit = $limit > 100 ? 10 : $limit; // limits the per page to 100.
-
-		$occupations = Occupation::paginate($limit);
+		$occupations = Occupation::paginate($this->getLimit());
 
 		return $this->respondWithPagination($occupations, [
 			'data' => $this->occupationTransformer->transformCollection($occupations->all()),
