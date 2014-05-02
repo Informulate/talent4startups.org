@@ -11,7 +11,7 @@ class UserController extends ApiController
 			return $this->respondNotFound();
 		}
 
-		return $this->respond($user);
+		return $this->respond(['data' => $user]);
 	}
 
 	/**
