@@ -1,21 +1,17 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Confide Controller Template
-|--------------------------------------------------------------------------
-|
-| This is the default Confide controller template for controlling user
-| authentication. Feel free to change to your needs.
-|
-*/
-
-class UserController extends BaseController
+class UserController extends ApiController
 {
 
 	public function show($id)
 	{
-		return User::find($id);
+		$user = User::find($id);
+
+		if (false === $user) {
+			return $this->respondNotFound();
+		}
+
+		return $this->respond($user);
 	}
 
 	/**

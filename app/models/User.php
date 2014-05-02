@@ -3,6 +3,7 @@
 use Zizaco\Confide\ConfideUser;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class User extends ConfideUser implements UserInterface, RemindableInterface {
 
@@ -77,6 +78,22 @@ class User extends ConfideUser implements UserInterface, RemindableInterface {
 	public function occupations()
 	{
 		return $this->belongsToMany('Occupation')->withPivot('interest');
+	}
+
+	/**
+	 * Find a user by its primary key or by its username.
+	 *
+	 * @param  mixed  $id
+	 * @param  array  $columns
+	 * @return \Illuminate\Database\Eloquent\Model|Collection|static
+	 */
+	public static function findByIdOrUsername($id, $columns = array('*'))
+	{
+		if (is_array($id) && empty($id)) return new Collection;
+
+		$instance = new static;
+
+		return $instance->newQuery()->where('id', '=', $id)->orWhere('username', '=', $id)->first($columns);
 	}
 
 }
