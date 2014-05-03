@@ -5,3 +5,11 @@ function OccupationsController($scope, $http) {
 	});
 
 }
+
+function UsersController($scope, $http) {
+
+	$http.get('/api/v1/users').success(function(users) {
+		$scope.users = users['data'];
+	});
+
+}

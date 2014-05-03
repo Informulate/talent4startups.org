@@ -109,10 +109,16 @@
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
 <div class="container">
-	<div class="col-sm-12" ng-controller="OccupationsController">
+	<div class="col-md-4" ng-controller="OccupationsController">
 		<h1>Occupations</h1>
 		<ul>
 			<li ng-repeat="occupation in occupations">{{ occupation.name }}</li>
+		</ul>
+	</div>
+	<div class="col-md-4" ng-controller="UsersController">
+		<h1>Users</h1>
+		<ul>
+			<li ng-repeat="user in users">{{ user.username }} {{ user.email }}</li>
 		</ul>
 	</div>
 </div>
