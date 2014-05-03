@@ -1,17 +1,40 @@
 <?php
 
+use Informulate\Transformers\UsersTransformer;
+
 class UserController extends ApiController
 {
+	protected $usersTransformer;
 
+	function __construct(UsersTransformer $usersTransformer)
+	{
+		$this->usersTransformer = $usersTransformer;
+	}
+
+
+	/**
+	 * @return \Illuminate\Http\JsonResponse|mixed
+	 */
+	public function index()
+	{
+		$users = User::paginate($this->getLimit());
+
+		return $this->respondWithPagination($users, ['data' => $this->usersTransformer->transformCollection($users->all())]);
+	}
+
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\JsonResponse|mixed
+	 */
 	public function show($id)
 	{
-		$user = User::find($id);
+		$user = User::findByIdOrUsername($id);
 
 		if (false === $user) {
 			return $this->respondNotFound();
 		}
 
-		return $this->respond(['data' => $user]);
+		return $this->respond(['data' => $this->usersTransformer->transform($user)]);
 	}
 
 	/**
