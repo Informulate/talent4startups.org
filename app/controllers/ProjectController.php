@@ -24,10 +24,7 @@ class ProjectController extends ApiController
 	 */
 	public function index()
 	{
-		$limit = Input::get('limit', 10);
-		$limit = $limit > 100 ? 10 : $limit; // limits the per page to 100.
-
-		$projects = Project::paginate($limit);
+		$projects = Project::with('owner')->paginate($this->getLimit());
 
 		return $this->respondWithPagination($projects, [
 			'data' => $this->projectTransformer->transformCollection($projects->all()),
