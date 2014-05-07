@@ -9,4 +9,14 @@ class Project extends Eloquent {
 	 */
 	protected $table = 'projects';
 
+	public function members()
+	{
+		return $this->belongsToMany('User');
+	}
+
+	public function owner()
+	{
+		return $this->belongsTo('User');
+	}
+
 }

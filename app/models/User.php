@@ -80,6 +80,11 @@ class User extends ConfideUser implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Occupation')->withPivot('interest');
 	}
 
+	public function projects()
+	{
+		return $this->belongsToMany('Project');
+	}
+
 	/**
 	 * Find a user by its primary key or by its username.
 	 *
