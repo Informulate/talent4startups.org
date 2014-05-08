@@ -9,14 +9,26 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+		if (App::environment() === 'production') {
+			exit('I just stopped you getting fired... do not run this in production. Love jesusOmar');
+		}
+
 		Eloquent::unguard();
 
+		$tables = [
+			'users',
+			'occupations',
+			'projects',
+			'tags',
+			'needs',
+			'occupation_user',
+			'project_user'
+		];
+
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-		User::truncate();
-		Occupation::truncate();
-		Project::truncate();
-		Tag::truncate();
-		DB::table('occupation_user')->truncate();
+		foreach ($tables as $table) {
+			DB::table($table)->truncate();
+		}
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 		$this->call('UsersTableSeeder');
