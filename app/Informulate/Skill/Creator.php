@@ -6,7 +6,7 @@
  * Time: 2:50 PM
  */
 
-namespace Informulate\Occupation;
+namespace Informulate\Skill;
 
 use Ivanlemeshev\Laravel4CyrillicSlug\Facades\Slug;
 use Occupation;
@@ -15,7 +15,7 @@ use Validator;
 
 /**
  * Class Creator
- * @package Informulate\Occupation
+ * @package Informulate\Skill
  */
 class Creator
 {
@@ -51,4 +51,4 @@ class Creator
 
 		return $this->listener->occupationCreationSucceeds();
 	}
-} 
+}

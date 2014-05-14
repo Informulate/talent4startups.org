@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder {
 
 		$tables = [
 			'users',
-			'occupations',
+			'skills',
 			'projects',
 			'tags',
 			'needs',
-			'occupation_user',
+			'skill_sets',
 			'project_user'
 		];
 
@@ -32,10 +32,10 @@ class DatabaseSeeder extends Seeder {
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 		$this->call('UsersTableSeeder');
-		$this->call('OccupationsTableSeeder');
+		$this->call('SkillsTableSeeder');
 		$this->call('ProjectsTableSeeder');
 		$this->call('TagsTableSeeder');
-		$this->call('OccupationUsersTableSeeder');
+		$this->call('SkillSetsTableSeeder');
 	}
 
 }
