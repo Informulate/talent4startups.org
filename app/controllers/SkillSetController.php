@@ -1,6 +1,6 @@
 <?php
 
-use Informulate\Occupation\Creator;
+use Informulate\SkillSet\Creator;
 use \Informulate\Transformers\SkillSetsTransformer;
 
 class SkillSetController extends ApiController {
@@ -100,7 +100,7 @@ class SkillSetController extends ApiController {
 	 * @param $errors
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationFails($errors)
+	public function skillSetCreationFails($errors)
 	{
 		return $this->respondWithError($errors);
 	}
@@ -108,7 +108,7 @@ class SkillSetController extends ApiController {
 	/**
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationSucceeds()
+	public function skillSetCreationSucceeds()
 	{
 		return $this->respond(['data' => ['success' => true]]);
 	}

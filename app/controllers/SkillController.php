@@ -35,34 +35,6 @@ class SkillController extends ApiController {
 	}
 
 	/**
-	 * @param $username
-	 * @return mixed
-	 */
-	public function experience($username)
-	{
-		$user = User::where('username', $username)->firstOrFail();
-		$skills = $user->skillSets()->where('interest', false)->paginate($this->getLimit());
-
-		return $this->respondWithPagination($skills, [
-			'data' => $this->skillSetTransformer->transformCollection($skills->all()),
-		]);
-	}
-
-	/**
-	 * @param $username
-	 * @return mixed
-	 */
-	public function interest($username)
-	{
-		$user = User::where('username', $username)->firstOrFail();
-		$skills = $user->skillSets()->where('interest', true)->paginate($this->getLimit());
-
-		return $this->respondWithPagination($skills, [
-			'data' => $this->skillSetTransformer->transformCollection($skills->all()),
-		]);
-	}
-
-	/**
 	 * Show the form for creating a new resource.
 	 * GET /occupations/create
 	 *
@@ -98,7 +70,7 @@ class SkillController extends ApiController {
 	 * @param $errors
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationFails($errors)
+	public function skillCreationFails($errors)
 	{
 		return $this->respondWithError($errors);
 	}
@@ -106,7 +78,7 @@ class SkillController extends ApiController {
 	/**
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationSucceeds()
+	public function skillCreationSucceeds()
 	{
 		return $this->respond(['data' => ['success' => true]]);
 	}
@@ -120,10 +92,10 @@ class SkillController extends ApiController {
 	 */
 	public function show($slug)
 	{
-		$skillset = SkillSet::where('slug', $slug)->firstOrFail();
+		$skill = Skill::where('slug', $slug)->firstOrFail();
 
-		if ($skillset) {
-			return $this->respond($this->skillSetTransformer->transform($skillset));
+		if ($skill) {
+			return $this->respond($this->skillTransformer->transform($skill));
 		}
 
 		return $this->respondNotFound();
@@ -138,17 +110,17 @@ class SkillController extends ApiController {
 	 */
 	public function edit($slug)
 	{
-		$skillset = SkillSet::where('slug', $slug)->firstOrFail();
+		$skill = SkillSet::where('slug', $slug)->firstOrFail();
 
-		if (! $skillset) {
+		if (! $skill) {
 			return $this->respondNotFound();
 		}
 
 		$data = [
 			'form' => [
-				'name' => $skillset->name
+				'name' => $skill->name
 			],
-			'action' => URL::route('api.v1.skillsets.update', ['skillset' => $slug]),
+			'action' => URL::route('api.v1.skill.update', ['skill' => $slug]),
 			'method' => 'PUT'
 		];
 

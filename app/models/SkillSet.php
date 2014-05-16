@@ -27,12 +27,4 @@ class SkillSet extends BaseModel
 		return $this->belongsToMany('Tag');
 	}
 
-	/**
-	 * @return array
-	 */
-	public static function getValidations()
-	{
-		return self::$rules;
-	}
-
 }

@@ -10,6 +10,7 @@ class Skill extends BaseModel
 	 */
 	protected $table = 'skills';
 	protected $guarded = ['id'];
+	protected static $rules = ['name' => 'required'];
 
 	public function skillSets()
 	{

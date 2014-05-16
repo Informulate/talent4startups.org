@@ -6,29 +6,29 @@
  * Time: 2:50 PM
  */
 
-namespace Informulate\Skill;
+namespace Informulate\Project;
 
 use Ivanlemeshev\Laravel4CyrillicSlug\Facades\Slug;
-use Skill;
-use SkillController;
+use Project;
+use ProjectController;
 use Validator;
 
 /**
  * Class Creator
- * @package Informulate\Skill
+ * @package Informulate\Project
  */
 class Creator
 {
 
 	/**
-	 * @var SkillController $listener
+	 * @var ProjectController $listener
 	 */
 	protected $listener;
 
 	/**
-	 * @param SkillController $listener
+	 * @param ProjectController $listener
 	 */
-	function __construct(SkillController $listener)
+	function __construct(ProjectController $listener)
 	{
 		$this->listener = $listener;
 	}
@@ -39,16 +39,16 @@ class Creator
 	 */
 	public function create($input)
 	{
-		$validation = Validator::make($input, Skill::getValidations());
+		$validation = Validator::make($input, Project::getValidations());
 
 		if ($validation->fails()) {
-			return $this->listener->skillCreationFails($validation->messages());
+			return $this->listener->projectCreationFails($validation->messages());
 		}
 
 		$input['slug'] = Slug::make($input['name']);
 
-		Skill::create($input);
+		Project::create($input);
 
-		return $this->listener->skillCreationSucceeds();
+		return $this->listener->projectCreationSucceeds();
 	}
 }
