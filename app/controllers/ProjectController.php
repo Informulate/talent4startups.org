@@ -1,6 +1,7 @@
 <?php
 
 use \Informulate\Transformers\ProjectsTransformer;
+use Informulate\Project\Creator;
 
 class ProjectController extends ApiController
 {
@@ -84,12 +85,12 @@ class ProjectController extends ApiController
 	 * Display the specified resource.
 	 * GET /project/{id}
 	 *
-	 * @param  int $id
+	 * @param  int $slug
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($slug)
 	{
-		$project = Project::findByIdOrSlug($id);
+		$project = Project::where('slug', $slug);
 
 		if ($project) {
 			return $this->respond($this->projectTransformer->transform($project));
@@ -102,12 +103,12 @@ class ProjectController extends ApiController
 	 * Show the form for editing the specified resource.
 	 * GET /project/{id}/edit
 	 *
-	 * @param  int $id
+	 * @param  int $slug
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($slug)
 	{
-		$project = Project::findByIdOrSlug($id);
+		$project = Project::where('slug', $slug);
 
 		if (!$project) {
 			return $this->respondNotFound();
@@ -117,7 +118,7 @@ class ProjectController extends ApiController
 			'form' => [
 				'name' => $project->name
 			],
-			'action' => URL::route('api.v1.projects.update', ['project' => $id]),
+			'action' => URL::route('api.v1.projects.update', ['project' => $slug]),
 			'method' => 'PUT'
 		];
 

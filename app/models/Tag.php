@@ -9,4 +9,14 @@ class Tag extends Eloquent {
 	 */
 	protected $table = 'tags';
 
+	public function skillSets()
+	{
+		return $this->belongsToMany('SkillSet');
+	}
+
+	public function users()
+	{
+		return $this->hasManyThrough('SkillSet', 'User');
+	}
+
 }

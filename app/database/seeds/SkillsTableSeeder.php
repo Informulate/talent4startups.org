@@ -3,7 +3,7 @@
 use Faker\Factory as Faker;
 use Ivanlemeshev\Laravel4CyrillicSlug\Facades\Slug;
 
-class OccupationsTableSeeder extends Seeder {
+class SkillsTableSeeder extends Seeder {
 
 	public function run()
 	{
@@ -13,7 +13,7 @@ class OccupationsTableSeeder extends Seeder {
 			$name = $faker->sentence(2);
 			$slug = Slug::make($name);
 
-			Occupation::create([
+			Skill::create([
 				'name' => $name,
 				'slug' => $slug
 			]);

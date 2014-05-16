@@ -1,6 +1,6 @@
 <?php
 
-class Project extends Eloquent {
+class Project extends BaseModel {
 
 	/**
 	 * The database table used by the model.
@@ -8,6 +8,8 @@ class Project extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'projects';
+	protected $guarded = ['id'];
+	protected static $rules = ['name' => 'required'];
 
 	public function members()
 	{

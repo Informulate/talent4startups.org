@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Informulate\Transformers\TagsTransformer;
 use Informulate\Transformers\UsersTransformer;
 
 class UserController extends ApiController
@@ -22,15 +24,32 @@ class UserController extends ApiController
 		return $this->respondWithPagination($users, ['data' => $this->usersTransformer->transformCollection($users->all())]);
 	}
 
+	public function tags($username)
+	{
+		try {
+			$user = User::where('username', $username)->firstOrFail();
+		} catch (ModelNotFoundException $e) {
+			return $this->respondNotFound();
+		}
+
+		$tags = Tag::whereHas('skillSets', function($query) use ($user) {
+			$query->where('user_id', $user->id);
+		})->get();
+
+		$tagsTransformer = new TagsTransformer();
+
+		return $this->respond(['data' => $tagsTransformer->transformCollection($tags->toArray())]);
+	}
+
 	/**
-	 * @param $id
+	 * @param $username
 	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
-	public function show($id)
+	public function show($username)
 	{
-		$user = User::findByIdOrUsername($id);
-
-		if (false === $user) {
+		try {
+			$user = User::where('username', $username)->firstOrFail();
+		} catch (ModelNotFoundException $e) {
 			return $this->respondNotFound();
 		}
 

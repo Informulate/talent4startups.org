@@ -15,13 +15,14 @@ Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 Route::group(['prefix' => 'api/v1'], function()
 {
-	Route::resource('occupations', 'OccupationController');
+	Route::resource('skills', 'SkillController');
 	Route::resource('projects', 'ProjectController');
 	Route::resource('users', 'UserController');
-	Route::group(['prefix' => 'user/{user}'], function () {
-		Route::get('occupations', 'UserOccupationsController@index');
-		Route::get('occupations/experience', 'UserOccupationsController@experience');
-		Route::get('occupations/interest', 'UserOccupationsController@interest');
+	Route::group(['prefix' => 'users/{username}'], function () {
+		Route::get('skills', ['as' => 'api.v1.users.skills.index', 'uses' => 'SkillSetController@index']);
+		Route::get('skills/experience', ['as' => 'api.v1.users.skills.experience', 'uses' => 'SkillSetController@experience']);
+		Route::get('skills/interest', ['as' => 'api.v1.users.skills.interest', 'uses' => 'SkillSetController@interest']);
+		Route::get('tags', ['as' => 'api.v1.users.tags', 'uses' => 'UserController@tags']);
 	});
 });
 

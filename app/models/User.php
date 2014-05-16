@@ -75,30 +75,14 @@ class User extends ConfideUser implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 
-	public function occupations()
+	public function skillSets()
 	{
-		return $this->belongsToMany('Occupation')->withPivot('interest');
+		return $this->hasMany('SkillSet');
 	}
 
 	public function projects()
 	{
 		return $this->belongsToMany('Project');
-	}
-
-	/**
-	 * Find a user by its primary key or by its username.
-	 *
-	 * @param  mixed  $id
-	 * @param  array  $columns
-	 * @return \Illuminate\Database\Eloquent\Model|Collection|static
-	 */
-	public static function findByIdOrUsername($id, $columns = array('*'))
-	{
-		if (is_array($id) && empty($id)) return new Collection;
-
-		$instance = new static;
-
-		return $instance->newQuery()->where('id', '=', $id)->orWhere('username', '=', $id)->first($columns);
 	}
 
 }
