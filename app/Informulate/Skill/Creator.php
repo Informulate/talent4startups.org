@@ -9,8 +9,8 @@
 namespace Informulate\Skill;
 
 use Ivanlemeshev\Laravel4CyrillicSlug\Facades\Slug;
-use Occupation;
-use OccupationController;
+use SkillSet;
+use SkillSetController;
 use Validator;
 
 /**
@@ -21,14 +21,14 @@ class Creator
 {
 
 	/**
-	 * @var OccupationController $listener
+	 * @var SkillSetController $listener
 	 */
 	protected $listener;
 
 	/**
-	 * @param OccupationController $listener
+	 * @param SkillSetController $listener
 	 */
-	function __construct(OccupationController $listener)
+	function __construct(SkillSetController $listener)
 	{
 		$this->listener = $listener;
 	}
@@ -39,16 +39,16 @@ class Creator
 	 */
 	public function create($input)
 	{
-		$validation = Validator::make($input, Occupation::getValidations());
+		$validation = Validator::make($input, SkillSet::getValidations());
 
 		if ($validation->fails()) {
-			return $this->listener->occupationCreationFails($validation->messages());
+			return $this->listener->skillSetCreationFails($validation->messages());
 		}
 
 		$input['slug'] = Slug::make($input['name']);
 
-		Occupation::create($input);
+		SkillSet::create($input);
 
-		return $this->listener->occupationCreationSucceeds();
+		return $this->listener->skillSetCreationSucceeds();
 	}
 }

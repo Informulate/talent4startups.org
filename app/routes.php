@@ -15,20 +15,14 @@ Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
 
 Route::group(['prefix' => 'api/v1'], function()
 {
-	Route::resource('occupations', 'OccupationController');
+	Route::resource('skills', 'SkillController');
 	Route::resource('projects', 'ProjectController');
 	Route::resource('users', 'UserController');
 	Route::group(['prefix' => 'users/{username}'], function () {
 		Route::get('skills', ['as' => 'api.v1.users.skills.index', 'uses' => 'SkillSetController@index']);
 		Route::get('skills/experience', ['as' => 'api.v1.users.skills.experience', 'uses' => 'SkillSetController@experience']);
 		Route::get('skills/interest', ['as' => 'api.v1.users.skills.interest', 'uses' => 'SkillSetController@interest']);
-		Route::get('tags', function($username) {
-			$user = User::where('username', $username)->firstOrFail();
-			$tags = Tag::whereHas('skillSets', function($query) use ($user) {
-				$query->where('user_id', $user->id);
-			})->get();
-			dd($tags->toArray());
-		});
+		Route::get('tags', ['as' => 'api.v1.users.tags', 'uses' => 'UserController@tags']);
 	});
 });
 

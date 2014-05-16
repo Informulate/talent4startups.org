@@ -109,10 +109,10 @@
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
 <div class="container">
-	<div class="col-md-4" ng-controller="OccupationsController">
-		<h1>Occupations</h1>
+	<div class="col-md-4" ng-controller="SkillsController">
+		<h1>Skills</h1>
 		<ul>
-			<li ng-repeat="occupation in occupations">{{ occupation.name }}</li>
+			<li ng-repeat="skill in skills">{{ skill.name }}</li>
 		</ul>
 	</div>
 	<div class="col-md-4" ng-controller="UsersController">
