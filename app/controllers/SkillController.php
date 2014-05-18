@@ -1,36 +1,36 @@
 <?php
 
-use Informulate\Occupation\Creator;
-use \Informulate\Transformers\OccupationsTransformer;
+use Informulate\Skill\Creator;
+use \Informulate\Transformers\SkillsTransformer;
 
-class OccupationController extends ApiController {
-
-	/**
-	 * @var Informulate\Transformers\OccupationsTransformer
-	 */
-	protected $occupationTransformer;
+class SkillController extends ApiController {
 
 	/**
-	 * @param OccupationsTransformer $occupationTransformer
+	 * @var Informulate\Transformers\SkillSetsTransformer
 	 */
-	function __construct(OccupationsTransformer $occupationTransformer)
+	protected $skillTransformer;
+
+	/**
+	 * @param SkillsTransformer $skillTransformer
+	 */
+	function __construct(SkillsTransformer $skillTransformer)
 	{
-		$this->occupationTransformer = $occupationTransformer;
+		$this->skillTransformer = $skillTransformer;
 	}
 
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /occupation
+	 * GET /skills
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$occupations = Occupation::paginate($this->getLimit());
+		$skills = Skill::paginate($this->getLimit());
 
-		return $this->respondWithPagination($occupations, [
-			'data' => $this->occupationTransformer->transformCollection($occupations->all()),
+		return $this->respondWithPagination($skills, [
+			'data' => $this->skillTransformer->transformCollection($skills->all()),
 		]);
 	}
 
@@ -70,7 +70,7 @@ class OccupationController extends ApiController {
 	 * @param $errors
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationFails($errors)
+	public function skillCreationFails($errors)
 	{
 		return $this->respondWithError($errors);
 	}
@@ -78,7 +78,7 @@ class OccupationController extends ApiController {
 	/**
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function occupationCreationSucceeds()
+	public function skillCreationSucceeds()
 	{
 		return $this->respond(['data' => ['success' => true]]);
 	}
@@ -87,15 +87,15 @@ class OccupationController extends ApiController {
 	 * Display the specified resource.
 	 * GET /occupation/{id}
 	 *
-	 * @param  int  $id
+	 * @param  int  $slug
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($slug)
 	{
-		$occupation = Occupation::findByIdOrSlug($id);
+		$skill = Skill::where('slug', $slug)->firstOrFail();
 
-		if ($occupation) {
-			return $this->respond($this->occupationTransformer->transform($occupation));
+		if ($skill) {
+			return $this->respond($this->skillTransformer->transform($skill));
 		}
 
 		return $this->respondNotFound();
@@ -105,22 +105,22 @@ class OccupationController extends ApiController {
 	 * Show the form for editing the specified resource.
 	 * GET /occupations/{id}/edit
 	 *
-	 * @param  int  $id
+	 * @param  int  $slug
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($slug)
 	{
-		$occupation = Occupation::findByIdOrSlug($id);
+		$skill = SkillSet::where('slug', $slug)->firstOrFail();
 
-		if (! $occupation) {
+		if (! $skill) {
 			return $this->respondNotFound();
 		}
 
 		$data = [
 			'form' => [
-				'name' => $occupation->name
+				'name' => $skill->name
 			],
-			'action' => URL::route('api.v1.occupations.update', ['occupation' => $id]),
+			'action' => URL::route('api.v1.skill.update', ['skill' => $slug]),
 			'method' => 'PUT'
 		];
 

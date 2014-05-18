@@ -2,20 +2,20 @@
 
 use Faker\Factory as Faker;
 
-class OccupationUsersTableSeeder extends Seeder {
+class SkillSetsTableSeeder extends Seeder {
 
 	public function run()
 	{
 		$faker = Faker::create();
 
-		$occupationIds = Occupation::lists('id');
+		$skillIds = Skill::lists('id');
 		$userIds = User::lists('id');
 
 		foreach (range(1, 40) as $index) {
-			DB::table('occupation_user')->insert(
+			DB::table('skill_sets')->insert(
 				[
 					'user_id' => $faker->randomElement($userIds),
-					'occupation_id' => $faker->randomElement($occupationIds),
+					'skill_id' => $faker->randomElement($skillIds),
 					'interest' => $faker->boolean(),
 					'created_at' => $faker->date(),
 					'updated_at' => $faker->date()
