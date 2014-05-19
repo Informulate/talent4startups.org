@@ -18,6 +18,7 @@ class ProjectStageTableSeeder extends Seeder {
 					'stage_id' => $faker->randomElement($stageIds),
 					'created_at' => new DateTime,
 					'updated_at' => new DateTime,
+					'percent_complete' => rand(1,10) * 10,
 				]);
 			}
 		}
