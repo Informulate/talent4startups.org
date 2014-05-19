@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder {
 			'skill_sets',
 			'project_user',
 			'skill_set_tag',
-			'stages'
+			'stages',
+			'project_stage'
 		];
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SkillSetsTableSeeder');
 		$this->call('SkillSetTagsTableSeeder');
 		$this->call('StagesTableSeeder');
+		$this->call('ProjectStageTableSeeder');
 	}
 
 }
