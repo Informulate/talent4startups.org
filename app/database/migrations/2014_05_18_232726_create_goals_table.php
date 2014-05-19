@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectStageTable extends Migration {
+class CreateGoalsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,15 @@ class CreateProjectStageTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('project_stage', function(Blueprint $table)
+		Schema::create('goals', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('name')->index();
+			$table->string('slug')->index();
+			$table->string('description');
+			$table->integer('weight');
 			$table->integer('project_id')->unsigned()->index();
 			$table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-			$table->integer('stage_id')->unsigned()->index();
-			$table->foreign('stage_id')->references('id')->on('stages');
-			$table->integer('percent_complete');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +32,7 @@ class CreateProjectStageTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('project_stage');
+		Schema::drop('goals');
 	}
 
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration {
+class CreateStagesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,12 @@ class CreateProjectsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('projects', function(Blueprint $table)
+		Schema::create('stages', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name')->unique();
 			$table->string('slug')->unique()->index();
-			$table->integer('owner_id')->unsigned()->index();
-			$table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('description');
-			$table->boolean('featured')->default(false);
 			$table->timestamps();
 		});
 	}
@@ -32,7 +29,7 @@ class CreateProjectsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('projects');
+		Schema::drop('stages');
 	}
 
 }
