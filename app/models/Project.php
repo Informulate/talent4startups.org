@@ -20,5 +20,10 @@ class Project extends BaseModel {
 	{
 		return $this->belongsTo('User');
 	}
+	public function stages()
+	{
+		return $this->belongsToMany('Stage');
+	}
+
 
 }
