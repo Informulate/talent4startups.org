@@ -13,6 +13,14 @@ class ConfideSetupUsersTable extends Migration
 	 */
 	public function up()
 	{
+		// Creates contact_methods table;
+		Schema::create('contact_methods', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->string('name')->unique;
+			$table->string('slug')->unique;
+			$table->timestamps();
+		});
 		// Creates the users table
 		Schema::create('users', function (Blueprint $table) {
 			$table->increments('id');
@@ -31,7 +39,8 @@ class ConfideSetupUsersTable extends Migration
 			$table->string('github_username');
 			$table->string('twitter_username');
 			$table->string('linkedin_username');
-			$table->string('preferred_contact_method');
+			$table->integer('contact_method_id')->unsigned()->index();
+			$table->foreign('contact_method_id')->references('id')->on('contact_methods')->onDelete('cascade');
 			$table->timestamps();
 		});
 
@@ -52,6 +61,7 @@ class ConfideSetupUsersTable extends Migration
 	{
 		Schema::drop('password_reminders');
 		Schema::drop('users');
+		Schema::drop('contact_methods');
 	}
 
 }
