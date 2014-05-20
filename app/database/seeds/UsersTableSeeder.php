@@ -6,7 +6,7 @@ class UsersTableSeeder extends Seeder {
 
 	public function run()
 	{
-		$faker = Faker::create('en_US');
+		$faker = Faker::create();
 
 		foreach (range(1, 30) as $index) {
 			$gender = (rand()&1) ? 'male' : 'female';
