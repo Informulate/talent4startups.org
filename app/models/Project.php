@@ -22,7 +22,7 @@ class Project extends BaseModel {
 	}
 	public function stages()
 	{
-		return $this->belongsToMany('Stage');
+		return $this->belongsToMany('Stage', 'project_stage')->withPivot('percent_complete');
 	}
 
 

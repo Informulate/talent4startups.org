@@ -12,6 +12,6 @@ class Stage extends \Eloquent {
 
 	public function project()
 	{
-		return $this->belongsToMany('Project');
+		return $this->belongsToMany('Project', 'project_stage')->withPivot('percent_complete');
 	}
 }
