@@ -20,5 +20,13 @@ class Project extends BaseModel {
 	{
 		return $this->belongsTo('User');
 	}
+	public function stages()
+	{
+		return $this->belongsToMany('Stage', 'project_stage')->withPivot('percent_complete');
+	}
+	public function  goals()
+	{
+		return $this->hasMany('Goal');
+	}
 
 }

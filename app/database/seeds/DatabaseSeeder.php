@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$tables = [
+			'contact_methods',
 			'users',
 			'skills',
 			'projects',
@@ -23,7 +24,10 @@ class DatabaseSeeder extends Seeder {
 			'needs',
 			'skill_sets',
 			'project_user',
-			'skill_set_tag'
+			'skill_set_tag',
+			'stages',
+			'project_stage',
+			'goals',
 		];
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -32,12 +36,16 @@ class DatabaseSeeder extends Seeder {
 		}
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
+		$this->call('ContactMethodsTableSeeder');
 		$this->call('UsersTableSeeder');
 		$this->call('SkillsTableSeeder');
 		$this->call('ProjectsTableSeeder');
 		$this->call('TagsTableSeeder');
 		$this->call('SkillSetsTableSeeder');
 		$this->call('SkillSetTagsTableSeeder');
+		$this->call('StagesTableSeeder');
+		$this->call('ProjectStageTableSeeder');
+		$this->call('GoalsTableSeeder');
 	}
 
 }

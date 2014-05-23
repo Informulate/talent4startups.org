@@ -23,7 +23,5 @@ class ProjectsTableSeeder extends Seeder {
 				]);
 			}
 		}
-
 	}
-
 }
