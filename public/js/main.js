@@ -13,3 +13,12 @@ function UsersController($scope, $http) {
 	});
 
 }
+
+function ProjectsController($scope, $http) {
+
+	$http.get('/api/v1/projects?limit=9').success(function(projects) {
+		$scope.projects = projects['data'];
+		$scope.paginator = projects['paginator']
+	});
+
+}

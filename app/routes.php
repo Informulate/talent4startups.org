@@ -12,6 +12,7 @@
 */
 
 Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
+Route::get('/projects', ['as' => 'projects', 'uses' => 'PagesController@projects']);
 
 Route::group(['prefix' => 'api/v1'], function()
 {
