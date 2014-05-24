@@ -41,22 +41,14 @@
 			<a class="navbar-brand" href="#">Talent4Startups</a>
 		</div>
 		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="/">Home</a></li>
+				<li><a href="#">Talents</a></li>
+				<li><a href="#">Projects</a></li>
 				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li class="dropdown-header">Nav header</li>
-						<li><a href="#">Separated link</a></li>
-						<li><a href="#">One more separated link</a></li>
-					</ul>
-				</li>
+				<li><a href="#contact">FAQ</a></li>
+				<li><a href="#">Login</a></li>
+				<li><button type="button" class="btn btn-primary navbar-btn">Sign Up</button></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
@@ -109,6 +101,46 @@
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div><!-- /.carousel -->
 <div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 class="text-center">Build a team. Grow your startup.</h1>
+			<h1 class="text-center"><small>Sub header section to reinforce the section title. Doesn’t have to be fancy. But should be relevant.</small></h1>
+		</div>
+	</div>
+</div>
+<div class="container-fluid students">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-sm-8">
+				<h2>To the students, the professionals - The Doers</h2>
+				<p>You know exactly what your career path should be. You are already doing the best you can to get trained and stay current but the opportunities to flex your muscles are hard to come by.</p>
+				<p>Students cannot get placed because of lack of experience. Professionals looking to broaden their skill set, cannot leverage past, unrelated experience. We can help. From now on, let there be no limit to your career aspirations.</p>
+				<p>Find the right projects to polish the specific skill you are looking for, bulk up your resume, and make real connections by delivering results. With each skill you acquire, with every level you attain... your ambitions get closer to reality.</p>
+				<a class="btn btn-success" href="#">See Current Opportunities</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid creators">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>To the startups, the entrepreneurs - The Creators</h2>
+				<p>An idea is like a seed. It has great potential but needs many things to grow: funding (or management buy-in), talented resources, market timing, network, marketing etc.</p>
+				<p>Many startups never take off because of a vicious cycle: you need something tangible to get funding, you need resources to build things, but its hard to get resources without the funding in the first place. T4S gives you that impetus to break the cycle.</p>
+				<p>Use free resources to build out your concept, fine tune your strategy, test it in the market, and use real results to attract investment. Now you have no excuse. The universe awaits... Make that ripple!</p>
+				<a class="btn btn-success" href="#">Launch your own Project</a>
+			</div>
+			<div class="col-sm-4">
+				<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
 	<div class="col-md-4" ng-controller="SkillsController">
 		<h1>Skills</h1>
 		<ul>
@@ -136,5 +168,6 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/angular.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/docs.min.js"></script>
 </body>
 </html>
