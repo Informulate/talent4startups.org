@@ -10,7 +10,11 @@ class PagesController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('index');
+		if (Auth::guest()) {
+			return View::make('index');
+		}
+
+		return View::make('dashboard');
 	}
 
 	public function projects()

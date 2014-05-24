@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\Response as ResponseCodes;
 
 class ApiController extends BaseController {
 
 	/**
 	 * @var int
 	 */
-	protected $statusCode = 200;
+	protected $statusCode = ResponseCodes::HTTP_OK;
 	protected $limit = 10;
 
 	/**
@@ -46,7 +47,7 @@ class ApiController extends BaseController {
 	 */
 	public function respondNotFound($message = 'Not found!')
 	{
-		return $this->setStatusCode(404)->respondWithError($message);
+		return $this->setStatusCode(ResponseCodes::HTTP_NOT_FOUND)->respondWithError($message);
 	}
 
 	/**
@@ -92,4 +93,13 @@ class ApiController extends BaseController {
 		return $this->respond($data);
 	}
 
-} 
+	/**
+	 * @param $data
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	protected function respondCreated($data)
+	{
+		return $this->setStatusCode(ResponseCodes::HTTP_CREATED)->respond(['data' => $data]);
+	}
+
+}

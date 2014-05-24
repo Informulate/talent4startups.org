@@ -78,7 +78,7 @@ class ProjectController extends ApiController
 	 */
 	public function projectCreationSucceeds()
 	{
-		return $this->respond(['data' => ['success' => true]]);
+		return $this->respondCreated(['message' => 'Project created successfully!']);
 	}
 
 	/**
