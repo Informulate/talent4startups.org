@@ -24,9 +24,10 @@ class ProjectsTransformer extends Transformer {
 			'name' => $project['name'],
 			'slug' => $project['slug'],
 			'owner' => $this->userTransformer->transform($project['owner']),
+			'description' => $project['description'],
 			'created_at' => $project['created_at'],
 			'updated_at' => $project['updated_at']
 		];
 	}
 
-} 
+}

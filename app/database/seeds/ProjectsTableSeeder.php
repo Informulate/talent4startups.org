@@ -8,6 +8,7 @@ class ProjectsTableSeeder extends Seeder {
 	public function run()
 	{
 		$faker = Faker::create();
+		$faker->addProvider(new \Faker\Provider\Lorem($faker));
 
 		foreach (User::all() as $user) {
 
@@ -19,7 +20,8 @@ class ProjectsTableSeeder extends Seeder {
 				Project::create([
 					'name' => $name,
 					'slug' => $slug,
-					'owner_id' => $user->id
+					'owner_id' => $user->id,
+					'description' => $faker->realText()
 				]);
 			}
 		}

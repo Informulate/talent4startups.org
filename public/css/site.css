@@ -48,7 +48,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-	padding: 20px 15px 0;
+	padding: 60px 15px 0;
 }
 .container .text-muted {
 	margin: 20px 0;
@@ -61,4 +61,16 @@ body > .container {
 
 code {
 	font-size: 80%;
+}
+
+.students, .creators {
+	padding-bottom: 100px;
+	width: 100%;
+}
+
+.creators {
+	background-color: #A5A5A5;
+	padding-top: 100px;
+	margin-top: 60px;
+	margin-bottom: 60px;
 }

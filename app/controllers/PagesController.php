@@ -13,4 +13,9 @@ class PagesController extends \BaseController {
 		return View::make('index');
 	}
 
+	public function projects()
+	{
+		return View::make('projects');
+	}
+
 }
