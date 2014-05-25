@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Informulate\Transformers\ProjectsTransformer;
 use Informulate\Transformers\TagsTransformer;
 use Informulate\Transformers\UsersTransformer;
 
@@ -39,6 +40,19 @@ class UserController extends ApiController
 		$tagsTransformer = new TagsTransformer();
 
 		return $this->respond(['data' => $tagsTransformer->transformCollection($tags->toArray())]);
+	}
+
+	public function projects($username)
+	{
+		try {
+			$user = User::where('username', $username)->firstOrFail();
+		} catch (ModelNotFoundException $e) {
+			return $this->respondNotFound();
+		}
+
+		$projectsTransformer = new ProjectsTransformer();
+
+		return $this->respond(['data' => $projectsTransformer->transformCollection($user->projects->toArray())]);
 	}
 
 	/**

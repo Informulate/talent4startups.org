@@ -24,6 +24,7 @@ Route::group(['prefix' => 'api/v1'], function()
 		Route::get('skills/experience', ['as' => 'api.v1.users.skills.experience', 'uses' => 'SkillSetController@experience']);
 		Route::get('skills/interest', ['as' => 'api.v1.users.skills.interest', 'uses' => 'SkillSetController@interest']);
 		Route::get('tags', ['as' => 'api.v1.users.tags', 'uses' => 'UserController@tags']);
+		Route::get('projects', 'UserController@projects');
 	});
 });
 

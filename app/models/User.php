@@ -82,7 +82,8 @@ class User extends ConfideUser implements UserInterface, RemindableInterface {
 
 	public function projects()
 	{
-		return $this->belongsToMany('Project');
+		//return $this->belongsToMany('Project');
+		return $this->hasMany('Project', 'owner_id');
 	}
 
 	public function contactMethod()
