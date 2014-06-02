@@ -51,7 +51,7 @@
 					<li><a href="{{ URL::to('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout :: {{ Auth::user()->email }}</a></li>
 				@else
 					<li><a href="#" data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					<li><button type="button" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-cog"></span> Sign Up</button></li>
+					<li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signup"><span class="glyphicon glyphicon-cog"></span> Sign Up</button></li>
 				@endif
 			</ul>
 		</div>
@@ -78,6 +78,20 @@
 			</div>
 			<div class="modal-body">
 				{{ Confide::makeLoginForm()->render() }}
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="signup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Login</h4>
+			</div>
+			<div class="modal-body">
+				{{ Confide::makeSignupForm()->render() }}
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
