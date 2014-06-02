@@ -2,7 +2,14 @@
 
 @section('content')
 	<div class="container">
-		<h1>Logged In</h1>
-		@include('angularjs/projects')
+		<div class="row">
+			<h1>Dashboard</h1>
+			<div class="col-md-9">
+				Main Stuff...
+			</div>
+			<div class="col-md-3">
+				@include('angularjs/user_projects', ['username' => Auth::user()->username])
+			</div>
+		</div>
 	</div>
 @stop
