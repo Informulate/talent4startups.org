@@ -50,8 +50,8 @@
 				@if (Auth::check())
 					<li><a href="{{ URL::to('/logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout :: {{ Auth::user()->email }}</a></li>
 				@else
-					<li><a href="#" data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					<li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signup"><span class="glyphicon glyphicon-cog"></span> Sign Up</button></li>
+					<li><a id="login-link" href="#" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><button id="signup-link" type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-cog"></span> Sign Up</button></li>
 				@endif
 			</ul>
 		</div>
@@ -69,29 +69,23 @@
 </div>
 
 @if (! Auth::check())
-<div id="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Login</h4>
-			</div>
 			<div class="modal-body">
-				{{ Confide::makeLoginForm()->render() }}
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<div id="signup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Login</h4>
-			</div>
-			<div class="modal-body">
-				{{ Confide::makeSignupForm()->render() }}
+				<div class="tab-content">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<ul class="nav nav-tabs">
+						<li id="login-tab-link" class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
+						<li id="signup-tab-link"><a href="#signup-tab" data-toggle="tab">Sign Up</a></li>
+					</ul>
+					<div class="tab-pane active" id="login-tab">
+						{{ Confide::makeLoginForm()->render() }}
+					</div>
+					<div class="tab-pane" id="signup-tab">
+						{{ Confide::makeSignupForm()->render() }}
+					</div>
+				</div>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -106,5 +100,22 @@
 <script src="/js/angular.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/docs.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		// Activate the signup tab
+		$('#signup-link').on('click', function() {
+			$('#login-tab, #login-tab-link').removeClass('active');
+			$('#signup-tab, #signup-tab-link').addClass('active');
+			$('#login-modal').modal();
+		});
+		// Activate the login tab
+		$('#login-link').on('click', function() {
+			$('#login-tab, #login-tab-link').addClass('active');
+			$('#signup-tab, #signup-tab-link').removeClass('active');
+			$('#login-modal').modal();
+		});
+	});
+</script>
+@yield('javascript')
 </body>
 </html>
