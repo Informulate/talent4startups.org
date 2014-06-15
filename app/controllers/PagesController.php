@@ -22,4 +22,9 @@ class PagesController extends \BaseController {
 		return View::make('projects');
 	}
 
+	public function newProject()
+	{
+		return View::make('projects.new');
+	}
+
 }
