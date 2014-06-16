@@ -103,6 +103,16 @@ class UserController extends ApiController
 			$notice = Lang::get('confide::confide.alerts.account_created') . ' ' . Lang::get('confide::confide.alerts.instructions_sent');
 
 			// Redirect with success message, You may replace "Lang::get(..." for your custom message.
+			$input = array(
+				'email' => Input::get('email'), // May be the username too
+				'username' => Input::get('email'), // so we have to pass both
+				'password' => Input::get('password')
+			);
+
+			if (Confide::logAttempt($input, Config::get('confide::signup_confirm'))) {
+				return Redirect::intended(URL::route('projects.new'));
+			}
+
 			return Redirect::action('UserController@login')
 				->with('notice', $notice);
 		} else {
