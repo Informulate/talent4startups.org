@@ -5,13 +5,15 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"laravelbook/ardent": "dev-master",
-		"zizaco/confide": "3.2.x",
-		"way/generators": "dev-master",
-		"barryvdh/laravel-ide-helper": "dev-master",
-		"phpspec/phpspec": "dev-develop",
-		"fzaninotto/faker": "1.4.*@dev",
-		"ivanlemeshev/laravel4-cyrillic-slug": "dev-master"
+		"laracasts/commander": "~1.0",
+		"laracasts/validation": "1.1.*",
+		"laracasts/flash": "~1.0"
+	},
+	"require-dev": {
+		"way/generators": "~2.0",
+		"codeception/codeception": "~2.0",
+		"laracasts/testdummy": "~1.0",
+		"barryvdh/laravel-ide-helper": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -20,9 +22,11 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"app/Informulate"
-		]
+			"app/tests/TestCase.php"
+		],
+		"psr-4": {
+			"Informulate\\": "app/Informulate"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [
