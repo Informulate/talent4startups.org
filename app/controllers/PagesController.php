@@ -2,29 +2,8 @@
 
 class PagesController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /pages
-	 *
-	 * @return Response
-	 */
-	public function index()
+	public function home()
 	{
-		if (Auth::guest()) {
-			return View::make('index');
-		}
-
-		return View::make('dashboard');
+		return View::make('pages.home');
 	}
-
-	public function projects()
-	{
-		return View::make('projects');
-	}
-
-	public function newProject()
-	{
-		return View::make('projects.new');
-	}
-
 }
