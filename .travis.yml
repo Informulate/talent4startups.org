@@ -10,8 +10,8 @@ before_script:
   - php artisan migrate --no-interaction
 
 script:
-  - php vendor/bin/codecept run
-  - php vendor/bin/codecept run functional
+  - php vendor/bin/codecept run --env
+  - php vendor/bin/codecept run functional --env
 
 notifications:
   slack: informulate:Io7yxfri2SwOzQ0h3KUG4OFB
