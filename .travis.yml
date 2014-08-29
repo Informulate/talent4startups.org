@@ -7,7 +7,7 @@ php:
 before_script:
   - composer install --dev --prefer-source --no-interaction
   - "mysql -e 'create database codeception_test;'"
-  - php artisan db:migrate
+  - php artisan migrate
 
 script:
   - php vendor/bin/codecept run
