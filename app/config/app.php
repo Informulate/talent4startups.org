@@ -126,6 +126,7 @@ return array(
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
+		"Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider",
 
 	),
 
@@ -194,6 +195,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Flash'             => 'Laracasts\Flash\Flash',
+		"Slugify"           => "Cocur\Slugify\Bridge\Laravel\SlugifyFacade",
 
 	),
 

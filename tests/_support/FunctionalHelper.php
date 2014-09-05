@@ -30,8 +30,6 @@ class FunctionalHelper extends \Codeception\Module
 		$I->fillField('name', $name);
 		$I->fillField('description', $description);
 		$I->click('#submit-project');
-
-		//$this->have('Informulate\Projects\Project', $overrides = ['name' => $name, 'description' => $description]);
 	}
 
 	public function have($model, $overrides = [])
