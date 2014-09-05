@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'new_project_path']) }}
+{{ Form::open(['route' => 'projects.store']) }}
 
 	<div class="form-group">
 		{{ Form::label('name', 'Name:') }}
@@ -7,7 +7,7 @@
 
 	<div class="form-group">
 		{{ Form::label('description', 'Description:') }}
-		{{ Form::text('description', null, ['class' => 'form-control']) }}
+		{{ Form::textarea('description', null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">

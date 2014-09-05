@@ -39,16 +39,8 @@ Route::get('logout', [
 /**
  * Projects!
  */
+Route::resource('projects', 'ProjectController');
 
-Route::get('projects/new', [
-	'as' => 'new_project_path',
-	'uses' => 'ProjectController@create'
-]);
-
-Route::post('projects/new', [
-	'as' => 'new_project_path',
-	'uses' => 'ProjectController@store'
-]);
 
 /**
  * Profile!

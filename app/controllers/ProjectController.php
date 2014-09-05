@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProjectForm;
 use Informulate\Projects\CreateNewProjectCommand;
 use Informulate\Core\CommandBus;
+use Informulate\Projects\Project;
 
 class ProjectController extends BaseController {
 
@@ -52,6 +53,19 @@ class ProjectController extends BaseController {
 
 		Flash::message('New Project Created');
 
-		return Redirect::to('profile');
+		return Redirect::route('projects.show', ['url' => $project->url]);
+	}
+
+	/**
+	 * Display a project
+	 *
+	 * @param $project
+	 * @return \Illuminate\View\View
+	 */
+	public function show($project)
+	{
+		$project = Project::where('url', '=', $project)->firstOrFail();
+
+		return View::make('project.show')->with('project', $project);;
 	}
 }

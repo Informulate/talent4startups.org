@@ -13,7 +13,7 @@ class Project extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['name', 'description', 'url'];
 
 	/**
 	 * Create a new project

@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration {
 			$table->integer('user_id')->index();
 			$table->string('name');
 			$table->text('description');
+			$table->string('url')->unique()->index();
 			$table->timestamps();
 		});
 	}

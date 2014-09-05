@@ -3,11 +3,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-6">
-			<h1>New Project</h1>
-
-			@include('layouts.partials.errors')
-
-			@include('layouts.partials.forms.project')
+			<h1>Hello, <?php echo $project->name; ?></h1>
 		</div>
 	</div>
 @stop
