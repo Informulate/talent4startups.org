@@ -1,0 +1,14 @@
+Informulate\Users\User:
+    username: $string
+    email: $string@example.com
+    password: $string
+    created_at: $date
+    updated_at: $date
+
+Informulate\Projects\Project:
+    user_id:
+        type: Informulate\Users\User
+    name: $string
+    description: $text
+    created_at: $date
+    updated_at: $date

@@ -1,3 +1,3 @@
 # Contribution Guidelines
 
-Please submit all issues and pull requests to the [jesusOmar/talent4startups](http://github.com/jesusOmar/talent4startups) repository!
+Please submit all issues and pull requests to the [laravel/framework](http://github.com/laravel/framework) repository!
