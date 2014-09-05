@@ -1,8 +1,12 @@
 <?php namespace Informulate\Projects;
 
+use Informulate\Projects\Events\ProjectCreated;
+use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
 class Project extends Eloquent {
+
+	use EventGenerator;
 
 	/**
 	 * Fillable fields for a new project
@@ -11,4 +15,18 @@ class Project extends Eloquent {
 	 */
 	protected $fillable = ['name', 'description'];
 
+	/**
+	 * Create a new project
+	 *
+	 * @param $attributes
+	 * @return static
+	 */
+	public static function create(array $attributes)
+	{
+		$project = new static($attributes);
+
+		$project->raise(new ProjectCreated($project));
+
+		return $project;
+	}
 }
