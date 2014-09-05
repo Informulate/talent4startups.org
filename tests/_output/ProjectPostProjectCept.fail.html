@@ -21,13 +21,13 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li ><a href="/">Home</a></li>
+				<li ><a href="http://localhost">Home</a></li>
 				<li ><a href="#talents">Talents</a></li>
-				<li ><a href="/projects">Projects</a></li>
+				<li ><a href="#projects">Projects</a></li>
 				<li ><a href="#about">About</a></li>
 				<li ><a href="#contact">FAQ</a></li>
-									<li><a id="login-link" href="<a href="http://localhost/login">http://localhost/login</a>" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					<li><a id="signup-link" href="<a href="http://localhost/register">http://localhost/register</a>" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-cog"></span> Sign Up</a></li>
+									<li><a id="login-link" href="http://localhost/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><form><a id="signup-link" href="http://localhost/register" type="button" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-cog"></span> Sign Up</a></form></li>
 							</ul>
 		</div>
 		<!--/.nav-collapse -->
@@ -36,7 +36,12 @@
 
 		
 		<div class="container">
-			
+			<div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+            New Project Created
+        </div>
+    
 				<div class="row">
 		<div class="col-md-6">
 				<h1>Profile</h1>
@@ -98,14 +103,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// Activate the signup tab
-		$('#signup-link').on('click', function() {
+		$('#signup-link').on('click', function(event) {
+			event.preventDefault();
 			$('#login-tab, #login-tab-link').removeClass('active');
 			$('#signup-tab, #signup-tab-link').addClass('active');
+			$('#login-modal').modal();
 		});
 		// Activate the login tab
-		$('#login-link').on('click', function() {
+		$('#login-link').on('click', function(event) {
+			event.preventDefault();
 			$('#login-tab, #login-tab-link').addClass('active');
 			$('#signup-tab, #signup-tab-link').removeClass('active');
+			$('#login-modal').modal();
 		});
 	});
 </script>
