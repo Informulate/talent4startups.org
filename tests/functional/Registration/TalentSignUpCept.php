@@ -24,3 +24,13 @@ $I->seeRecord('users', [
 	'username' => 'JaneDoe',
 	'email' => 'jane@example.com'
 ]);
+
+$I->fillField('First Name:', 'Jane');
+$I->fillField('Last Name:', 'Doe');
+$I->click('#submit-profile');
+
+$I->amOnPage('/projects/create');
+$I->seeRecord('profiles', [
+	'first_name' => 'Jane',
+	'last_name' => 'Doe'
+]);

@@ -3,10 +3,9 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-6">
-				<h1>Profile</h1>
-				<h2>About You</h2>
+			@include('layouts.partials.errors')
 
-					TODO: Finish Me
-			</div>
+			@include('layouts.partials.forms.profile')
+		</div>
 	</div>
 @stop

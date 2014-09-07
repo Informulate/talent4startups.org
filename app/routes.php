@@ -48,3 +48,8 @@ Route::get('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@edit'
 ]);
+
+Route::post('profile', [
+	'as' => 'edit_profile',
+	'uses' => 'ProfileController@store'
+]);

@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProfileForm;
-use Informulate\Registration\RegisterUserCommand;
 use Informulate\Core\CommandBus;
+use Informulate\Users\UpdateProfileCommand;
 
 class ProfileController extends BaseController {
 
@@ -38,10 +38,16 @@ class ProfileController extends BaseController {
 	/**
 	 * Save the user.
 	 */
-	public function store($userId)
+	public function store()
 	{
 		$this->profileForm->validate(Input::all());
 
-		return Redirect::home();
+		extract(Input::only('first_name', 'last_name'));
+
+		$this->execute(
+			new UpdateProfileCommand(Auth::user(), $first_name, $last_name)
+		);
+
+		return Redirect::route('projects.create');
 	}
 }
