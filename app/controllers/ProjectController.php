@@ -27,6 +27,17 @@ class ProjectController extends BaseController {
 		$this->beforeFilter('auth');
 	}
 
+	/**
+	 * Display a list of active projects
+	 *
+	 * @return $this
+	 */
+	public function index()
+	{
+		$projects = Project::all();
+
+		return View::make('project.index')->with('projects', $projects);
+	}
 
 	/**
 	 * Show the form for creating a new user.

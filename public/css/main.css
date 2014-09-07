@@ -36,3 +36,9 @@ body {
 .glyphicons.type {
   font-size: 80px;
   margin-left: -40px; }
+
+/**
+ * User Dashboard
+ */
+#new-project-panel-btn {
+  color: #fff !important; }
