@@ -42,6 +42,11 @@ Route::get('logout', [
 Route::resource('projects', 'ProjectController');
 
 /**
+ * Talents!
+ */
+Route::resource('talents', 'TalentController');
+
+/**
  * Profile!
  */
 Route::get('profile', [
