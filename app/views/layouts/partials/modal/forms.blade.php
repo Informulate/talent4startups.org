@@ -15,16 +15,17 @@
 					<div class="tab-pane text-center" id="signup-tab">
 						<div class="row">
 							<div class="col-sm-6">
-								<p id="startup">
-									X <br/>
-									I’m a startup looking for talent
-								</p>
+								<div id="startup">
+									<i class="glyphicons group type"></i>
+								</div>
+								<p>I’m a startup looking for talent</p>
 								<p>This text is meant to be treated as fine print. This text is meant to be treated as fine print. This text is meant to be treated as fine print. This text is meant to be treated as fine print.</p>
 							</div>
 							<div class="col-sm-6">
-								<p id="talent">
-								Y <br/>
-								I’m talent looking for a startup</p>
+								<div id="talent">
+									<i class="glyphicons user type"></i>
+								</div>
+								<p>I’m talent looking for a startup</p>
 								<p>This text is meant to be treated as fine print. This text is meant to be treated as fine print. This text is meant to be treated as fine print. This text is meant to be treated as fine print.</p>
 							</div>
 						</div>
@@ -32,7 +33,7 @@
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
 								<button class="btn btn-primary">LinkedIn</button><br/>
-								<a href="{{ route('register_path') }}">Or sign up with email instead</a>
+								<a id="register-email" href="{{ route('register_path') }}">Or sign up with email instead</a>
 							</div>
 						</div>
 					</div>
@@ -57,6 +58,30 @@
 			$('#login-tab, #login-tab-link').addClass('active');
 			$('#signup-tab, #signup-tab-link').removeClass('active');
 			$('#login-modal').modal();
+		});
+
+		// User Type Selection feedback
+		$('#startup').on('click', function() {
+			$('#talent').removeClass('text-primary');
+			$(this).addClass('text-primary');
+		});
+
+		$('#talent').on('click', function() {
+			$('#startup').removeClass('text-primary');
+			$(this).addClass('text-primary');
+		});
+
+		// Register via email
+		$('#register-email').on('click', function(event) {
+			if (false === $("#agree").is(':checked')) {
+				event.preventDefault();
+				alert('You must agree to the Terms of Use before getting started!');
+			}
+
+			if (false === $('#talent').hasClass('text-primary') && false === $('#startup').hasClass('text-primary')) {
+				event.preventDefault();
+				alert('Are you a talent or a startup? Click the appropriate icon above!');
+			}
 		});
 	});
 </script>

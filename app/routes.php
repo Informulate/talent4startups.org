@@ -41,7 +41,6 @@ Route::get('logout', [
  */
 Route::resource('projects', 'ProjectController');
 
-
 /**
  * Profile!
  */
