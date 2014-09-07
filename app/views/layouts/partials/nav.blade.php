@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
@@ -11,11 +11,11 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
-				<li @if (Request::path() === 'talents') class="active" @endif><a href="#talents">Talents</a></li>
-				<li @if (Request::path() === 'projects') class="active" @endif><a href="#projects">Projects</a></li>
-				<li @if (Request::path() === 'about') class="active" @endif><a href="#about">About</a></li>
-				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact">FAQ</a></li>
+				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons home"></i> Home</a></li>
+				<li @if (Request::path() === 'talents') class="active" @endif><a href="#talents"><i class="glyphicons group"></i> Talents</a></li>
+				<li @if (Request::path() === 'projects') class="active" @endif><a href="#projects"><i class="glyphicons suitcase"></i> Projects</a></li>
+				<li @if (Request::path() === 'about') class="active" @endif><a href="#about"><i class="glyphicons asterisk"></i> About</a></li>
+				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact"><i class="glyphicons circle_question_mark"></i> FAQ</a></li>
 				@if ($currentUser)
 					<li><a href="{{ route('logout_path') }}"><span class="glyphicon glyphicon-log-out"></span> Logout :: {{ $currentUser->email }}</a></li>
 				@else
