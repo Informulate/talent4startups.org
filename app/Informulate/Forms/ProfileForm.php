@@ -10,6 +10,7 @@ class ProfileForm extends FormValidator {
 	 * @var array
 	 */
 	protected $rules = [
-		'location' => 'required'
+		'first_name' => 'required',
+		'last_name' => 'required'
 	];
 }
