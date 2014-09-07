@@ -10,7 +10,7 @@
 						<li id="signup-tab-link"><a href="#signup-tab" data-toggle="tab">Sign Up</a></li>
 					</ul>
 					<div class="tab-pane active" id="login-tab">
-						DERP
+						@include('layouts.partials.forms.login')
 					</div>
 					<div class="tab-pane text-center" id="signup-tab">
 						<div class="row">
