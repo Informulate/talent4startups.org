@@ -13,7 +13,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons home"></i> Home</a></li>
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="#talents"><i class="glyphicons group"></i> Talents</a></li>
-				<li @if (Request::path() === 'projects') class="active" @endif><a href="#projects"><i class="glyphicons suitcase"></i> Projects</a></li>
+				<li @if (Request::path() === 'projects') class="active" @endif><a href="{{ route('projects.index') }}"><i class="glyphicons suitcase"></i> Projects</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="#about"><i class="glyphicons asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact"><i class="glyphicons circle_question_mark"></i> FAQ</a></li>
 				@if ($currentUser)
