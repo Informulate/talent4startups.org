@@ -4,7 +4,7 @@
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="/images/picjumbo.com_Smooth-Touch-Workspace.jpg" alt="First slide">
+				<img src="{{{ asset( 'images/picjumbo.com_Smooth-Touch-Workspace.jpg' ) }}}" alt="First slide">
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Example headline.</h1>

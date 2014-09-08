@@ -40,6 +40,21 @@ Route::get('logout', [
  * Projects!
  */
 
+Route::get('projects', [
+	'as' => 'project_index',
+	'uses' => 'ProjectController@index'
+]);
+
+Route::get('projects/{id}', [
+	'as' => 'project_show',
+	'uses' => 'ProjectController@show'
+]);
+
+Route::get('projects/edit', [
+	'as' => 'project_edit',
+	'uses' => 'ProjectController@edit'
+]);
+
 Route::get('projects/new', [
 	'as' => 'new_project_path',
 	'uses' => 'ProjectController@create'
@@ -48,6 +63,11 @@ Route::get('projects/new', [
 Route::post('projects/new', [
 	'as' => 'new_project_path',
 	'uses' => 'ProjectController@store'
+]);
+
+Route::delete('projects/{id}', [
+	'as' => 'project_destroy',
+	'uses' => 'ProjectController@destroy'
 ]);
 
 /**
