@@ -23,7 +23,7 @@ class ProjectController extends BaseController {
 	{
 		$this->projectForm = $projectForm;
 
-		//$this->beforeFilter('auth');
+		$this->beforeFilter('auth');
 	}
 
 	/**
