@@ -54,13 +54,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			//'host'      => getenv('DB_HOST'),
             'host'      => 'localhost',
-			//'database'  => getenv('DB_NAME'),
             'database'  => 'talent4startups',
-			//'username'  => getenv('DB_USERNAME'),
             'username'  => 'root',
-			//'password'  => getenv('DB_PASSWORD'),
             'password'  => 'ss1',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
