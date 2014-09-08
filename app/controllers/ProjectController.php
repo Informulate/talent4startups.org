@@ -23,20 +23,20 @@ class ProjectController extends BaseController {
 	function __construct(ProjectForm $projectForm)
 	{
 		$this->projectForm = $projectForm;
-
 		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
 	}
 
 	/**
-	 * Display a list of active projects
+	 * Index that shows all projects.
 	 *
-	 * @return $this
+	 * @return Response
 	 */
 	public function index()
 	{
-		$projects = Project::all();
+		$projects = Project::paginate(25);
 
-		return View::make('project.index')->with('projects', $projects);
+		return View::make('project.index')
+			->with('projects', $projects);
 	}
 
 	/**
@@ -78,5 +78,18 @@ class ProjectController extends BaseController {
 		$project = Project::where('url', '=', $project)->firstOrFail();
 
 		return View::make('project.show')->with('project', $project);;
+	}
+
+	/**
+	 * Destroy a record.
+	 *
+	 * @return Response
+	 */
+	public function destroy( $id )
+	{
+		if( Request::ajax() ) {
+			Project::destroy( $id );
+			return 1;
+		}
 	}
 }
