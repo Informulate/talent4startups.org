@@ -13,7 +13,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="#talents">Talents</a></li>
-				<li @if (Request::path() === 'projects') class="active" @endif><a href="{{{ action( 'ProjectController@index' ) }}}">Projects</a></li>
+				<li @if (Request::path() === 'projects') class="active" @endif><a href="#projects">Projects</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="#about">About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact">FAQ</a></li>
 				@if ($currentUser)
