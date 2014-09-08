@@ -26,31 +26,6 @@ class ProjectController extends BaseController {
 		$this->beforeFilter('auth');
 	}
 
-	/**
-	 * Index that shows all projects.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$projects = Project::paginate( 25 );
-
-		return View::make('project.index')
-			->with( 'projects', $projects );
-	}
-
-	/**
-	 * Show the detail page for project.
-	 *
-	 * @return Response
-	 */
-	public function show( $projectid )
-	{
-		$project = Project::find( $projectid );
-
-		return View::make('project.show')
-			->with( 'project', $project );
-	}
 
 	/**
 	 * Show the form for creating a new user.
@@ -78,19 +53,5 @@ class ProjectController extends BaseController {
 		Flash::message('New Project Created');
 
 		return Redirect::to('profile');
-	}
-
-	/**
- * Destroy a record.
- *
- * @return Response
- */
-	public function destroy( $id )
-	{
-    if( Request::ajax() )
-    {   	
-	    Project::destroy( $id );
-      return 1;
-    }
 	}
 }
