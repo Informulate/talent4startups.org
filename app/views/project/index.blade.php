@@ -2,6 +2,11 @@
 
 @section('content')
 	<div class="row">
+		<div class="col-sm-12">
+			{{ $projects->links() }}
+		</div>
+	</div>
+	<div class="row">
 		@foreach($projects as $project)
 			<div class="col-sm-6 col-md-3">
 				<div class="thumbnail">
@@ -10,12 +15,17 @@
 						<h3><?php echo $project->name; ?></h3>
 						<h6><i class="glyphicons google_maps"></i>Orlando, FL.</h6>
 						<p>Project Needs: Developers, Writers, Project Managers</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit dolorem eius, asperiores magnam perspiciatis dolor ratione dolores impedit qui. Rerum amet, iusto.  Eaque neque expedita similique veniam nihil ab perspiciatis.</p>
+						<p>{{ Str::limit( $project->description, 50 ) }}</p>
 						<p><a href="{{ route('projects.show', $project->url) }}" class="btn btn-primary pull-right" role="button">Learn More</a></p>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
 		@endforeach()
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			{{ $projects->links() }}
+		</div>
 	</div>
 @stop

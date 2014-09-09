@@ -14,7 +14,8 @@
 		"way/generators": "~2.0",
 		"codeception/codeception": "~2.0",
 		"laracasts/testdummy": "~1.0",
-		"barryvdh/laravel-ide-helper": "dev-master"
+		"barryvdh/laravel-ide-helper": "dev-master",
+        "fzaninotto/faker": "1.5.*@dev"
 	},
 	"autoload": {
 		"classmap": [

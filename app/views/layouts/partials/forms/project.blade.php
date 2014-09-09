@@ -2,16 +2,16 @@
 
 	<div class="form-group">
 		{{ Form::label('name', 'Name:') }}
-		{{ Form::text('name', null, ['class' => 'form-control']) }}
+		{{ Form::text('name', isset( $project ) ? $project->name : null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('description', 'Description:') }}
-		{{ Form::textarea('description', null, ['class' => 'form-control']) }}
+		{{ Form::textarea('description', isset( $project ) ? $project->description : null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">
-		{{ Form::submit('Save Project', ['id' => 'submit-project','class' => 'btn btn-primary']) }}
+		{{ Form::submit( isset( $project ) ? 'Update Project' : 'Save Project', ['id' => 'submit-project','class' => 'btn btn-primary']) }}
 	</div>
 
 {{ Form::close() }}
