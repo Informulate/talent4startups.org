@@ -104,3 +104,6 @@ div#cboxOverlay {
   width: 21px;
   height: 21px;
   background: url(../images/controls.png) no-repeat -130px -29px; }
+
+#new-project-panel-btn {
+  color: #fff !important; }

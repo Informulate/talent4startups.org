@@ -33,7 +33,7 @@ class ProjectController extends BaseController {
 	 */
 	public function index()
 	{
-		$projects = Project::paginate(25);
+		$projects = Project::paginate(16);
 
 		return View::make('project.index')
 			->with('projects', $projects);
