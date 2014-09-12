@@ -30,6 +30,16 @@ class Project extends Eloquent {
 		return $project;
 	}
 
+	/**
+	 * The project's owner
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function owner()
+	{
+		return $this->belongsTo('Informulate\Users\User', 'user_id');
+	}
+
 	public function tags()
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');

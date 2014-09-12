@@ -12,7 +12,7 @@
 				<div class="thumbnail projects">
 					<img data-src="holder.js/300x300" alt="...">
 					<div class="caption">
-						<h3><?php echo $project->name; ?></h3>
+						<h3>{{ $project->name }} <br/><small>By: {{ $project->owner->profile->first_name }} {{ $project->owner->profile->last_name }}</small></h3>
 						<h6><i class="glyphicons google_maps"></i>Orlando, FL.</h6>
 						<p>Project Needs: Developers, Writers, Project Managers</p>
 						<p>{{ Str::limit( $project->description, 50 ) }}</p>
