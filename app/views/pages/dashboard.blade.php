@@ -50,10 +50,9 @@
 					<h3 class="panel-title">Your projects <a id="new-project-panel-btn" href="{{ route('projects.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons plus"></i> New project</a></h3>
 				</div>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-					<a href="#" class="list-group-item">Morbi leo risus</a>
-					<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-					<a href="#" class="list-group-item">Vestibulum at eros</a>
+					@foreach($myProjects as $project)
+					<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
+					@endforeach
 				</div>
 			</div>
 		</div>

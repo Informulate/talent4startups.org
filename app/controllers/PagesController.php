@@ -5,7 +5,9 @@ class PagesController extends \BaseController {
 	public function home()
 	{
 		if (Auth::check()) {
-			return View::make('pages.dashboard');
+			$myProjects = Project::myProjects();
+
+			return View::make('pages.dashboard')->with('myProjects', $myProjects);
 		}
 
 		return View::make('pages.home');

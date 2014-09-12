@@ -59,7 +59,7 @@ class ProjectController extends BaseController {
 		extract(Input::only('name', 'description'));
 
 		$project = $this->execute(
-			new CreateNewProjectCommand($name, $description)
+			new CreateNewProjectCommand(Auth::user(), $name, $description)
 		);
 
 		Flash::message('New Project Created');
