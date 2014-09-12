@@ -6,7 +6,7 @@
 			<h1>{{ $project->name }}</h1>
 			<p>{{ $project->description }}</p>
 			@foreach($project->tags as $tag)
-				{{ $tag->name }} &nbsp;
+				<span class="badge">{{ $tag->name }}</span> &nbsp;
 			@endforeach
 		</div>
 	</div>
