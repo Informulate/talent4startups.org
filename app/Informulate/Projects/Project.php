@@ -29,4 +29,9 @@ class Project extends Eloquent {
 
 		return $project;
 	}
+
+	public function tags()
+	{
+		return $this->belongsToMany('Informulate\Tags\Tag');
+	}
 }
