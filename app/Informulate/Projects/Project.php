@@ -40,6 +40,16 @@ class Project extends Eloquent {
 		return $this->belongsTo('Informulate\Users\User', 'user_id');
 	}
 
+	/**
+	 * The project members
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function members()
+	{
+		return $this->belongsToMany('Informulate\Users\User');
+	}
+
 	public function tags()
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');
