@@ -105,5 +105,13 @@ div#cboxOverlay {
   height: 21px;
   background: url(../images/controls.png) no-repeat -130px -29px; }
 
+.projects {
+  height: 550px; }
+
+.learn-more {
+  position: absolute;
+  right: 25px;
+  bottom: 30px; }
+
 #new-project-panel-btn {
   color: #fff !important; }

@@ -32,6 +32,7 @@ class CreateNewProjectCommandHandler implements CommandHandler{
 		$slugify = Slugify::create();
 		$project = Project::create(
 			[
+				'user_id' => $command->user->id,
 				'name' => $command->name,
 				'description' => $command->description,
 				'url' => $slugify->slugify($command->name)

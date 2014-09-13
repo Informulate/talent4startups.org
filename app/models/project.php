@@ -1,11 +1,10 @@
 <?php
 class Project extends Eloquent
 {
-	protected $fillable = 
+	protected $fillable =
 	[
 		'user_id',
 		'name',
 		'description'
 	];
 }
-?>

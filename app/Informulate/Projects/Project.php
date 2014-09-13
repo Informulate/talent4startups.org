@@ -13,7 +13,7 @@ class Project extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'description', 'url'];
+	protected $fillable = ['user_id', 'name', 'description', 'url'];
 
 	/**
 	 * Create a new project
@@ -28,6 +28,26 @@ class Project extends Eloquent {
 		$project->raise(new ProjectCreated($project));
 
 		return $project;
+	}
+
+	/**
+	 * The project's owner
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function owner()
+	{
+		return $this->belongsTo('Informulate\Users\User', 'user_id');
+	}
+
+	/**
+	 * The project members
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function members()
+	{
+		return $this->belongsToMany('Informulate\Users\User');
 	}
 
 	public function tags()

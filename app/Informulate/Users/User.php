@@ -40,7 +40,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function profile()
 	{
-		return $this->hasOne('Profile');
+		return $this->hasOne('Informulate\Users\Profile');
+	}
+
+	/**
+	 * The user's projects
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function projects()
+	{
+		return $this->hasMany('Informulate\Projects\Project');
 	}
 
 	/**
