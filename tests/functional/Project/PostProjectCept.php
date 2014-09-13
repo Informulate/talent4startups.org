@@ -6,6 +6,7 @@ $I = new FunctionalTester($scenario);
 $I->am('a talent4startups memeber');
 $I->wantTo('create a project');
 
+$I->signIn();
 $I->amOnPage('/projects/create');
 
 $name = 'My first project';
