@@ -1,6 +1,8 @@
 <?php namespace Informulate\Projects;
 
+use DB;
 use Informulate\Projects\Events\ProjectCreated;
+use Informulate\Users\User;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
@@ -43,13 +45,53 @@ class Project extends Eloquent {
 	/**
 	 * The project members
 	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function members()
 	{
 		return $this->belongsToMany('Informulate\Users\User');
 	}
 
+	/**
+	 * @param User $user
+	 * @return bool
+	 */
+	public function hasMember(User $user = null)
+	{
+		if ($user) {
+			return !is_null(
+				DB::table('project_user')
+					->where('project_id', $this->id)
+					->where('user_id', $user->id)
+					->first()
+			);
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param User $user
+	 * @return bool
+	 */
+	public function hasPendingInvitationFrom(User $user = null)
+	{
+		if ($user) {
+			return !is_null(
+				DB::table('project_user')
+					->where('project_id', $this->id)
+					->where('user_id', $user->id)
+					->where('pending', true)
+					->first()
+			);
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function tags()
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');

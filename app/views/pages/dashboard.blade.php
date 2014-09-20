@@ -39,10 +39,9 @@
 					<h3 class="panel-title">Projects you contribute to</h3>
 				</div>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-					<a href="#" class="list-group-item">Morbi leo risus</a>
-					<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-					<a href="#" class="list-group-item">Vestibulum at eros</a>
+					@foreach($contributions as $project)
+						<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
+					@endforeach
 				</div>
 			</div>
 			<div class="panel panel-default">
