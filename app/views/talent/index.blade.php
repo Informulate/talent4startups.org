@@ -2,6 +2,11 @@
 
 @section('content')
 	<div class="row">
+		<div class="col-sm-12">
+			{{ $talents->links() }}
+		</div>
+	</div>
+	<div class="row">
 		@foreach($talents as $talent)
 			<div class="col-sm-6 col-md-3">
 				<div class="thumbnail">
@@ -17,5 +22,10 @@
 				</div>
 			</div>
 		@endforeach()
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			{{ $talents->links() }}
+		</div>
 	</div>
 @stop
