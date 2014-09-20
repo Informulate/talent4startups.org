@@ -28,8 +28,9 @@ class ProjectTableSeeder extends Seeder {
 	{
 		$faker = Faker\Factory::create();
 		$slugify = Slugify::create();
+		$users = User::all();
 
-		foreach (User::all() as $user) {
+		foreach ($users as $user) {
 			foreach (range(1, rand(2, 4)) as $i) {
 				$name = $faker->name;
 
@@ -42,6 +43,13 @@ class ProjectTableSeeder extends Seeder {
 
 				$this->repository->save($project);
 
+				foreach (range(1, rand(2, 6)) as $i) {
+					$id = rand(1, (count($users) - 1));
+
+					if ($project->owner->id !== $id) {
+						$this->repository->addMemberRequest($users[$id], $project);
+					}
+				}
 			}
 		}
 	}
