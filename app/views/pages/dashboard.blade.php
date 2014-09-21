@@ -34,16 +34,18 @@
 			</ul>
 		</div>
 		<div class="col-sm-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Projects you contribute to</h3>
+			@if(count($contributions) > 0)
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Projects you contribute to</h3>
+					</div>
+					<div class="list-group">
+						@foreach($contributions as $project)
+							<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
+						@endforeach
+					</div>
 				</div>
-				<div class="list-group">
-					@foreach($contributions as $project)
-						<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
-					@endforeach
-				</div>
-			</div>
+			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Your projects <a id="new-project-panel-btn" href="{{ route('projects.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons plus"></i> New project</a></h3>
