@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Redirect;
+use Informulate\Projects\UpdateProjectMembershipCommand;
 use Informulate\Projects\CancelProjectMembershipRequestCommand;
 use Informulate\Projects\Project;
 use Informulate\Core\CommandBus;
 use Informulate\Projects\RequestProjectMembershipCommand;
+use Informulate\Users\User;
 
 class MembershipController extends \BaseController {
 
@@ -16,28 +18,6 @@ class MembershipController extends \BaseController {
 	function __construct()
 	{
 		$this->beforeFilter('auth');
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 * GET /membership
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /membership/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
 	}
 
 	/**
@@ -57,39 +37,24 @@ class MembershipController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
-	 * GET /membership/{id}
+	 * Approves project membership for the specified user
+	 * Get /projects/{projectUrl}/membership/{userId}/approve
 	 *
-	 * @param  int  $id
+	 * @param $project
+	 * @param $user
+	 * @param $action
 	 * @return Response
 	 */
-	public function show($id)
+	public function update($project, $user, $action)
 	{
-		//
-	}
+		$project = Project::where('url', '=', $project)->firstOrFail();
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /membership/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+		if ($project->owner == Auth::user()) {
+			$user = User::find($user);
+			$this->execute(new UpdateProjectMembershipCommand($user, $project, $action));
+		}
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /membership/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+		return Redirect::route('projects.show', ['url' => $project->url]);
 	}
 
 	/**
