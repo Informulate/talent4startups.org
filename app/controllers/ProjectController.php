@@ -5,6 +5,8 @@ use Informulate\Forms\ProjectForm;
 use Informulate\Projects\CreateNewProjectCommand;
 use Informulate\Core\CommandBus;
 use Informulate\Projects\Project;
+use Informulate\Projects\ProjectRepository;
+use Informulate\Users\User;
 
 class ProjectController extends BaseController {
 
@@ -76,8 +78,20 @@ class ProjectController extends BaseController {
 	public function show($project)
 	{
 		$project = Project::where('url', '=', $project)->firstOrFail();
+		$requests = $project->members()->where('pending', true)->get();
+		$members = $project->members()->where('approved', true)->get();
 
-		return View::make('project.show')->with('project', $project);;
+		return View::make('project.show')->with('project', $project)->with('requests', $requests)->with('members', $members);
+	}
+
+	public function approveMember($project, $userId)
+	{
+		if ($project->owner == Auth::user()) {
+			$user = User::find($userId);
+			if (false == $project->hasMember($user)) {
+				//
+			}
+		}
 	}
 
 	/**

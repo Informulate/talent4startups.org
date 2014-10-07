@@ -40,6 +40,18 @@ Route::get('logout', [
  * Projects!
  */
 Route::resource('projects', 'ProjectController');
+Route::get('projects/{id}/membership', [
+	'as' => 'project_membership_request',
+	'uses' => 'MembershipController@request'
+]);
+Route::get('projects/{project}/membership/{user}/{action}', [
+	'as' => 'project_membership_update',
+	'uses' => 'MembershipController@update'
+]);
+Route::get('projects/{id}/membership/cancel', [
+	'as' => 'project_membership_request_cancel',
+	'uses' => 'MembershipController@destroy'
+]);
 
 /**
  * Talents!

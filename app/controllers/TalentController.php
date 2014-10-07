@@ -11,7 +11,7 @@ class TalentController extends BaseController {
 	 */
 	public function index()
 	{
-		$talents = User::all();
+		$talents = User::paginate(16);
 
 		return View::make('talent.index')->with('talents', $talents);
 	}

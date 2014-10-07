@@ -54,6 +54,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/**
+	 * The projects the user contributes to
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function contributions()
+	{
+		return $this->belongsToMany('Informulate\Projects\Project');
+	}
+
+	/**
 	 * Hash the password
 	 *
 	 * @param $password
