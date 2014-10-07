@@ -8,7 +8,8 @@
 		"laracasts/commander": "~1.0",
 		"laracasts/validation": "1.1.*",
 		"laracasts/flash": "~1.0",
-		"cocur/slugify": "@stable"
+		"cocur/slugify": "@stable",
+		"intervention/image": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",

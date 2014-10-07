@@ -42,7 +42,7 @@ Route::get('logout', [
 Route::resource('projects', 'ProjectController');
 Route::get('projects/{id}/membership', [
 	'as' => 'project_membership_request',
-	'uses' => 'MembershipController@store'
+	'uses' => 'MembershipController@request'
 ]);
 Route::get('projects/{project}/membership/{user}/{action}', [
 	'as' => 'project_membership_update',

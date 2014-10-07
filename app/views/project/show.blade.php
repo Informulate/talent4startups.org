@@ -2,8 +2,8 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-6">
-			<h1>{{ $project->name }} <small>@if($project->owner == $currentUser)<a class="btn btn-primary btn-xs" href="#">Edit Project</a>@endif</small></h1>
+		<div class="col-md-8">
+			<h1>{{ $project->name }}</h1>
 
 			<img data-src="holder.js/800x300" alt="...">
 
@@ -24,8 +24,11 @@
 					<span class="badge">{{ $tag->name }}</span> &nbsp;
 				@endforeach
 			</div>
+		</div>
+		<div class="col-md-4">
 
 			@if($project->owner == $currentUser)
+				<a class="btn btn-primary btn-xs pull-right" href="#">Edit Project</a>
 				<h2>Member requests</h2>
 
 				@foreach($requests as $user)

@@ -21,12 +21,13 @@ class MembershipController extends \BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 * POST /membership
+	 * Creates a new membership request for the current logged on user
+	 * Get /projects/{id}/membership
 	 *
+	 * @param $project
 	 * @return Response
 	 */
-	public function store($project)
+	public function request($project)
 	{
 		/* @var $project \Informulate\Projects\Project */
 		$project = Project::where('url', '=', $project)->firstOrFail();
