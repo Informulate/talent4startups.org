@@ -101,9 +101,6 @@ class ProjectController extends BaseController {
 	 */
 	public function destroy( $id )
 	{
-		if( Request::ajax() ) {
-			Project::destroy( $id );
-			return 1;
-		}
+		// TODO: Implement proper project deactivation (We don't want to delete it we just want to deactivate it)
 	}
 }
