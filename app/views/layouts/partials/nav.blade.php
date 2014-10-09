@@ -18,6 +18,7 @@
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact"><i class="glyphicons circle_question_mark"></i> FAQ</a></li>
 				@if ($currentUser)
 					<li><a href="{{ route('logout_path') }}"><span class="glyphicon glyphicon-log-out"></span> Logout :: {{ $currentUser->email }}</a></li>
+					<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicon glyphicon-log-in"></span> Reset Password</a></li>
 				@else
 					<li><a id="login-link" href="{{ route('login_path') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-cog"></span> Sign Up</a></form></li>

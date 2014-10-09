@@ -93,7 +93,31 @@ class ProjectController extends BaseController {
 			}
 		}
 	}
+	/*
+	 * load view for edit project
+	 * @param string $project
+	 */
+	public function edit($project){
+		$project = Project::where('url', '=', $project)->firstOrFail();
+		return View::make('project.edit')->with('project',$project);
+	}
 
+	 /*
+	 * Update project in storage
+	 * @param string url	
+	 */
+	public function update($project){
+		
+			$this->projectForm->validate(Input::all());
+	        $project 	   	  = Project::where('url', '=', $project)->firstOrFail();
+            $project->name 	  = Input::get('name');
+            $project->description = Input::get('description');
+            $project->save();
+	    // redirect
+            Flash::message('Project updated successfullly!');
+            return Redirect::to('projects');
+                
+	}
 	/**
 	 * Destroy a record.
 	 *

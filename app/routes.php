@@ -70,3 +70,17 @@ Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'
 ]);
+/**
+* Reset password
+*/
+
+Route::get('reset_password', [
+	'as' => 'reset_password',
+	'uses' => 'ProfileController@resetPasswordForm'
+]);
+
+
+Route::post('reset_password', [
+	'as' => 'reset_password',
+	'uses' => 'ProfileController@resetPassword'
+]);

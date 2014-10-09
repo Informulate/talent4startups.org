@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'projects.store']) }}
+{{ Form::open(['route' => isset( $project ) ? array('projects.update',$project['url']): 'projects.store','method'=>isset( $project ) ? 'PUT': 'POST']) }}
 
 	<div class="form-group">
 		{{ Form::label('name', 'Name:') }}
