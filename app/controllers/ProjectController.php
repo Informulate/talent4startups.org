@@ -7,6 +7,7 @@ use Informulate\Core\CommandBus;
 use Informulate\Projects\Project;
 use Informulate\Projects\ProjectRepository;
 use Informulate\Users\User;
+use Informulate\Tags\Tag;
 
 class ProjectController extends BaseController {
 
@@ -18,13 +19,19 @@ class ProjectController extends BaseController {
 	private $projectForm;
 
 	/**
+	 * @var Tag
+	 */
+	private $tag;
+
+	/**
 	 * Constructor
 	 *
 	 * @param ProjectForm $projectForm
 	 */
-	function __construct(ProjectForm $projectForm)
+	function __construct(ProjectForm $projectForm,Tag $tag)
 	{
 		$this->projectForm = $projectForm;
+		$this->tag  = $tag;
 		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
 	}
 
@@ -48,7 +55,10 @@ class ProjectController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('project.create');
+	
+		$tags = $this->tag->listTags();
+			
+		return View::make('project.create')->with('tags',$tags)->with('projectTags','');
 	}
 
 	/**
@@ -58,11 +68,13 @@ class ProjectController extends BaseController {
 	{
 		$this->projectForm->validate(Input::all());
 
-		extract(Input::only('name', 'description'));
-
+		extract(Input::only('name', 'description','tags'));
+		
 		$project = $this->execute(
 			new CreateNewProjectCommand(Auth::user(), $name, $description)
 		);
+		
+		$this->tag->newProjectTags($project,$tags); //assign tags to projects
 
 		Flash::message('New Project Created');
 
@@ -92,7 +104,37 @@ class ProjectController extends BaseController {
 				//
 			}
 		}
+	} 
+
+	 /*
+	 * load view for edit project with tags
+	 * @param string $project (url)
+	 */
+	public function edit($project){
+		$tags = $this->tag->listTags();
+		$project = Project::where('url', '=', $project)->firstOrFail();
+		$projectTags = $this->tag->listProjectTags($project);
+		return View::make('project.edit')->with('project',$project)
+				->with('projectTags',$projectTags)->with('tags',$tags);
 	}
+
+	 /*
+	 * Update project in storage
+	 * @param string url	
+	 */
+	public function update($project){
+	        $project 	   	  = Project::where('url', '=', $project)->firstOrFail();
+            $project->name 	  = Input::get('name');
+            $project->description = Input::get('description');
+            $project->save();
+	        $tags = Input::get('tags');
+            $this->tag->updateProjectTags($project,$tags);	
+	        // redirect
+            Flash::message('Project updated successfullly!');
+            return Redirect::to('projects');
+                
+	}
+
 
 	/**
 	 * Destroy a record.
