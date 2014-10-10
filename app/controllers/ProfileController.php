@@ -31,6 +31,7 @@ class ProfileController extends BaseController {
 	{
 		$this->profileForm = $profileForm;
 		$this->resetForm   = $resetform;
+		$this->beforeFilter('auth');
 	}
 	/**
 	 * Show the form for creating a new user.
@@ -61,10 +62,7 @@ class ProfileController extends BaseController {
 	 * Load view for reset password for logged in users
 	 */
 	public function resetPasswordForm(){
-		if(!Auth::id()) {
-		//redirect to login , if user not logged in
-		return Redirect::to('login');
-		}	
+			
 		return View::make('profile.reset_password');
 	}
 

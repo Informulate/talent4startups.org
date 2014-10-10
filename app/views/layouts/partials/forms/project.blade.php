@@ -16,6 +16,12 @@
 	</div>
 
 	<div class="form-group">
+		{{ Form::label('tags', 'Tags:') }}
+		
+		{{ Form::select('tags[]', $tags, $projectTags, array('multiple')); }}
+	</div>
+	
+	<div class="form-group">
 		{{ Form::submit( isset( $project ) ? 'Update Project' : 'Save Project', ['id' => 'submit-project','class' => 'btn btn-primary']) }}
 	</div>
 
