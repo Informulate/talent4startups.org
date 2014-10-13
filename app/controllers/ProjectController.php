@@ -20,19 +20,13 @@ class ProjectController extends BaseController {
 	private $projectForm;
 
 	/**
-	 * @var Tag
-	 */
-	private $tag;
-
-	/**
 	 * Constructor
 	 *
 	 * @param ProjectForm $projectForm
 	 */
-	function __construct(ProjectForm $projectForm,Tag $tag)
+	function __construct(ProjectForm $projectForm)
 	{
 		$this->projectForm = $projectForm;
-		$this->tag  = $tag;
 		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
 	}
 
@@ -57,7 +51,7 @@ class ProjectController extends BaseController {
 	public function create()
 	{
 	
-		$tags = $this->tag->listTags();
+		$tags   = Tag::lists('name','id');
 		$stages = Stage::lists('name','id');
 		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
 	}
@@ -72,7 +66,7 @@ class ProjectController extends BaseController {
 		$project = $this->execute(
 			new CreateNewProjectCommand(Auth::user(), $name, $description)
 		);		
-		$this->tag->newProjectTags($project,$tags); //assign tags to projects
+		Tag::newProjectTags($project,$tags); //assign tags to projects
 		Flash::message('New Project Created');
 		return Redirect::route('projects.show', ['url' => $project->url]);
 	}
@@ -107,11 +101,12 @@ class ProjectController extends BaseController {
 	 * @param string $project (url)
 	 */
 	public function edit($project){
-		$tags = $this->tag->listTags();
+		$tags = Tag::lists('name','id');
 		$project = Project::where('url', '=', $project)->firstOrFail();
-		$projectTags = $this->tag->listProjectTags($project);
+		$stages = Stage::lists('name','id');
+		$projectTags = Tag::listProjectTags($project);
 		return View::make('project.edit')->with('project',$project)
-				->with('projectTags',$projectTags)->with('tags',$tags);
+				->with('projectTags',$projectTags)->with('tags',$tags)->with('stages',	$stages);
 	}
 
 	 /*
@@ -124,7 +119,7 @@ class ProjectController extends BaseController {
             $project->description = Input::get('description');
             $project->save();
 	        $tags = Input::get('tags');
-            $this->tag->updateProjectTags($project,$tags);	
+            Tag::updateProjectTags($project,$tags);	
 	        // redirect
             Flash::message('Project updated successfullly!');
             return Redirect::to('projects');

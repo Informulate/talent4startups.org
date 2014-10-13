@@ -22,20 +22,11 @@ class Tag extends Eloquent {
 
 
 	/**
-	 * Fetch all tags from storage
-	 * @return tag-ids,name
-	 */
-	public function listTags(){
-	   $tags = Tag::lists('name','id');
-		return $tags;
-	}
-
-	/**
 	 * Fetch project's tags from storage
 	 * @param Object Project
 	 * @return tag ids
 	 */
-	public function listProjectTags(Project $project){
+	public static function listProjectTags(Project $project){
 
 		$tags = $project->tags;
 
@@ -46,7 +37,7 @@ class Tag extends Eloquent {
 	* add project's tags
 	* @param Object Project,array tags
 	*/
-	public function newProjectTags(Project $project,$tags){
+	public static function newProjectTags(Project $project,$tags){
 		if(sizeof($tags)>0){
 			// if user selected tags
 			foreach($tags as $tagID){
@@ -59,9 +50,9 @@ class Tag extends Eloquent {
 	* Update project's tags
 	* @param Object Project,array tags
 	*/
-	public function updateProjectTags(Project $project,$tags){
+	public static function updateProjectTags(Project $project,$tags){
 		Project::find($project['id'])->tags()->detach();// remove all tags of project
-		$this->newProjectTags($project,$tags); //add new tags
+		Tag::newProjectTags($project,$tags); //add new tags
 	}
 
 	
