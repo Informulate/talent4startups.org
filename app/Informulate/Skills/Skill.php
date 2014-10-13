@@ -9,16 +9,16 @@ class Skill extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name'];
-
+	protected $fillable = ['name','skill_id'];
 
 	 /**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function users()
+	public function profiles()
 	{
-		return $this->belongsToMany('Informulate\Users\User');
+		return $this->belongsToMany('Informulate\Users\Profile');
 	}
+
 	/**
 	 * Fetch all skills from storage
 	 * @return skill-ids,name
@@ -27,17 +27,15 @@ class Skill extends Eloquent {
 	   $skills = Skill::lists('name','id');
 		return $skills;
 	}
-	/**	
-	* add user's skills
-	* @param Object Project,array skills
-	*/
-	public static function newUserSkills(User $user,$skills){
-		if(sizeof($skills)>0){
-			// if user selected skills
-			foreach($skills as $skillID){
-			 $user->skill()->attach($user['id'], array('skill_id' => $skillID));
-			}
-		}
+	
+	/**
+	 * fetch user profile skills
+	 * @param Object $profile
+	 * @return array skills
+	 */
+	public static function getUserProfileSkills(Profile $profile){
+		
+		return $profile->skills;
 	}
 
 }
