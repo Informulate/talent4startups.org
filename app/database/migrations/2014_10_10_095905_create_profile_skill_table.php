@@ -18,7 +18,7 @@ class CreateProfileSkillTable extends Migration {
 			$table->integer('profile_id')->unsigned()->index();
 			$table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
 			$table->integer('skill_id')->unsigned()->index();
-			$table->foreign('skill_id')->references('id')->on('skilles')->onDelete('cascade');
+			$table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
 		});
 	}
 

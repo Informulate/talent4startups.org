@@ -8,6 +8,7 @@ use Informulate\Projects\Project;
 use Informulate\Projects\ProjectRepository;
 use Informulate\Users\User;
 use Informulate\Tags\Tag;
+use Informulate\Stages\Stage;
 
 class ProjectController extends BaseController {
 
@@ -57,8 +58,8 @@ class ProjectController extends BaseController {
 	{
 	
 		$tags = $this->tag->listTags();
-			
-		return View::make('project.create')->with('tags',$tags)->with('projectTags','');
+		$stages = Stage::lists('name','id');
+		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
 	}
 
 	/**
@@ -67,17 +68,12 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 		$this->projectForm->validate(Input::all());
-
-		extract(Input::only('name', 'description','tags'));
-		
+		extract(Input::only('name', 'description','tags'));		
 		$project = $this->execute(
 			new CreateNewProjectCommand(Auth::user(), $name, $description)
-		);
-		
+		);		
 		$this->tag->newProjectTags($project,$tags); //assign tags to projects
-
 		Flash::message('New Project Created');
-
 		return Redirect::route('projects.show', ['url' => $project->url]);
 	}
 

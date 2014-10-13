@@ -49,5 +49,9 @@ class Profile extends Eloquent {
 
 		return $profile;
 	}
+		public function skills()
+	{
+		return $this->belongsToMany('Informulate\Skills\Skill');
+	}
 
 }

@@ -15,11 +15,12 @@ class AddAdditionalPropertiesToProfileTable extends Migration {
 		Schema::table('profiles', function(Blueprint $table)
 		{
 			$table->string('user_type')->after('last_name');
-			$table->integer('agerange')->after('user_type');
+			$table->string('agerange')->after('user_type');
 			$table->string('location')->after('agerange');
 			$table->string('workexperience')->after('location');
 			$table->text('about')->after('workexperience');
 			$table->integer('describe')->after('about');
+			$table->string('image');
 			$table->string('another_skill')->after('describe');
 			$table->string('facebook')->after('another_skill');
 			$table->string('linkedins')->after('facebook');
@@ -38,7 +39,8 @@ class AddAdditionalPropertiesToProfileTable extends Migration {
 		
 		Schema::table('profiles', function(Blueprint $table)
 		{
-			$table->removeColumn(['image', 'video']);
+			$table->removeColumn(['image', 'user_type','agerange','location','workexperience','about'
+			,'describe','another_skill','facebook','linkedins','twitter','meetup']);
 		});
 	}
 

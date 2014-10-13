@@ -6,6 +6,8 @@ use Informulate\Forms\ResetForm;
 use Informulate\Core\CommandBus;
 use Informulate\Users\UpdateProfileCommand;
 use Informulate\Users\User;
+use Informulate\Describes\Describe;
+use Informulate\Skills\Skill;
 
 class ProfileController extends BaseController {
 
@@ -20,7 +22,10 @@ class ProfileController extends BaseController {
 	 * @var ResetForm
 	 */
 	private $resetForm;
-
+	/**
+	 * @var Skill
+	 */
+	private $skill;
 	/**
 	 * Constructor
 	 *
@@ -40,24 +45,32 @@ class ProfileController extends BaseController {
 	 */
 	public function edit()
 	{
-		return View::make('profile.edit');
+		$describes=Describe::lists('name','id'); 
+		$skills=Skill::lists('name','id');  		
+		return View::make('profile.edit')->with( 'describes',$describes)->with( 'skills',$skills);
 	}
-
 	/**
 	 * Save the user.
 	 */
 	public function store()
 	{
 		$this->profileForm->validate(Input::all());
-
-		extract(Input::only('first_name', 'last_name'));
-
-		$this->execute(
+		extract(Input::only('first_name', 'last_name','image', 'skills'));		 
+	 /*	$destinationPath = public_path().'/img/'; 
+			if (Input::hasFile('image')) {
+				 	$file            = Input::file('image'); 
+			        $filename        = str_random(6) . '_' . $file->getClientOriginalName();
+			        $uploadSuccess   = $file->move($destinationPath, $filename);
+			//		Input::file('photo')->move($destinationPath);
+			        $image=$filename; 
+	        
+	   	    }		*/
+		$userData=$this->execute(
 			new UpdateProfileCommand(Auth::user(), $first_name, $last_name)
 		);
-
-		return Redirect::route('projects.create');
-	}
+		//$this->skill->newUserSkills($userData,$skills); //assign skills to users
+	 	return Redirect::route('projects.create');
+	} 
 	/**
 	 * Load view for reset password for logged in users
 	 */
@@ -65,9 +78,6 @@ class ProfileController extends BaseController {
 			
 		return View::make('profile.reset_password');
 	}
-
-
-
 	/**
 	 * Reset requested password for user
 	 */
