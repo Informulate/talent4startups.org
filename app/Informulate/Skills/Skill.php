@@ -35,7 +35,20 @@ class Skill extends Eloquent {
 	 */
 	public static function getUserProfileSkills(Profile $profile){
 		
-		return $profile->skills;
+		$skills = $profile->skills;
+		return $skills->lists('id');
+	}
+	
+	/* add profile skills to profile_skills
+	 * @param Object $profile, array $sills
+	 */
+	public static function newProfileSkills($profile,$skills){
+		if(sizeof($skills)>0){
+			// if user selected tags
+			foreach($skills as $skillID){
+			 $profile->skills()->attach($profile['id'], array('skill_id' => $skillID));
+			}
+		}
 	}
 
 }

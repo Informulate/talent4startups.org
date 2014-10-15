@@ -106,23 +106,25 @@ class ProjectController extends BaseController {
 		$stages = Stage::lists('name','id');
 		$projectTags = Tag::listProjectTags($project);
 		return View::make('project.edit')->with('project',$project)
-				->with('projectTags',$projectTags)->with('tags',$tags)->with('stages',	$stages);
+				->with('projectTags',$projectTags)->with('tags',$tags)
+				->with('stages',$stages);
 	}
+
 
 	 /*
 	 * Update project in storage
 	 * @param string url	
 	 */
-	public function update($project){
-	        $project 	   	  = Project::where('url', '=', $project)->firstOrFail();
+	public function update($projectUrl){
+	    $project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
             $project->name 	  = Input::get('name');
             $project->description = Input::get('description');
             $project->save();
-	        $tags = Input::get('tags');
+	    $tags = Input::get('tags');
             Tag::updateProjectTags($project,$tags);	
-	        // redirect
+	    // redirect
             Flash::message('Project updated successfullly!');
-            return Redirect::to('projects');
+	    return  Redirect::action('ProjectController@show',$projectUrl);
                 
 	}
 
