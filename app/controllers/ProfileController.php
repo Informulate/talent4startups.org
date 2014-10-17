@@ -1,11 +1,15 @@
 <?php
-
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProfileForm;
 use Informulate\Forms\ResetForm;
 use Informulate\Core\CommandBus;
 use Informulate\Users\UpdateProfileCommand;
 use Informulate\Users\User;
+use Informulate\Users\Profile;
+use Informulate\Describes\Describe;
+use Informulate\Skills\Skill;
+use Informulate\Projects\Project;
+use Informulate\Users\Events\ProfileUpdated;
 
 class ProfileController extends BaseController {
 
@@ -20,7 +24,10 @@ class ProfileController extends BaseController {
 	 * @var ResetForm
 	 */
 	private $resetForm;
-
+	/**
+	 * @var Skill
+	 */
+	private $skill;
 	/**
 	 * Constructor
 	 *
@@ -34,30 +41,44 @@ class ProfileController extends BaseController {
 		$this->beforeFilter('auth');
 	}
 	/**
-	 * Show the form for creating a new user.
+	 * Show the form for creating a user profile.
 	 *
 	 * @return Response
 	 */
 	public function edit()
-	{
-		return View::make('profile.edit');
+	{	
+		$profileInfo = Profile::where('user_id','=',Auth::id())->first();
+		$describes=Describe::lists('name','id'); 
+		$skills=Skill::lists('name','id');  		
+		$profileSkills=Skill::getUserProfileSkills($profileInfo);
+		return View::make('profile.edit')->with('profileInfo',$profileInfo)
+			    ->with( 'describes',$describes)->with( 'skills',$skills)
+			    ->with('profileSkills',$profileSkills);
 	}
-
 	/**
 	 * Save the user.
 	 */
 	public function store()
-	{
+	{	
 		$this->profileForm->validate(Input::all());
-
-		extract(Input::only('first_name', 'last_name'));
-
-		$this->execute(
-			new UpdateProfileCommand(Auth::user(), $first_name, $last_name)
+		$userData=$this->execute(
+			new UpdateProfileCommand(Auth::user(),Input::all())
 		);
+		Flash::message('Your profile has been updated successfully!');	
+		//redirect to home, if user is talent
+		if(Input::get('user_type')=='T'){
+			return Redirect::intended('');
+		}else{
+	 	// redirect to create projct if no project added by startup yet.
+		  $projects =  Project::where('user_id','=',Auth::id())->count();
+		  if($projects==0){
+			return Redirect::route('projects.create');	
+		}
+		   
+		}
+		return Redirect::intended('');
 
-		return Redirect::route('projects.create');
-	}
+	} 
 	/**
 	 * Load view for reset password for logged in users
 	 */
@@ -65,9 +86,6 @@ class ProfileController extends BaseController {
 			
 		return View::make('profile.reset_password');
 	}
-
-
-
 	/**
 	 * Reset requested password for user
 	 */
@@ -84,7 +102,7 @@ class ProfileController extends BaseController {
 
 		//check if user entered old password correct
 		$user = User::find(Auth::id());
-
+		Flash::message('Your password has been reset successfully!');
         	if(Hash::check($old_password, $user->password)){
             		//old password correct
 	 		try{

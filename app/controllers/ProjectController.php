@@ -8,6 +8,7 @@ use Informulate\Projects\Project;
 use Informulate\Projects\ProjectRepository;
 use Informulate\Users\User;
 use Informulate\Tags\Tag;
+use Informulate\Stages\Stage;
 
 class ProjectController extends BaseController {
 
@@ -19,19 +20,13 @@ class ProjectController extends BaseController {
 	private $projectForm;
 
 	/**
-	 * @var Tag
-	 */
-	private $tag;
-
-	/**
 	 * Constructor
 	 *
 	 * @param ProjectForm $projectForm
 	 */
-	function __construct(ProjectForm $projectForm,Tag $tag)
+	function __construct(ProjectForm $projectForm)
 	{
 		$this->projectForm = $projectForm;
-		$this->tag  = $tag;
 		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
 	}
 
@@ -56,9 +51,9 @@ class ProjectController extends BaseController {
 	public function create()
 	{
 	
-		$tags = $this->tag->listTags();
-			
-		return View::make('project.create')->with('tags',$tags)->with('projectTags','');
+		$tags   = Tag::lists('name','id');
+		$stages = Stage::lists('name','id');
+		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
 	}
 
 	/**
@@ -67,17 +62,12 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 		$this->projectForm->validate(Input::all());
-
-		extract(Input::only('name', 'description','tags'));
-		
+		extract(Input::only('name', 'description','tags'));		
 		$project = $this->execute(
 			new CreateNewProjectCommand(Auth::user(), $name, $description)
-		);
-		
-		$this->tag->newProjectTags($project,$tags); //assign tags to projects
-
+		);		
+		Tag::newProjectTags($project,$tags); //assign tags to projects
 		Flash::message('New Project Created');
-
 		return Redirect::route('projects.show', ['url' => $project->url]);
 	}
 
@@ -111,27 +101,30 @@ class ProjectController extends BaseController {
 	 * @param string $project (url)
 	 */
 	public function edit($project){
-		$tags = $this->tag->listTags();
+		$tags = Tag::lists('name','id');
 		$project = Project::where('url', '=', $project)->firstOrFail();
-		$projectTags = $this->tag->listProjectTags($project);
+		$stages = Stage::lists('name','id');
+		$projectTags = Tag::listProjectTags($project);
 		return View::make('project.edit')->with('project',$project)
-				->with('projectTags',$projectTags)->with('tags',$tags);
+				->with('projectTags',$projectTags)->with('tags',$tags)
+				->with('stages',$stages);
 	}
+
 
 	 /*
 	 * Update project in storage
 	 * @param string url	
 	 */
-	public function update($project){
-	        $project 	   	  = Project::where('url', '=', $project)->firstOrFail();
+	public function update($projectUrl){
+	    $project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
             $project->name 	  = Input::get('name');
             $project->description = Input::get('description');
             $project->save();
-	        $tags = Input::get('tags');
-            $this->tag->updateProjectTags($project,$tags);	
-	        // redirect
+	    $tags = Input::get('tags');
+            Tag::updateProjectTags($project,$tags);	
+	    // redirect
             Flash::message('Project updated successfullly!');
-            return Redirect::to('projects');
+	    return  Redirect::action('ProjectController@show',$projectUrl);
                 
 	}
 

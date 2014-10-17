@@ -12,5 +12,6 @@ class ProfileForm extends FormValidator {
 	protected $rules = [
 		'first_name' => 'required',
 		'last_name' => 'required'
+		,'skills' => 'required'
 	];
 }

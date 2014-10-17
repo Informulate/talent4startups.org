@@ -33,7 +33,7 @@
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
 								<button class="btn btn-primary">LinkedIn</button><br/>
-								<a id="register-email" href="{{ route('register_path') }}">Or sign up with email instead</a>
+								<a id="register-email" style="cursor:pointer;">Or sign up with email instead</a>
 							</div>
 						</div>
 					</div>
@@ -73,14 +73,28 @@
 
 		// Register via email
 		$('#register-email').on('click', function(event) {
+			var $error=0;
 			if (false === $("#agree").is(':checked')) {
+				$error++;
 				event.preventDefault();
 				alert('You must agree to the Terms of Use before getting started!');
 			}
 
 			if (false === $('#talent').hasClass('text-primary') && false === $('#startup').hasClass('text-primary')) {
+				$error++;
 				event.preventDefault();
 				alert('Are you a talent or a startup? Click the appropriate icon above!');
+			}
+
+			if($error==0){
+			//No errors, form is ready to submit
+			if($('#talent').hasClass('text-primary')){
+				var $userType = 'T';
+			}else{
+				var $userType = 'S';
+			}
+
+			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
 			}
 		});
 	});

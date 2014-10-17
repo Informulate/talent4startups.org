@@ -8,14 +8,9 @@ class UpdateProfileCommand {
 	public $user;
 
 	/**
-	 * @var string first_name
+	 * @var object profileInfo
 	 */
-	public $first_name;
-
-	/**
-	 * @var string last_name
-	 */
-	public $last_name;
+	public $profileInfo;
 
 	/**
 	 * @var boolean active
@@ -27,11 +22,10 @@ class UpdateProfileCommand {
 	 * @param $first_name
 	 * @param $last_name
 	 */
-	function __construct(User $user, $first_name, $last_name)
+	function __construct(User $user, $profileInfo)
 	{
 		$this->user = $user;
-		$this->first_name = $first_name;
-		$this->last_name = $last_name;
+		$this->profileInfo = $profileInfo;
 	}
 
 }
