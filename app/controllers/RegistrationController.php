@@ -34,13 +34,14 @@ class RegistrationController extends BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{	
-		$data = Input::all();
-		if(!array_key_exists('user_type',$data))
-		{
-			redirect::route('/');
+	{
+		$userType = Input::get('userType');
+
+		if (is_null($userType)) {
+			return View::make('registration.select_type');
 		}
-		return View::make('registration.create');
+
+		return View::make('registration.create')->with('userType', $userType);
 	}
 
 	/**
@@ -61,10 +62,10 @@ class RegistrationController extends BaseController {
 		);
 
 		Auth::login($user);
-		
-		//create user profile and store user_type in profile table	
-		
-		$profile = new Profile(array('user_type'=>$user_type));		
+
+		//create user profile and store user_type in profile table
+
+		$profile = new Profile(array('user_type'=>$user_type));
 
 		$profile = $user->profile()->save($profile);
 
@@ -73,7 +74,7 @@ class RegistrationController extends BaseController {
 		return Redirect::to('profile');
 		}
 
-		
+
 		return View::make('registration.create')->with('userType',$data['user_type']);
 	}
 }
