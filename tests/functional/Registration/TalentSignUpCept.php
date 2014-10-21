@@ -11,6 +11,10 @@ $I->click('Or sign up with email instead');
 
 $I->amOnPage('/register');
 
+$I->click('Sign Up As a StartUp');
+
+$I->amOnPage('/register?userType=startup');
+
 $I->fillField('Username:', 'JaneDoe');
 $I->fillField('Email:', 'jane@example.com');
 $I->fillField('Password:', 'demo');
@@ -27,6 +31,11 @@ $I->seeRecord('users', [
 
 $I->fillField('First Name:', 'Jane');
 $I->fillField('Last Name:', 'Doe');
+$I->selectOption('#agerange', '30-above');
+$I->selectOption('#describe', '1');
+$I->selectOption('skills[]', 'non-profie');
+$I->fillField('workexperience', 'My Work experience');
+$I->fillField('about', 'This is my about summary');
 $I->click('#submit-profile');
 
 $I->amOnPage('/projects/create');

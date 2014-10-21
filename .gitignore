@@ -11,3 +11,4 @@ _ide_helper.php
 node_modules
 .env.testing.php
 .sass-cache/
+tests/_output/*
