@@ -2,7 +2,7 @@
 
 	<div class="form-group">
 		{{ Form::label('first_name', 'First Name:') }}
-		{{ Form::text('first_name', isset( $user->profile ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
+		{{ Form::text('first_name', isset( $user->profile->first_name ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">
@@ -31,7 +31,7 @@
 	<div class="form-group">
 		{{ Form::label('skills', 'I\'m skilled in :') }}
 		<!--{{ Form::text('skills',null, ['class' => 'form-control']) }}-->
-		{{ Form::select('skills[]', $skills, isset( $user->profile ) ? $user->profile->skills : null,array('multiple')); }}
+		{{ Form::select('skills[]', $skills, isset( $user->profile ) ? $user->profile->skills->lists('id') : null,array('multiple')); }}
 
 	</div>
 	<div class="form-group">

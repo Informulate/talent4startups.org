@@ -70,6 +70,8 @@ Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'
 ]);
+
+
 /**
 * Reset password
 */
@@ -84,3 +86,24 @@ Route::post('reset_password', [
 	'as' => 'reset_password',
 	'uses' => 'ProfileController@resetPassword'
 ]);
+
+
+/**
+* Forgot password
+*/
+Route::get('password/reset', array(
+  'uses' => 'PasswordController@remind',
+  'as' => 'password.remind'
+));
+Route::post('password/reset', array(
+  'uses' => 'PasswordController@request',
+  'as' => 'password.request'
+));
+Route::get('password/reset/{token}', array(
+  'uses' => 'PasswordController@reset',
+  'as' => 'password.reset'
+));
+Route::post('password/reset/{token}', array(
+  'uses' => 'PasswordController@update',
+  'as' => 'password.update'
+));

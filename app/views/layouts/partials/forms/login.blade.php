@@ -12,6 +12,7 @@
 
 	<div class="form-group">
 		{{ Form::submit('Login', ['id' => 'submit-login','class' => 'btn btn-primary']) }}
+		<a id="forgot_password" href="{{ route('password.remind') }}">Forgot Password</a>
 	</div>
 
 {{ Form::close() }}

@@ -50,13 +50,14 @@ class RegistrationController extends BaseController {
 	public function store()
 	{
 		$data = Input::all();
+		
 		if(array_key_exists('submit-registration',$data))
 		{
 		//if form filled and submitted by user
 		$this->registrationForm->validate(Input::all());
 
 		extract(Input::only('username', 'email', 'password','user_type'));
-
+		
 		$user = $this->execute(
 			new RegisterUserCommand($username, $email, $password)
 		);

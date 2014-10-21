@@ -50,7 +50,6 @@ class ProfileController extends BaseController {
 		$user = Auth::user();
 		$describes = Describe::lists('name','id');
 		$skills = Skill::lists('name','id');
-
 		return View::make('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills);
 	}
 	/**
@@ -58,6 +57,7 @@ class ProfileController extends BaseController {
 	 */
 	public function store()
 	{
+		$user = Auth::user();
 		$this->profileForm->validate(Input::all());
 		$userData=$this->execute(
 			new UpdateProfileCommand(Auth::user(),Input::all())
@@ -95,12 +95,11 @@ class ProfileController extends BaseController {
 
 		if($new_password!=$password_confirmation) {
 	 	 	//confrim password not match
-	 	 	return redirect::route('reset_password')->with('error','Confirm password not 							match');
+	 	 	return redirect::route('reset_password')->with('error','Confirm password not match');
 		}
 
 		//check if user entered old password correct
 		$user = User::find(Auth::id());
-		Flash::message('Your password has been reset successfully!');
         	if(Hash::check($old_password, $user->password)){
             		//old password correct
 	 		try{
@@ -114,12 +113,12 @@ class ProfileController extends BaseController {
 	  		// fail to update user, generate error and load view
 
                             Flash::message('Error in reset password. Try again later!');
-                            return redirect::route('reset_password')->with('error','Error in reset password. 						Try again later!');
+                            return redirect::route('reset_password')->with('error','Error in reset password. Try again later!');
 			}
      		}
       		 else{
 	 		 // generate error if old password is incorrect
-          		 return redirect::route('reset_password')->with('error','Old password is 				 incorrect!');
+          		 return redirect::route('reset_password')->with('error','Old password is incorrect!');
         	    }
  	 }
 }
