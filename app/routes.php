@@ -39,16 +39,24 @@ Route::get('logout', [
 /**
  * Projects!
  */
-
-Route::get('projects/new', [
-	'as' => 'new_project_path',
-	'uses' => 'ProjectController@create'
+Route::resource('projects', 'ProjectController');
+Route::get('projects/{id}/membership', [
+	'as' => 'project_membership_request',
+	'uses' => 'MembershipController@request'
+]);
+Route::get('projects/{project}/membership/{user}/{action}', [
+	'as' => 'project_membership_update',
+	'uses' => 'MembershipController@update'
+]);
+Route::get('projects/{id}/membership/cancel', [
+	'as' => 'project_membership_request_cancel',
+	'uses' => 'MembershipController@destroy'
 ]);
 
-Route::post('projects/new', [
-	'as' => 'new_project_path',
-	'uses' => 'ProjectController@store'
-]);
+/**
+ * Talents!
+ */
+Route::resource('talents', 'TalentController');
 
 /**
  * Profile!
@@ -56,4 +64,23 @@ Route::post('projects/new', [
 Route::get('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@edit'
+]);
+
+Route::post('profile', [
+	'as' => 'edit_profile',
+	'uses' => 'ProfileController@store'
+]);
+/**
+* Reset password
+*/
+
+Route::get('reset_password', [
+	'as' => 'reset_password',
+	'uses' => 'ProfileController@resetPasswordForm'
+]);
+
+
+Route::post('reset_password', [
+	'as' => 'reset_password',
+	'uses' => 'ProfileController@resetPassword'
 ]);

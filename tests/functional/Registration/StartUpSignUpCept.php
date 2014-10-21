@@ -11,6 +11,10 @@ $I->click('Or sign up with email instead');
 
 $I->amOnPage('/register');
 
+$I->click('Sign Up As a StartUp');
+
+$I->amOnPage('/register?userType=startup');
+
 $I->fillField('Username:', 'JohnDoe');
 $I->fillField('Email:', 'john@example.com');
 $I->fillField('Password:', 'demo');

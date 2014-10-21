@@ -34,6 +34,36 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
 	/**
+	 * The user's profile
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function profile()
+	{
+		return $this->hasOne('Informulate\Users\Profile');
+	}
+
+	/**
+	 * The user's projects
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function projects()
+	{
+		return $this->hasMany('Informulate\Projects\Project');
+	}
+
+	/**
+	 * The projects the user contributes to
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function contributions()
+	{
+		return $this->belongsToMany('Informulate\Projects\Project');
+	}
+
+	/**
 	 * Hash the password
 	 *
 	 * @param $password

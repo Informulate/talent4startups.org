@@ -1,5 +1,6 @@
 <?php namespace Informulate\Projects;
 
+use Cocur\Slugify\Slugify;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
@@ -28,10 +29,13 @@ class CreateNewProjectCommandHandler implements CommandHandler{
 	 */
 	public function handle($command)
 	{
+		$slugify = Slugify::create();
 		$project = Project::create(
 			[
+				'user_id' => $command->user->id,
 				'name' => $command->name,
-				'description' => $command->description
+				'description' => $command->description,
+				'url' => $slugify->slugify($command->name)
 			]
 		);
 

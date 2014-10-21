@@ -3,8 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
-		<link href="/css/vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/main.css" rel="stylesheet">
+		<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css') }}}" rel="stylesheet">
+		<link href="{{{ asset( 'css/vendors/bootstrap/bootstrap.min.css' ) }}}" rel="stylesheet">
+		<link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="{{{ asset( 'js/vendors/jquery/jquery-2.1.1.min.js' ) }}}"></script>
 	</head>
 	<body>
 
@@ -12,16 +15,18 @@
 
 		@yield('wide-content')
 
-		<div class="container">
+		<div class="container-fluid">
 			@include('flash::message')
 
 			@yield('content')
 		</div>
 
-		<script src="/js/vendors/jquery/jquery-2.1.1.min.js"></script>
-		<script src="/js/vendors/bootstrap/bootstrap.min.js"></script>
-		<script src="/js/vendors/holder/docs.min.js"></script>
-
+		
+		<script src="{{{ asset( 'js/vendors/bootstrap/bootstrap.min.js' ) }}}"></script>
+		<script src="{{{ asset('/js/vendors/modernizr/modernizr.js') }}}"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox-min.js"></script>
+		<script src="{{{ asset( 'js/vendors/holder/docs.min.js' ) }}}"></script>
+		<script src="{{{ asset( 'js/script.js' ) }}}"></script>
 		@yield('javascript')
 
 		@include('layouts.partials.modal.forms')
