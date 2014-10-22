@@ -30,7 +30,7 @@
 	</div>
 	<div class="form-group">
 		{{ Form::label('skills[]', 'I\'m skilled in :') }}
-		{{ Form::select('skills[]', $skills, is_object( $user->profile->skills ) ? $user->profile->skills->lists('id') : null,array('multiple')); }}
+		{{ Form::select('skills[]', $skills, is_object( $user->profile ) ? (is_object( $user->profile->skills ) ? $user->profile->skills->lists('id') : null) : null, array('multiple')); }}
 
 	</div>
 	<div class="form-group">

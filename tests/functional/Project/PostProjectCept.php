@@ -3,13 +3,12 @@
 use Cocur\Slugify\Slugify;
 
 $I = new FunctionalTester($scenario);
+
 $I->am('a talent4startups memeber');
 $I->wantTo('create a project');
 
-$I->amOnPage('/login');
-$I->fillField('#email', 'test@gmail.com');
-$I->fillField('#password', '12345');
-$I->click('#submit-login');
+$I->signIn();
+
 $I->amOnPage('/projects/create');
 
 $name = 'My first project';
