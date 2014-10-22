@@ -50,7 +50,6 @@ class ProfileController extends BaseController {
 		$user = Auth::user();
 		$describes = Describe::lists('name','id');
 		$skills = Skill::lists('name','id');
-
 		return View::make('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills);
 	}
 	/**
@@ -58,13 +57,14 @@ class ProfileController extends BaseController {
 	 */
 	public function store()
 	{
+		$user = Auth::user();
 		$this->profileForm->validate(Input::all());
 		$userData=$this->execute(
 			new UpdateProfileCommand(Auth::user(),Input::all())
 		);
 		Flash::message('Your profile has been updated successfully!');
 		//redirect to home, if user is talent
-		if(Input::get('user_type')=='T'){
+		if(Input::get('user_type')=='talent'){
 			return Redirect::intended('');
 		}else{
 	 	// redirect to create projct if no project added by startup yet.
@@ -95,31 +95,30 @@ class ProfileController extends BaseController {
 
 		if($new_password!=$password_confirmation) {
 	 	 	//confrim password not match
-	 	 	return redirect::route('reset_password')->with('error','Confirm password not 							match');
+	 	 	return redirect::route('reset_password')->with('error','Confirm password not match');
 		}
 
 		//check if user entered old password correct
 		$user = User::find(Auth::id());
-		Flash::message('Your password has been reset successfully!');
         	if(Hash::check($old_password, $user->password)){
             		//old password correct
 	 		try{
 	 		 //save user with new password, display success message
 
-                            $user->password = $new_password;
-                            $user->save();
-                            Flash::message('Your password has been reset successfully!');
-                            return redirect::route('reset_password');
+                $user->password = $new_password;
+                $user->save();
+                Flash::message('Your password has been reset successfully!');
+                return redirect::route('reset_password');
 			}catch(Exception $e){
 	  		// fail to update user, generate error and load view
 
                             Flash::message('Error in reset password. Try again later!');
-                            return redirect::route('reset_password')->with('error','Error in reset password. 						Try again later!');
+                            return redirect::route('reset_password')->with('error','Error in reset password. Try again later!');
 			}
      		}
       		 else{
 	 		 // generate error if old password is incorrect
-          		 return redirect::route('reset_password')->with('error','Old password is 				 incorrect!');
+          		 return redirect::route('reset_password')->with('error','Old password is incorrect!');
         	    }
  	 }
 }

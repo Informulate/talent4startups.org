@@ -1,5 +1,10 @@
 @extends('layouts.default')
-
+@if (Session::has('error'))
+	<div class="alert alert-danger">
+		<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+				{{ Session::get('error') }}
+	</div>
+@endif
 @section('content')
 	<div class="row">
 		<div class="col-sm-8">

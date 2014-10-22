@@ -2,16 +2,16 @@
 
 	<div class="form-group">
 		{{ Form::label('first_name', 'First Name:') }}
-		{{ Form::text('first_name', isset( $user->profile ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
+		{{ Form::text('first_name',  is_object( $user->profile ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('last_name', 'Last Name:') }}
-		{{ Form::text('last_name', isset( $user->profile ) ? $user->profile->last_name : null, ['class' => 'form-control']) }}
+		{{ Form::text('last_name', is_object( $user->profile ) ? $user->profile->last_name : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('location', 'Your Location:') }}
-		{{ Form::text('location', isset( $user->profile ) ? $user->profile->location : null, ['class' => 'form-control']) }}
+		{{ Form::text('location', is_object( $user->profile ) ? $user->profile->location : null, ['class' => 'form-control']) }}
 	</div>
 
 	<div class="form-group">
@@ -21,27 +21,26 @@
 				   '0-18' => 'Under 18',
 				   '19-30' => '19 to 30',
 				   '30-above' => 'Over 30'],
-				   isset( $user->profile ) ? $user->profile->agerange : null
+				   is_object( $user->profile ) ? $user->profile->agerange : null
 				) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('describe', 'I\'m best describes as a:') }}
-		 {{ Form::select('describe', $describes, isset( $user->profile ) ? $user->profile->describe : null); }}
+		 {{ Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null); }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('skills', 'I\'m skilled in :') }}
-		<!--{{ Form::text('skills',null, ['class' => 'form-control']) }}-->
-		{{ Form::select('skills[]', $skills, isset( $user->profile ) ? $user->profile->skills : null,array('multiple')); }}
+		{{ Form::label('skills[]', 'I\'m skilled in :') }}
+		{{ Form::select('skills[]', $skills, is_object( $user->profile->skills ) ? $user->profile->skills->lists('id') : null,array('multiple')); }}
 
 	</div>
 	<div class="form-group">
 		{{ Form::label('workexperience', 'Work Experience:') }}
-		{{ Form::text('workexperience', isset( $user->profile ) ? $user->profile->workexperience : null, ['class' =>
+		{{ Form::text('workexperience', is_object( $user->profile ) ? $user->profile->workexperience : null, ['class' =>
 		'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('about', 'Summary about who you are :') }}
-		{{ Form::textarea('about',isset( $user->profile ) ? $user->profile->about : null, ['class' => 'form-control']) }}
+		{{ Form::textarea('about',is_object( $user->profile ) ? $user->profile->about : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('image', 'Profile Image :') }}
@@ -49,19 +48,19 @@
 	</div>
 	<div class="form-group">
 		{{ Form::label('facebook', 'Facebook:') }}
-		{{ Form::text('facebook',isset( $user->profile ) ? $user->profile->facebook : null, ['class' => 'form-control']) }}
+		{{ Form::text('facebook',is_object( $user->profile ) ? $user->profile->facebook : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('linkedins', 'Linkedin:') }}
-		{{ Form::text('linkedins', isset( $user->profile ) ? $user->profile->linkedins : null, ['class' => 'form-control']) }}
+		{{ Form::text('linkedins', isset( $user->profile->linkedins ) ? $user->profile->linkedins : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('twitter', 'Twitter:') }}
-		{{ Form::text('twitter',isset( $user->profile ) ? $user->profile->twitter : null, ['class' => 'form-control']) }}
+		{{ Form::text('twitter',is_object( $user->profile ) ? $user->profile->twitter : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('meetup', 'Meetup:') }}
-		{{ Form::text('meetup',isset( $user->profile ) ? $user->profile->meetup : null, ['class' => 'form-control']) }}
+		{{ Form::text('meetup',is_object( $user->profile ) ? $user->profile->meetup : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{Form::hidden('user_type','',['id'=>'user_type'])}}

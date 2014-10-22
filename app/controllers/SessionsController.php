@@ -47,9 +47,7 @@ class SessionsController extends BaseController {
 
 		if (Auth::attempt($formData)) {
 			Flash::message('Welcome back to Talent4Startups!');
-			
-		        $profile = Profile::where('user_id','=',Auth::id())->first();
-
+		    $profile = Auth::user()->profile;
 			if(sizeof($profile)>0){
 			     //user has created profile
 				$talentSkills = Skill::getUserProfileSkills($profile); 

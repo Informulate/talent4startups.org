@@ -7,6 +7,7 @@ use Informulate\Core\CommandBus;
 use Informulate\Projects\Project;
 use Informulate\Projects\ProjectRepository;
 use Informulate\Users\User;
+use Informulate\Users\Profile;
 use Informulate\Tags\Tag;
 use Informulate\Stages\Stage;
 
@@ -50,7 +51,11 @@ class ProjectController extends BaseController {
 	 */
 	public function create()
 	{
-	
+		$profileInfo = Auth::user()->profile;
+        if($profileInfo['user_type']=='talent'){
+        //redirect to home if user is talent
+		return Redirect::intended('')->with('error','Talents do not have permission to create project');
+		}
 		$tags   = Tag::lists('name','id');
 		$stages = Stage::lists('name','id');
 		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
@@ -105,9 +110,7 @@ class ProjectController extends BaseController {
 		$project = Project::where('url', '=', $project)->firstOrFail();
 		$stages = Stage::lists('name','id');
 		$projectTags = Tag::listProjectTags($project);
-		return View::make('project.edit')->with('project',$project)
-				->with('projectTags',$projectTags)->with('tags',$tags)
-				->with('stages',$stages);
+		return View::make('project.edit')->with('project',$project)->with('projectTags',$projectTags)->with('tags',$tags)->with('stages',$stages);
 	}
 
 
@@ -116,15 +119,16 @@ class ProjectController extends BaseController {
 	 * @param string url	
 	 */
 	public function update($projectUrl){
-	    $project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
+			$this->projectForm->validate(Input::all());
+			$project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
             $project->name 	  = Input::get('name');
             $project->description = Input::get('description');
             $project->save();
-	    $tags = Input::get('tags');
+			$tags = Input::get('tags');
             Tag::updateProjectTags($project,$tags);	
-	    // redirect
+			// redirect
             Flash::message('Project updated successfullly!');
-	    return  Redirect::action('ProjectController@show',$projectUrl);
+	        return  Redirect::action('ProjectController@show',$projectUrl);
                 
 	}
 
