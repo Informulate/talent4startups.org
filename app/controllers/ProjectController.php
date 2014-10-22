@@ -52,7 +52,7 @@ class ProjectController extends BaseController {
 	public function create()
 	{
 		$profileInfo = Auth::user()->profile;
-        if($profileInfo['user_type']=='T'){
+        if($profileInfo['user_type']=='talent'){
         //redirect to home if user is talent
 		return Redirect::intended('')->with('error','Talents do not have permission to create project');
 		}
@@ -128,7 +128,7 @@ class ProjectController extends BaseController {
             Tag::updateProjectTags($project,$tags);	
 			// redirect
             Flash::message('Project updated successfullly!');
-	    return  Redirect::action('ProjectController@show',$projectUrl);
+	        return  Redirect::action('ProjectController@show',$projectUrl);
                 
 	}
 

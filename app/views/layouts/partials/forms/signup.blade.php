@@ -22,6 +22,7 @@
 
 
 	<div class="form-group">
+		{{ Form::hidden('user_type',$userType) }}
 		{{ Form::submit('Sign Up', ['id' => 'submit-registration','name' => 'submit-registration','class' => 'btn btn-primary']) }}
 	</div>
 

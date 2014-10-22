@@ -76,9 +76,9 @@
 			if($error==0){
 			//No errors, form is ready to submit
 			if($('#talent').hasClass('text-primary')){
-				var $userType = 'T';
+				var $userType = 'talent';
 			}else{
-				var $userType = 'S';
+				var $userType = 'startup';
 			}
 
 			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();

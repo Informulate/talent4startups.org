@@ -64,7 +64,7 @@ class ProfileController extends BaseController {
 		);
 		Flash::message('Your profile has been updated successfully!');
 		//redirect to home, if user is talent
-		if(Input::get('user_type')=='T'){
+		if(Input::get('user_type')=='talent'){
 			return Redirect::intended('');
 		}else{
 	 	// redirect to create projct if no project added by startup yet.
@@ -105,10 +105,10 @@ class ProfileController extends BaseController {
 	 		try{
 	 		 //save user with new password, display success message
 
-                            $user->password = $new_password;
-                            $user->save();
-                            Flash::message('Your password has been reset successfully!');
-                            return redirect::route('reset_password');
+                $user->password = $new_password;
+                $user->save();
+                Flash::message('Your password has been reset successfully!');
+                return redirect::route('reset_password');
 			}catch(Exception $e){
 	  		// fail to update user, generate error and load view
 
