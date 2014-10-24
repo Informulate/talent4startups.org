@@ -59,6 +59,7 @@ class Profile extends Eloquent {
 		$profile->linkedins = $profileInfo['linkedins'];
 		$profile->twitter = $profileInfo['twitter'];
 		$profile->meetup = $profileInfo['meetup'];
+		$profile->active = array_key_exists('active', $profileInfo) ?: false;
 
 		//upload profile picture, if your has selected
 		$fileName = '';

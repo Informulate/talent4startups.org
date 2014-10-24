@@ -1,8 +1,21 @@
 <?php
 
 use Informulate\Users\User;
+use Informulate\Users\UserRepository;
 
 class TalentController extends BaseController {
+	/**
+	 * @var UserRepository
+	 */
+	private $userRepository;
+
+	/**
+	 * @param UserRepository $userRepository
+	 */
+	function __construct(UserRepository $userRepository)
+	{
+		$this->userRepository = $userRepository;
+	}
 
 	/**
 	 * Display a list of active talents
@@ -11,7 +24,7 @@ class TalentController extends BaseController {
 	 */
 	public function index()
 	{
-		$talents = User::paginate(16);
+		$talents = $this->userRepository->findActiveTalents();
 
 		return View::make('talent.index')->with('talents', $talents);
 	}
