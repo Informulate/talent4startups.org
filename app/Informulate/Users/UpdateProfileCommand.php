@@ -8,7 +8,7 @@ class UpdateProfileCommand {
 	public $user;
 
 	/**
-	 * @var object profileInfo
+	 * @var array profileInfo
 	 */
 	public $profileInfo;
 
@@ -19,8 +19,7 @@ class UpdateProfileCommand {
 
 	/**
 	 * @param User $user
-	 * @param $first_name
-	 * @param $last_name
+	 * @param $profileInfo
 	 */
 	function __construct(User $user, $profileInfo)
 	{

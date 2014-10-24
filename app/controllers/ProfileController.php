@@ -10,6 +10,7 @@ use Informulate\Describes\Describe;
 use Informulate\Skills\Skill;
 use Informulate\Projects\Project;
 use Informulate\Users\Events\ProfileUpdated;
+use Informulate\Users\UserRepository;
 
 class ProfileController extends BaseController {
 
@@ -29,17 +30,38 @@ class ProfileController extends BaseController {
 	 */
 	private $skill;
 	/**
+	 * @var UserRepository
+	 */
+	private $userRepository;
+
+	/**
 	 * Constructor
 	 *
 	 * @param ProfileForm $profileForm
-         * @param ResetForm $resetForm
+	 * @param ResetForm $resetForm
+	 * @param UserRepository $userRepository
 	 */
-	function __construct(ProfileForm $profileForm,ResetForm $resetform)
+	function __construct(ProfileForm $profileForm, ResetForm $resetForm, UserRepository $userRepository)
 	{
 		$this->profileForm = $profileForm;
-		$this->resetForm   = $resetform;
-		$this->beforeFilter('auth');
+		$this->resetForm   = $resetForm;
+		$this->userRepository = $userRepository;
+		$this->beforeFilter('auth', ['except' => ['show']]);
 	}
+
+	/**
+	 * Show the users public profile
+	 *
+	 * @param $username
+	 * @return $this
+	 */
+	public function show($username)
+	{
+		$user = $this->userRepository->findByUsername($username);
+
+		return View::make('profile.show')->with('user', $user)->with('projects', $user->projects)->with('contributions', $user->contributions);
+	}
+
 	/**
 	 * Show the form for creating a user profile.
 	 *
@@ -57,25 +79,26 @@ class ProfileController extends BaseController {
 	 */
 	public function store()
 	{
-		$user = Auth::user();
 		$this->profileForm->validate(Input::all());
-		$userData=$this->execute(
+
+		$this->execute(
 			new UpdateProfileCommand(Auth::user(),Input::all())
 		);
+
 		Flash::message('Your profile has been updated successfully!');
+
 		//redirect to home, if user is talent
-		if(Input::get('user_type')=='talent'){
-			return Redirect::intended('');
-		}else{
-	 	// redirect to create projct if no project added by startup yet.
-		  $projects =  Project::where('user_id','=',Auth::id())->count();
-		  if($projects==0){
-			return Redirect::route('projects.create');
+		if (Input::get('user_type') == 'startup') {
+
+			// redirect to create projct if no project added by startup yet.
+			$projects =  Project::where('user_id', '=', Auth::user()->id)->count();
+
+			if ($projects == 0) {
+				return Redirect::route('projects.create');
+			}
 		}
 
-		}
 		return Redirect::intended('');
-
 	}
 	/**
 	 * Load view for reset password for logged in users

@@ -51,13 +51,9 @@ class ProjectController extends BaseController {
 	 */
 	public function create()
 	{
-		$profileInfo = Auth::user()->profile;
-        if($profileInfo['user_type']=='talent'){
-        //redirect to home if user is talent
-		return Redirect::intended('')->with('error','Talents do not have permission to create project');
-		}
 		$tags   = Tag::lists('name','id');
 		$stages = Stage::lists('name','id');
+
 		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
 	}
 
@@ -67,10 +63,10 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 		$this->projectForm->validate(Input::all());
-		extract(Input::only('name', 'description','tags'));		
+		extract(Input::only('name', 'description','tags'));
 		$project = $this->execute(
 			new CreateNewProjectCommand(Auth::user(), $name, $description)
-		);		
+		);
 		Tag::newProjectTags($project,$tags); //assign tags to projects
 		Flash::message('New Project Created');
 		return Redirect::route('projects.show', ['url' => $project->url]);
@@ -99,7 +95,7 @@ class ProjectController extends BaseController {
 				//
 			}
 		}
-	} 
+	}
 
 	 /*
 	 * load view for edit project with tags
@@ -116,7 +112,7 @@ class ProjectController extends BaseController {
 
 	 /*
 	 * Update project in storage
-	 * @param string url	
+	 * @param string url
 	 */
 	public function update($projectUrl){
 			$this->projectForm->validate(Input::all());
@@ -125,11 +121,11 @@ class ProjectController extends BaseController {
             $project->description = Input::get('description');
             $project->save();
 			$tags = Input::get('tags');
-            Tag::updateProjectTags($project,$tags);	
+            Tag::updateProjectTags($project,$tags);
 			// redirect
             Flash::message('Project updated successfullly!');
 	        return  Redirect::action('ProjectController@show',$projectUrl);
-                
+
 	}
 
 

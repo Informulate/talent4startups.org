@@ -2,7 +2,7 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 use Informulate\Skills\Skill;
-use Informulate\Users\Upload; 
+use Informulate\Users\Upload;
 
 class UpdateProfileCommandHandler implements CommandHandler{
 
@@ -31,19 +31,15 @@ class UpdateProfileCommandHandler implements CommandHandler{
 	{
 		$profile = Profile::updateProfile(
 			$command->user, $command->profileInfo
-		);	
-		$fileName ='';
-		//upload profile picture, if your has selected
-		if(isset($command->profileInfo['image'])){
-		$targetPath = storage_path().'/images/';
-		$fileName   = str_random(10).'.'.$command->profileInfo['image']->getClientOriginalName();
-		$command->profileInfo['image']->move($targetPath,$fileName);
-		}
-		$profile->image = $fileName;
+		);
+
 		$this->repository->save($profile);
 		$this->dispatchEventsFor($profile);
-		Profile::find($profile['id'])->skills()->detach();// remove all skills of project
+
+		// TODO: I have to find a better location for this --jesusOmar
+		$profile->skills()->detach();// remove all skills of project
 		Skill::newProfileSkills($profile,$command->profileInfo['skills']); //add new skills
+
 		return $profile;
 	}
 }

@@ -40,7 +40,27 @@ class UserTableSeeder extends Seeder {
 		}
 
 		foreach(User::all() as $currentUser) {
-			$profile = Profile::updateProfile($currentUser, $faker->firstName, $faker->lastName);
+			$profileData = [
+				'first_name' => $faker->firstName,
+				'last_name' => $faker->lastName,
+				'location' => $faker->city,
+				'agerange' => $faker->randomElement(
+					['0-18' => 'Under 18',
+					'19-30' => '19 to 30',
+					'30-above' => 'Over 30'
+				]),
+				'describe' => $faker->numberBetween(1, 2),
+				'workexperience' => $faker->numberBetween(1, 5) . " Yrs",
+				'about' => $faker->sentence(),
+				'facebook' => $faker->userName,
+				'linkedins' => $faker->userName,
+				'twitter' => $faker->userName,
+				'meetup' => $faker->userName,
+				'active' => $faker->boolean()
+			];
+
+			$profile = Profile::updateProfile($currentUser, $profileData);
+
 			$this->profileRepository->save($profile);
 		}
 	}

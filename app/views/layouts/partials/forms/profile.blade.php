@@ -63,14 +63,18 @@
 		{{ Form::text('meetup',is_object( $user->profile ) ? $user->profile->meetup : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
+		{{ Form::label('active', 'Allow startups to view you as a talent? TODO: This needs better wording') }}
+		{{ Form::checkbox('active', is_object( $user->profile ) ? $user->profile->active : null, is_object( $user->profile ) ? $user->profile->active : null, ['class' => 'form-control']) }}
+	</div>
+	<div class="form-group">
 		{{Form::hidden('user_type','',['id'=>'user_type'])}}
 		{{ Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) }}
 	</div>
 {{ Form::close() }}
 
 	<!-- Add user type to hidden variable -->
-	<script>
-	$('#profile-form').submit(function(){
-	$('#user_type').val("{{isset( $user->profile ) ? $user->profile->user_type : null}}")
-	});
+	<script type="text/javascript">
+		$('#profile-form').submit(function() {
+			$('#user_type').val("{{ isset( $user->profile ) ? $user->profile->user_type : 'talent' }}")
+		});
 	</script>
