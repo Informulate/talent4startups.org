@@ -10,6 +10,7 @@ use Informulate\Describes\Describe;
 use Informulate\Skills\Skill;
 use Informulate\Projects\Project;
 use Informulate\Users\Events\ProfileUpdated;
+use Informulate\Users\UserRepository;
 
 class ProfileController extends BaseController {
 
@@ -29,17 +30,38 @@ class ProfileController extends BaseController {
 	 */
 	private $skill;
 	/**
+	 * @var UserRepository
+	 */
+	private $userRepository;
+
+	/**
 	 * Constructor
 	 *
 	 * @param ProfileForm $profileForm
-         * @param ResetForm $resetForm
+	 * @param ResetForm $resetForm
+	 * @param UserRepository $userRepository
 	 */
-	function __construct(ProfileForm $profileForm,ResetForm $resetform)
+	function __construct(ProfileForm $profileForm, ResetForm $resetForm, UserRepository $userRepository)
 	{
 		$this->profileForm = $profileForm;
-		$this->resetForm   = $resetform;
-		$this->beforeFilter('auth');
+		$this->resetForm   = $resetForm;
+		$this->userRepository = $userRepository;
+		$this->beforeFilter('auth', ['except' => ['show']]);
 	}
+
+	/**
+	 * Show the users public profile
+	 *
+	 * @param $username
+	 * @return $this
+	 */
+	public function show($username)
+	{
+		$user = $this->userRepository->findByUsername($username);
+
+		return View::make('profile.show')->with('user', $user);
+	}
+
 	/**
 	 * Show the form for creating a user profile.
 	 *

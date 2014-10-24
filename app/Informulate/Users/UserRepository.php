@@ -6,4 +6,9 @@ class UserRepository {
 	{
 		return $user->save();
 	}
+
+	public function findByUsername($username)
+	{
+		return User::whereUsername($username)->first();
+	}
 }

@@ -65,7 +65,10 @@ Route::get('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@edit'
 ]);
-
+Route::get('@{username}', [
+	'as' => 'profile_path',
+	'uses' => 'ProfileController@show'
+]);
 Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'

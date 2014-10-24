@@ -13,8 +13,7 @@ class Profile extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'active','user_type',
-			        'agerange','location','workexperience','about','describe','another_skill','facebook','linkedins','twitter','meetup','image','active'];
+	protected $fillable = ['first_name', 'last_name', 'active','user_type', 'agerange','location','workexperience','about','describe','another_skill','facebook','linkedins','twitter','meetup','image','active'];
 
 	/**
 	 * The database table used by the model.
@@ -33,48 +32,53 @@ class Profile extends Eloquent {
 		return $this->belongsTo('User');
 	}
 
-
 	/**
 	 * Update a user's profile
 	 *
 	 * @param User $user
-	 * @param $first_name
-	 * @param $last_name
+	 * @param $profileInfo
+	 *
 	 * @return static
 	 */
-	/*
-	public static function updateProfile1(User $user, $first_name, $last_name)
+	public static function updateProfile(User $user, $profileInfo)
 	{
-		$profile = new static(compact('first_name', 'last_name'));
+		$profile = $user->profile;
+
+		if (is_null($profile)) {
+			$profile = new static();
+		}
+
+		$profile->first_name = $profileInfo['first_name'];
+		$profile->last_name = $profileInfo['last_name'];
+		$profile->location = $profileInfo['location'];
+		$profile->agerange = $profileInfo['agerange'];
+		$profile->describe = $profileInfo['describe'];
+		$profile->workexperience = $profileInfo['workexperience'];
+		$profile->about = $profileInfo['about'];
+		$profile->facebook = $profileInfo['facebook'];
+		$profile->linkedins = $profileInfo['linkedins'];
+		$profile->twitter = $profileInfo['twitter'];
+		$profile->meetup = $profileInfo['meetup'];
+
+		//upload profile picture, if your has selected
+		$fileName = '';
+
+		if (isset($profileInfo['image'])) {
+			$targetPath = storage_path() . '/images/';
+			$fileName = str_random(10) . '.' . $profileInfo['image']->getClientOriginalName();
+			$profileInfo['image']->move($targetPath, $fileName);
+		}
+
+		$profile->image = $fileName;
+
+		// if we don't have a user type, assume is a talent that failed to create their profile.
+		if (is_null($profile->user_type)) {
+			$profile->user_type = 'talent';
+		}
+
 		$profile->user_id = $user->id;
-		$user->raise(new ProfileUpdated($user));
+
 		return $profile;
-	} */
-
-
-	/**
-	 * Update a user's profile
-	 *
-	 * @param User $user
-	 * @param array $data
-	 * @return static
-	 */
-
-	public static function updateProfile(User $user, $profileInfo){
-		$profile = Profile::where('user_id','=',$user->id)->first();
-		$profile->first_name 	= $profileInfo['first_name'];
-		$profile->last_name 	= $profileInfo['last_name'];
-		$profile->last_name  	= $profileInfo['last_name'];
-		$profile->location   	= $profileInfo['location'];
-		$profile->agerange  	= $profileInfo['agerange'];
-		$profile->describe  	= $profileInfo['describe'];
-		$profile->workexperience= $profileInfo['workexperience'];
-		$profile->about  	= $profileInfo['about'];
-		$profile->facebook  	= $profileInfo['facebook'];
-		$profile->linkedins  	= $profileInfo['linkedins'];
-		$profile->twitter  	= $profileInfo['twitter'];
-		$profile->meetup  	= $profileInfo['meetup'];
-		return $profile;			
 	}
 
 	/**
