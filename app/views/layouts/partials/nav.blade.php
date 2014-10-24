@@ -17,8 +17,13 @@
 				<li @if (Request::path() === 'about') class="active" @endif><a href="#about"><i class="glyphicons asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact"><i class="glyphicons circle_question_mark"></i> FAQ</a></li>
 				@if ($currentUser)
-					<li><a href="{{ route('logout_path') }}"><span class="glyphicon glyphicon-log-out"></span> Logout :: {{ $currentUser->email }}</a></li>
-					<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicon glyphicon-log-in"></span> Reset Password</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ $currentUser->email }} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('logout_path') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicon glyphicon-warning-sign"></span> Reset Password</a></li>
+						</ul>
+					</li>
 				@else
 					<li><a id="login-link" href="{{ route('login_path') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-cog"></span> Sign Up</a></form></li>
