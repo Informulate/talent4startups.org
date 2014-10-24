@@ -59,7 +59,7 @@ class ProfileController extends BaseController {
 	{
 		$user = $this->userRepository->findByUsername($username);
 
-		return View::make('profile.show')->with('user', $user);
+		return View::make('profile.show')->with('user', $user)->with('projects', $user->projects)->with('contributions', $user->contributions);
 	}
 
 	/**
