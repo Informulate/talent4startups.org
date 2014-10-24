@@ -22,7 +22,15 @@
 			<h2>Projects I’m involved in</h2>
 			@if(count($contributions) > 0)
 				@foreach($contributions as $project)
-					<a href="#">{{ $project->name }}</a>
+				<div class="col-sm-3">
+					<div class="clearfix">
+						<h4><a href="{{ route('projects.show', $project->url) }}">{{ $project->name }}</a> <small>By: {{ $project->owner->profile->first_name }} {{ $project->owner->profile->last_name }}</small></h4>
+						<p>{{ Str::limit( $project->description, 50 ) }}</p>
+					</div>
+					<div class="clearfix">
+						<p><a href="" class="btn btn-primary btn-xs pull-right" role="button">Learn More</a></p>
+					</div>
+				</div>
 				@endforeach
 			@else
 				<div class="alert alert-info">
