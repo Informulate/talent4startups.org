@@ -85,9 +85,9 @@ class Profile extends Eloquent {
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function skills()
+	public function tags()
 	{
-		return $this->belongsToMany('Informulate\Skills\Skill');
+		return $this->belongsToMany('Informulate\Tags\Tag');
 	}
 
 }

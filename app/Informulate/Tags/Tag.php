@@ -19,6 +19,15 @@ class Tag extends Eloquent {
 	{
 		return $this->belongsToMany('Informulate\Projects\Project');
 	}
+	
+	 /**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function profiles()
+	{
+		return $this->belongsToMany('Informulate\Users\Profile');
+	}
+
 
 
 	/**
@@ -55,6 +64,17 @@ class Tag extends Eloquent {
 		Tag::newProjectTags($project,$tags); //add new tags
 	}
 
+	/* add profile skills to profile_tags
+	 * @param Object $profile, array $tags
+	 */
+	public static function newProfileTags($profile,$tags){
+		if(sizeof($tags)>0){
+			// if user selected tags
+			foreach($tags as $tagID){
+			 $profile->tags()->attach($profile['id'], array('tag_id' => $tagID));
+			}
+		}
+	}
 	
 
 }

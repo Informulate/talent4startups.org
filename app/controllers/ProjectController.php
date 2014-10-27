@@ -1,5 +1,5 @@
 <?php
-
+use Cocur\Slugify\Slugify;
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProjectForm;
 use Informulate\Projects\CreateNewProjectCommand;
@@ -115,16 +115,21 @@ class ProjectController extends BaseController {
 	 * @param string url
 	 */
 	public function update($projectUrl){
+			$slugify = Slugify::create();
 			$this->projectForm->validate(Input::all());
 			$project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
+            $project->url 	  = $slugify->slugify(Input::get('name'));
             $project->name 	  = Input::get('name');
+            $project->stage_id 	  = Input::get('stage_id');
             $project->description = Input::get('description');
+			$project->goal 	  = Input::get('goal');
+			$project->video 	  = Input::get('video');
             $project->save();
 			$tags = Input::get('tags');
             Tag::updateProjectTags($project,$tags);
 			// redirect
             Flash::message('Project updated successfullly!');
-	        return  Redirect::action('ProjectController@show',$projectUrl);
+	        return  Redirect::action('ProjectController@show',$project->url);
 
 	}
 
