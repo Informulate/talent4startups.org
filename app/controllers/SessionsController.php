@@ -42,7 +42,6 @@ class SessionsController extends BaseController {
 	public function store()
 	{
 		$formData = Input::only('email', 'password');
-
 		$this->signInForm->validate($formData);
 
 		if (Auth::attempt($formData)) {
@@ -60,6 +59,8 @@ class SessionsController extends BaseController {
 			// if profile is null, redirect to profile
 			return Redirect::intended('profile');
 		}
+		//if wrong email/password entered
+		return Redirect::to('login')->with('email',$formData['email'])->with('error','Wrong email/password entered.');
 	}
 	public function destroy()
 	{
