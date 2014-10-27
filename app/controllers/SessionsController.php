@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\SignInForm;
 use Informulate\Users\Profile;
-use Informulate\Skills\Skill;
+use Informulate\Tags\Tag;
 
 class SessionsController extends BaseController {
 
@@ -49,7 +49,7 @@ class SessionsController extends BaseController {
 		    $profile = Auth::user()->profile;
 			if(sizeof($profile)>0){
 			     //user has created profile
-				$talentSkills = Skill::getUserProfileSkills($profile); 
+				$talentSkills = Tag::getUserProfileTags($profile); 
 			
 				if(count($talentSkills)>0){
 				// user has added skills to profile , redirect to projects

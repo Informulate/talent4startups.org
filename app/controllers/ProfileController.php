@@ -26,10 +26,6 @@ class ProfileController extends BaseController {
 	 */
 	private $resetForm;
 	/**
-	 * @var Skill
-	 */
-	private $skill;
-	/**
 	 * @var UserRepository
 	 */
 	private $userRepository;
@@ -138,7 +134,7 @@ class ProfileController extends BaseController {
                             Flash::message('Error in reset password. Try again later!');
                             return redirect::route('reset_password')->with('error','Error in reset password. Try again later!');
 			}
-     		}
+     		} 
       		 else{
 	 		 // generate error if old password is incorrect
           		 return redirect::route('reset_password')->with('error','Old password is incorrect!');

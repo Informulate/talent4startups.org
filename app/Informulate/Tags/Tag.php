@@ -39,7 +39,7 @@ class Tag extends Eloquent {
 
 		$tags = $project->tags;
 
-		return $tags->lists('id');
+		return $tags->lists('id'); 
 	}	
 
 	/**	
@@ -64,6 +64,16 @@ class Tag extends Eloquent {
 		Tag::newProjectTags($project,$tags); //add new tags
 	}
 
+	/**
+	 * fetch user profile tags/skills
+	 * @param Array $profile
+	 * @return array tags
+	 */
+	public static function getUserProfileTags($profile){
+		$tags = $profile->tags;
+		return $tags->lists('id');
+	}
+	
 	/* add profile skills to profile_tags
 	 * @param Object $profile, array $tags
 	 */
