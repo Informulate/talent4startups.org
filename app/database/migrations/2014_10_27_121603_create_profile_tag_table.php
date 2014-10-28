@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileSkillTable extends Migration {
+class CreateProfileTagTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateProfileSkillTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('profile_skill', function(Blueprint $table)
+		//
+		Schema::create('profile_tag', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('profile_id')->unsigned()->index();
 			$table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
-			$table->integer('skill_id')->unsigned()->index();
-			$table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
+			$table->integer('tag_id')->unsigned()->index();
+			$table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
 		});
 	}
 
@@ -29,7 +30,8 @@ class CreateProfileSkillTable extends Migration {
 	 */
 	public function down()
 	{
-			Schema::drop('profile_skill');
+		//
+		Schema::drop('profile_tag');
 	}
 
 }

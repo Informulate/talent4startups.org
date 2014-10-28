@@ -1,7 +1,7 @@
 <?php namespace Informulate\Users;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
-use Informulate\Skills\Skill;
+use Informulate\Tags\Tag;
 use Informulate\Users\Upload;
 
 class UpdateProfileCommandHandler implements CommandHandler{
@@ -37,8 +37,8 @@ class UpdateProfileCommandHandler implements CommandHandler{
 		$this->dispatchEventsFor($profile);
 
 		// TODO: I have to find a better location for this --jesusOmar
-		$profile->skills()->detach();// remove all skills of project
-		Skill::newProfileSkills($profile,$command->profileInfo['skills']); //add new skills
+		$profile->tags()->detach();// remove all skills of project
+		Tag::newProfileTags($profile,$command->profileInfo['skills']); //add new skills
 
 		return $profile;
 	}

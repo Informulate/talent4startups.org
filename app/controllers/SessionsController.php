@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\SignInForm;
 use Informulate\Users\Profile;
-use Informulate\Skills\Skill;
+use Informulate\Tags\Tag;
 
 class SessionsController extends BaseController {
 
@@ -42,7 +42,6 @@ class SessionsController extends BaseController {
 	public function store()
 	{
 		$formData = Input::only('email', 'password');
-
 		$this->signInForm->validate($formData);
 
 		if (Auth::attempt($formData)) {
@@ -50,7 +49,7 @@ class SessionsController extends BaseController {
 		    $profile = Auth::user()->profile;
 			if(sizeof($profile)>0){
 			     //user has created profile
-				$talentSkills = Skill::getUserProfileSkills($profile); 
+				$talentSkills = Tag::getUserProfileTags($profile); 
 			
 				if(count($talentSkills)>0){
 				// user has added skills to profile , redirect to projects
@@ -60,6 +59,8 @@ class SessionsController extends BaseController {
 			// if profile is null, redirect to profile
 			return Redirect::intended('profile');
 		}
+		//if wrong email/password entered
+		return Redirect::to('login')->with('email',$formData['email'])->with('error','Wrong email/password entered.');
 	}
 	public function destroy()
 	{

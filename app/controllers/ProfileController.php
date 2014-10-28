@@ -7,8 +7,8 @@ use Informulate\Users\UpdateProfileCommand;
 use Informulate\Users\User;
 use Informulate\Users\Profile;
 use Informulate\Describes\Describe;
-use Informulate\Skills\Skill;
 use Informulate\Projects\Project;
+use Informulate\Tags\Tag;
 use Informulate\Users\Events\ProfileUpdated;
 use Informulate\Users\UserRepository;
 
@@ -25,10 +25,6 @@ class ProfileController extends BaseController {
 	 * @var ResetForm
 	 */
 	private $resetForm;
-	/**
-	 * @var Skill
-	 */
-	private $skill;
 	/**
 	 * @var UserRepository
 	 */
@@ -71,7 +67,7 @@ class ProfileController extends BaseController {
 	{
 		$user = Auth::user();
 		$describes = Describe::lists('name','id');
-		$skills = Skill::lists('name','id');
+		$skills = Tag::lists('name','id');
 		return View::make('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills);
 	}
 	/**
@@ -138,7 +134,7 @@ class ProfileController extends BaseController {
                             Flash::message('Error in reset password. Try again later!');
                             return redirect::route('reset_password')->with('error','Error in reset password. Try again later!');
 			}
-     		}
+     		} 
       		 else{
 	 		 // generate error if old password is incorrect
           		 return redirect::route('reset_password')->with('error','Old password is incorrect!');
