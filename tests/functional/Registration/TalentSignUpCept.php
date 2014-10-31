@@ -33,7 +33,7 @@ $I->fillField('First Name:', 'Jane');
 $I->fillField('Last Name:', 'Doe');
 $I->selectOption('#agerange', '30-above');
 $I->selectOption('#describe', '1');
-$I->selectOption('skills[]', 'non-profie');
+$I->selectOption('skills[]', '1');
 $I->fillField('workexperience', 'My Work experience');
 $I->fillField('about', 'This is my about summary');
 $I->click('#submit-profile');
