@@ -68,6 +68,7 @@
 	</div>
 	<div class="form-group">
 		{{Form::hidden('user_type','',['id'=>'user_type'])}}
+		{{Form::hidden('active',1,['id'=>'active'])}}
 		{{ Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) }}
 	</div>
 {{ Form::close() }}

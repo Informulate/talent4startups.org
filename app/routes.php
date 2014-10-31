@@ -40,6 +40,12 @@ Route::get('logout', [
  * Projects!
  */
 Route::resource('projects', 'ProjectController');
+
+Route::post('project/findProjects', [
+	'as' => 'project_find',
+	'uses' => 'ProjectController@findProjects'
+]);
+
 Route::get('projects/{id}/membership', [
 	'as' => 'project_membership_request',
 	'uses' => 'MembershipController@request'
@@ -58,6 +64,10 @@ Route::get('projects/{id}/membership/cancel', [
  */
 Route::resource('talents', 'TalentController');
 
+Route::post('talent/findTalents', [
+	'as' => 'talent_find',
+	'uses' => 'TalentController@findTalents'
+]);
 /**
  * Profile!
  */

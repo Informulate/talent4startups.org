@@ -10,25 +10,18 @@ class CreateNewProjectCommand {
 	public $user;
 
 	/**
-	 * @var string username
+	 * @var array projectInfo
 	 */
-	public $name;
-
-	/**
-	 * @var string email
-	 */
-	public $description;
+	public $projectInfo;
 
 	/**
 	 * @param User $user
-	 * @param $name
-	 * @param $description
+	 * @param $project data
 	 */
-	function __construct(User $user, $name, $description)
+	function __construct(User $user,$projectInfo)
 	{
 		$this->user = $user;
-		$this->name = $name;
-		$this->description = $description;
+		$this->projectInfo = $projectInfo;
 	}
 
 }

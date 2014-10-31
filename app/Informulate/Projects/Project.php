@@ -15,7 +15,7 @@ class Project extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id', 'name', 'description', 'url'];
+	protected $fillable = ['user_id', 'name', 'description', 'url', 'goal' , 'stage_id' , 'video'];
 
 	/**
 	 * Create a new project
@@ -95,5 +95,13 @@ class Project extends Eloquent {
 	public function tags()
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function describes()
+	{
+		return $this->belongsToMany('Informulate\Describes\Describe');
 	}
 }

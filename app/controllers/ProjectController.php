@@ -6,6 +6,7 @@ use Informulate\Projects\CreateNewProjectCommand;
 use Informulate\Core\CommandBus;
 use Informulate\Projects\Project;
 use Informulate\Projects\ProjectRepository;
+use Informulate\Describes\Describe;
 use Informulate\Users\User;
 use Informulate\Users\Profile;
 use Informulate\Tags\Tag;
@@ -28,7 +29,7 @@ class ProjectController extends BaseController {
 	function __construct(ProjectForm $projectForm)
 	{
 		$this->projectForm = $projectForm;
-		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
+		$this->beforeFilter('auth', ['except' => ['index', 'show','findProjects']]);
 	}
 
 	/**
@@ -39,9 +40,8 @@ class ProjectController extends BaseController {
 	public function index()
 	{
 		$projects = Project::paginate(16);
-
-		return View::make('project.index')
-			->with('projects', $projects);
+		$describes = Describe::lists('name','id');
+		return View::make('project.index')->with('projects', $projects)->with('describes',$describes);
 	}
 
 	/**
@@ -53,8 +53,8 @@ class ProjectController extends BaseController {
 	{
 		$tags   = Tag::lists('name','id');
 		$stages = Stage::lists('name','id');
-
-		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages);
+		$describes = Describe::lists('name','id');
+		return View::make('project.create')->with('tags',$tags)->with('projectTags','')->with('stages',	$stages)->with('describes',$describes);
 	}
 
 	/**
@@ -63,11 +63,11 @@ class ProjectController extends BaseController {
 	public function store()
 	{
 		$this->projectForm->validate(Input::all());
-		extract(Input::only('name', 'description','tags'));
 		$project = $this->execute(
-			new CreateNewProjectCommand(Auth::user(), $name, $description)
+			new CreateNewProjectCommand(Auth::user(),(object)Input::all())
 		);
-		Tag::newProjectTags($project,$tags); //assign tags to projects
+		Tag::newProjectTags($project,Input::get('tags')); //assign tags to projects
+		Describe::newProjectDescribes($project,Input::get('needs')); //assign describes to projects
 		Flash::message('New Project Created');
 		return Redirect::route('projects.show', ['url' => $project->url]);
 	}
@@ -85,6 +85,25 @@ class ProjectController extends BaseController {
 		$members = $project->members()->where('approved', true)->get();
 
 		return View::make('project.show')->with('project', $project)->with('requests', $requests)->with('members', $members);
+	}
+
+	/**
+	 * Return list of projects searched/found
+	 *
+	 * @return projects\index
+	 */
+	public function findProjects(){
+		if(Request::ajax()) {
+		//continue if AJAX request
+		$tag = !empty(Input::get('tag'))?Tag::where('name', '=', Input::get('tag'))->first():'';
+		$tagID = is_object($tag) && sizeof($tag)>0?$tag->id:0;
+		$projects = Project::whereHas('tags',function($q) use ($tagID){
+			Input::get('tag')!=''?$q->where('tags.id', '=',$tagID):null;
+		})->whereHas('describes',function($query){
+			Input::get('describe')!=0?$query->where('talentdescribes.id', '=',Input::get('describe')):null;
+		})->paginate(16);
+		return View::make('project.index-project')->with('projects', $projects)->render();
+		}
 	}
 
 	public function approveMember($project, $userId)
@@ -106,7 +125,8 @@ class ProjectController extends BaseController {
 		$project = Project::where('url', '=', $project)->firstOrFail();
 		$stages = Stage::lists('name','id');
 		$projectTags = Tag::listProjectTags($project);
-		return View::make('project.edit')->with('project',$project)->with('projectTags',$projectTags)->with('tags',$tags)->with('stages',$stages);
+		$describes = Describe::lists('name','id');
+		return View::make('project.edit')->with('project',$project)->with('projectTags',$projectTags)->with('tags',$tags)->with('stages',$stages)->with('describes',$describes);
 	}
 
 
@@ -115,21 +135,23 @@ class ProjectController extends BaseController {
 	 * @param string url
 	 */
 	public function update($projectUrl){
-			$slugify = Slugify::create();
-			$this->projectForm->validate(Input::all());
-			$project 	   	  = Project::where('url', '=', $projectUrl)->firstOrFail();
-            $project->url 	  = $slugify->slugify(Input::get('name'));
-            $project->name 	  = Input::get('name');
-            $project->stage_id 	  = Input::get('stage_id');
-            $project->description = Input::get('description');
-			$project->goal 	  = Input::get('goal');
-			$project->video 	  = Input::get('video');
-            $project->save();
-			$tags = Input::get('tags');
-            Tag::updateProjectTags($project,$tags);
-			// redirect
-            Flash::message('Project updated successfullly!');
-	        return  Redirect::action('ProjectController@show',$project->url);
+		$slugify = Slugify::create();
+		$this->projectForm->validate(Input::all());
+		$project = Project::where('url', '=', $projectUrl)->firstOrFail();
+		$project->url = $slugify->slugify(Input::get('name'));
+		$project->name = Input::get('name');
+		$project->stage_id = Input::get('stage_id');
+		$project->description = Input::get('description');
+		$project->goal 	= Input::get('goal');
+		$project->video = Input::get('video');
+		$project->save();
+		$tags = Input::get('tags');
+		$describes = Input::get('needs');
+		Tag::updateProjectTags($project,$tags);
+		Describe::updateProjectDescribes($project,$describes);
+		// redirect
+		Flash::message('Project updated successfullly!');
+		return  Redirect::action('ProjectController@show',$project->url);
 
 	}
 
