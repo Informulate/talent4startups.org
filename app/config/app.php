@@ -128,6 +128,7 @@ return array(
 		'Laracasts\Flash\FlashServiceProvider',
 		"Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider",
 		"Intervention\Image\ImageServiceProvider",
+		'Artdarek\OAuth\OAuthServiceProvider',
 
 	),
 
@@ -198,6 +199,7 @@ return array(
 		'Flash'             => 'Laracasts\Flash\Flash',
 		"Slugify"           => "Cocur\Slugify\Bridge\Laravel\SlugifyFacade",
 		'Image'             => 'Intervention\Image\Facades\Image',
+		'OAuth' 			=> 'Artdarek\OAuth\Facade\OAuth',
 
 	),
 

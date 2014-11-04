@@ -9,7 +9,8 @@
 		"laracasts/validation": "1.1.*",
 		"laracasts/flash": "~1.0",
 		"cocur/slugify": "@stable",
-		"intervention/image": "dev-master"
+		"intervention/image": "dev-master",
+		"artdarek/oauth-4-laravel": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",

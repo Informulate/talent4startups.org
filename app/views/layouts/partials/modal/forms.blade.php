@@ -19,7 +19,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
-								<button class="btn btn-primary">LinkedIn</button><br/>
+								<button id="register-linkedin" class="btn btn-primary">LinkedIn</button><br/>
 								<a id="register-email" style="cursor:pointer;">Or sign up with email instead</a>
 							</div>
 						</div>
@@ -60,7 +60,33 @@
 
 		// Register via email
 		$('#register-email').on('click', function(event) {
-			var $error=0;
+			var $error = validateRegistration();
+			if($error==0){
+			//No errors, form is ready to submit
+
+			var $userType = getUserType();
+
+			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
+			}
+		});
+
+		// Register via Linekdin
+		$('#register-linkedin').on('click', function(event) {
+			var $error = validateRegistration();
+			if($error==0){
+			//No errors, form is ready to submit
+
+			var $userType = getUserType();
+
+			$('<form method="GET" action="{{ route("register_linkedin") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
+			}
+		});
+
+		/*
+		* validate form before submit
+		*/
+		function validateRegistration(){
+		var $error=0;
 			if (false === $("#agree").is(':checked')) {
 				$error++;
 				event.preventDefault();
@@ -72,18 +98,20 @@
 				event.preventDefault();
 				alert('Are you a talent or a startup? Click the appropriate icon above!');
 			}
+			return $error;
+		}
 
-			if($error==0){
-			//No errors, form is ready to submit
-			if($('#talent').hasClass('text-primary')){
+		/*
+		* Identify user is talent or startup
+		*/
+		function getUserType(){
+		if($('#talent').hasClass('text-primary')){
 				var $userType = 'talent';
 			}else{
 				var $userType = 'startup';
 			}
-
-			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
-			}
-		});
+			return $userType;
+		}
 	});
 </script>
 @endif
