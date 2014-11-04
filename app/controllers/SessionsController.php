@@ -65,7 +65,45 @@ class SessionsController extends BaseController {
 	* Login with linked in
 	*/
 	public function loginWithLinkedin(){
-		//DO STUFF HERE
+		// get data from input
+        $code = Input::get( 'code' );
+        $linkedinService = OAuth::consumer( 'Linkedin' );
+        if ( !empty( $code ) ) {
+            // This was a callback request from linked-in, get the token
+            $token = $linkedinService->requestAccessToken( $code );
+            // Send a request with it. Please note that XML is the default format.
+			$result = json_decode($linkedinService->request('/people/~?format=json'), true);
+			$email  = json_decode($linkedinService->request('/people/~/email-address?format=json'), true);
+
+			$user = User::where('email','=',$email)->first();
+
+			if(sizeof($user)==0){
+			// if not a registered user, insert new user as talent
+			$user = new User;
+			$user->email = $email;
+			$user->save();
+
+			//create user profile and store user_type in profile table
+			$profile = new Profile(array('user_type'=>'talent','active'=>1, 'first_name'=>$result['firstName'], 'last_name'=>$result['lastName']));
+			$profile = $user->profile()->save($profile);
+			}
+			Auth::login($user);
+			Flash::message('Welcome to Talent4Startups');
+			$profile = $user->profile;
+			$tags = $user->profile->tags;
+			if(is_object($profile) && !empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
+			//redirect to home page if profile has First Name, Last Name and Skills
+			return Redirect::intended('');
+			}
+			return Redirect::to('profile');
+
+        } // if not ask for permission first
+        else {
+            // get linkedinService authorization
+            $url = $linkedinService->getAuthorizationUri(array('state'=>'DCEEFWF45453sdffef424'));
+            // return to linkedin login url
+            return Redirect::to( (string)$url );
+        }
 	}
 
 	public function destroy()
