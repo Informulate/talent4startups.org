@@ -30,8 +30,8 @@ return array(
          * Linkedin
          */		
 		'Linkedin' => array(
-		'client_id'     => '753icicqfipaa2',
-		'client_secret' => 'vJZ6HKbfP14w6JCx',
+		'client_id'     => getenv('CLIENT_ID'),
+		'client_secret' => getenv('CLIENT_SECRET'),
 		),  		
 
     )
