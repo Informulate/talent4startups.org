@@ -48,11 +48,12 @@ class SessionsController extends BaseController {
 		if (Auth::attempt($formData)) {
 			Flash::message('Welcome back to Talent4Startups!');
 		    $profile = Auth::user()->profile;
+			if(is_object($profile) && sizeof($profile)>0){
 			$tags = Auth::user()->profile->tags;
-
-			if(is_object($profile) && !empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
+			if(!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
 			//redirect to home page if profile has First Name, Last Name and Skills
 			return Redirect::intended('');
+			}
 			}
 			// if profile is missing, redirect to edit profile page
 			return Redirect::intended('profile');
@@ -90,10 +91,12 @@ class SessionsController extends BaseController {
 			Auth::login($user);
 			Flash::message('Welcome to Talent4Startups');
 			$profile = $user->profile;
+			if(is_object($profile) && sizeof($profile)>0){
 			$tags = $user->profile->tags;
-			if(is_object($profile) && !empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
+			if(!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
 			//redirect to home page if profile has First Name, Last Name and Skills
 			return Redirect::intended('');
+			}
 			}
 			return Redirect::to('profile');
 

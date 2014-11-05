@@ -256,12 +256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "f65e57914f5ca3874cc2db5967be17e1fd093975"
+                "reference": "e626de028b4734da1e461c8cd2d4d5fc195f1478"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/f65e57914f5ca3874cc2db5967be17e1fd093975",
-                "reference": "f65e57914f5ca3874cc2db5967be17e1fd093975",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/e626de028b4734da1e461c8cd2d4d5fc195f1478",
+                "reference": "e626de028b4734da1e461c8cd2d4d5fc195f1478",
                 "shasum": ""
             },
             "require": {
@@ -279,8 +279,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Intervention\\Image\\": "src/"
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -304,7 +304,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2014-09-18 15:55:40"
+            "time": "2014-10-23 18:51:15"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -518,24 +518,24 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v4.2.9",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f"
+                "reference": "e29253c7f29e3b1ca716de7fe309b272e3ddf47d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
-                "reference": "14665bc3c38c3ec24a12c904d013a663dc4a1d8f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e29253c7f29e3b1ca716de7fe309b272e3ddf47d",
+                "reference": "e29253c7f29e3b1ca716de7fe309b272e3ddf47d",
                 "shasum": ""
             },
             "require": {
-                "classpreloader/classpreloader": "~1.0",
+                "classpreloader/classpreloader": "~1.0.2",
                 "d11wtq/boris": "~1.0",
                 "filp/whoops": "1.1.*",
                 "ircmaxell/password-compat": "~1.0",
-                "jeremeamia/superclosure": "~1.0",
+                "jeremeamia/superclosure": "~1.0.1",
                 "monolog/monolog": "~1.6",
                 "nesbot/carbon": "~1.0",
                 "patchwork/utf8": "1.1.*",
@@ -629,7 +629,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-09-15 02:45:24"
+            "time": "2014-10-04 18:48:27"
         },
         {
             "name": "lusitanian/oauth",
@@ -2030,12 +2030,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "03cc70759b2d8d03bd6886d9964eff81a8720bdb"
+                "reference": "486d9d9c4d209720d490ac186f8493b3c0f6897c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/03cc70759b2d8d03bd6886d9964eff81a8720bdb",
-                "reference": "03cc70759b2d8d03bd6886d9964eff81a8720bdb",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/486d9d9c4d209720d490ac186f8493b3c0f6897c",
+                "reference": "486d9d9c4d209720d490ac186f8493b3c0f6897c",
                 "shasum": ""
             },
             "require": {
@@ -2085,7 +2085,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2014-09-15 15:20:52"
+            "time": "2014-10-14 08:39:02"
         },
         {
             "name": "codeception/codeception",
@@ -2269,12 +2269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "7f6c460ca74ee988a79a3d0015be25ee3d4726b2"
+                "reference": "a845fa37a6c38000c9061aa9afc329057d502eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/7f6c460ca74ee988a79a3d0015be25ee3d4726b2",
-                "reference": "7f6c460ca74ee988a79a3d0015be25ee3d4726b2",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a845fa37a6c38000c9061aa9afc329057d502eec",
+                "reference": "a845fa37a6c38000c9061aa9afc329057d502eec",
                 "shasum": ""
             },
             "require": {
@@ -2311,7 +2311,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-09-19 08:17:45"
+            "time": "2014-11-04 21:37:14"
         },
         {
             "name": "guzzlehttp/guzzle",
