@@ -14,6 +14,25 @@ class ProjectRepository {
 		return $project->save();
 	}
 
+	public function allActive($tag = null, $needs = null)
+	{
+		$results = Project::where('status', '=', '1');
+
+		if ($tag) {
+			$results->whereHas('tags', function ($q) use ($tag) {
+				$q->where('tags.name', '=', $tag);
+			});
+		}
+
+		if ($needs) {
+			$results->whereHas('describes', function ($q) use ($needs) {
+				$q->where('talentdescribes.name', '=', $needs);
+			});
+		}
+
+		return $results->paginate(16);
+	}
+
 	/**
 	 * @param User $user
 	 * @param Project $project
