@@ -19,30 +19,30 @@
 	@include('talent.index-talent')
 </div>
 <script>
-        $("document").ready(function(){
+		$("document").ready(function() {
 			//search talents
-			 function requestTalents(page){
-                var describe = $("#describe").val();
-                var tag = $("#tag").val();
-                var dataString = 'describe='+describe+'&tag='+tag;
-                $.ajax({
-                    type: "POST",
-                    url : "talent/findTalents?page="+page,
-                    data : dataString,
-                    success : function(data){
-                        console.log(data);
-						$('#talent-container').html(data)
-                    }
-                },"html");
+			function requestTalents(page) {
+				var describe = $("#describe").val();
+				var tag = $("#tag").val();
+				var dataString = 'describe='+describe+'&tag='+tag;
+				$.ajax({
+					type: "POST",
+					url : "talent/findTalents?page="+page,
+					data : dataString,
+					success : function(data) {
+						$('#talent-container').html(data);
+					}
+				},"html");
 				return false;
 			}
-				$('#search-button').on('click', requestTalents);
 
-				//pagination
-				$(document).on('click', '.pagination a', function (e) {
-					e.preventDefault();
-					requestTalents($(this).attr('href').split('page=')[1]);
-				});
-        });//end of document ready function
-    </script>
+			$('#search-button').on('click', requestTalents);
+
+			//pagination
+			$(document).on('click', '.pagination a', function (e) {
+				e.preventDefault();
+				requestTalents($(this).attr('href').split('page=')[1]);
+			});
+		});//end of document ready function
+	</script>
 @stop
