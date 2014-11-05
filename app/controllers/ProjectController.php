@@ -95,13 +95,24 @@ class ProjectController extends BaseController {
 	public function findProjects(){
 		if(Request::ajax()) {
 		//continue if AJAX request
+		$projects = Project::where('status', '=', '1');
+		if(!empty(Input::get('tag'))){
+		// if user has entered tag
 		$tag = !empty(Input::get('tag'))?Tag::where('name', '=', Input::get('tag'))->first():'';
 		$tagID = is_object($tag) && sizeof($tag)>0?$tag->id:0;
-		$projects = Project::whereHas('tags',function($q) use ($tagID){
+			$projects->whereHas('tags',function($q) use ($tagID){
 			Input::get('tag')!=''?$q->where('tags.id', '=',$tagID):null;
-		})->whereHas('describes',function($query){
+		});
+		}
+
+		if(!empty(Input::get('describe'))){
+		// if user has entered describe
+		$projects->whereHas('describes',function($query){
 			Input::get('describe')!=0?$query->where('talentdescribes.id', '=',Input::get('describe')):null;
-		})->paginate(16);
+		});
+		}
+		$projects = $projects->paginate(16);
+
 		return View::make('project.index-project')->with('projects', $projects)->render();
 		}
 	}
