@@ -34,6 +34,14 @@ body {
   font-size: 80px;
   margin-left: -40px; }
 
+.thumbnail {
+  height: 550px; }
+
+.thumbnail .btn-primary {
+  position: absolute;
+  bottom: 30px;
+  right: 30px; }
+
 i.fa.fa-info-circle {
   font-size: 20px; }
 

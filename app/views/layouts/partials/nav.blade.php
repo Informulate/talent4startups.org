@@ -20,6 +20,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ $currentUser->email }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ route('profile_path', $currentUser->username) }}"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
 							<li><a href="{{ route('logout_path') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicon glyphicon-warning-sign"></span> Reset Password</a></li>
 						</ul>
