@@ -32,14 +32,14 @@
 				<h2>Member requests</h2>
 
 				@foreach($requests as $user)
-					<div><img class="img-circle" data-src="holder.js/64x64/auto"> {{ $user->profile->first_name }} {{ $user->profile->last_name }} <a class="btn btn-primary btn-xs" href="{{ route('project_membership_update', ['projectUrl' => $project->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a> <a class="btn btn-primary btn-xs" href="{{ route('project_membership_update', ['projectUrl' => $project->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a></div>
+					<div><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64"> {{ $user->profile->first_name }} {{ $user->profile->last_name }} <a class="btn btn-primary btn-xs" href="{{ route('project_membership_update', ['projectUrl' => $project->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a> <a class="btn btn-primary btn-xs" href="{{ route('project_membership_update', ['projectUrl' => $project->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a></div>
 				@endforeach
 
 			@endif
 
 			<h2>Project Contributors</h2>
 			@foreach($members as $user)
-							<div><img class="img-circle" data-src="holder.js/64x64/auto"> {{ $user->profile->first_name }} {{ $user->profile->last_name }}</div>
+							<div><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64"> {{ $user->profile->first_name }} {{ $user->profile->last_name }}</div>
 			@endforeach
 
 		</div>

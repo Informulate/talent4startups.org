@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-3">
-			<img class="img-circle img-responsive img-rounded" data-src="holder.js/150x150" alt="...">
+			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150">
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
@@ -12,9 +12,11 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>My Interests</h2>
-			@foreach($user->profile->skills as $skill)
-				<a href="#"><span class="badge">{{ $skill->name }}</span></a>
-			@endforeach
+			@if(count($user->profile->skills) > 0)
+				@foreach($user->profile->skills as $skill)
+					<a href="#"><span class="badge">{{ $skill->name }}</span></a>
+				@endforeach
+			@endif
 		</div>
 	</div>
 	<div class="row">
@@ -28,7 +30,9 @@
 						<p>{{ Str::limit( $project->description, 50 ) }}</p>
 					</div>
 					<div class="clearfix">
-						<p><a href="" class="btn btn-primary btn-xs pull-right" role="button">Learn More</a></p>
+						@if ($currentUser->username == $user->username)
+							<p><a href="{{ route('edit_profile') }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
+						@endif
 					</div>
 				</div>
 				@endforeach
