@@ -4,7 +4,8 @@
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
-class Profile extends Eloquent {
+class Profile extends Eloquent
+{
 
 	use EventGenerator;
 
@@ -13,7 +14,7 @@ class Profile extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'active','user_type', 'agerange','location','workexperience','about','describe','another_skill','facebook','linkedins','twitter','meetup','image','active'];
+	protected $fillable = ['first_name', 'last_name', 'active', 'agerange', 'location', 'workexperience', 'about', 'describe', 'another_skill', 'facebook', 'linkedins', 'twitter', 'meetup', 'image', 'active'];
 
 	/**
 	 * The database table used by the model.
@@ -51,32 +52,13 @@ class Profile extends Eloquent {
 		$profile->first_name = $profileInfo['first_name'];
 		$profile->last_name = $profileInfo['last_name'];
 		$profile->location = $profileInfo['location'];
-		$profile->agerange = $profileInfo['agerange'];
-		$profile->describe = $profileInfo['describe'];
-		$profile->workexperience = $profileInfo['workexperience'];
+		$profile->skill = $profileInfo['describe'];
 		$profile->about = $profileInfo['about'];
 		$profile->facebook = $profileInfo['facebook'];
-		$profile->linkedins = $profileInfo['linkedins'];
+		$profile->linkedIn = $profileInfo['linkedins'];
 		$profile->twitter = $profileInfo['twitter'];
 		$profile->meetup = $profileInfo['meetup'];
-		$profile->active = array_key_exists('active', $profileInfo) ?true: false;
-
-		//upload profile picture, if your has selected
-		$fileName = '';
-
-		if (isset($profileInfo['image'])) {
-			$targetPath = storage_path() . '/images/';
-			$fileName = str_random(10) . '.' . $profileInfo['image']->getClientOriginalName();
-			$profileInfo['image']->move($targetPath, $fileName);
-		}
-
-		$profile->image = $fileName;
-
-		// if we don't have a user type, assume is a talent that failed to create their profile.
-		if (is_null($profile->user_type)) {
-			$profile->user_type = 'talent';
-		}
-
+		$profile->published = array_key_exists('published', $profileInfo) ? true : false;
 		$profile->user_id = $user->id;
 
 		return $profile;

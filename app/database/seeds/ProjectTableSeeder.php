@@ -1,20 +1,20 @@
 <?php
 
 use Cocur\Slugify\Slugify;
-use Informulate\Projects\Project;
-use Informulate\Projects\ProjectRepository;
+use Informulate\Startups\Startup;
+use Informulate\Startups\StartupRepository;
 use Informulate\Users\User;
 
 class ProjectTableSeeder extends Seeder {
 	/**
-	 * @var ProjectRepository
+	 * @var StartupRepository
 	 */
 	private $repository;
 
 	/**
-	 * @param ProjectRepository $repository
+	 * @param StartupRepository $repository
 	 */
-	function __construct(ProjectRepository $repository)
+	function __construct(StartupRepository $repository)
 	{
 		$this->repository = $repository;
 	}
@@ -34,20 +34,20 @@ class ProjectTableSeeder extends Seeder {
 			foreach (range(1, rand(2, 4)) as $i) {
 				$name = $faker->name;
 
-				$project = Project::create([
+				$startup = Startup::create([
 					'name' => $name,
 					'description' => $faker->text,
 					'url' => $slugify->slugify($name),
 					'user_id' => $user->id,
 				]);
 
-				$this->repository->save($project);
+				$this->repository->save($startup);
 
 				foreach (range(1, rand(2, 6)) as $i) {
 					$id = rand(1, (count($users) - 1));
 
-					if ($project->owner->id !== $id) {
-						$this->repository->addMemberRequest($users[$id], $project);
+					if ($startup->owner->id !== $id) {
+						$this->repository->addMemberRequest($users[$id], $startup);
 					}
 				}
 			}

@@ -32,7 +32,7 @@ class UserRepository {
 	public function findActiveTalents()
 	{
 		return User::whereHas('profile', function ($q) {
-			$q->where('active', '=', true);
+			$q->where('published', '=', true);
 		})->paginate(16);
 	}
 }

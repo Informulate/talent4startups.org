@@ -7,10 +7,10 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
-				<a class="btn btn-primary" href="{{ route('register_path', ['userType' => 'startup']) }}">Sign Up As a StartUp</a>
+				<a class="btn btn-primary" href="{{ route('register_path', ['type' => 'startup']) }}">Sign Up As a StartUp</a>
 			</div>
 			<div class="col-sm-6">
-				<a class="btn btn-primary" href="{{ route('register_path', ['userType' => 'talent']) }}">Sign Up As a Talent</a>
+				<a class="btn btn-primary" href="{{ route('register_path', ['type' => 'talent']) }}">Sign Up As a Talent</a>
 			</div>
 		</div>
 	</div>

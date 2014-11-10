@@ -1,9 +1,11 @@
 <?php namespace Informulate\Tags;
 
 use Eloquent;
-use Informulate\Projects\Project;
-class Tag extends Eloquent {
-	
+use Informulate\Startups\Startup;
+
+class Tag extends Eloquent
+{
+
 	/**
 	 * Fields that are mass assigned
 	 *
@@ -12,15 +14,15 @@ class Tag extends Eloquent {
 	protected $fillable = ['tag_id'];
 
 
-	 /**
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function projects()
+	public function startups()
 	{
-		return $this->belongsToMany('Informulate\Projects\Project');
+		return $this->belongsToMany('Informulate\Startups\Startup');
 	}
-	
-	 /**
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function profiles()
@@ -29,39 +31,40 @@ class Tag extends Eloquent {
 	}
 
 
+	/**
+	 * @param Startup $startup
+	 * @return mixed
+	 */
+	public static function listStartupTags(Startup $startup)
+	{
+
+		$tags = $startup->tags;
+
+		return $tags->lists('id');
+	}
 
 	/**
-	 * Fetch project's tags from storage
-	 * @param Object Project
-	 * @return tag ids
+	 * @param Startup $startup
+	 * @param $tags
 	 */
-	public static function listProjectTags(Project $project){
-
-		$tags = $project->tags;
-
-		return $tags->lists('id'); 
-	}	
-
-	/**	
-	* add project's tags
-	* @param Object Project,array tags
-	*/
-	public static function newProjectTags(Project $project,$tags){
-		if(sizeof($tags)>0){
+	public static function newStartupTags(Startup $startup, $tags)
+	{
+		if (sizeof($tags) > 0) {
 			// if user selected tags
-			foreach($tags as $tagID){
-			 $project->tags()->attach($project['id'], array('tag_id' => $tagID));
+			foreach ($tags as $tagID) {
+				$startup->tags()->attach($startup['id'], array('tag_id' => $tagID));
 			}
 		}
 	}
 
-	/**	
-	* Update project's tags
-	* @param Object Project,array tags
-	*/
-	public static function updateProjectTags(Project $project,$tags){
-		Project::find($project['id'])->tags()->detach();// remove all tags of project
-		Tag::newProjectTags($project,$tags); //add new tags
+	/**
+	 * @param Startup $startup
+	 * @param $tags
+	 */
+	public static function updateStartupTags(Startup $startup, $tags)
+	{
+		Startup::find($startup['id'])->tags()->detach();// remove all tags of startup
+		Tag::newStartupTags($startup, $tags); //add new tags
 	}
 
 	/**
@@ -69,22 +72,25 @@ class Tag extends Eloquent {
 	 * @param Array $profile
 	 * @return array tags
 	 */
-	public static function getUserProfileTags($profile){
+	public static function getUserProfileTags($profile)
+	{
 		$tags = $profile->tags;
 		return $tags->lists('id');
 	}
-	
-	/* add profile skills to profile_tags
-	 * @param Object $profile, array $tags
+
+	/**
+	 * @param $profile
+	 * @param $tags
 	 */
-	public static function newProfileTags($profile,$tags){
-		if(sizeof($tags)>0){
+	public static function newProfileTags($profile, $tags)
+	{
+		if (sizeof($tags) > 0) {
 			// if user selected tags
-			foreach($tags as $tagID){
-			 $profile->tags()->attach($profile['id'], array('tag_id' => $tagID));
+			foreach ($tags as $tagID) {
+				$profile->tags()->attach($profile['id'], array('tag_id' => $tagID));
 			}
 		}
 	}
-	
+
 
 }

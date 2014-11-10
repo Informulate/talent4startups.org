@@ -16,7 +16,7 @@
 	{{ Form::close() }}
 </div> <!-- display search fields ends -->
 <div id="talent-container">
-	@include('talent.index-talent')
+	@include('talent.list')
 </div>
 <script>
 		$("document").ready(function() {

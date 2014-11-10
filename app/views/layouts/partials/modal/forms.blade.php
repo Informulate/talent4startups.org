@@ -60,13 +60,15 @@
 
 		// Register via email
 		$('#register-email').on('click', function(event) {
+			event.preventDefault();
+			console.log('WTF CARAJO');
+
 			var $error = validateRegistration();
-			if($error==0){
-			//No errors, form is ready to submit
 
-			var $userType = getUserType();
-
-			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
+			if ($error == 0) {
+				//No errors, form is ready to submit
+				var $type = getType();
+				$('<form method="GET" action="{{ route("register_path") }}?type='+$type+'"><input type="hidden" name="type" id="type" value="'+$type+'"></form>').appendTo('body').submit();
 			}
 		});
 
@@ -76,9 +78,9 @@
 			if($error==0){
 			//No errors, form is ready to submit
 
-			var $userType = getUserType();
+			var $type = getType();
 
-			$('<form method="GET" action="{{ route("register_linkedin") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
+			$('<form method="GET" action="{{ route("register_linkedin") }}"><input type="hidden" name="type" id="type" value="'+$type+'"></form>').appendTo('body').submit();
 			}
 		});
 
@@ -104,13 +106,13 @@
 		/*
 		* Identify user is talent or startup
 		*/
-		function getUserType(){
+		function getType(){
 		if($('#talent').hasClass('text-primary')){
-				var $userType = 'talent';
+				var $type = 'talent';
 			}else{
-				var $userType = 'startup';
+				var $type = 'startup';
 			}
-			return $userType;
+			return $type;
 		}
 	});
 </script>

@@ -48,9 +48,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
-	public function projects()
+	public function startups()
 	{
-		return $this->hasMany('Informulate\Projects\Project');
+		return $this->hasMany('Informulate\Startups\Startup');
 	}
 
 	/**
@@ -60,7 +60,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function contributions()
 	{
-		return $this->belongsToMany('Informulate\Projects\Project');
+		return $this->belongsToMany('Informulate\Startups\Startup');
 	}
 
 	/**
@@ -79,11 +79,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @param $username
 	 * @param $email
 	 * @param $password
+	 * @param $type
+	 *
 	 * @return static
 	 */
-	public static function register($username, $email, $password)
+	public static function register($username, $email, $password, $type)
 	{
-		$user = new static(compact('username', 'email', 'password'));
+		$user = new static(compact('username', 'email', 'password', 'type'));
 
 		$user->raise(new UserRegistered($user));
 

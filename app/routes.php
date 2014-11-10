@@ -47,25 +47,25 @@ Route::get('logout', [
 ]);
 
 /**
- * Projects!
+ * Startups!
  */
-Route::resource('projects', 'ProjectController');
+Route::resource('startups', 'StartupController');
 
-Route::post('project/findProjects', [
-	'as' => 'project_find',
-	'uses' => 'ProjectController@findProjects'
+Route::post('startups/search', [
+	'as' => 'startups_search',
+	'uses' => 'StartupController@search'
 ]);
 
-Route::get('projects/{id}/membership', [
-	'as' => 'project_membership_request',
+Route::get('startups/{id}/membership', [
+	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
 ]);
-Route::get('projects/{project}/membership/{user}/{action}', [
-	'as' => 'project_membership_update',
+Route::get('startups/{startup}/membership/{user}/{action}', [
+	'as' => 'startup_membership_update',
 	'uses' => 'MembershipController@update'
 ]);
-Route::get('projects/{id}/membership/cancel', [
-	'as' => 'project_membership_request_cancel',
+Route::get('startups/{id}/membership/cancel', [
+	'as' => 'startup_membership_request_cancel',
 	'uses' => 'MembershipController@destroy'
 ]);
 
