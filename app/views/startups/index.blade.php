@@ -3,7 +3,7 @@
 @section('content')
 
 	<div class="row"> <!-- display search fields -->
-		{{ Form::open(['route' => 'startups_search','name'=>'project-search-form','id'=>'project-search-form', 'method' => 'get']) }}
+		{{ Form::open(['route' => 'startups.index','name'=>'project-search-form','id'=>'project-search-form', 'method' => 'get']) }}
 			<div class="form-group col-sm-3">
 				{{ Form::select('needs', array('Startups that Need: Everyone') + $needs, null,['id'=>'needs','class' => 'form-control']); }}
 			</div>

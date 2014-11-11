@@ -91,5 +91,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		return $user;
 	}
-
 }

@@ -47,7 +47,12 @@ class StartupController extends BaseController
 	 */
 	public function index()
 	{
-		$startups = $this->repository->allActive();
+		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
+
+		if (Request::ajax()) {
+			return View::make('startups.list')->with('startups', $startups)->render();
+		}
+
 		$needs = Skill::lists('name', 'id');
 
 		return View::make('startups.index')->with('startups', $startups)->with('needs', $needs);
@@ -96,24 +101,6 @@ class StartupController extends BaseController
 		$members = $startup->members()->where('approved', true)->get();
 
 		return View::make('startups.show')->with('startup', $startup)->with('requests', $requests)->with('members', $members);
-	}
-
-	/**
-	 * Return list of startups searched/found
-	 *
-	 * @return Response
-	 */
-	public function search()
-	{
-		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
-
-		if (Request::ajax()) {
-			return View::make('startups.list')->with('startups', $startups)->render();
-		}
-
-		$needs = Skill::lists('name', 'id');
-
-		return View::make('startups.index')->with('startups', $startups)->with('needs', $needs);
 	}
 
 	public function approveMember($startup, $userId)

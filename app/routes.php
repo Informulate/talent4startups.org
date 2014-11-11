@@ -49,10 +49,6 @@ Route::get('logout', [
 /**
  * Startups!
  */
-Route::get('startups/search', [
-	'as' => 'startups_search',
-	'uses' => 'StartupController@search'
-]);
 Route::resource('startups', 'StartupController');
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
@@ -71,11 +67,6 @@ Route::get('startups/{id}/membership/cancel', [
  * Talents!
  */
 Route::resource('talents', 'TalentController');
-
-Route::post('talent/findTalents', [
-	'as' => 'talent_find',
-	'uses' => 'TalentController@findTalents'
-]);
 /**
  * Profile!
  */

@@ -28,33 +28,15 @@ class TalentController extends BaseController
 	 */
 	public function index()
 	{
-		$talents = $this->userRepository->findActiveTalents();
-		$describes = Skill::lists('name', 'id');
-		return View::make('talent.index')->with('talents', $talents)->with('describes', $describes);
-	}
+		$talents = $this->userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'));
 
-	/**
-	 * @return string
-	 */
-	protected function findTalents()
-	{
 		if (Request::ajax()) {
-			//continue if AJAX request
-			$tag = !empty(Input::get('tag')) ? Tag::where('name', '=', Input::get('tag'))->first() : '';
-			$tagID = is_object($tag) && sizeof($tag) > 0 ? $tag->id : 0;
-			$talents = User::whereHas('profile', function ($q) use ($tagID) {
-				$q->where('active', '=', true);
-				Input::get('describe') != 0 ? $q->where('describe', '=', Input::get('describe')) : null;
-				if (!empty(Input::get('tag'))) {
-					//if user entered tag
-					$profiles = Profile::whereHas('tags', function ($query) use ($tagID) {
-						$query->where('tags.id', '=', $tagID);
-					})->get()->lists('id');
-					$q->whereIn('id', count($profiles) > 0 ? $profiles : array(-1));
-				}
-			})->paginate(16);
-			return View::make('talent.index-talent')->with('talents', $talents)->render();
+			return View::make('talent.list')->with('talents', $talents)->render();
 		}
+
+		$describes = Skill::lists('name', 'id');
+
+		return View::make('talent.index')->with('talents', $talents)->with('describes', $describes);
 	}
 
 	/**
