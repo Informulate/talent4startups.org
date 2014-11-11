@@ -3,8 +3,8 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class RequestStartupMembershipCommandHandler implements CommandHandler{
-
+class RequestStartupMembershipCommandHandler implements CommandHandler
+{
 	use DispatchableTrait;
 
 	/**

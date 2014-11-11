@@ -2,8 +2,8 @@
 
 use Informulate\Startups\Startup;
 
-class StartupCreated {
-
+class StartupCreated
+{
 	/**
 	 * @var Startup
 	 */
@@ -16,5 +16,4 @@ class StartupCreated {
 	{
 		$this->startup = $startup;
 	}
-
 }

@@ -6,8 +6,8 @@ use Informulate\Startups\StartupRepository;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class UpdateStartupCommandHandler implements CommandHandler{
-
+class UpdateStartupCommandHandler implements CommandHandler
+{
 	use DispatchableTrait;
 
 	/**

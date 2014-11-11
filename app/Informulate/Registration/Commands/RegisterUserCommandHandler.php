@@ -5,8 +5,8 @@ use Informulate\Users\UserRepository;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class RegisterUserCommandHandler implements CommandHandler{
-
+class RegisterUserCommandHandler implements CommandHandler
+{
 	use DispatchableTrait;
 
 	/**

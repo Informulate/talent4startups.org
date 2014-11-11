@@ -2,8 +2,8 @@
 
 use Informulate\Users\User;
 
-class CancelStartupMembershipRequestCommand {
-
+class CancelStartupMembershipRequestCommand
+{
 	/**
 	 * @var User $user
 	 */
@@ -23,5 +23,4 @@ class CancelStartupMembershipRequestCommand {
 		$this->user = $user;
 		$this->startup = $startup;
 	}
-
 }

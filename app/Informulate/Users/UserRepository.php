@@ -1,7 +1,7 @@
 <?php namespace Informulate\Users;
 
-class UserRepository {
-
+class UserRepository
+{
 	/**
 	 * Saves the user
 	 *

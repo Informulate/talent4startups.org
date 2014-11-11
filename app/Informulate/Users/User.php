@@ -8,8 +8,8 @@ use Informulate\Registration\Events\UserRegistered;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent, Hash;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
-
+class User extends Eloquent implements UserInterface, RemindableInterface
+{
 	use UserTrait, RemindableTrait, EventGenerator;
 
 	/**

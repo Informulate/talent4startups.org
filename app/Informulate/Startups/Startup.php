@@ -8,7 +8,6 @@ use Eloquent;
 
 class Startup extends Eloquent
 {
-
 	use EventGenerator;
 
 	/**

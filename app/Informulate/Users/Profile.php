@@ -1,12 +1,10 @@
 <?php namespace Informulate\Users;
 
-
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
 class Profile extends Eloquent
 {
-
 	use EventGenerator;
 
 	/**
@@ -14,7 +12,7 @@ class Profile extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'active', 'agerange', 'location', 'workexperience', 'about', 'describe', 'another_skill', 'facebook', 'linkedins', 'twitter', 'meetup', 'image', 'active'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'skill', 'facebook', 'linkedIn', 'twitter', 'meetup', 'published'];
 
 	/**
 	 * The database table used by the model.
@@ -71,5 +69,4 @@ class Profile extends Eloquent
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');
 	}
-
 }

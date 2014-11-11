@@ -2,8 +2,8 @@
 
 use Informulate\Users\User;
 
-class CreateNewStartupCommand {
-
+class CreateNewStartupCommand
+{
 	/**
 	 * @var User $user
 	 */
@@ -23,5 +23,4 @@ class CreateNewStartupCommand {
 		$this->user = $user;
 		$this->startup = $startup;
 	}
-
 }

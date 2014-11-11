@@ -5,7 +5,8 @@ use Informulate\Startups\Startup;
 use Informulate\Startups\StartupRepository;
 use Informulate\Users\User;
 
-class ProjectTableSeeder extends Seeder {
+class ProjectTableSeeder extends Seeder
+{
 	/**
 	 * @var StartupRepository
 	 */

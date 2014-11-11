@@ -2,8 +2,8 @@
 
 use Informulate\Users\User;
 
-class UpdateStartupMembershipCommand {
-
+class UpdateStartupMembershipCommand
+{
 	/**
 	 * @var User $user
 	 */
@@ -30,5 +30,4 @@ class UpdateStartupMembershipCommand {
 		$this->startup = $startup;
 		$this->action = $action;
 	}
-
 }

@@ -2,7 +2,8 @@
 
 use Informulate\Startups\Startup;
 
-class UpdateStartupCommand {
+class UpdateStartupCommand
+{
 	/**
 	 * @var array projectInfo
 	 */
@@ -17,5 +18,4 @@ class UpdateStartupCommand {
 		$this->startup = $startup;
 		$this->data = $data;
 	}
-
 }

@@ -2,7 +2,6 @@
 
 class RegisterUserCommand
 {
-
 	/**
 	 * @var string $username
 	 */
@@ -36,5 +35,4 @@ class RegisterUserCommand
 		$this->password = $password;
 		$this->type = $type;
 	}
-
 }

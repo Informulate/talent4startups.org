@@ -2,7 +2,8 @@
 
 use Informulate\Users\User;
 
-class UpdateProfileCommand {
+class UpdateProfileCommand
+{
 
 	/**
 	 * @var User $user
