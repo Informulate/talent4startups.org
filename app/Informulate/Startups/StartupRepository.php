@@ -26,12 +26,18 @@ class StartupRepository
 		}
 
 		if ($needs) {
-			$results->whereHas('describes', function ($q) use ($needs) {
-				$q->where('skills.name', '=', $needs);
+			$results->whereHas('needs', function ($q) use ($needs) {
+				$q->where('skills.id', '=', $needs);
 			});
 		}
 
-		return $results->paginate(16);
+		$paginatedResults = $results->paginate(16);
+
+		if ($needs or $tag) {
+			$paginatedResults->appends(['needs' => $needs, 'tag' => $tag]);
+		}
+
+		return $paginatedResults;
 	}
 
 	/**

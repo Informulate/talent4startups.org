@@ -1,10 +1,10 @@
 <?php
 
-use Cocur\Slugify\Slugify;
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\StartupForm;
 use Informulate\Startups\Commands\CreateNewStartupCommand;
 use Informulate\Core\CommandBus;
+use Informulate\Startups\Commands\UpdateStartupCommand;
 use Informulate\Startups\Startup;
 use Informulate\Startups\StartupRepository;
 use Informulate\Skills\Skill;
@@ -105,9 +105,15 @@ class StartupController extends BaseController
 	 */
 	public function search()
 	{
-		$startups = $this->repository->allActive(Input::get('tag'), Input::get('describe'));
+		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
 
-		return View::make('startups.list')->with('startups', $startups)->render();
+		if (Request::ajax()) {
+			return View::make('startups.list')->with('startups', $startups)->render();
+		}
+
+		$needs = Skill::lists('name', 'id');
+
+		return View::make('startups.index')->with('startups', $startups)->with('needs', $needs);
 	}
 
 	public function approveMember($startup, $userId)
@@ -126,7 +132,6 @@ class StartupController extends BaseController
 	 */
 	public function edit($startup)
 	{
-		// TODO: Move to the startups repository
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 		$tags = Tag::lists('name', 'id');
 		$stages = Stage::lists('name', 'id');
@@ -143,24 +148,15 @@ class StartupController extends BaseController
 	 */
 	public function update($startup)
 	{
-		$slugify = Slugify::create();
 		$this->startupForm->validate(Input::all());
 
-		// TODO: Move to a command
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
-		$startup->url = $slugify->slugify(Input::get('name'));
-		$startup->name = Input::get('name');
-		$startup->stage_id = Input::get('stage_id');
-		$startup->description = Input::get('description');
-		$startup->video = Input::get('video');
-		// TODO: This detach and attach should be smarter. Remove only not needed, and add only the missing ones!
-		$startup->needs()->detach();
-		$startup->tags()->detach();
-		$startup->needs()->attach(Input::get('needs'));
-		$startup->tags()->attach(Input::get('tags'));
-		$startup->save();
 
-		Flash::message('Startup updated successfullly!');
+		$this->execute(
+			new UpdateStartupCommand($startup, Input::all())
+		);
+
+		Flash::message('Startup updated successfully!');
 
 		return Redirect::action('StartupController@show', $startup->url);
 	}

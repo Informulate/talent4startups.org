@@ -1,5 +1,5 @@
 	@if (Request::ajax())
-	<script src="{{{ asset( 'js/vendors/holder/docs.min.js' ) }}}"></script>
+		<script src="{{{ asset( 'js/vendors/holder/docs.min.js' ) }}}"></script>
 	@endif
 	<div class="row">
 		<div class="col-sm-12">

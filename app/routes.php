@@ -49,13 +49,11 @@ Route::get('logout', [
 /**
  * Startups!
  */
-Route::resource('startups', 'StartupController');
-
-Route::post('startups/search', [
+Route::get('startups/search', [
 	'as' => 'startups_search',
 	'uses' => 'StartupController@search'
 ]);
-
+Route::resource('startups', 'StartupController');
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
