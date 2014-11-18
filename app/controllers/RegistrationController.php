@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\RegistrationForm;
 use Informulate\Registration\Commands\RegisterUserCommand;
+use Informulate\Users\Commands\UpdateProfileCommand;
 use Informulate\Users\User;
 use Informulate\Core\CommandBus;
 
 class RegistrationController extends BaseController
 {
-
 	use CommandBus;
 
 	/**
@@ -69,56 +69,56 @@ class RegistrationController extends BaseController
 	* Register user through Linked-in
 	*/
 
-	public function registerWithLinkedin()
+	public function registerWithLinkedIn()
 	{
 		// get data from input
 		$code = Input::get('code');
-		$linkedinService = OAuth::consumer('Linkedin');
+		$linkedInService = OAuth::consumer('LinkedIn');
 
 		if (!empty($code)) {
-			// This was a callback request from linkedin, get the token
-			$token = $linkedinService->requestAccessToken($code);
-			// Send a request with it. Please note that XML is the default format.
-			$result = json_decode($linkedinService->request('/people/~?format=json'), true);
-			$email = json_decode($linkedinService->request('/people/~/email-address?format=json'), true);
-
+			$token = $linkedInService->requestAccessToken($code);
+			$result = json_decode($linkedInService->request('/people/~?format=json'), true);
+			$email = json_decode($linkedInService->request('/people/~/email-address?format=json'), true);
 			$user = User::where('email', '=', $email)->first();
-			if (sizeof($user) == 0) {
-				//insert new user in db
-				$user = new User;
-				$user->email = $email;
-				$user->save();
 
-				//create user profile and store user_type in profile table
-				//$profile = new Profile(array('user_type' => Session::get('userType'), 'active' => 1, 'first_name' => $result['firstName'], 'last_name' => $result['lastName']));
-				//$profile = $user->profile()->save($profile);
-				//remove session key
-				Session::forget('type');
+			if (is_null($user) and $token) {
+				$user = $this->execute(
+					new RegisterUserCommand($email, $email, $code, $type = Session::get('type') ?: 'talent')
+				);
+
+				$this->execute(
+					new UpdateProfileCommand($user, [
+						'first_name' => $result['firstName'],
+						'last_name' => $result['lastName'],
+						'linkedIn' => $result['siteStandardProfileRequest']['url'],
+						'published' => true
+					])
+				);
+
+				Flash::message('Welcome to Talent4Startups');
 			}
 
-			Auth::login($user);
-			Flash::message('Welcome to Talent4Startups');
-			$profile = $user->profile;
-			if (is_object($profile) && sizeof($profile) > 0) {
-				$tags = $user->profile->tags;
-				if (!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags) > 0)) {
-					//redirect to home page if profile has First Name, Last Name and Skills
-					return Redirect::intended('');
+			if ($token) {
+				Auth::login($user);
+
+				if (is_null($user->profile)) {
+					return Redirect::route('edit_profile');
 				}
+
+				return Redirect::intended('home');
 			}
-			// if profile is missing, redirect to edit profile page
-			return Redirect::intended('profile');
-		}// if not ask for permission first
-		else {
-			$type = Input::get('type');
-			if (is_null($type)) {
-				return View::make('registration.select_type');
-			}
-			Session::put('type', $type);
-			// get linkedinService authorization
-			$url = $linkedinService->getAuthorizationUri(array('state' => 'DCEEFWF45453sdffef424'));
-			// return to linkedin login url
-			return Redirect::to((string)$url);
 		}
+
+		$type = Input::get('type');
+
+		if (is_null($type)) {
+			return View::make('registration.select_type');
+		}
+
+		Session::put('type', $type);
+
+		$url = $linkedInService->getAuthorizationUri(['state' => 'DCEEFWF45453sdffef424']);
+
+		return Redirect::to((string)$url);
 	}
 }

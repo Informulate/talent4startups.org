@@ -49,13 +49,13 @@ class Profile extends Eloquent
 
 		$profile->first_name = $profileInfo['first_name'];
 		$profile->last_name = $profileInfo['last_name'];
-		$profile->location = $profileInfo['location'];
-		$profile->skill = $profileInfo['describe'];
-		$profile->about = $profileInfo['about'];
-		$profile->facebook = $profileInfo['facebook'];
-		$profile->linkedIn = $profileInfo['linkedins'];
-		$profile->twitter = $profileInfo['twitter'];
-		$profile->meetup = $profileInfo['meetup'];
+		$profile->location = array_key_exists('location', $profileInfo) ? $profileInfo['location'] : '';
+		$profile->skill = array_key_exists('describe', $profileInfo) ? $profileInfo['describe'] : '';
+		$profile->about = array_key_exists('about', $profileInfo) ? $profileInfo['about'] : '';
+		$profile->facebook = array_key_exists('facebook', $profileInfo) ? $profileInfo['facebook'] : '';
+		$profile->linkedIn = array_key_exists('linkedIn', $profileInfo) ? $profileInfo['linkedIn'] : '';
+		$profile->twitter = array_key_exists('twitter', $profileInfo) ? $profileInfo['twitter'] : '';
+		$profile->meetup = array_key_exists('meetup', $profileInfo) ? $profileInfo['meetup'] : '';
 		$profile->published = array_key_exists('published', $profileInfo) ? true : false;
 		$profile->user_id = $user->id;
 

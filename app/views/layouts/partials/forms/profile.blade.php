@@ -31,8 +31,8 @@
 		{{ Form::text('facebook',is_object( $user->profile ) ? $user->profile->facebook : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('linkedins', 'Linkedin:') }}
-		{{ Form::text('linkedins', isset( $user->profile->linkedins ) ? $user->profile->linkedins : null, ['class' => 'form-control']) }}
+		{{ Form::label('linkedIn', 'LinkedIn:') }}
+		{{ Form::text('linkedIn', isset( $user->profile->linkedIn ) ? $user->profile->linkedIn : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('twitter', 'Twitter:') }}
