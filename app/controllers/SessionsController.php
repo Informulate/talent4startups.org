@@ -5,8 +5,6 @@ use Informulate\Forms\SignInForm;
 use Informulate\Registration\Commands\RegisterUserCommand;
 use Informulate\Users\Commands\UpdateProfileCommand;
 use Informulate\Users\User;
-use Informulate\Users\Profile;
-use Informulate\Tags\Tag;
 
 class SessionsController extends BaseController
 {
@@ -41,7 +39,7 @@ class SessionsController extends BaseController
 
 
 	/**
-	 * Save the user.
+	 * Login the user
 	 */
 	public function store()
 	{
@@ -50,24 +48,24 @@ class SessionsController extends BaseController
 
 		if (Auth::attempt($formData)) {
 			Flash::message('Welcome back to Talent4Startups!');
-			$profile = Auth::user()->profile;
-			if (is_object($profile) && sizeof($profile) > 0) {
-				$tags = Auth::user()->profile->tags;
-				if (!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags) > 0)) {
-					//redirect to home page if profile has First Name, Last Name and Skills
-					return Redirect::intended('');
-				}
+
+			// If the user is missing it's profile, force them to update their details
+			$user = Auth::user();
+			if (is_null($user->profile) or is_null($user->profile->first_name)) {
+				return Redirect::to('profile');
 			}
-			// if profile is missing, redirect to edit profile page
-			return Redirect::intended('profile');
+
+			return Redirect::intended('home');
 		}
-		//if wrong email/password entered
+
 		return Redirect::to('login')->with('email', $formData['email'])->with('error', 'Wrong email/password entered.');
 	}
 
-	/*
-	* Login with linked in
-	*/
+	/**
+	 * Login with linked in
+	 *
+	 * @return Response
+	 */
 	public function loginWithLinkedIn()
 	{
 		// get data from input
@@ -81,6 +79,7 @@ class SessionsController extends BaseController
 			$user = User::where('email', '=', $email)->first();
 
 			if (is_null($user) and $token) {
+				// We should have the type stored on the session if for whatever reason that fails, default to talents then.
 				$user = $this->execute(
 					new RegisterUserCommand($email, $email, $code, $type = Session::get('type') ?: 'talent')
 				);
@@ -89,7 +88,7 @@ class SessionsController extends BaseController
 					new UpdateProfileCommand($user, [
 						'first_name' => $result['firstName'],
 						'last_name' => $result['lastName'],
-						'linkedIn' => $result['siteStandardProfileRequest']['url'],
+						'linked_in' => $result['siteStandardProfileRequest']['url'],
 						'published' => true
 					])
 				);
@@ -116,15 +115,33 @@ class SessionsController extends BaseController
 
 		Session::put('type', $type);
 
-		$url = $linkedInService->getAuthorizationUri(['state' => 'DCEEFWF45453sdffef424']);
+		$url = $linkedInService->getAuthorizationUri(['state' => 'DCEEFWF45453sdffef424']); // TODO: What is this?
 
 		return Redirect::to((string)$url);
 	}
 
+	/**
+	 * Log the user out and redirect to the home page
+	 *
+	 * @return Redirect
+	 */
 	public function destroy()
 	{
 		Auth::logout();
 		Flash::message('You have now been logged out');
 		return Redirect::home();
+	}
+
+	/**
+	 * Store the selected user type on the session
+	 *
+	 * Since we need to know the user type, and users might register with a social network, store the selected user type on the session
+	 * This is most likely called via an ajax get request
+	 *
+	 * @return null
+	 */
+	public function storeUserType()
+	{
+		Session::put('type', Input::get('type'));
 	}
 }

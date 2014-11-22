@@ -41,12 +41,6 @@ class UpdateProfileCommandHandler implements CommandHandler
 		$this->repository->save($profile);
 		$this->dispatchEventsFor($profile);
 
-		if (array_key_exists('skills', $command->profileInfo)) {
-			// TODO: I have to find a better location for this --jesusOmar
-			$profile->tags()->detach();// remove all skills of project
-			$profile->tags()->attach($command->profileInfo['skills']);
-		}
-
 		return $profile;
 	}
 }

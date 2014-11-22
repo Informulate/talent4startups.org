@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="form-group">
-		Login with  <a href="{{ route('login_linkedin') }}" id="login-linkedin" class="btn btn-primary">LinkedIn</a>
+		Login with  <a href="{{ route('login_linked_in') }}" id="login-linked_in" class="btn btn-primary">LinkedIn</a>
 	</div>
 
 {{ Form::close() }}

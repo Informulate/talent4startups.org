@@ -18,8 +18,8 @@ Route::post('register', [
 	'uses' => 'RegistrationController@store'
 ]);
 
-Route::get('register/linkedin', [
-	'as' => 'register_linkedin',
+Route::get('register/linked_in', [
+	'as' => 'register_linked_in',
 	'uses' => 'RegistrationController@registerWithLinkedin'
 ]);
 
@@ -36,14 +36,19 @@ Route::post('login', [
 	'uses' => 'SessionsController@store'
 ]);
 
-Route::get('login/linkedin', [
-	'as' => 'login_linkedin',
-	'uses' => 'SessionsController@loginWithLinkedin'
+Route::get('login/linkedIn', [
+	'as' => 'login_linked_in',
+	'uses' => 'SessionsController@loginWithLinkedIn'
 ]);
 
 Route::get('logout', [
 	'as' => 'logout_path',
 	'uses' => 'SessionsController@destroy'
+]);
+
+Route::get('session/type', [
+	'as' => 'store_type_path',
+	'uses' => 'SessionsController@storeUserType'
 ]);
 
 /**

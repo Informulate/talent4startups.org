@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Document</title>
 		<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css') }}}" rel="stylesheet">
+		<link href="{{{ asset( 'css/vendors/glyphicons/social.css') }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/bootstrap/bootstrap.min.css' ) }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -21,7 +22,7 @@
 			@yield('content')
 		</div>
 
-		
+
 		<script src="{{{ asset( 'js/vendors/bootstrap/bootstrap.min.js' ) }}}"></script>
 		<script src="{{{ asset('/js/vendors/modernizr/modernizr.js') }}}"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox-min.js"></script>

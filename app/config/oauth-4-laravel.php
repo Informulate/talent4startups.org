@@ -19,11 +19,11 @@ return [
 	'consumers' => [
 
 		/**
-		 * Linkedin
+		 * linked_in
 		 */
-		'LinkedIn' => [
-			'client_id' => getenv('LINKEDIN_CLIENT_ID'),
-			'client_secret' => getenv('LINKEDIN_CLIENT_SECRET'),
+		'linked_in' => [
+			'client_id' => getenv('linked_in_CLIENT_ID'),
+			'client_secret' => getenv('linked_in_CLIENT_SECRET'),
 		],
 
 	]

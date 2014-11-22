@@ -22,7 +22,7 @@ class CreateProfilesTable extends Migration
 			$table->text('about');
 			$table->integer('skill');
 			$table->string('facebook');
-			$table->string('linkedIn');
+			$table->string('linked_in');
 			$table->string('twitter');
 			$table->string('meetup');
 			$table->boolean('published');

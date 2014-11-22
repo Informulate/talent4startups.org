@@ -48,7 +48,7 @@ class UserTableSeeder extends Seeder
 				'describe' => $faker->numberBetween(1, 2),
 				'about' => $faker->sentence(),
 				'facebook' => $faker->userName,
-				'linkedIn' => $faker->userName,
+				'linked_in' => $faker->userName,
 				'twitter' => $faker->userName,
 				'meetup' => $faker->userName,
 				'published' => $faker->boolean()

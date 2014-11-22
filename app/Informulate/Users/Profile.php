@@ -12,7 +12,7 @@ class Profile extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'skill', 'facebook', 'linkedIn', 'twitter', 'meetup', 'published'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'skill', 'facebook', 'linked_in', 'twitter', 'meetup', 'published'];
 
 	/**
 	 * The database table used by the model.
@@ -53,11 +53,18 @@ class Profile extends Eloquent
 		$profile->skill = array_key_exists('describe', $profileInfo) ? $profileInfo['describe'] : '';
 		$profile->about = array_key_exists('about', $profileInfo) ? $profileInfo['about'] : '';
 		$profile->facebook = array_key_exists('facebook', $profileInfo) ? $profileInfo['facebook'] : '';
-		$profile->linkedIn = array_key_exists('linkedIn', $profileInfo) ? $profileInfo['linkedIn'] : '';
+		$profile->linked_in = array_key_exists('linked_in', $profileInfo) ? $profileInfo['linked_in'] : '';
 		$profile->twitter = array_key_exists('twitter', $profileInfo) ? $profileInfo['twitter'] : '';
 		$profile->meetup = array_key_exists('meetup', $profileInfo) ? $profileInfo['meetup'] : '';
 		$profile->published = array_key_exists('published', $profileInfo) ? true : false;
 		$profile->user_id = $user->id;
+
+		if (array_key_exists('skills', $profileInfo)) {
+			// We need to save the profile before we can attach tags to it.
+			$profile->save();
+			$profile->tags()->detach();// remove all skills of project
+			$profile->tags()->attach($profileInfo['skills']);
+		}
 
 		return $profile;
 	}
