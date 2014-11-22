@@ -4,9 +4,6 @@ use Informulate\Users\Profile;
 use Informulate\Users\ProfileRepository;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
-use Informulate\Tags\Tag;
-
-//use Informulate\Users\Upload;
 
 class UpdateProfileCommandHandler implements CommandHandler
 {
