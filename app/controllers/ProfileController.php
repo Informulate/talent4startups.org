@@ -84,18 +84,17 @@ class ProfileController extends BaseController
 
 		Flash::message('Your profile has been updated successfully!');
 
-		//redirect to home, if user is talent
 		if (Input::get('type') == 'startup') {
 
 			// redirect to create projct if no project added by startup yet.
-			$projects = Startup::where('user_id', '=', Auth::user()->id)->count();
+			$projectsCount = Startup::where('user_id', '=', Auth::user()->id)->count();
 
-			if ($projects == 0) {
+			if ($projectsCount == 0) {
 				return Redirect::route('startups.create');
 			}
 		}
 
-		return Redirect::intended('');
+		return Redirect::intended('/');
 	}
 
 	/**
@@ -103,7 +102,6 @@ class ProfileController extends BaseController
 	 */
 	public function resetPasswordForm()
 	{
-
 		return View::make('profile.reset_password');
 	}
 
@@ -117,19 +115,16 @@ class ProfileController extends BaseController
 		extract(Input::only('old_password', 'new_password', 'password_confirmation'));
 
 		if ($new_password != $password_confirmation) {
-			//confrim password not match
 			return redirect::route('reset_password')->with('error', 'Confirm password not match');
 		}
 
 		//check if user entered old password correct
 		$user = User::find(Auth::id());
 		if (Hash::check($old_password, $user->password)) {
-			//old password correct
 			try {
-				//save user with new password, display success message
-
 				$user->password = $new_password;
 				$user->save();
+
 				Flash::message('Your password has been reset successfully!');
 				return redirect::route('reset_password');
 			} catch (Exception $e) {
@@ -139,7 +134,6 @@ class ProfileController extends BaseController
 				return redirect::route('reset_password')->with('error', 'Error in reset password. Try again later!');
 			}
 		} else {
-			// generate error if old password is incorrect
 			return redirect::route('reset_password')->with('error', 'Old password is incorrect!');
 		}
 	}

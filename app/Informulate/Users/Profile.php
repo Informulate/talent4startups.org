@@ -35,11 +35,11 @@ class Profile extends Eloquent
 	 * Update a user's profile
 	 *
 	 * @param User $user
-	 * @param $profileInfo
+	 * @param $attributes
 	 *
 	 * @return static
 	 */
-	public static function updateProfile(User $user, $profileInfo)
+	public static function updateProfile(User $user, array $attributes)
 	{
 		$profile = $user->profile;
 
@@ -47,23 +47,23 @@ class Profile extends Eloquent
 			$profile = new static();
 		}
 
-		$profile->first_name = $profileInfo['first_name'];
-		$profile->last_name = $profileInfo['last_name'];
-		$profile->location = array_key_exists('location', $profileInfo) ? $profileInfo['location'] : '';
-		$profile->skill = array_key_exists('describe', $profileInfo) ? $profileInfo['describe'] : '';
-		$profile->about = array_key_exists('about', $profileInfo) ? $profileInfo['about'] : '';
-		$profile->facebook = array_key_exists('facebook', $profileInfo) ? $profileInfo['facebook'] : '';
-		$profile->linked_in = array_key_exists('linked_in', $profileInfo) ? $profileInfo['linked_in'] : '';
-		$profile->twitter = array_key_exists('twitter', $profileInfo) ? $profileInfo['twitter'] : '';
-		$profile->meetup = array_key_exists('meetup', $profileInfo) ? $profileInfo['meetup'] : '';
-		$profile->published = array_key_exists('published', $profileInfo) ? true : false;
+		$profile->first_name = $attributes['first_name'];
+		$profile->last_name = $attributes['last_name'];
+		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
+		$profile->skill = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
+		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
+		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
+		$profile->linked_in = array_key_exists('linked_in', $attributes) ? $attributes['linked_in'] : '';
+		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
+		$profile->meetup = array_key_exists('meetup', $attributes) ? $attributes['meetup'] : '';
+		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
 
-		if (array_key_exists('skills', $profileInfo)) {
+		if (array_key_exists('skills', $attributes)) {
 			// We need to save the profile before we can attach tags to it.
 			$profile->save();
 			$profile->tags()->detach();// remove all skills of project
-			$profile->tags()->attach($profileInfo['skills']);
+			$profile->tags()->attach($attributes['skills']);
 		}
 
 		return $profile;
