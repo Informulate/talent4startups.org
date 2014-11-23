@@ -5,8 +5,7 @@ use Informulate\Startups\Startup;
 use Informulate\Startups\StartupRepository;
 use Informulate\Users\User;
 
-class ProjectTableSeeder extends Seeder
-{
+class StartupTableSeeder extends Seeder {
 	/**
 	 * @var StartupRepository
 	 */
@@ -15,8 +14,7 @@ class ProjectTableSeeder extends Seeder
 	/**
 	 * @param StartupRepository $repository
 	 */
-	function __construct(StartupRepository $repository)
-	{
+	function __construct(StartupRepository $repository) {
 		$this->repository = $repository;
 	}
 
@@ -25,8 +23,7 @@ class ProjectTableSeeder extends Seeder
 	 *
 	 * @return void
 	 */
-	public function run()
-	{
+	public function run() {
 		$faker = Faker\Factory::create();
 		$slugify = Slugify::create();
 		$users = User::all();

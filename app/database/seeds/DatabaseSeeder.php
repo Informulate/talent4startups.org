@@ -7,8 +7,7 @@ class DatabaseSeeder extends Seeder {
 	 *
 	 * @return void
 	 */
-	public function run()
-	{
+	public function run() {
 		if (App::environment() === 'production') {
 			exit('I just stopped you getting fired. Love Phil');
 		}
@@ -18,22 +17,27 @@ class DatabaseSeeder extends Seeder {
 		$tables = [
 			'users',
 			'profiles',
-			'projects',
-			'project_user',
-			'project_tag',
-			'tags'
+			'profile_tag',
+			'startups',
+			'startup_user',
+			'startup_tag',
+			'tags',
+			'stages',
+			'skills',
+			'skill_startup',
+			'password_reminders',
 		];
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-		foreach($tables as $table) {
+		foreach ($tables as $table) {
 			DB::table($table)->truncate();
 		}
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 		$this->call('UserTableSeeder');
-		$this->call('ProjectTableSeeder');
+		$this->call('StartupTableSeeder');
 	}
 
 }
