@@ -1,49 +1,73 @@
-<?php 
-class PasswordController extends BaseController {
- 
-  public function remind()
-  {
-    return View::make('password.remind');
-  }
+<?php use Informulate\Users\User;
 
-  public function request()
+class PasswordController extends BaseController
+{
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function remind()
 	{
-	  $credentials = array('email' => Input::get('email'),'password' => Input::get('password')); 
-		//$response = Password::remind($credentials);
-		 $response = Password::remind($credentials, function($message) {
-	        $message->subject('Reset your password (Talent4startups).');
-	    });
-		if($response=='reminders.user')	{
+		return View::make('password.remind');
+	}
+
+	/**
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+	 */
+	public function request()
+	{
+		$credentials = Input::only(
+			'email',
+			'password'
+		);
+
+		$response = Password::remind($credentials, function ($message) {
+			$message->subject('Reset your password (Talent4startups).');
+		});
+
+		if ($response == 'reminders.user') {
 			return Redirect::back()->with('error', 'Please enter valid email !');
 		}
-	   Flash::message('Reset password link has been sent to your email.');
-	   return View::make('password.remind');
+
+		Flash::message('Reset password link has been sent to your email.');
+		return View::make('password.remind');
 	}
+
+	/**
+	 * @param $token
+	 * @return $this
+	 */
 	public function reset($token)
 	{
-	  return View::make('password.reset')->with('token', $token);
+		return View::make('password.reset')->with('token', $token);
 	}
+
+	/**
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function update()
 	{
-		 $credentials = Input::only(
-			'email', 'password', 'password_confirmation', 'token'
+		$credentials = Input::only(
+			'email',
+			'password',
+			'password_confirmation',
+			'token'
 		);
-		$response = Password::reset($credentials, function($user, $password)
-		{
-		//	$user->password = Hash::make($password);
-			$user->password = $password ;
+
+		$response = Password::reset($credentials, function (User $user, $password) {
+			$user->password = $password;
 			$user->save();
-		});			 
-		switch ($response)
-		{
+		});
+
+		switch ($response) {
 			case Password::INVALID_PASSWORD:
 			case Password::INVALID_TOKEN:
 			case Password::INVALID_USER:
 				return Redirect::back()->with('error', Lang::get($response));
-
+				break;
 			case Password::PASSWORD_RESET:
-				return Redirect::to('/');
+				return Redirect::home();
+				break;
 		}
 	}
 }
-?>

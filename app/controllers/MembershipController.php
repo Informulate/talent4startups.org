@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Redirect;
-use Informulate\Projects\UpdateProjectMembershipCommand;
-use Informulate\Projects\CancelProjectMembershipRequestCommand;
-use Informulate\Projects\Project;
+use Informulate\Startups\UpdateStartupMembershipCommand;
+use Informulate\Startups\CancelStartupMembershipRequestCommand;
+use Informulate\Startups\Startup;
 use Informulate\Core\CommandBus;
-use Informulate\Projects\RequestProjectMembershipCommand;
+use Informulate\Startups\RequestStartupMembershipCommand;
 use Informulate\Users\User;
 
 class MembershipController extends \BaseController {
@@ -22,57 +22,57 @@ class MembershipController extends \BaseController {
 
 	/**
 	 * Creates a new membership request for the current logged on user
-	 * Get /projects/{id}/membership
+	 * Get /startups/{id}/membership
 	 *
-	 * @param $project
+	 * @param $startup
 	 * @return Response
 	 */
-	public function request($project)
+	public function request($startup)
 	{
-		/* @var $project \Informulate\Projects\Project */
-		$project = Project::where('url', '=', $project)->firstOrFail();
+		/* @var $startup \Informulate\Startups\Startup */
+		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		$this->execute(new RequestProjectMembershipCommand(Auth::user(), $project));
+		$this->execute(new RequestStartupMembershipCommand(Auth::user(), $startup));
 
-		return Redirect::route('projects.show', ['url' => $project->url]);
+		return Redirect::route('startups.show', ['url' => $startup->url]);
 	}
 
 	/**
-	 * Approves project membership for the specified user
-	 * Get /projects/{projectUrl}/membership/{userId}/approve
+	 * Approves startup membership for the specified user
+	 * Get /startups/{startupUrl}/membership/{userId}/approve
 	 *
-	 * @param $project
+	 * @param $startup
 	 * @param $user
 	 * @param $action
 	 * @return Response
 	 */
-	public function update($project, $user, $action)
+	public function update($startup, $user, $action)
 	{
-		$project = Project::where('url', '=', $project)->firstOrFail();
+		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		if ($project->owner == Auth::user()) {
+		if ($startup->owner == Auth::user()) {
 			$user = User::find($user);
-			$this->execute(new UpdateProjectMembershipCommand($user, $project, $action));
+			$this->execute(new UpdateStartupMembershipCommand($user, $startup, $action));
 		}
 
-		return Redirect::route('projects.show', ['url' => $project->url]);
+		return Redirect::route('startups.show', ['url' => $startup->url]);
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /membership/{id}
 	 *
-	 * @param  int  $project
+	 * @param  int  $startup
 	 * @return Response
 	 */
-	public function destroy($project)
+	public function destroy($startup)
 	{
-		/* @var $project \Informulate\Projects\Project */
-		$project = Project::where('url', '=', $project)->firstOrFail();
+		/* @var $startup \Informulate\Startups\Startup */
+		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		$this->execute(new CancelProjectMembershipRequestCommand(Auth::user(), $project));
+		$this->execute(new CancelStartupMembershipRequestCommand(Auth::user(), $startup));
 
-		return Redirect::route('projects.show', ['url' => $project->url]);
+		return Redirect::route('startups.show', ['url' => $startup->url]);
 	}
 
 }

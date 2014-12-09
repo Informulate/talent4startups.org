@@ -2,8 +2,8 @@
 
 use Laracasts\Validation\FormValidator;
 
-class ProfileForm extends FormValidator {
-
+class ProfileForm extends FormValidator
+{
 	/**
 	 * Validation rules for the registration form
 	 *
@@ -12,6 +12,6 @@ class ProfileForm extends FormValidator {
 	protected $rules = [
 		'first_name' => 'required',
 		'last_name' => 'required'
-		,'skills' => 'required'
+		, 'skills' => 'required'
 	];
 }

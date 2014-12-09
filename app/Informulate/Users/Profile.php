@@ -1,11 +1,10 @@
 <?php namespace Informulate\Users;
 
-
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
-class Profile extends Eloquent {
-
+class Profile extends Eloquent
+{
 	use EventGenerator;
 
 	/**
@@ -13,7 +12,7 @@ class Profile extends Eloquent {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'active','user_type', 'agerange','location','workexperience','about','describe','another_skill','facebook','linkedins','twitter','meetup','image','active'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'skill', 'facebook', 'linked_in', 'twitter', 'meetup', 'published'];
 
 	/**
 	 * The database table used by the model.
@@ -36,11 +35,11 @@ class Profile extends Eloquent {
 	 * Update a user's profile
 	 *
 	 * @param User $user
-	 * @param $profileInfo
+	 * @param $attributes
 	 *
 	 * @return static
 	 */
-	public static function updateProfile(User $user, $profileInfo)
+	public static function updateProfile(User $user, array $attributes)
 	{
 		$profile = $user->profile;
 
@@ -48,36 +47,24 @@ class Profile extends Eloquent {
 			$profile = new static();
 		}
 
-		$profile->first_name = $profileInfo['first_name'];
-		$profile->last_name = $profileInfo['last_name'];
-		$profile->location = $profileInfo['location'];
-		$profile->agerange = $profileInfo['agerange'];
-		$profile->describe = $profileInfo['describe'];
-		$profile->workexperience = $profileInfo['workexperience'];
-		$profile->about = $profileInfo['about'];
-		$profile->facebook = $profileInfo['facebook'];
-		$profile->linkedins = $profileInfo['linkedins'];
-		$profile->twitter = $profileInfo['twitter'];
-		$profile->meetup = $profileInfo['meetup'];
-		$profile->active = array_key_exists('active', $profileInfo) ?true: false;
-
-		//upload profile picture, if your has selected
-		$fileName = '';
-
-		if (isset($profileInfo['image'])) {
-			$targetPath = storage_path() . '/images/';
-			$fileName = str_random(10) . '.' . $profileInfo['image']->getClientOriginalName();
-			$profileInfo['image']->move($targetPath, $fileName);
-		}
-
-		$profile->image = $fileName;
-
-		// if we don't have a user type, assume is a talent that failed to create their profile.
-		if (is_null($profile->user_type)) {
-			$profile->user_type = 'talent';
-		}
-
+		$profile->first_name = $attributes['first_name'];
+		$profile->last_name = $attributes['last_name'];
+		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
+		$profile->skill = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
+		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
+		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
+		$profile->linked_in = array_key_exists('linked_in', $attributes) ? $attributes['linked_in'] : '';
+		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
+		$profile->meetup = array_key_exists('meetup', $attributes) ? $attributes['meetup'] : '';
+		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
+
+		if (array_key_exists('skills', $attributes)) {
+			// We need to save the profile before we can attach tags to it.
+			$profile->save();
+			$profile->tags()->detach();// remove all skills of project
+			$profile->tags()->attach($attributes['skills']);
+		}
 
 		return $profile;
 	}
@@ -89,5 +76,4 @@ class Profile extends Eloquent {
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');
 	}
-
 }

@@ -18,8 +18,8 @@ Route::post('register', [
 	'uses' => 'RegistrationController@store'
 ]);
 
-Route::get('register/linkedin', [
-	'as' => 'register_linkedin',
+Route::get('register/linked_in', [
+	'as' => 'register_linked_in',
 	'uses' => 'RegistrationController@registerWithLinkedin'
 ]);
 
@@ -36,9 +36,9 @@ Route::post('login', [
 	'uses' => 'SessionsController@store'
 ]);
 
-Route::get('login/linkedin', [
-	'as' => 'login_linkedin',
-	'uses' => 'SessionsController@loginWithLinkedin'
+Route::get('login/linkedIn', [
+	'as' => 'login_linked_in',
+	'uses' => 'SessionsController@loginWithLinkedIn'
 ]);
 
 Route::get('logout', [
@@ -46,26 +46,25 @@ Route::get('logout', [
 	'uses' => 'SessionsController@destroy'
 ]);
 
-/**
- * Projects!
- */
-Route::resource('projects', 'ProjectController');
-
-Route::post('project/findProjects', [
-	'as' => 'project_find',
-	'uses' => 'ProjectController@findProjects'
+Route::get('session/type', [
+	'as' => 'store_type_path',
+	'uses' => 'SessionsController@storeUserType'
 ]);
 
-Route::get('projects/{id}/membership', [
-	'as' => 'project_membership_request',
+/**
+ * Startups!
+ */
+Route::resource('startups', 'StartupController');
+Route::get('startups/{id}/membership', [
+	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
 ]);
-Route::get('projects/{project}/membership/{user}/{action}', [
-	'as' => 'project_membership_update',
+Route::get('startups/{startup}/membership/{user}/{action}', [
+	'as' => 'startup_membership_update',
 	'uses' => 'MembershipController@update'
 ]);
-Route::get('projects/{id}/membership/cancel', [
-	'as' => 'project_membership_request_cancel',
+Route::get('startups/{id}/membership/cancel', [
+	'as' => 'startup_membership_request_cancel',
 	'uses' => 'MembershipController@destroy'
 ]);
 
@@ -73,11 +72,6 @@ Route::get('projects/{id}/membership/cancel', [
  * Talents!
  */
 Route::resource('talents', 'TalentController');
-
-Route::post('talent/findTalents', [
-	'as' => 'talent_find',
-	'uses' => 'TalentController@findTalents'
-]);
 /**
  * Profile!
  */

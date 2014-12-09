@@ -29,7 +29,7 @@ class FunctionalHelper extends \Codeception\Module
 		$I = $this->getModule('Laravel4');
 		$I->fillField('name', $name);
 		$I->fillField('description', $description);
-		$I->click('#submit-project');
+		$I->click('#submit-startup');
 	}
 
 	public function have($model, $overrides = [])

@@ -5,7 +5,7 @@ Informulate\Users\User:
     created_at: $date
     updated_at: $date
 
-Informulate\Projects\Project:
+Informulate\Startups\Startup:
     user_id:
         type: Informulate\Users\User
     name: $string

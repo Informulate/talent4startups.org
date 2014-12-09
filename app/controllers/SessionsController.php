@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\SignInForm;
+use Informulate\Registration\Commands\RegisterUserCommand;
+use Informulate\Users\Commands\UpdateProfileCommand;
 use Informulate\Users\User;
-use Informulate\Users\Profile;
-use Informulate\Tags\Tag;
 
-class SessionsController extends BaseController {
+class SessionsController extends BaseController
+{
 
 	/**
 	 * @var SignInForm
@@ -36,9 +37,9 @@ class SessionsController extends BaseController {
 		return View::make('sessions.create');
 	}
 
-	 
-	 /**
-	 * Save the user.
+
+	/**
+	 * Login the user
 	 */
 	public function store()
 	{
@@ -47,72 +48,100 @@ class SessionsController extends BaseController {
 
 		if (Auth::attempt($formData)) {
 			Flash::message('Welcome back to Talent4Startups!');
-		    $profile = Auth::user()->profile;
-			if(is_object($profile) && sizeof($profile)>0){
-			$tags = Auth::user()->profile->tags;
-			if(!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
-			//redirect to home page if profile has First Name, Last Name and Skills
-			return Redirect::intended('');
+
+			// If the user is missing it's profile, force them to update their details
+			$user = Auth::user();
+			if (is_null($user->profile) or is_null($user->profile->first_name)) {
+				return Redirect::to('profile');
 			}
-			}
-			// if profile is missing, redirect to edit profile page
-			return Redirect::intended('profile');
+
+			return Redirect::intended('/');
 		}
-		//if wrong email/password entered
-		return Redirect::to('login')->with('email',$formData['email'])->with('error','Wrong email/password entered.');
+
+		return Redirect::to('login')->with('email', $formData['email'])->with('error', 'Wrong email/password entered.');
 	}
 
-	/*
-	* Login with linked in
-	*/
-	public function loginWithLinkedin(){
+	/**
+	 * Login with linked in
+	 *
+	 * @return Response
+	 */
+	public function loginWithLinkedIn()
+	{
 		// get data from input
-        $code = Input::get( 'code' );
-        $linkedinService = OAuth::consumer( 'Linkedin' );
-        if ( !empty( $code ) ) {
-            // This was a callback request from linked-in, get the token
-            $token = $linkedinService->requestAccessToken( $code );
-            // Send a request with it. Please note that XML is the default format.
-			$result = json_decode($linkedinService->request('/people/~?format=json'), true);
-			$email  = json_decode($linkedinService->request('/people/~/email-address?format=json'), true);
+		$code = Input::get('code');
+		$linkedInService = OAuth::consumer('LinkedIn');
 
-			$user = User::where('email','=',$email)->first();
+		if (!empty($code)) {
+			$token = $linkedInService->requestAccessToken($code);
+			$result = json_decode($linkedInService->request('/people/~?format=json'), true);
+			$email = json_decode($linkedInService->request('/people/~/email-address?format=json'), true);
+			$user = User::where('email', '=', $email)->first();
 
-			if(sizeof($user)==0){
-			// if not a registered user, insert new user as talent
-			$user = new User;
-			$user->email = $email;
-			$user->save();
+			if (is_null($user) and $token) {
+				// We should have the type stored on the session if for whatever reason that fails, default to talents then.
+				$user = $this->execute(
+					new RegisterUserCommand($email, $email, $code, $type = Session::get('type') ?: 'talent')
+				);
 
-			//create user profile and store user_type in profile table
-			$profile = new Profile(array('user_type'=>'talent','active'=>1, 'first_name'=>$result['firstName'], 'last_name'=>$result['lastName']));
-			$profile = $user->profile()->save($profile);
+				$this->execute(
+					new UpdateProfileCommand($user, [
+						'first_name' => $result['firstName'],
+						'last_name' => $result['lastName'],
+						'linked_in' => $result['siteStandardProfileRequest']['url'],
+						'published' => true
+					])
+				);
+
+				Flash::message('Welcome to Talent4Startups');
 			}
-			Auth::login($user);
-			Flash::message('Welcome to Talent4Startups');
-			$profile = $user->profile;
-			if(is_object($profile) && sizeof($profile)>0){
-			$tags = $user->profile->tags;
-			if(!empty($profile->first_name) && !empty($profile->last_name) && (is_object($tags) && sizeof($tags)>0)){
-			//redirect to home page if profile has First Name, Last Name and Skills
-			return Redirect::intended('');
-			}
-			}
-			return Redirect::to('profile');
 
-        } // if not ask for permission first
-        else {
-            // get linkedinService authorization
-            $url = $linkedinService->getAuthorizationUri(array('state'=>'DCEEFWF45453sdffef424'));
-            // return to linkedin login url
-            return Redirect::to( (string)$url );
-        }
+			if ($token) {
+				Auth::login($user);
+
+				if (is_null($user->profile)) {
+					return Redirect::route('edit_profile');
+				}
+
+				return Redirect::intended('/');
+			}
+		}
+
+		$type = Input::get('type');
+
+		if (is_null($type)) {
+			return View::make('registration.select_type');
+		}
+
+		Session::put('type', $type);
+
+		$url = $linkedInService->getAuthorizationUri(['state' => 'DCEEFWF45453sdffef424']); // TODO: What is this?
+
+		return Redirect::to((string)$url);
 	}
 
+	/**
+	 * Log the user out and redirect to the home page
+	 *
+	 * @return Redirect
+	 */
 	public function destroy()
 	{
 		Auth::logout();
 		Flash::message('You have now been logged out');
 		return Redirect::home();
+	}
+
+	/**
+	 * Store the selected user type on the session
+	 *
+	 * Since we need to know the user type, and users might register with a social network, store the selected user type on the session
+	 * This is most likely called via an ajax get request
+	 *
+	 * @return null
+	 */
+	public function storeUserType()
+	{
+		Session::put('type', Input::get('type'));
 	}
 }

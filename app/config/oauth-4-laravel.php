@@ -1,39 +1,31 @@
 <?php
-return array( 
 
-    /*
-    |--------------------------------------------------------------------------
-    | oAuth Config
-    |--------------------------------------------------------------------------
-    */
+return [
 
-    /**
-     * Storage
-     */
-    'storage' => 'Session', 
+	/*
+	|--------------------------------------------------------------------------
+	| oAuth Config
+	|--------------------------------------------------------------------------
+	*/
 
-    /**
-     * Consumers
-     */
-    'consumers' => array(
+	/**
+	 * Storage
+	 */
+	'storage' => 'Session',
 
-        /**
-         * Facebook
-         */
-        'Facebook' => array(
-            'client_id'     => '',
-            'client_secret' => '',
-            'scope'         => array(),
-        ),  
-		
+	/**
+	 * Consumers
+	 */
+	'consumers' => [
+
 		/**
-         * Linkedin
-         */		
-		'Linkedin' => array(
-		'client_id'     => getenv('CLIENT_ID'),
-		'client_secret' => getenv('CLIENT_SECRET'),
-		),  		
+		 * linked_in
+		 */
+		'linked_in' => [
+			'client_id' => getenv('LINKED_IN_CLIENT_ID'),
+			'client_secret' => getenv('LINKED_IN_CLIENT_SECRET'),
+		],
 
-    )
+	]
 
-);
+];

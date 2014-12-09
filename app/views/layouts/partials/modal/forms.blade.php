@@ -19,8 +19,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
-								<button id="register-linkedin" class="btn btn-primary">LinkedIn</button><br/>
-								<a id="register-email" style="cursor:pointer;">Or sign up with email instead</a>
+								<a id="register-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Linked <i class="social-icon social linked_in white"></i></a><br/>
+								<a id="register-email" href="{{ route('register_path') }}">Or sign up with email instead</a>
 							</div>
 						</div>
 					</div>
@@ -51,66 +51,56 @@
 		$('#startup').on('click', function() {
 			$('#talent').removeClass('text-primary');
 			$(this).addClass('text-primary');
+			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
+			$.get("{{ route("store_type_path", ['type' => 'startup']) }}");
 		});
 
 		$('#talent').on('click', function() {
 			$('#startup').removeClass('text-primary');
 			$(this).addClass('text-primary');
+			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
+			$.get("{{ route("store_type_path", ['type' => 'talent']) }}");
 		});
 
 		// Register via email
 		$('#register-email').on('click', function(event) {
-			var $error = validateRegistration();
-			if($error==0){
-			//No errors, form is ready to submit
-
-			var $userType = getUserType();
-
-			$('<form method="POST" action="{{ route("register_path") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
-			}
+			$(this).attr('href', $(this).attr('href') + '?type=' + getType());
+			validateRegistration(event);
 		});
 
 		// Register via Linekdin
-		$('#register-linkedin').on('click', function(event) {
-			var $error = validateRegistration();
-			if($error==0){
-			//No errors, form is ready to submit
-
-			var $userType = getUserType();
-
-			$('<form method="GET" action="{{ route("register_linkedin") }}"><input type="hidden" name="user_type" id="user_type" value="'+$userType+'"></form>').appendTo('body').submit();
-			}
+		$('#register-linked_in').on('click', function(event) {
+			validateRegistration(event);
 		});
 
-		/*
-		* validate form before submit
-		*/
-		function validateRegistration(){
-		var $error=0;
+		/**
+		 * validate form before submit
+		 */
+		function validateRegistration(event) {
+			var errors = null;
+
 			if (false === $("#agree").is(':checked')) {
-				$error++;
+				errors++;
 				event.preventDefault();
 				alert('You must agree to the Terms of Use before getting started!');
 			}
 
 			if (false === $('#talent').hasClass('text-primary') && false === $('#startup').hasClass('text-primary')) {
-				$error++;
+				errors++;
 				event.preventDefault();
 				alert('Are you a talent or a startup? Click the appropriate icon above!');
 			}
-			return $error;
+
+			return errors;
 		}
 
-		/*
-		* Identify user is talent or startup
-		*/
-		function getUserType(){
-		if($('#talent').hasClass('text-primary')){
-				var $userType = 'talent';
-			}else{
-				var $userType = 'startup';
-			}
-			return $userType;
+		/**
+		 * Identify user is talent or startup
+		 *
+		 * @returns {string}
+		 */
+		function getType() {
+			return $('#talent').hasClass('text-primary') ? 'talent' : 'startup';
 		}
 	});
 </script>

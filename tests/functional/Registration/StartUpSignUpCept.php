@@ -13,7 +13,7 @@ $I->amOnPage('/register');
 
 $I->click('Sign Up As a StartUp');
 
-$I->amOnPage('/register?userType=startup');
+$I->amOnPage('/register?type=startup');
 
 $I->fillField('Username:', 'JohnDoe');
 $I->fillField('Email:', 'john@example.com');

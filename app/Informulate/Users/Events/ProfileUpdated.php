@@ -2,8 +2,8 @@
 
 use Informulate\Users\User;
 
-class ProfileUpdated {
-
+class ProfileUpdated
+{
 	/**
 	 * @var User
 	 */
@@ -16,5 +16,4 @@ class ProfileUpdated {
 	{
 		$this->user = $user;
 	}
-
 }

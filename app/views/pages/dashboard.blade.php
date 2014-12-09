@@ -42,22 +42,22 @@
 			@if(count($contributions) > 0)
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Projects you contribute to</h3>
+						<h3 class="panel-title">Startups you contribute to</h3>
 					</div>
 					<div class="list-group">
-						@foreach($contributions as $project)
-							<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
+						@foreach($contributions as $startup)
+							<a href="{{ route('startups.show', $startup->url) }}" class="list-group-item">{{ $startup->name }}</a>
 						@endforeach
 					</div>
 				</div>
 			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Your projects <a id="new-project-panel-btn" href="{{ route('projects.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons plus"></i> New project</a></h3>
+					<h3 class="panel-title">Your startups <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons plus"></i> New startup</a></h3>
 				</div>
 				<div class="list-group">
-					@foreach($myProjects as $project)
-					<a href="{{ route('projects.show', $project->url) }}" class="list-group-item">{{ $project->name }}</a>
+					@foreach($myStartups as $startup)
+					<a href="{{ route('startups.show', $startup->url) }}" class="list-group-item">{{ $startup->name }}</a>
 					@endforeach
 				</div>
 			</div>
