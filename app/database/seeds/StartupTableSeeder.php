@@ -37,6 +37,7 @@ class StartupTableSeeder extends Seeder {
 					'description' => $faker->text,
 					'url' => $slugify->slugify($name),
 					'user_id' => $user->id,
+					'published' => true,
 				]);
 
 				$this->repository->save($startup);
