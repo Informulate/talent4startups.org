@@ -1,5 +1,7 @@
 <?php
 
+use Informulate\Skills\Skill;
+use Informulate\Tags\Tag;
 use Informulate\Users\Profile;
 use Informulate\Users\ProfileRepository;
 use Informulate\Users\User;
@@ -40,12 +42,15 @@ class UserTableSeeder extends Seeder
 			$this->userRepository->save($user);
 		}
 
+		$tags = Tag::all();
+		$skills = Skill::all();
+
 		foreach (User::all() as $currentUser) {
 			$profileData = [
 				'first_name' => $faker->firstName,
 				'last_name' => $faker->lastName,
 				'location' => $faker->city,
-				'describe' => $faker->numberBetween(1, 2),
+				'describe' => $faker->numberBetween(1, count($skills) - 1),
 				'about' => $faker->sentence(),
 				'facebook' => $faker->userName,
 				'linked_in' => $faker->userName,
@@ -54,9 +59,19 @@ class UserTableSeeder extends Seeder
 				'published' => $faker->boolean()
 			];
 
+			$skills = [];
+			foreach (range(1, rand(2, 4)) as $i) {
+				$id = rand(1, (count($tags) - 1));
+				$skills[] = $id;
+			}
+
+			$profileData['skills'] = $skills;
+
 			$profile = Profile::updateProfile($currentUser, $profileData);
 
 			$this->profileRepository->save($profile);
+
+
 		}
 	}
 }

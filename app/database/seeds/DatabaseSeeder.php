@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run() {
 		if (App::environment() === 'production') {
-			exit('I just stopped you getting fired. Love Phil');
+			exit('I just stopped you getting fired. Love Jesus');
 		}
 
 		Eloquent::unguard();
@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder {
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
+		$this->call('TagTableSeeder');
+		$this->call('SkillTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('StartupTableSeeder');
 	}

@@ -10,7 +10,7 @@ class Tag extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['tag_id'];
+	protected $fillable = ['name'];
 
 
 	/**

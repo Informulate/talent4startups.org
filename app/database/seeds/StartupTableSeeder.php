@@ -1,8 +1,10 @@
 <?php
 
 use Cocur\Slugify\Slugify;
+use Informulate\Skills\Skill;
 use Informulate\Startups\Startup;
 use Informulate\Startups\StartupRepository;
+use Informulate\Tags\Tag;
 use Informulate\Users\User;
 
 class StartupTableSeeder extends Seeder {
@@ -27,6 +29,8 @@ class StartupTableSeeder extends Seeder {
 		$faker = Faker\Factory::create();
 		$slugify = Slugify::create();
 		$users = User::all();
+		$tags = Tag::all();
+		$skills = Skill::all();
 
 		foreach ($users as $user) {
 			foreach (range(1, rand(2, 4)) as $i) {
@@ -41,6 +45,21 @@ class StartupTableSeeder extends Seeder {
 				]);
 
 				$this->repository->save($startup);
+
+				$startupTags = [];
+				foreach (range(1, rand(2, 4)) as $i) {
+					$id = rand(1, (count($tags) - 1));
+					$startupTags[] = $id;
+				}
+
+				$needs = [];
+				foreach (range(1, rand(2, 4)) as $i) {
+					$id = rand(1, (count($skills) - 1));
+					$needs[] = $id;
+				}
+
+				$startup->needs()->attach($needs);
+				$startup->tags()->attach($startupTags);
 
 				foreach (range(1, rand(2, 6)) as $i) {
 					$id = rand(1, (count($users) - 1));
