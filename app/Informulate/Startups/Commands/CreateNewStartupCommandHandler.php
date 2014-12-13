@@ -38,7 +38,7 @@ class CreateNewStartupCommandHandler implements CommandHandler
 				'name' => $command->startup->name,
 				'description' => $command->startup->description,
 				'url' => $slugify->slugify($command->startup->name),
-				'stage_id' => $command->startup->stage_id,
+//				'stage_id' => $command->startup->stage_id,
 				'video' => $command->startup->video,
 				'published' => true
 			]
@@ -47,11 +47,11 @@ class CreateNewStartupCommandHandler implements CommandHandler
 		$this->repository->save($startup);
 
 		if (isset($command->startup->tags)) {
-			$startup->tags()->attach($command->startup->tags);
+			$this->repository->updateTags($startup, $command->startup->tags);
 		}
 
 		if (isset($command->startup->needs)) {
-			$startup->needs()->attach($command->startup->needs);
+			$this->repository->updateNeeds($startup, $command->startup->needs);
 		}
 
 		$this->dispatchEventsFor($startup);

@@ -19,13 +19,13 @@
 </div>
 
 <div class="form-group">
-	{{ Form::label('tags[]', 'Tags:') }}
-	{{ Form::select('tags[]', $tags, isset($startup) ? $startup->tags->lists('id', 'name') : null, ['multiple']); }}
+	{{ Form::label('tags', 'Tags:') }}
+	{{ Form::text('tags', is_object( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
-	{{ Form::label('needs[]', 'Startup Needs:') }}
-	{{ Form::select('needs[]', $needs, isset($startup) ? $startup->needs->lists('id', 'name') : null, ['multiple']); }}
+	{{ Form::label('needs', 'Startup Needs:') }}
+	{{ Form::text('needs', is_object( $startup ) ? $startup->needs->implode('name', ',') : null, ['id' => 'needs', 'class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
