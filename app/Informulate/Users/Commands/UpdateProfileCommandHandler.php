@@ -7,7 +7,6 @@ use Laracasts\Commander\Events\DispatchableTrait;
 
 class UpdateProfileCommandHandler implements CommandHandler
 {
-
 	use DispatchableTrait;
 
 	/**
@@ -36,6 +35,11 @@ class UpdateProfileCommandHandler implements CommandHandler
 		);
 
 		$this->repository->save($profile);
+
+		if (array_key_exists('skills', $command->profileInfo)) {
+			$this->repository->updateSkills($profile, $command->profileInfo['skills']);
+		}
+
 		$this->dispatchEventsFor($profile);
 
 		return $profile;

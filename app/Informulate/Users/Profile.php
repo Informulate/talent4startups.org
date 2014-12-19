@@ -59,13 +59,6 @@ class Profile extends Eloquent
 		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
 
-		if (array_key_exists('skills', $attributes)) {
-			// We need to save the profile before we can attach tags to it.
-			$profile->save();
-			$profile->tags()->detach();// remove all skills of project
-			$profile->tags()->attach($attributes['skills']);
-		}
-
 		return $profile;
 	}
 

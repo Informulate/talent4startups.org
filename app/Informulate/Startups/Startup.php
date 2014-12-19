@@ -40,23 +40,9 @@ class Startup extends Eloquent
 		$startup->name = $attributes['name'];
 		$startup->description = $attributes['description'];
 		$startup->url = $slugify->slugify($attributes['name']);
-		$startup->stage_id = $attributes['stage_id'];
+//		$startup->stage_id = $attributes['stage_id'];
 		$startup->video = $attributes['video'];
 		$startup->published = true;
-
-		if (isset($attributes['tags'])) {
-			// We need to save the startup before we can attach tags to it.
-			$startup->save();
-			$startup->tags()->detach();
-			$startup->tags()->attach($attributes['tags']);
-		}
-
-		if (isset($attributes['needs'])) {
-			// We need to save the startup before we can attach needs to it.
-			$startup->save();
-			$startup->needs()->detach();
-			$startup->needs()->attach($attributes['needs']);
-		}
 
 		return $startup;
 	}

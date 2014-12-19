@@ -12,3 +12,9 @@ Informulate\Startups\Startup:
     description: $text
     created_at: $date
     updated_at: $date
+
+Informulate\Skills\Skill:
+    id: $integer
+    name: $string
+    created_at: $date
+    updated_at: $date

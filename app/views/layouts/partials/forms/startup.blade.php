@@ -20,12 +20,12 @@
 
 <div class="form-group">
 	{{ Form::label('tags', 'Tags:') }}
-	{{ Form::text('tags', is_object( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
+	{{ Form::text('tags', isset( $startup ) and is_object( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
 	{{ Form::label('needs', 'Startup Needs:') }}
-	{{ Form::text('needs', is_object( $startup ) ? $startup->needs->implode('name', ',') : null, ['id' => 'needs', 'class' => 'form-control']) }}
+	{{ Form::text('needs', isset( $startup ) and is_object( $startup ) ? $startup->needs->implode('name', ',') : null, ['id' => 'needs', 'class' => 'form-control']) }}
 </div>
 
 <div class="form-group">

@@ -2,6 +2,7 @@
 $I = new FunctionalTester($scenario);
 $I->am('a guest');
 $I->wantTo('sign up for a Talent4Startups account');
+$I->haveSkills(); // Pre-populate the skills for the best describe option
 
 $I->amOnPage('/');
 $I->click('Sign Up');
@@ -32,7 +33,7 @@ $I->seeRecord('users', [
 $I->fillField('First Name:', 'Jane');
 $I->fillField('Last Name:', 'Doe');
 $I->selectOption('#describe', '1');
-$I->selectOption('skills[]', '1');
+$I->fillField('skills', 'php,laravel,doctrine');
 $I->fillField('about', 'This is my about summary');
 $I->click('#submit-profile');
 

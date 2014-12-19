@@ -37,6 +37,14 @@ class UpdateStartupCommandHandler implements CommandHandler
 
 		$this->repository->save($startup);
 
+		if (isset($command->startup->tags)) {
+			$this->repository->updateTags($startup, $command->startup->tags);
+		}
+
+		if (isset($command->startup->needs)) {
+			$this->repository->updateNeeds($startup, $command->startup->needs);
+		}
+
 		$this->dispatchEventsFor($startup);
 
 		return $startup;
