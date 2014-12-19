@@ -1,6 +1,7 @@
 <?php
 namespace Codeception\Module;
 
+use Informulate\Skills\Skill;
 use Laracasts\TestDummy\Factory as TestDummy;
 
 // here you can define custom actions
@@ -44,11 +45,17 @@ class FunctionalHelper extends \Codeception\Module
 
 	public function haveSkills()
 	{
-		$id = 1;
-		$name = 'developer';
-		$overrides = compact('name', 'id');
+		$skills = Skill::find(1);
 
-		return $this->have('Informulate\Skills\Skill', $overrides);
+		if (! $skills) {
+			$id = 1;
+			$name = 'developer';
+			$overrides = compact('name', 'id');
+
+			return $this->have('Informulate\Skills\Skill', $overrides);
+		}
+
+		return $skills;
 	}
 
 }
