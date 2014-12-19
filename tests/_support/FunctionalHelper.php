@@ -42,4 +42,13 @@ class FunctionalHelper extends \Codeception\Module
 		return $this->have('Informulate\Users\User', $overrides);
 	}
 
+	public function haveSkills()
+	{
+		$id = 1;
+		$name = 'developer';
+		$overrides = compact('name', 'id');
+
+		return $this->have('Informulate\Skills\Skill', $overrides);
+	}
+
 }

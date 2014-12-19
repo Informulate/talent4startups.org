@@ -9,7 +9,7 @@ class Skill extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'skill_id'];
+	protected $fillable = ['name'];
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

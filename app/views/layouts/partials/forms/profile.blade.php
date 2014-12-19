@@ -1,5 +1,4 @@
 {{ Form::open(['route' => 'edit_profile','files'=>'true','name'=>'profile-form','id'=>'profile-form']) }}
-
 	<div class="form-group">
 		{{ Form::label('first_name', 'First Name:') }}
 		{{ Form::text('first_name',  is_object( $user->profile ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
@@ -18,9 +17,8 @@
 		 {{ Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null); }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('skills[]', 'I\'m skilled in :') }}
-		{{ Form::select('skills[]', $skills, is_object( $user->profile ) ? (is_object( $user->profile->tags ) ? $user->profile->tags->lists('id') : null) : null, array('multiple')); }}
-
+		{{ Form::label('skills', 'I\'m skilled in :') }}
+		{{ Form::text('skills', is_object( $user->profile ) ? $user->profile->tags->implode('name', ',') : null, ['id' => 'skills', 'class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::label('about', 'Summary about who you are :') }}
