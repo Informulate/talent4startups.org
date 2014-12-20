@@ -43,7 +43,9 @@ class UserRepository
 			}
 
 			if ($skill) {
-				$q->where('skill', '=', $skill);
+				$q->whereHas('skill', function ($q) use ($tag, $skill) {
+					$q->where('id', '=', $skill);
+				});
 			}
 		});
 
