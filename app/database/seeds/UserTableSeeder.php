@@ -2,13 +2,16 @@
 
 use Informulate\Skills\Skill;
 use Informulate\Tags\Tag;
-use Informulate\Users\Profile;
+use Informulate\Users\Commands\UpdateProfileCommand;
 use Informulate\Users\ProfileRepository;
 use Informulate\Users\User;
 use Informulate\Users\UserRepository;
+use Informulate\Core\CommandBus;
 
 class UserTableSeeder extends Seeder
 {
+	use CommandBus;
+
 	/**
 	 * @var UserRepository
 	 */
@@ -37,15 +40,13 @@ class UserTableSeeder extends Seeder
 	{
 		$faker = Faker\Factory::create();
 
-		for ($i = 0; $i < 100; $i++) {
-			$user = User::register($faker->userName, $faker->email, 'password', 'talent');
-			$this->userRepository->save($user);
-		}
-
 		$tags = Tag::all();
 		$skills = Skill::all();
 
-		foreach (User::all() as $currentUser) {
+		for ($i = 0; $i < 100; $i++) {
+			$user = User::register($faker->userName, $faker->email, 'password', 'talent');
+			$this->userRepository->save($user);
+
 			$profileData = [
 				'first_name' => $faker->firstName,
 				'last_name' => $faker->lastName,
@@ -59,19 +60,17 @@ class UserTableSeeder extends Seeder
 				'published' => $faker->boolean()
 			];
 
-			$skills = [];
+			$skills = '';
 			foreach (range(1, rand(2, 4)) as $i) {
 				$id = rand(1, (count($tags) - 1));
-				$skills[] = $id;
+				$skills .= $tags[$id]->name . ",";
 			}
 
 			$profileData['skills'] = $skills;
 
-			$profile = Profile::updateProfile($currentUser, $profileData);
-
-			$this->profileRepository->save($profile);
-
-
+			$this->execute(
+				new UpdateProfileCommand($user, $profileData)
+			);
 		}
 	}
 }
