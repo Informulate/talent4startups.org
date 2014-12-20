@@ -30,7 +30,7 @@
 						<p>{{ Str::limit( $startup->description, 50 ) }}</p>
 					</div>
 					<div class="clearfix">
-						@if ($currentUser->username == $user->username)
+						@if ($currentUser and $currentUser->username == $user->username)
 							<p><a href="{{ route('edit_profile') }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
 						@endif
 					</div>
