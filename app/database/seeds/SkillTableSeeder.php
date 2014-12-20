@@ -11,11 +11,11 @@ class SkillTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-		$faker = Faker\Factory::create();
+		$skills = ['Designer', 'Developer', 'Engineer', 'Musician', 'Visual Artist', 'Filmmaker', 'Writer', 'Project Manager', 'Other'];
 
-		for ($i = 0; $i < 100; $i++) {
+		foreach ($skills as $skillName) {
 			$skill = Skill::create([
-				'name' => $faker->domainWord
+				'name' => $skillName
 			]);
 			$skill->save();
 		}

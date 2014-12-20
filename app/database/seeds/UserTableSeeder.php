@@ -44,7 +44,7 @@ class UserTableSeeder extends Seeder
 		$skills = Skill::all();
 
 		for ($i = 0; $i < 100; $i++) {
-			$user = User::register($faker->userName, $faker->email, 'password', 'talent');
+			$user = User::register($faker->unique()->userName, $faker->unique()->email, 'password', 'talent');
 			$this->userRepository->save($user);
 
 			$profileData = [
@@ -60,13 +60,13 @@ class UserTableSeeder extends Seeder
 				'published' => $faker->boolean()
 			];
 
-			$skills = '';
-			foreach (range(1, rand(2, 4)) as $i) {
+			$userSkills = '';
+			foreach (range(1, rand(2, 4)) as $x) {
 				$id = rand(1, (count($tags) - 1));
-				$skills .= $tags[$id]->name . ",";
+				$userSkills .= $tags[$id]->name . ",";
 			}
 
-			$profileData['skills'] = $skills;
+			$profileData['skills'] = $userSkills;
 
 			$this->execute(
 				new UpdateProfileCommand($user, $profileData)
