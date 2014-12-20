@@ -12,7 +12,7 @@ class Profile extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'skill', 'facebook', 'linked_in', 'twitter', 'meetup', 'published'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'linked_in', 'twitter', 'meetup', 'published'];
 
 	/**
 	 * The database table used by the model.
@@ -29,6 +29,14 @@ class Profile extends Eloquent
 	public function user()
 	{
 		return $this->belongsTo('User');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function skill()
+	{
+		return $this->belongsTo('Informulate\Skills\Skill');
 	}
 
 	/**
@@ -50,7 +58,7 @@ class Profile extends Eloquent
 		$profile->first_name = $attributes['first_name'];
 		$profile->last_name = $attributes['last_name'];
 		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
-		$profile->skill = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
+		$profile->skill_id = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
 		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->linked_in = array_key_exists('linked_in', $attributes) ? $attributes['linked_in'] : '';
