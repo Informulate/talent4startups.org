@@ -14,8 +14,9 @@
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons home"></i> Home</a></li>
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons group"></i> Talent</a></li>
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons suitcase"></i> Startups</a></li>
-				<li @if (Request::path() === 'about') class="active" @endif><a href="#about"><i class="glyphicons asterisk"></i> About</a></li>
-				<li @if (Request::path() === 'contact') class="active" @endif><a href="#contact"><i class="glyphicons circle_question_mark"></i> FAQ</a></li>
+				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons asterisk"></i> About</a></li>
+				<li @if (Request::path() === 'contact') class="active" @endif><a href="/contact"><i class="glyphicons circle_question_mark"></i> Contact</a></li>
+				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons circle_info"></i> FAQ</a></li>
 				@if ($currentUser)
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ $currentUser->email }} <span class="caret"></span></a>

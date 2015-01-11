@@ -124,3 +124,28 @@ Route::post('password/reset/{token}', array(
   'uses' => 'PasswordController@update',
   'as' => 'password.update'
 ));
+
+
+/**
+ * Static Pages
+ */
+Route::get('about', array(
+    'uses' => 'StaticController@about',
+    'as' => 'about'
+));
+Route::get('contact', array(
+    'uses' => 'StaticController@contact',
+    'as' => 'contact'
+));
+Route::get('faq', array(
+    'uses' => 'StaticController@faq',
+    'as' => 'faq'
+));
+Route::get('sponsors', array(
+    'uses' => 'StaticController@sponsors',
+    'as' => 'sponsors'
+));
+Route::get('knowledge-base', array(
+    'uses' => 'StaticController@knowledgebase',
+    'as' => 'knowledgebase'
+));
