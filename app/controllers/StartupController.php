@@ -97,8 +97,8 @@ class StartupController extends BaseController
 	public function show($startup)
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
-		$requests = $startup->members()->where('pending', true)->get();
-		$members = $startup->members()->where('approved', true)->get();
+		$requests = $startup->members()->where('status', '')->get();
+		$members = $startup->members()->where('status', 'approved')->get();
 
 		return View::make('startups.show')->with('startup', $startup)->with('requests', $requests)->with('members', $members);
 	}
