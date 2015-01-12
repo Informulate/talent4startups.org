@@ -73,10 +73,10 @@ class StartupRepository
 	 */
 	public function addMemberRequest(User $user, Startup $startup)
 	{
-		DB::insert('insert into startup_user (startup_id, user_id, pending, created_at, updated_at) values (?, ?, ?, NOW() , NOW())', [
+		DB::insert('insert into startup_user (startup_id, user_id, status, created_at, updated_at) values (?, ?, ?, NOW() , NOW())', [
 			$startup->id,
 			$user->id,
-			true,
+			'pending',
 		]);
 	}
 
@@ -86,7 +86,7 @@ class StartupRepository
 	 */
 	public function approveMemberRequest(User $user, Startup $startup)
 	{
-		DB::update('update startup_user set pending = false, approved = true where startup_id = ? and user_id = ?', [
+		DB::update('update startup_user set status = "approved" where startup_id = ? and user_id = ?', [
 			$startup->id,
 			$user->id
 		]);
@@ -98,7 +98,7 @@ class StartupRepository
 	 */
 	public function rejectMemberRequest(User $user, Startup $startup)
 	{
-		DB::update('update startup_user set pending = false, rejected = true where startup_id = ? and user_id = ?', [
+		DB::update('update startup_user set status = "rejected" where startup_id = ? and user_id = ?', [
 			$startup->id,
 			$user->id
 		]);

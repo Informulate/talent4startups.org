@@ -66,6 +66,9 @@ class StartupTableSeeder extends Seeder {
 
 					if ($startup->owner->id !== $id) {
 						$this->repository->addMemberRequest($users[$id], $startup);
+						if (rand(0,1)) {
+							$this->repository->approveMemberRequest($users[$id], $startup);
+						}
 					}
 				}
 			}
