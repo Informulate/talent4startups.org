@@ -53,7 +53,7 @@
 			@endif
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Your startups <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons plus"></i> New startup</a></h3>
+					<h3 class="panel-title">Your startups <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a></h3>
 				</div>
 				<div class="list-group">
 					@foreach($myStartups as $startup)
