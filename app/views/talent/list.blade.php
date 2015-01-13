@@ -16,7 +16,7 @@
 						<h6><i class="glyphicons google_maps"></i>{{ $talent->profile->location }}</h6>
 						<p>{{ $talent->profile->skill->name }}</p>
 						<p>{{ Str::limit($talent->profile->about, 160) }}</p>
-						<p>
+						<p><i class="glyphicon glyphicon-tags"></i>
 							@foreach($talent->profile->tags as $tag)
 								<span class="badge">{{ $tag->name }}</span>
 							@endforeach

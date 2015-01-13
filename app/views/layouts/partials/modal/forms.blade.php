@@ -19,8 +19,9 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
-								<a id="register-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Linked <i class="social-icon social linked_in white"></i></a><br/>
-								<a id="register-email" href="{{ route('register_path') }}">Or sign up with email instead</a>
+								<a id="register-linked_in" href="{{ route("login_linked_in") }}">Sign up with LinkedIn</a>
+								<br/>
+								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
 							</div>
 						</div>
 					</div>
