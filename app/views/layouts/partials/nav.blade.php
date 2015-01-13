@@ -7,16 +7,17 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="{{ route('home') }}">Talent4Startups</a>
+			<a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/t4s-identity.png') }}" style="width: 75px; height: 75px;" alt=""/></a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons home"></i> Home</a></li>
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons group"></i> Talent</a></li>
-				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons suitcase"></i> Startups</a></li>
+				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons lightbulb"></i> Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="/contact"><i class="glyphicons circle_question_mark"></i> Contact</a></li>
 				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons circle_info"></i> FAQ</a></li>
+				<li><a href="#"><i class="glyphicons book_open"></i> Knowledge Base</a></li>
 				@if ($currentUser)
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ $currentUser->email }} <span class="caret"></span></a>
