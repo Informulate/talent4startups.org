@@ -13,7 +13,7 @@
 					<img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300">
 					<div class="caption">
 						<h3><a href="{{ route('profile_path', $talent->username) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a></h3>
-						<h6><i class="glyphicons google_maps"></i>{{ $talent->profile->location }}</h6>
+						<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $talent->profile->location }}</h6>
 						<p>{{ $talent->profile->skill->name }}</p>
 						<p>{{ Str::limit($talent->profile->about, 160) }}</p>
 						<p><i class="glyphicon glyphicon-tags"></i>
