@@ -129,6 +129,7 @@ return array(
 		"Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider",
 		"Intervention\Image\ImageServiceProvider",
 		'Artdarek\OAuth\OAuthServiceProvider',
+		'Cmgmyr\Messenger\MessengerServiceProvider',
 
 	),
 
