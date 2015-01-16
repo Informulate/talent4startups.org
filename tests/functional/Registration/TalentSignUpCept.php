@@ -8,7 +8,7 @@ $I->amOnPage('/');
 $I->click('Sign Up');
 $I->click('#talent');
 $I->click('#agree');
-$I->click('Or sign up with email instead');
+$I->click('Or Sign up with email instead');
 
 $I->amOnPage('/register');
 
