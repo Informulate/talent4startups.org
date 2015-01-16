@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-	<div class="text-center col-sm-offset-2 col-sm-8" id="signup-tab">
+	<div class="text-center col-sm-offset-2 col-sm-8" id="sign-up-tab">
 		<div class="row">
 			@include('layouts.partials.type')
 		</div>

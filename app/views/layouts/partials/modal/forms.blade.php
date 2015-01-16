@@ -7,12 +7,12 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<ul class="nav nav-tabs">
 						<li id="login-tab-link" class="active"><a href="#login-tab" data-toggle="tab">Login</a></li>
-						<li id="signup-tab-link"><a href="#signup-tab" data-toggle="tab">Sign Up</a></li>
+						<li id="sign-up-tab-link"><a href="#sign-up-tab" data-toggle="tab">Sign Up</a></li>
 					</ul>
 					<div class="tab-pane active" id="login-tab">
 						@include('layouts.partials.forms.login')
 					</div>
-					<div class="tab-pane text-center" id="signup-tab">
+					<div class="tab-pane text-center" id="sign-up-tab">
 						<div class="row">
 							@include('layouts.partials.type')
 						</div>
@@ -37,14 +37,14 @@
 		$('#signup-link').on('click', function(event) {
 			event.preventDefault();
 			$('#login-tab, #login-tab-link').removeClass('active');
-			$('#signup-tab, #signup-tab-link').addClass('active');
+			$('#sign-up-tab, #sign-up-tab-link').addClass('active');
 			$('#login-modal').modal();
 		});
 		// Activate the login tab
 		$('#login-link').on('click', function(event) {
 			event.preventDefault();
 			$('#login-tab, #login-tab-link').addClass('active');
-			$('#signup-tab, #signup-tab-link').removeClass('active');
+			$('#sign-up-tab, #sign-up-tab-link').removeClass('active');
 			$('#login-modal').modal();
 		});
 
