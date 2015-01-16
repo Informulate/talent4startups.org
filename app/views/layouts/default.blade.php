@@ -16,7 +16,7 @@
 
 		@yield('wide-content')
 
-		<div class="container-fluid">
+		<div id="main-container" class="container">
 			@include('flash::message')
 
 			@yield('content')
