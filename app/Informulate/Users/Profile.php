@@ -12,7 +12,7 @@ class Profile extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'linked_in', 'twitter', 'meetup', 'published'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'twitter', 'youtube', 'published'];
 
 	/**
 	 * The database table used by the model.
@@ -61,9 +61,8 @@ class Profile extends Eloquent
 		$profile->skill_id = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
 		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
-		$profile->linked_in = array_key_exists('linked_in', $attributes) ? $attributes['linked_in'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
-		$profile->meetup = array_key_exists('meetup', $attributes) ? $attributes['meetup'] : '';
+		$profile->youtube = array_key_exists('youtube', $attributes) ? $attributes['youtube'] : '';
 		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
 
