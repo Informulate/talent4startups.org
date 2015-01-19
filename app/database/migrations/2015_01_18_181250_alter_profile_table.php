@@ -3,8 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterProfileTable extends Migration {
-
+class AlterProfileTable extends Migration 
+{
 	/**
 	 * Run the migrations.
 	 *

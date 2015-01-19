@@ -4,7 +4,7 @@ use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
 class Profile extends Eloquent
-{
+{ 
 	use EventGenerator;
 
 	/**
