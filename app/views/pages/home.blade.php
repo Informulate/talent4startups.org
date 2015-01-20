@@ -4,7 +4,13 @@
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="{{{ asset( 'images/picjumbo.com_Smooth-Touch-Workspace.jpg' ) }}}" alt="First slide">
+				<div align="center" class="embed-responsive embed-responsive-16by9">
+				    <video id="videos" autoplay class="embed-responsive-item" autoplay onended="run();">
+				        <source id="ss" src=<?php echo URL::asset('videos/clip1.mp4') ?> type="video/mp4">
+				        <source id="ss" src=<?php echo URL::asset('videos/clip2.mp4') ?> type="video/mp4">
+				        <source id="ss" src=<?php echo URL::asset('videos/clip3.mp4') ?> type="video/mp4">
+				    </video>
+				</div>
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Example headline.</h1>
