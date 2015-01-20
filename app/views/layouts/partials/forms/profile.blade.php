@@ -29,16 +29,12 @@
 		{{ Form::text('facebook',is_object( $user->profile ) ? $user->profile->facebook : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('linked_in', 'linked_in:') }}
-		{{ Form::text('linked_in', isset( $user->profile->linked_in ) ? $user->profile->linked_in : null, ['class' => 'form-control']) }}
-	</div>
-	<div class="form-group">
 		{{ Form::label('twitter', 'Twitter:') }}
 		{{ Form::text('twitter',is_object( $user->profile ) ? $user->profile->twitter : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('meetup', 'Meetup:') }}
-		{{ Form::text('meetup',is_object( $user->profile ) ? $user->profile->meetup : null, ['class' => 'form-control']) }}
+		{{ Form::label('youtube', 'YouTube:') }}
+		{{ Form::text('youtube',is_object( $user->profile ) ? $user->profile->youtube : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
 		{{ Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) }}
