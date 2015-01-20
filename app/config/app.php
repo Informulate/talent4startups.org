@@ -129,6 +129,8 @@ return array(
 		"Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider",
 		"Intervention\Image\ImageServiceProvider",
 		'Artdarek\OAuth\OAuthServiceProvider',
+		'Awjudd\FeedReader\FeedReaderServiceProvider',
+		'Thujohn\Twitter\TwitterServiceProvider',
 
 	),
 
@@ -200,7 +202,8 @@ return array(
 		"Slugify"           => "Cocur\Slugify\Bridge\Laravel\SlugifyFacade",
 		'Image'             => 'Intervention\Image\Facades\Image',
 		'OAuth' 			=> 'Artdarek\OAuth\Facade\OAuth',
-
+		'FeedReader'     	=> 'Awjudd\FeedReader\Facades\FeedReader',
+		'Twitter' 			=> 'Thujohn\Twitter\TwitterFacade',
 	),
 
 );
