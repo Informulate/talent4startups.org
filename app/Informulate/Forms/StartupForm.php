@@ -11,5 +11,6 @@ class StartupForm extends FormValidator
 	 */
 	protected $rules = [
 		'name' => 'required',
+		'video' => ['Regex:/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i']
 	];
 }
