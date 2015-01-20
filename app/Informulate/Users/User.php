@@ -91,4 +91,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 		return $user;
 	}
+
+	public function ratings()
+	{
+		return $this->morphMany('Informulate\Ratings\Rating', 'rated');
+	}
+
+	public function rating()
+	{
+		$total_ratings = $score = 0;
+
+		foreach ($this->ratings as $rating) {
+			$score = $score + $rating->rating;
+			$total_ratings++;
+		}
+
+		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
+	}
 }

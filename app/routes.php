@@ -149,3 +149,11 @@ Route::get('knowledge-base', array(
     'uses' => 'StaticController@knowledgebase',
     'as' => 'knowledgebase'
 ));
+
+/**
+ * Ratings
+ */
+Route::post('rating', [
+	'as' => 'rating',
+	'uses' => 'RatingController@rate'
+]);

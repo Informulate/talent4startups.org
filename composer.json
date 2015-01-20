@@ -10,7 +10,8 @@
 		"laracasts/flash": "~1.0",
 		"cocur/slugify": "@stable",
 		"intervention/image": "dev-master",
-		"artdarek/oauth-4-laravel": "dev-master"
+		"artdarek/oauth-4-laravel": "dev-master",
+        "awjudd/feed-reader": "1.1.*"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",
