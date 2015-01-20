@@ -12,3 +12,4 @@ node_modules
 .env.testing.php
 .sass-cache/
 tests/_output/*
+app/assets/sass/main.css
