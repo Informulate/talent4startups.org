@@ -38,6 +38,44 @@
 					@endforeach
 				]
 			});
+
+            $('#add-need').on('click', function() {
+                var formClone = $('#startup-needs-container div.need').clone();
+
+                $(this).parent('.startup-needs').append(formClone);
+
+                var cloneIndex = $('.startup-needs .need').length;
+                $('.startup-needs .need').find('*').each(function () {
+                    var name = this.name || '';
+                    var match = name.match(/(\d)+/i);
+                    if (!match && name.length > 0) {
+                        if (!name.match(/\[\]$/i)) {
+                            this.name = 'needs[' + cloneIndex + '][' + name + ']';
+                        } else {
+                            this.name = 'needs[' + cloneIndex + '][' + name.replace('[]', '') + '][]';
+                        }
+                    }
+                    console.log(this.name);
+                });
+
+                $(formClone).find('.remove').on('click', function() {
+                      $(this).parent('.need').remove();
+                 });
+                cloneIndex++;
+
+                $('.startup-needs .need .tags').select2({
+                    'tags': [
+                            @foreach($tags as $tag)
+                                '{{ $tag }}',
+                            @endforeach
+                    ]
+                });
+            });
+
+            $('.need .remove').on('click', function() {
+            console.log($(this));
+                  $(this).parent('.need').remove();
+             });
 		});
 	</script>
 @stop

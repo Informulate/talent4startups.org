@@ -54,11 +54,21 @@ class StartupTableSeeder extends Seeder {
 
 				$needs = [];
 				foreach (range(1, rand(2, 4)) as $i) {
-					$id = rand(1, (count($skills) - 1));
-					$needs[] = $id;
+					$roleId = rand(1, (count($skills) - 1));
+                    $needTags = [];
+                    foreach (range(1, rand(2, 4)) as $i) {
+                        $id = rand(1, (count($tags) - 1));
+                        $needTags[] = $id;
+                    }
+					$needs[] = array(
+                        'role' => $roleId,
+                        'quantity' => rand(1,10),
+                        'skills' => implode(',', $needTags),
+                    );
+
+                    $this->repository->updateNeeds($startup, $needs);
 				}
 
-				$startup->needs()->attach($needs);
 				$startup->tags()->attach($startupTags);
 
 				foreach (range(1, rand(2, 6)) as $i) {
