@@ -7,10 +7,11 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Informulate\Registration\Events\UserRegistered;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent, Hash;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 class User extends Eloquent implements UserInterface, RemindableInterface
 {
-	use UserTrait, RemindableTrait, EventGenerator;
+	use UserTrait, RemindableTrait, EventGenerator, Messagable;
 
 	/**
 	 * Fields that are mass assigned

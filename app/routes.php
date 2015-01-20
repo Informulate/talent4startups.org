@@ -150,6 +150,7 @@ Route::get('knowledge-base', array(
     'as' => 'knowledgebase'
 ));
 
+
 /**
  * Ratings
  */
@@ -157,3 +158,17 @@ Route::post('rating', [
 	'as' => 'rating',
 	'uses' => 'RatingController@rate'
 ]);
+
+/**
+ * Messaging
+ */
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create/{recipient?}', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::get('search/{query?}', ['as' => 'messages.search', 'uses' => 'MessagesController@searchRecipients']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('markread/{threadId}', ['as' => 'messages.markRead', 'uses' => 'MessagesController@markRead']);
+    Route::get('delete/{threadId}', ['as' => 'messages.delete', 'uses' => 'MessagesController@delete']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});

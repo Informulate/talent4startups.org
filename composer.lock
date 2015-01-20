@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88e4843e492a8f10dc0a4da5fb3d97c8",
+    "hash": "5a50b8574257c3a59278c1babea5023b",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -100,6 +100,59 @@
                 "preload"
             ],
             "time": "2014-03-12 00:05:31"
+        },
+        {
+            "name": "cmgmyr/messenger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cmgmyr/laravel-messenger.git",
+                "reference": "9fb2f0bfcc13b0bde279e037b34e1ec4ebde912f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cmgmyr/laravel-messenger/zipball/9fb2f0bfcc13b0bde279e037b34e1ec4ebde912f",
+                "reference": "9fb2f0bfcc13b0bde279e037b34e1ec4ebde912f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~4.0",
+                "illuminate/support": "~4.0",
+                "nesbot/carbon": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "adamwathan/faktory": "0.3.*",
+                "fabpot/php-cs-fixer": "1.0.*@dev",
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Cmgmyr\\Messenger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Gmyr",
+                    "email": "cmgmyr@gmail.com"
+                }
+            ],
+            "description": "Simple user messaging tool for Laravel",
+            "keywords": [
+                "Messenger",
+                "laravel",
+                "messaging",
+                "user messaging"
+            ],
+            "time": "2015-01-13 21:31:52"
         },
         {
             "name": "cocur/slugify",
@@ -3463,6 +3516,7 @@
         "cocur/slugify": 0,
         "intervention/image": 20,
         "artdarek/oauth-4-laravel": 20,
+        "cmgmyr/messenger": 20,
         "barryvdh/laravel-ide-helper": 20,
         "fzaninotto/faker": 20
     },

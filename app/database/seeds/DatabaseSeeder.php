@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder {
 			'skills',
 			'skill_startup',
 			'password_reminders',
+            'messages',
+            'participants',
+            'threads'
 		];
 
 		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -40,6 +43,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SkillTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('StartupTableSeeder');
+        $this->call('MessageTableSeeder');
 	}
 
 }
