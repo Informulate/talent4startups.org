@@ -32,5 +32,7 @@
 
 		@include('layouts.partials.modal.forms')
 
+		@include('layouts.partials.footer')
+	
 	</body>
 </html>
