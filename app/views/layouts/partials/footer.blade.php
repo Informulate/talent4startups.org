@@ -29,6 +29,7 @@
             @endfor
             <div class="footer-headline"><h5>Tweets we follow</h5></div>
             <?php $count = count($twitterHomeFeed) < 3 ? count($twitterHomeFeed) : 3 ; ?>
+            <?php if (!is_array($twitterHomeFeed)) { $count = 0; } ?>
             @for ($i = 0; $i < $count; $i++)
                 <p>
                     {{ $twitterHomeFeed[$i]->text }}, <a target="_blank" href = "http://twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View tweet</a>
