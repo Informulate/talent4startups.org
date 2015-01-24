@@ -38,6 +38,7 @@ class StartupController extends BaseController
 		$this->repository = $repository;
 
 		$this->beforeFilter('auth', ['except' => ['index', 'show', 'search']]);
+		$this->beforeFilter('@isCurrentOwnerFilter', ['only' => ['edit', 'update']]);
 	}
 
 	/**
@@ -103,6 +104,10 @@ class StartupController extends BaseController
 		return View::make('startups.show')->with('startup', $startup)->with('requests', $requests)->with('members', $members);
 	}
 
+	/**
+	 * @param $startup
+	 * @param $userId
+	 */
 	public function approveMember($startup, $userId)
 	{
 		if ($startup->owner == Auth::user()) {
@@ -116,6 +121,10 @@ class StartupController extends BaseController
 	/*
 	 * load view for edit startup with tags
 	 * @param string $startup (url)
+	 */
+	/**
+	 * @param $startup
+	 * @return $this
 	 */
 	public function edit($startup)
 	{
@@ -132,6 +141,11 @@ class StartupController extends BaseController
 	 * Update startup in storage
 	 *
 	 * @param $startup
+	 */
+	/**
+	 * @param $startup
+	 * @return mixed
+	 * @throws \Laracasts\Validation\FormValidationException
 	 */
 	public function update($startup)
 	{
@@ -157,5 +171,20 @@ class StartupController extends BaseController
 	public function destroy($id)
 	{
 		// TODO: Implement proper startup deactivation (We don't want to delete it we just want to deactivate it)
+	}
+
+	/**
+	 * @param $route
+	 * @param $request
+	 */
+	public function isCurrentOwnerFilter($route, $request)
+	{
+		$parameters = $route->parameters();
+		$startup = $parameters['startups'];
+		$startup = Startup::where('url', '=', $startup)->firstOrFail();
+
+		if ($startup->owner != Auth::user()) {
+			return Redirect::route('startups.show', ['startup' => $startup->url]);
+		}
 	}
 }
