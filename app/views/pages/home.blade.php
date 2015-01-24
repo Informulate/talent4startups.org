@@ -5,10 +5,8 @@
 		<div class="carousel-inner">
 			<div class="item active">
 				<div align="center" class="embed-responsive embed-responsive-16by9">
-				    <video id="videos" autoplay class="embed-responsive-item" autoplay onended="run();">
-				        <source id="ss" src=<?php echo URL::asset('videos/clip1.mp4') ?> type="video/mp4">
-				        <source id="ss" src=<?php echo URL::asset('videos/clip2.mp4') ?> type="video/mp4">
-				        <source id="ss" src=<?php echo URL::asset('videos/clip3.mp4') ?> type="video/mp4">
+				    <video id="videos" autoplay="autoplay" loop="loop" class="embed-responsive-item">
+				        <source id="ss" src=<?php echo URL::asset('videos/clip.mp4') ?> type="video/mp4">
 				    </video>
 				</div>
 				<div class="container">

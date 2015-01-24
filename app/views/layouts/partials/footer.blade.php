@@ -1,4 +1,4 @@
-<div id="footer" class="container-fluid">
+<div id="footer" class="container">
     <div class="row">
         <div class="col-sm-3">
             <div class="footer-headline"><h5>Recent Articles</h5></div>
