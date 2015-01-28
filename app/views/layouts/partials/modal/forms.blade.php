@@ -50,15 +50,15 @@
 
 		// User Type Selection feedback
 		$('#startup').on('click', function() {
-			$('#talent').removeClass('text-primary');
-			$(this).addClass('text-primary');
+			$('#talent').closest('label').removeClass('text-primary');
+			$(this).closest('label').addClass('text-primary');
 			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
 			$.get("{{ route("store_type_path", ['type' => 'startup']) }}");
 		});
 
 		$('#talent').on('click', function() {
-			$('#startup').removeClass('text-primary');
-			$(this).addClass('text-primary');
+			$('#startup').closest('label').removeClass('text-primary');
+			$(this).closest('label').addClass('text-primary');
 			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
 			$.get("{{ route("store_type_path", ['type' => 'talent']) }}");
 		});

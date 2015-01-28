@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Redirect;
+use Informulate\Core\CommandBus;
 use Informulate\Forms\SignInForm;
 use Informulate\Registration\Commands\RegisterUserCommand;
 use Informulate\Users\Commands\UpdateProfileCommand;
@@ -8,6 +9,8 @@ use Informulate\Users\User;
 
 class SessionsController extends BaseController
 {
+
+	use CommandBus;
 
 	/**
 	 * @var SignInForm
@@ -70,7 +73,7 @@ class SessionsController extends BaseController
 	{
 		// get data from input
 		$code = Input::get('code');
-		$linkedInService = OAuth::consumer('LinkedIn');
+		$linkedInService = OAuth::consumer('Linkedin');
 
 		if (!empty($code)) {
 			$token = $linkedInService->requestAccessToken($code);
@@ -107,7 +110,7 @@ class SessionsController extends BaseController
 			}
 		}
 
-		$type = Input::get('type');
+		$type = Session::get('type') ?: Input::get('type');
 
 		if (is_null($type)) {
 			return View::make('registration.select_type');
