@@ -21,7 +21,7 @@ return [
 		/**
 		 * linked_in
 		 */
-		'linked_in' => [
+		'Linkedin' => [
 			'client_id' => getenv('LINKED_IN_CLIENT_ID'),
 			'client_secret' => getenv('LINKED_IN_CLIENT_SECRET'),
 		],
