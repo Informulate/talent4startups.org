@@ -1,6 +1,9 @@
 body {
   padding-top: 70px; }
 
+#main-container {
+  margin-top: 40px; }
+
 .container h1:first-of-type {
   margin-top: 0; }
 
@@ -25,3 +28,44 @@ body {
 
 .feature {
   margin-bottom: 80px; }
+
+.thumbnail {
+  height: 550px; }
+
+.thumbnail .btn-primary {
+  position: absolute;
+  bottom: 30px;
+  right: 30px; }
+
+.projects {
+  height: 550px; }
+
+.learn-more {
+  position: absolute;
+  right: 25px;
+  bottom: 30px; }
+
+.contributor {
+  margin-bottom: 10px; }
+
+#new-project-panel-btn {
+  color: #fff !important; }
+
+#login-modal .tab-pane {
+  padding-top: 20px; }
+
+#talent, #startup {
+  display: block;
+  margin: 0 auto; }
+
+.sign-up label {
+  cursor: pointer;
+  text-align: center; }
+
+.label-header {
+  display: block;
+  font-size: 30px; }
+
+.glyphicons.type {
+  font-size: 80px;
+  display: block; }

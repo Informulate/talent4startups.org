@@ -2,8 +2,8 @@
 
 use App;
 
-trait CommandBus {
-
+trait CommandBus
+{
 	/**
 	 * Execute the command
 	 *

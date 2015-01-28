@@ -2,8 +2,8 @@
 
 use Laracasts\Validation\FormValidator;
 
-class RegistrationForm extends FormValidator {
-
+class RegistrationForm extends FormValidator
+{
 	/**
 	 * Validation rules for the registration form
 	 *
@@ -12,6 +12,7 @@ class RegistrationForm extends FormValidator {
 	protected $rules = [
 		'username' => 'required|unique:users',
 		'email' => 'required|email|unique:users',
-		'password' => 'required|confirmed'
+		'password' => 'required|confirmed',
+		'type' => 'required'
 	];
 }

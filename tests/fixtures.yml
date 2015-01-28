@@ -5,10 +5,16 @@ Informulate\Users\User:
     created_at: $date
     updated_at: $date
 
-Informulate\Projects\Project:
+Informulate\Startups\Startup:
     user_id:
         type: Informulate\Users\User
     name: $string
     description: $text
+    created_at: $date
+    updated_at: $date
+
+Informulate\Skills\Skill:
+    id: $integer
+    name: $string
     created_at: $date
     updated_at: $date

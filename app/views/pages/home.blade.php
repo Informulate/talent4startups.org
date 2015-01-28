@@ -4,7 +4,11 @@
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
-				<img src="/images/picjumbo.com_Smooth-Touch-Workspace.jpg" alt="First slide">
+				<div align="center" class="embed-responsive embed-responsive-16by9">
+				    <video id="videos" autoplay="autoplay" loop="loop" class="embed-responsive-item">
+				        <source id="ss" src=<?php echo URL::asset('videos/clip.mp4') ?> type="video/mp4">
+				    </video>
+				</div>
 				<div class="container">
 					<div class="carousel-caption">
 						<h1>Example headline.</h1>
@@ -42,7 +46,7 @@
 			<p>An idea is like a seed. It has great potential but needs many things to grow: funding (or management buy-in), talented resources, market timing, network, marketing etc.</p>
 			<p>Many startups never take off because of a vicious cycle: you need something tangible to get funding, you need resources to build things, but its hard to get resources without the funding in the first place. T4S gives you that impetus to break the cycle.</p>
 			<p>Use free resources to build out your concept, fine tune your strategy, test it in the market, and use real results to attract investment. Now you have no excuse. The universe awaits... Make that ripple!</p>
-			<a class="btn btn-success" href="#">Launch your own Project</a>
+			<a class="btn btn-success" href="#">Launch your own Startup</a>
 		</div>
 		<div class="col-sm-4">
 			<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">

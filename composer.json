@@ -7,13 +7,21 @@
 		"laravel/framework": "4.2.*",
 		"laracasts/commander": "~1.0",
 		"laracasts/validation": "1.1.*",
-		"laracasts/flash": "~1.0"
+		"laracasts/flash": "~1.0",
+		"cocur/slugify": "@stable",
+		"intervention/image": "dev-master",
+		"artdarek/oauth-4-laravel": "dev-master",
+	  	"simplepie/simplepie": "dev-master",
+	  	"awjudd/feed-reader": "1.1.*",
+	  	"thujohn/twitter": "dev-master",
+		"cmgmyr/messenger": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",
 		"codeception/codeception": "~2.0",
 		"laracasts/testdummy": "~1.0",
-		"barryvdh/laravel-ide-helper": "dev-master"
+		"barryvdh/laravel-ide-helper": "dev-master",
+        "fzaninotto/faker": "1.5.*@dev"
 	},
 	"autoload": {
 		"classmap": [

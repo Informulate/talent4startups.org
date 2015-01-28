@@ -1,6 +1,7 @@
 <?php
 namespace Codeception\Module;
 
+use Informulate\Skills\Skill;
 use Laracasts\TestDummy\Factory as TestDummy;
 
 // here you can define custom actions
@@ -29,9 +30,7 @@ class FunctionalHelper extends \Codeception\Module
 		$I = $this->getModule('Laravel4');
 		$I->fillField('name', $name);
 		$I->fillField('description', $description);
-		$I->click('#submit-project');
-
-		//$this->have('Informulate\Projects\Project', $overrides = ['name' => $name, 'description' => $description]);
+		$I->click('#submit-startup');
 	}
 
 	public function have($model, $overrides = [])
@@ -42,6 +41,21 @@ class FunctionalHelper extends \Codeception\Module
 	public function haveAnAccount($overrides = [])
 	{
 		return $this->have('Informulate\Users\User', $overrides);
+	}
+
+	public function haveSkills()
+	{
+		$skills = Skill::find(1);
+
+		if (! $skills) {
+			$id = 1;
+			$name = 'developer';
+			$overrides = compact('name', 'id');
+
+			return $this->have('Informulate\Skills\Skill', $overrides);
+		}
+
+		return $skills;
 	}
 
 }

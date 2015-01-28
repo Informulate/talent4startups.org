@@ -2,8 +2,8 @@
 
 use Informulate\Users\User;
 
-class UserRegistered {
-
+class UserRegistered
+{
 	/**
 	 * @var User
 	 */
@@ -16,5 +16,4 @@ class UserRegistered {
 	{
 		$this->user = $user;
 	}
-
 }

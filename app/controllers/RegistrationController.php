@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\RegistrationForm;
-use Informulate\Registration\RegisterUserCommand;
+use Informulate\Registration\Commands\RegisterUserCommand;
+use Informulate\Users\Commands\UpdateProfileCommand;
+use Informulate\Users\User;
 use Informulate\Core\CommandBus;
 
-class RegistrationController extends BaseController {
-
+class RegistrationController extends BaseController
+{
 	use CommandBus;
 
 	/**
@@ -34,7 +36,13 @@ class RegistrationController extends BaseController {
 	 */
 	public function create()
 	{
-		return View::make('registration.create');
+		$type = Input::get('type');
+
+		if (is_null($type)) {
+			return View::make('registration.select_type');
+		}
+
+		return View::make('registration.create')->with('type', $type);
 	}
 
 	/**
@@ -44,10 +52,10 @@ class RegistrationController extends BaseController {
 	{
 		$this->registrationForm->validate(Input::all());
 
-		extract(Input::only('username', 'email', 'password'));
+		extract(Input::only('username', 'email', 'password', 'type'));
 
 		$user = $this->execute(
-			new RegisterUserCommand($username, $email, $password)
+			new RegisterUserCommand($username, $email, $password, $type)
 		);
 
 		Auth::login($user);

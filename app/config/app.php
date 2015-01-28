@@ -126,6 +126,12 @@ return array(
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
+		"Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider",
+		"Intervention\Image\ImageServiceProvider",
+		'Artdarek\OAuth\OAuthServiceProvider',
+		'Cmgmyr\Messenger\MessengerServiceProvider',
+		'Awjudd\FeedReader\FeedReaderServiceProvider',
+		'Thujohn\Twitter\TwitterServiceProvider',
 
 	),
 
@@ -194,7 +200,11 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Flash'             => 'Laracasts\Flash\Flash',
-
+		"Slugify"           => "Cocur\Slugify\Bridge\Laravel\SlugifyFacade",
+		'Image'             => 'Intervention\Image\Facades\Image',
+		'OAuth' 			=> 'Artdarek\OAuth\Facade\OAuth',
+		'FeedReader'     	=> 'Awjudd\FeedReader\Facades\FeedReader',
+		'Twitter' 			=> 'Thujohn\Twitter\TwitterFacade',
 	),
 
 );

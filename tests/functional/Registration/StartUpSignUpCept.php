@@ -7,9 +7,13 @@ $I->amOnPage('/');
 $I->click('Sign Up');
 $I->click('#startup');
 $I->click('#agree');
-$I->click('Or sign up with email instead');
+$I->click('Or Sign up with email instead');
 
 $I->amOnPage('/register');
+
+$I->click('Sign Up As a StartUp');
+
+$I->amOnPage('/register?type=startup');
 
 $I->fillField('Username:', 'JohnDoe');
 $I->fillField('Email:', 'john@example.com');
