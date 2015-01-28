@@ -29,24 +29,7 @@
 		</div>
 	</div>
 	<div class="col-lg-6">
-		@foreach($startups as $index => $startup)
-			@if ($index % 2 === 0 and $index > 0)
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-			@endif
+		@foreach($startups as $startup)
 			<div class="clearfix">
 				<div class="thumbnail startups">
 					<img data-src="holder.js/300x300" alt="...">
@@ -63,24 +46,7 @@
 		@endforeach()
 	</div>
 	<div class="col-lg-6">
-		@foreach($talents as $index => $talent)
-			@if ($index % 2 === 0 and $index > 0)
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
-			@endif
+		@foreach($talents as $talent)
 			<div class="thumb clearfix">
 				<div class="thumbnail">
 					<img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300&d=wavatar">
@@ -101,11 +67,6 @@
 				</div>
 			</div>
 		@endforeach()
-	</div>
-	<div class="row feature">
-		<div class="col-sm-10 col-sm-offset-2">
-				<img src="https:////storage.googleapis.com/support-kms-prod/SNP_40CDC3FE322AB07CD3E5860E126FF906B05D_2922298_en_v3">
-		</div>
 	</div>
 	@include('layouts.partials.socialshare')
 @stop
