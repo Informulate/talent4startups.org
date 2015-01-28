@@ -27,10 +27,10 @@
 				</div>
 			@else
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-sm-9">
 						@yield('content')
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						@include('layouts.partials.adsense-right')
 					</div>
 				</div>
