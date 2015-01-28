@@ -17,12 +17,21 @@
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons glyphicons-asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="/contact"><i class="glyphicons glyphicons-circle-question-mark"></i> Contact</a></li>
 				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons glyphicons-circle-info"></i> FAQ</a></li>
-				<li @if (Request::path() === 'faq') class="active" @endif><a href="/knowledge-base"><i class="glyphicons glyphicons-book-open"></i> Knowledge Base</a></li>
+				<li @if (Request::path() === 'knowledge-base') class="active" @endif><a href="/knowledge-base"><i class="glyphicons glyphicons-book-open"></i> Knowledge Base</a></li>
 				@if ($currentUser)
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicons glyphicons-user"></i> {{ $currentUser->email }} <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						    <i class="glyphicons @if ($currentUser->newMessagesCount() > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i>
+						    {{ $currentUser->email }}
+						    @if ($currentUser->newMessagesCount() > 0)  <span class="btn-xs btn btn-info"><strong>{{ $currentUser->newMessagesCount() }}</strong></span> @endif
+						    <span class="caret"></span>
+                        </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('profile_path', $currentUser->username) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
+							<li>
+							    <a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if ($currentUser->newMessagesCount() > 0)  ({{ $currentUser->newMessagesCount() }}) @endif</a>
+
+                            </li>
 							<li><a href="{{ route('logout_path') }}"><span class="glyphicons glyphicons-log-out"></span> Logout</a></li>
 							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
 						</ul>

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Document</title>
+		<title>{{ isset($pageTitle) ? $pageTitle : 'Talent4Startups' }}</title>
 		<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css' ) }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/glyphicons/social.css' ) }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/bootstrap/bootstrap.min.css' ) }}}" rel="stylesheet">
@@ -32,5 +32,7 @@
 
 		@include('layouts.partials.modal.forms')
 
+		@include('layouts.partials.footer')
+	
 	</body>
 </html>

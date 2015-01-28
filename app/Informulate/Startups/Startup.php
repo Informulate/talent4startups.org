@@ -118,7 +118,7 @@ class Startup extends Eloquent
 	 */
 	public function needs()
 	{
-		return $this->belongsToMany('Informulate\Skills\Skill');
+		return $this->hasMany('Informulate\Startups\Need');
 	}
 
 	public function ratings()

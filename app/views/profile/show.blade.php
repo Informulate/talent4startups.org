@@ -1,9 +1,12 @@
 @extends('layouts.default')
 
 @section('content')
+    <div class="pull-right">
+        <a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a>
+	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150">
+			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=wavatar">
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>

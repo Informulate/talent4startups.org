@@ -33,8 +33,23 @@ class StartupRepository
 	 */
 	public function updateNeeds(Startup $startup, $needs)
 	{
-		$items = explode(',', $needs);
-		$this->updateCollection($startup, 'needs', self::SKILL_CLASS, $items);
+		foreach ($startup->needs as $need) {
+            $need->delete();
+        }
+
+        $needList = array();;
+        foreach ($needs as $needData) {
+            $tags = explode(',', $needData['skills']);
+            $need = Need::create([
+                'startup_id' => $startup->id,
+                'skill_id' => $needData['role'],
+                'quantity' => $needData['quantity'],
+            ]);
+
+            $need->save();
+            $this->updateCollection($need, 'tags', self::TAG_CLASS, $tags);
+            $needList[] = $need;
+        }
 	}
 
 	/**
@@ -117,12 +132,12 @@ class StartupRepository
 	}
 
 	/**
-	 * @param Startup $startup
+	 * @param $object
 	 * @param $property
 	 * @param $class
 	 * @param array $items
 	 */
-	private function updateCollection(Startup $startup, $property, $class, array $items)
+	private function updateCollection($object, $property, $class, array $items)
 	{
 		$collection = $class::all();
 
@@ -140,7 +155,7 @@ class StartupRepository
 			$itemList[] = $currentObj->id;
 		}
 
-		$startup->{$property}()->detach();
-		$startup->{$property}()->attach($itemList);
+        $object->{$property}()->detach();
+        $object->{$property}()->attach($itemList);
 	}
 }

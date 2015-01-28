@@ -23,9 +23,24 @@
 	{{ Form::text('tags', isset( $startup ) and is_object( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
 </div>
 
-<div class="form-group">
-	{{ Form::label('needs', 'Startup Needs:') }}
-	{{ Form::text('needs', isset( $startup ) and is_object( $startup ) ? $startup->needs->implode('name', ',') : null, ['id' => 'needs', 'class' => 'form-control']) }}
+<div class="form-group startup-needs">
+
+	@if (isset( $startup ) and is_object( $startup ) and $startup->needs())
+	    @foreach ($startup->needs as $i => $need)
+	    <div class="need">
+            <span class="btn btn-sm btn-default remove pull-right">remove</span>
+            {{ Form::label('needs['.$i.'][role]', 'Role:') }}
+            {{ Form::select('needs['.$i.'][role]', $needs, ['name' => 'role[]', 'selected' => $need->skill_id]) }}
+            {{ Form::label('needs['.$i.'][quantity]', 'Quantity:') }}
+            {{ Form::select('needs['.$i.'][quantity]', array_combine(range(1,10), range(1,10)), $need->quantity) }}
+            <div class="form-group">
+                {{ Form::label('needs['.$i.'][skills]', 'Skills:') }}
+                {{ Form::text('needs['.$i.'][skills]', implode(',', $need->tags->lists('name')), ['class' => 'tags form-control']) }}
+            </div>
+        </div>
+	    @endforeach
+	@endif
+	<span class="btn btn-sm btn-success" id="add-need">Add Need</span>
 </div>
 
 <div class="form-group">
@@ -35,4 +50,18 @@
 
 <div class="form-group">
 	{{ Form::submit( isset( $startup ) ? 'Update Project' : 'Save Project', ['id' => 'submit-startup','class' => 'btn btn-primary']) }}
+</div>
+
+<div id="startup-needs-container" style="display:none">
+    <div class="need">
+        <span class="btn btn-sm btn-default remove pull-right">remove</span>
+        {{ Form::label('role', 'Role:') }}
+        {{ Form::select('role', $needs, ['name' => 'role[]']) }}
+        {{ Form::label('quantity', 'Quantity:') }}
+        {{ Form::select('quantity', array_combine(range(1,10), range(1,10))) }}
+        <div class="form-group">
+            {{ Form::label('skills', 'Skills:') }}
+            {{ Form::text('skills', '', ['class' => 'tags form-control']) }}
+        </div>
+    </div>
 </div>
