@@ -14,7 +14,8 @@
 	  	"simplepie/simplepie": "dev-master",
 	  	"awjudd/feed-reader": "1.1.*",
 	  	"thujohn/twitter": "dev-master",
-		"cmgmyr/messenger": "dev-master"
+		"cmgmyr/messenger": "dev-master",
+        "misd/linkify": "1.1.*"
 	},
 	"require-dev": {
 		"way/generators": "~2.0",

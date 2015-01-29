@@ -55,6 +55,10 @@ Route::get('session/type', [
  * Startups!
  */
 Route::resource('startups', 'StartupController');
+Route::get('startups/{id}', [
+    'as' => 'startup_profile',
+    'uses' => 'StartupController@request'
+]);
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
@@ -67,6 +71,7 @@ Route::get('startups/{id}/membership/cancel', [
 	'as' => 'startup_membership_request_cancel',
 	'uses' => 'MembershipController@destroy'
 ]);
+
 
 /**
  * Talents!

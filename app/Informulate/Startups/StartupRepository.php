@@ -1,6 +1,11 @@
 <?php namespace Informulate\Startups;
 
 use DB;
+use Informulate\Startups\Events\UserApplied;
+use Informulate\Startups\Events\UserDenied;
+use Informulate\Startups\Events\UserJoined;
+use Informulate\Startups\Events\UserLeft;
+use Informulate\Startups\Events\UserLeftCreated;
 use Informulate\Users\User;
 
 class StartupRepository
@@ -93,6 +98,8 @@ class StartupRepository
 			$user->id,
 			'pending',
 		]);
+
+        $startup->raise(new UserApplied($startup, $user));
 	}
 
 	/**
@@ -105,6 +112,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $startup->raise(new UserJoined($startup, $user));
 	}
 
 	/**
@@ -117,6 +126,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $this->raise(new UserDenied($startup, $user));
 	}
 
 	/**
@@ -129,6 +140,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $startup->raise(new UserLeft($startup, $user));
 	}
 
 	/**

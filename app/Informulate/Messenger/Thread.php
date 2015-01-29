@@ -36,4 +36,14 @@ class Thread extends \Cmgmyr\Messenger\Models\Thread
 
         return new Collection($users);
     }
+
+    /**
+     * Messages relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany('Informulate\Messenger\Message');
+    }
 }

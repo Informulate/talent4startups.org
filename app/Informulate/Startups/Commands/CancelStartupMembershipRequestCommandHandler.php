@@ -1,5 +1,6 @@
 <?php namespace Informulate\Startups;
 
+use Informulate\Users\ThreadRepository;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 

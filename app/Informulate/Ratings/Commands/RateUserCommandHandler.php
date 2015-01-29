@@ -58,6 +58,7 @@ class RateUserCommandHandler implements CommandHandler
 			default:
 				$command->rated_type = 'Informulate\\Users\\User';
 				$command->rated_by_type = 'Informulate\\Startups\\Startup';
+                ThreadRepository::notification('talent.rating.talent', $user, array());
 				break;
 		}
 	}
