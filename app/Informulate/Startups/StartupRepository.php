@@ -76,11 +76,11 @@ class StartupRepository
 
 		if ($needs) {
 			$results->whereHas('needs', function ($q) use ($needs) {
-				$q->where('skills.id', '=', $needs);
+				$q->where('needs.skill_id', '=', $needs);
 			});
 		}
 
-		$paginatedResults = $results->paginate(16);
+		$paginatedResults = $results->paginate(12);
 
 		if ($needs or $tag) {
 			$paginatedResults->appends(['needs' => $needs, 'tag' => $tag]);
