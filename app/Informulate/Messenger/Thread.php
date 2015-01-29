@@ -59,7 +59,16 @@ class Thread extends \Cmgmyr\Messenger\Models\Thread
             $participant->last_read = null;
             $participant->save();
         } catch (ModelNotFoundException $e) {
-            dd($e);
         }
+    }
+
+    /**
+     * Participants relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function participants()
+    {
+        return $this->hasMany('Informulate\Messenger\Participant');
     }
 }

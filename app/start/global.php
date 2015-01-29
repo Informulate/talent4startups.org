@@ -11,6 +11,7 @@
 |
 */
 
+use Informulate\Messenger\Events\NewMessage;
 use Informulate\Ratings\Events\StartupRated;
 use Informulate\Ratings\Events\UserRated;
 use Informulate\Registration\Events\UserRegistered;
@@ -131,4 +132,18 @@ Event::listen('Informulate.Ratings.Events.StartupRated', function (StartupRated 
 
 Event::listen('Informulate.Ratings.Events.UserRated', function (UserRated $userRated) {
     ThreadRepository::notification('talent.rating.talent', $userRated->user, array());
+});
+
+Event::listen('Informulate.Messenger.Events.NewMessage', function (NewMessage $newMessage) {
+    $participant = $newMessage->participant;
+
+    try {
+        Mail::send('emails.message', array('subject' => $participant->thread->subject, 'body' => $participant->thread->latestMessage()->body), function ($message) use ($participant) {
+            $message->from('noreply@talent4startups.org')
+                ->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
+                ->subject($participant->thread->subject);
+        });
+    } catch (Swift_SwiftException $e) {
+
+    }
 });

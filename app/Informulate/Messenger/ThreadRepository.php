@@ -1,7 +1,7 @@
 <?php namespace Informulate\Users;
 
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Participant;
+use Informulate\Messenger\Participant;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;

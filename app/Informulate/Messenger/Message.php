@@ -1,6 +1,7 @@
 <?php namespace Informulate\Messenger;
 
 use Illuminate\Support\Collection;
+use Informulate\Messenger\Events\NewMessage;
 use Misd\Linkify\Linkify;
 
 class Message extends \Cmgmyr\Messenger\Models\Message
