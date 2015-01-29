@@ -1,3 +1,7 @@
+@if(Request::ajax())
+    @yield('content')
+@else
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -36,3 +40,4 @@
 	
 	</body>
 </html>
+@endif
