@@ -41,6 +41,11 @@ Route::get('login/linkedIn', [
 	'uses' => 'SessionsController@loginWithLinkedIn'
 ]);
 
+Route::get('register/linkedIn', [
+	'as' => 'register_linked_in',
+	'uses' => 'SessionsController@loginWithLinkedIn'
+]);
+
 Route::get('logout', [
 	'as' => 'logout_path',
 	'uses' => 'SessionsController@destroy'

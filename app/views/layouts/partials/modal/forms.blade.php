@@ -10,7 +10,17 @@
 						<li id="sign-up-tab-link"><a href="#sign-up-tab" data-toggle="tab">Sign Up</a></li>
 					</ul>
 					<div class="tab-pane active" id="login-tab">
-						@include('layouts.partials.forms.login')
+						<div class="row">
+							<div class="col-sm-12">
+								<i class="social social-linked-in linked-in-btn"></i>
+								<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Sign In with LinkedIn</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<a href="{{ route('login_path') }}">Or Sign in with email instead</a>
+							</div>
+						</div>
 					</div>
 					<div class="tab-pane text-center" id="sign-up-tab">
 						<div class="row">
@@ -19,7 +29,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
-								<a id="register-linked_in" href="{{ route("login_linked_in") }}">Sign up with LinkedIn</a>
+								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
 							</div>

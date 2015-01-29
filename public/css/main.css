@@ -70,6 +70,9 @@ body {
   font-size: 80px;
   display: block; }
 
+.linked-in-btn {
+  font-size: 34px; }
+
 /* Begin footer */
 #footer {
   background: none repeat scroll 0 0 #303030;
