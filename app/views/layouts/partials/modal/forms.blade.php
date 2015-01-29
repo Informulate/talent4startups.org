@@ -86,7 +86,7 @@
 				alert('You must agree to the Terms of Use before getting started!');
 			}
 
-			if (false === $('#talent').hasClass('text-primary') && false === $('#startup').hasClass('text-primary')) {
+			if (false === $('label[for="talent"]').hasClass('text-primary') && false === $('label[for="startup"]').hasClass('text-primary')) {
 				errors++;
 				event.preventDefault();
 				alert('Are you a talent or a startup? Click the appropriate icon above!');
