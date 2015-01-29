@@ -109,7 +109,7 @@ class MessagesController extends BaseController
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::user()->id,
-                'body'      => $input['message'],
+                'body'      => strip_tags($input['message']),
             ]
         );
 
@@ -161,7 +161,7 @@ class MessagesController extends BaseController
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::id(),
-                'body'      => Input::get('message'),
+                'body'      => strip_tags(Input::get('message')),
             ]
         );
 
