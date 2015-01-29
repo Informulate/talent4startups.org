@@ -112,7 +112,7 @@ class SessionsController extends BaseController
 
 		$type = Session::get('type') ?: Input::get('type');
 
-		if (is_null($type)) {
+		if (Route::currentRouteName() === 'register_linked_in' and is_null($type)) {
 			return View::make('registration.select_type');
 		}
 
