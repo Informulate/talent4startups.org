@@ -49,6 +49,8 @@ class StartupRepository
                 'startup_id' => $startup->id,
                 'skill_id' => $needData['role'],
                 'quantity' => $needData['quantity'],
+                'commitment' => $needData['commitment'],
+                'description' => $needData['description'],
             ]);
 
             $need->save();

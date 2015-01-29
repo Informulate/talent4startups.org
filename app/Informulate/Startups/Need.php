@@ -16,7 +16,7 @@ class Need extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['quantity', 'startup_id', 'skill_id'];
+	protected $fillable = ['quantity', 'startup_id', 'skill_id', 'commitment', 'description'];
 
     /**
      * Create a new project
