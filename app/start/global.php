@@ -11,12 +11,22 @@
 |
 */
 
+use Informulate\Ratings\Events\StartupRated;
+use Informulate\Ratings\Events\UserRated;
+use Informulate\Registration\Events\UserRegistered;
+use Informulate\Startups\Events\StartupCreated;
+use Informulate\Startups\Events\UserApplied;
+use Informulate\Startups\Events\UserDenied;
+use Informulate\Startups\Events\UserJoined;
+use Informulate\Startups\Events\UserLeft;
+use Informulate\Users\ThreadRepository;
+
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path() . '/commands',
+    app_path() . '/controllers',
+    app_path() . '/models',
+    app_path() . '/database/seeds',
 
 ));
 
@@ -31,7 +41,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path() . '/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +56,12 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
 });
 
-App::error(function(Laracasts\Validation\FormValidationException $exception, $code)
-{
-	return Redirect::back()->withInput()->withErrors($exception->getErrors());
+App::error(function (Laracasts\Validation\FormValidationException $exception, $code) {
+    return Redirect::back()->withInput()->withErrors($exception->getErrors());
 });
 
 /*
@@ -67,9 +75,8 @@ App::error(function(Laracasts\Validation\FormValidationException $exception, $co
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -83,4 +90,45 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
+require app_path() . '/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Event Listeners
+|--------------------------------------------------------------------------
+|
+*/
+
+Event::listen('Informulate.Registration.Events.UserRegistered', function (UserRegistered $userRegistered) {
+    ThreadRepository::notification('auth.registration', $userRegistered->user, array());
+});
+
+Event::listen('Informulate.Startups.Events.StartupCreated', function (StartupCreated $startupCreated) {
+    ThreadRepository::notification('startup.created.owner', $startupCreated->startup->owner, array('startup' => $startupCreated->startup));
+});
+
+Event::listen('Informulate.Startups.Events.UserApplied', function (UserApplied $userApplied) {
+    ThreadRepository::notification('startup.join.request.owner', $userApplied->startup->owner, array('startup' => $userApplied->startup, 'talent' => $userApplied->user));
+});
+
+Event::listen('Informulate.Startups.Events.UserJoined', function (UserJoined $userJoined) {
+    ThreadRepository::notification('startup.join.talent', $userJoined->user, array('startup' => $userJoined->startup));
+    ThreadRepository::notification('startup.join.group', $userJoined->startup->members, array('startup' => $userJoined->startup, 'talent' => $userJoined->user));
+});
+
+Event::listen('Informulate.Startups.Events.UserLeft', function (UserLeft $userLeft) {
+    ThreadRepository::notification('startup.left.talent', $userLeft->user, array('startup' => $userLeft->startup));
+    ThreadRepository::notification('startup.left.group', $userLeft->startup->members, array('startup' => $userLeft->startup, 'talent' => $userLeft->user));
+});
+
+Event::listen('Informulate.Startups.Events.UserDenied', function (UserDenied $userDenied) {
+    ThreadRepository::notification('startup.join.request.deny.talent', $userDenied->user, array('startup' => $userDenied->startup));
+});
+
+Event::listen('Informulate.Ratings.Events.StartupRated', function (StartupRated $startupRated) {
+    ThreadRepository::notification('startup.rating.owner', $startupRated->startup->owner, array('startup' => $startupRated->startup));
+});
+
+Event::listen('Informulate.Ratings.Events.UserRated', function (UserRated $userRated) {
+    ThreadRepository::notification('talent.rating.talent', $userRated->user, array());
+});

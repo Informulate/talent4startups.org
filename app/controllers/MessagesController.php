@@ -1,7 +1,6 @@
 <?php
 
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Informulate\Messenger\Thread;
+use Informulate\Messenger\Message;
 use Informulate\Users\User;
 use Informulate\Users\UserRepository;
 
