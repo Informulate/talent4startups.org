@@ -217,6 +217,26 @@ class MessagesController extends BaseController
     }
 
     /**
+     * Mark thread unread
+     *
+     * @param $threadId
+     * @return mixed
+     */
+    public function markUnread($threadId)
+    {
+        try {
+            $thread = Thread::findOrFail($threadId);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The thread with ID: ' . $threadId . ' was not found.');
+
+            return Redirect::to('messages');
+        }
+        $thread->markAsUnRead(Auth::id());
+
+        return Redirect::to('messages/');
+    }
+
+    /**
      * Delete a thread
      *
      * @param $threadId

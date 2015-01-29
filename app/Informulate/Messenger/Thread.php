@@ -46,4 +46,20 @@ class Thread extends \Cmgmyr\Messenger\Models\Thread
     {
         return $this->hasMany('Informulate\Messenger\Message');
     }
+
+    /**
+     * Mark a thread as unread for a user
+     *
+     * @param integer $userId
+     */
+    public function markAsUnRead($userId)
+    {
+        try {
+            $participant = $this->getParticipantFromUser($userId);
+            $participant->last_read = null;
+            $participant->save();
+        } catch (ModelNotFoundException $e) {
+            dd($e);
+        }
+    }
 }

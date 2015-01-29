@@ -3,7 +3,7 @@
 @section('content')
         <div class="pull-right actions">
            @if($thread->isUnread($currentUserId))<a href="{{ route('messages.markRead', $thread->id) }}" class="btn btn-warning pull-right">Mark Read</a> @endif
-           <a href="{{ route('messages.delete', $thread->id) }}" class="btn btn-danger pull-right">Delete</a>
+           <a href="{{ route('messages.unread', $thread->id) }}" class="btn btn-default pull-right">Mark Unread</a>
         </div>
         <h1>{{$thread->subject}}</h1>
 
