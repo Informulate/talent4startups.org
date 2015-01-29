@@ -51,7 +51,7 @@ class UserRepository
 			}
 		});
 
-		$paginatedResults = $results->paginate(16);
+		$paginatedResults = $results->paginate(12);
 
 		if ($skill or $tag) {
 			$paginatedResults->appends(['needs' => $skill, 'tag' => $tag]);
