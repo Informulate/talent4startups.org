@@ -23,7 +23,25 @@
 		<div id="main-container" class="container">
 			@include('flash::message')
 
-			@yield('content')
+			@if(Route::current()->getName() == 'home')
+				<div class="row">
+					<div class="col-sm-12">
+						@yield('content')
+					</div>
+				</div>
+			@else
+				<div class="row">
+					<div class="col-sm-9">
+						@yield('content')
+					</div>
+					<div class="col-sm-3">
+						@include('layouts.partials.adsense-right')
+					</div>
+				</div>
+			@endif
+
+
+
 		</div>
 
 		<script src="{{{ asset( 'js/vendors/jquery/jquery-2.1.1.min.js' ) }}}"></script>

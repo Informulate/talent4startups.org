@@ -41,6 +41,11 @@
 		</div>
 	</div>
 	<div class="row feature">
+		<div class="col-sm-10 col-sm-offset-2">
+				<img src="https:////storage.googleapis.com/support-kms-prod/SNP_40CDC3FE322AB07CD3E5860E126FF906B05D_2922298_en_v3">
+		</div>
+	</div>
+	<div class="row feature">
 		<div class="col-sm-8">
 			<h2>To the startups, the entrepreneurs - The Creators</h2>
 			<p>An idea is like a seed. It has great potential but needs many things to grow: funding (or management buy-in), talented resources, market timing, network, marketing etc.</p>
