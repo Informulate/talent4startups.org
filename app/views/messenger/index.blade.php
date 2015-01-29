@@ -47,8 +47,12 @@
             <p class="text-muted">{{ Str::words($thread->latestMessage()->body, 15) }}</p>
             <div class="clearfix"></div>
             <div class="pull-right actions">
-               @if($thread->isUnread($currentUserId))<a href="{{ route('messages.markRead', $thread->id) }}" class="btn btn-warning pull-right">Mark Read</a> @endif
-               <a href="{{ route('messages.delete', $thread->id) }}" class="btn btn-danger pull-right">Delete</a>
+                @if($thread->isUnread($currentUserId))
+                    <a href="{{ route('messages.markRead', $thread->id) }}" class="btn btn-warning pull-right">Mark Read</a>
+
+                @else
+                    <a href="{{ route('messages.unread', $thread->id) }}" class="btn btn-default pull-right">Mark Unread</a>
+               @endif
             </div>
             <div class="pull-left actions">
                 <a href="{{ route('messages.show', $thread->id) }}" class="btn btn-default pull-right read-more">Read More</a>
