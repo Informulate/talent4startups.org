@@ -62,7 +62,7 @@
         </li>
         <li>
             <p><strong>I love it, how do I spread the word?</strong></p>
-            <p>You can help spread the word by <>tweeting us<twitter>, or sharing us. You can also bring attention to your own profile by using the sharing options on your personal or startup profile page.</p>
+            <p>You can help spread the word by <a href="https://twitter.com/T4Startups" target="_blank">tweeting us</a>, or sharing us. You can also bring attention to your own profile by using the sharing options on your personal or startup profile page.</p>
             @include('layouts.partials.socialshare')
         </li>
     </ol>
