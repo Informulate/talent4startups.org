@@ -57,4 +57,5 @@
 			<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
 		</div>
 	</div>
+	@include('layouts.partials.socialshare')
 @stop

@@ -46,6 +46,7 @@
 				</div>
 			@endif
 		</div>
+		@include('layouts.partials.socialshare')
 	</div>
 @stop
 

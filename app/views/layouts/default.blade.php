@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>{{ isset($pageTitle) ? $pageTitle : 'Talent4Startups' }}</title>
+		<link href="{{{ asset( 'css/vendors/social-likes/social-likes_flat.css') }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css' ) }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/glyphicons/social.css' ) }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/bootstrap/bootstrap.min.css' ) }}}" rel="stylesheet">
@@ -45,6 +46,7 @@
 	@include('layouts.partials.footer')
 
 	<script src="{{{ asset( 'js/vendors/jquery/jquery-2.1.1.min.js' ) }}}"></script>
+	<script src="{{{ asset( 'js/vendors/social-likes/social-likes.min.js' ) }}}"></script>
 	<script src="{{{ asset( 'js/vendors/bootstrap/bootstrap.min.js' ) }}}"></script>
 	<script src="{{{ asset('/js/vendors/modernizr/modernizr.js' ) }}}"></script>
 	<script src="{{{ asset( 'js/vendors/holder/docs.min.js' ) }}}"></script>
