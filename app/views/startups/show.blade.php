@@ -63,6 +63,7 @@
 
 		</div>
 	</div>
+	@include('layouts.partials.socialshare')
 @stop
 
 @section('javascript')

@@ -18,4 +18,5 @@
 <div id="talent-container">
 	@include('talent.list')
 </div>
+@include('layouts.partials.socialshare')
 @stop

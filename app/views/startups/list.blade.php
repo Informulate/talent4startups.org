@@ -27,4 +27,5 @@
 		<div class="col-sm-12">
 			{{ $startups->links() }}
 		</div>
+		@include('layouts.partials.socialshare')
 	</div>

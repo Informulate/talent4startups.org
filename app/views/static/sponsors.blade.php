@@ -70,4 +70,6 @@
             </tr>
         </tbody>
     </table>
+
+    @include('layouts.partials.socialshare')
 @stop
