@@ -1,6 +1,7 @@
 <?php namespace Informulate\Messenger;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Thread extends \Cmgmyr\Messenger\Models\Thread
 {
@@ -14,10 +15,15 @@ class Thread extends \Cmgmyr\Messenger\Models\Thread
     public function scopeForUserByPriority($query, $userId)
     {
         return $query->join('participants', 'threads.id', '=', 'participants.thread_id')
+            ->join('messages', function ($join) {
+                $join->on('threads.id', '=', 'messages.thread_id')
+                    ->on('messages.user_id', '!=', DB::raw('participants.user_id'));
+            })
             ->where('participants.user_id', $userId)
             ->whereNull('participants.deleted_at')
             ->selectRaw('threads.*, CASE WHEN threads.updated_at <= participants.last_read THEN 1 ELSE 0 END AS message_read')
-            ->orderByRaw('message_read ASC, threads.updated_at DESC');
+            ->orderByRaw('message_read ASC, threads.updated_at DESC')
+            ->groupBy('id');
     }
 
     /**

@@ -180,7 +180,7 @@ class MessagesController extends BaseController
             $thread->addParticipants(Input::get('recipients'));
         }
 
-        return Redirect::to('messages/' . $id);
+        return Redirect::to('messages');
     }
 
     /**
