@@ -16,10 +16,10 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="footer-headline"><h5>Tweets</h5></div>
+				<?php $count = count($twitterFeed) < 3 ? count($twitterFeed) : 3; ?>
 				<?php if (!is_array($twitterFeed)) {
 					$count = 0;
 				} ?>
-				<?php $count = count($twitterFeed) < 3 ? count($twitterFeed) : 3; ?>
 				@for ($i = 0; $i < $count; $i++)
 					<p>
 						{{ $twitterFeed[$i]->text }}, <a target="_blank"
