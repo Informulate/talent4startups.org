@@ -64,6 +64,10 @@ Route::get('startups/{id}', [
     'as' => 'startup_profile',
     'uses' => 'StartupController@request'
 ]);
+Route::get('startups/create', [
+	'as' => 'startup_create',
+	'uses' => 'StartupController@create'
+]);
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
