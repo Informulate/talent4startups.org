@@ -31,14 +31,19 @@ class UserRepository
 	 *
 	 * @param null $tag
 	 * @param null $skill
+     * @param null $location
 	 * @return \Illuminate\Pagination\Paginator
 	 */
-	public function findActiveTalents($tag = null, $skill = null)
+	public function findActiveTalents($tag = null, $skill = null, $location = null)
 	{
-		$results = User::whereHas('profile', function ($q) use ($tag, $skill) {
+		$results = User::whereHas('profile', function ($q) use ($tag, $skill, $location) {
 			$q->where('published', '=', true);
 
-			if ($tag) {
+            if ($location) {
+                $q->where('location', '=', $location);
+            }
+
+            if ($tag) {
 				$q->whereHas('tags', function ($q2) use ($tag) {
 					$q2->where('tags.name', '=', $tag);
 				});

@@ -8,7 +8,7 @@
 				{{ Form::select('needs', array('Startups that Need: Everyone') + $needs, null,['id'=>'needs','class' => 'form-control']); }}
 			</div>
 			<div class="form-group col-sm-3">
-				{{ Form::text('tag', null, ['id'=>'tag','class' => 'form-control']) }}
+				{{ Form::text('tag', null, ['id'=>'tag','class' => 'form-control', 'placeholder' => 'Enter tag']) }}
 			</div>
 			<div class="form-group col-sm-3">
 				{{ Form::submit('Search', ['id'=>'search-button','class' => 'btn btn-primary']) }}

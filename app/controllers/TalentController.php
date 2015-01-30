@@ -28,7 +28,7 @@ class TalentController extends BaseController
 	 */
 	public function index()
 	{
-		$talents = $this->userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'));
+		$talents = $this->userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'));
 
 		if (Request::ajax()) {
 			return View::make('talent.list')->with('talents', $talents)->render();
