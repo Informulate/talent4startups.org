@@ -143,7 +143,7 @@ Event::listen('Informulate.Messenger.Events.NewMessage', function (NewMessage $n
                 ->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
                 ->subject($participant->thread->subject);
         });
-    } catch (Swift_SwiftException $e) {
+    } catch (Exception $e) {
 
     }
 });
