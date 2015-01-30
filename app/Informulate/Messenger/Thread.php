@@ -17,7 +17,8 @@ class Thread extends \Cmgmyr\Messenger\Models\Thread
         return $query->join('participants', 'threads.id', '=', 'participants.thread_id')
             ->join('messages', function ($join) {
                 $join->on('threads.id', '=', 'messages.thread_id')
-                    ->on('messages.user_id', '!=', DB::raw('participants.user_id'));
+                    ->on('messages.user_id', '!=', DB::raw('participants.user_id'))
+                    ->orOn('messages.type', '=', DB::raw('"notification"'));
             })
             ->where('participants.user_id', $userId)
             ->whereNull('participants.deleted_at')
