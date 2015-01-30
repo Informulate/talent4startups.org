@@ -6,10 +6,11 @@
 <div class="col-md-6">
     <!-- Subject Form Input -->
     <div class="form-group">
-        {{ Form::label('recipient_ac', 'To', ['class' => 'control-label']) }}
-        {{ Form::text('recipient_ac', null, ['class' => 'form-control']) }}
+        {{ Form::label('recipient_ac', 'To ', ['class' => 'control-label']) }}
+        {{ Form::text('recipient_ac', null, ['class' => 'form-control', 'autocomplete' => 'on', 'autofocus' => 'autofocus', 'placeholder' => 'Start typing the name(s) of others you are connected with']) }}
         {{ Form::hidden('recipients', $recipient->id, ['class' => 'form-control', 'id' => 'recipients']) }}
         <ul id="recipient_list" class="list-inline">
+            <span class="text-muted">Recipients: </span>
         @if ($recipient->id > 0)
             <li class="btn btn-default btn-xs" rel="{{ $recipient->id }}">{{ $recipient->profile->first_name }} {{ $recipient->profile->last_name }}</li>
         @endif
