@@ -28,6 +28,14 @@
 				</div>
 			</div>
 		@endforeach()
+
+		@if (count($talents) == 0)
+			<div class="alert alert-warning">
+				<h1><i class="glyphicons glyphicons-alert"></i> Warning!</h1>
+				<p>No results found!</p>
+			</div>
+		@endif
+
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
