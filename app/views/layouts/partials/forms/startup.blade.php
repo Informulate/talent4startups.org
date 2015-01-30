@@ -31,12 +31,16 @@
             <span class="btn btn-sm btn-default remove pull-right">remove</span>
             {{ Form::label('needs['.$i.'][role]', 'Role:') }}
             {{ Form::select('needs['.$i.'][role]', $needs, ['name' => 'role[]', 'selected' => $need->skill_id]) }}
+            {{ Form::label('needs['.$i.'][commitment]', 'Commitment:') }}
+            {{ Form::select('needs['.$i.'][commitment]', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => $need->commitment]) }}
             {{ Form::label('needs['.$i.'][quantity]', 'Quantity:') }}
             {{ Form::select('needs['.$i.'][quantity]', array_combine(range(1,10), range(1,10)), $need->quantity) }}
             <div class="form-group">
                 {{ Form::label('needs['.$i.'][skills]', 'Skills:') }}
                 {{ Form::text('needs['.$i.'][skills]', implode(',', $need->tags->lists('name')), ['class' => 'tags form-control']) }}
             </div>
+            {{ Form::label('needs['.$i.'][description]', 'Description:') }}
+            {{ Form::text('needs['.$i.'][description]', $need->description, ['class' => 'form-control']) }}
         </div>
 	    @endforeach
 	@endif
@@ -57,11 +61,15 @@
         <span class="btn btn-sm btn-default remove pull-right">remove</span>
         {{ Form::label('role', 'Role:') }}
         {{ Form::select('role', $needs, ['name' => 'role[]']) }}
+        {{ Form::label('commitment', 'Commitment:') }}
+        {{ Form::select('commitment', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => 'Part-Time']) }}
         {{ Form::label('quantity', 'Quantity:') }}
         {{ Form::select('quantity', array_combine(range(1,10), range(1,10))) }}
         <div class="form-group">
             {{ Form::label('skills', 'Skills:') }}
             {{ Form::text('skills', '', ['class' => 'tags form-control']) }}
         </div>
+        {{ Form::label('description', 'Description:') }}
+        {{ Form::text('description', '', ['class' => 'form-control']) }}
     </div>
 </div>

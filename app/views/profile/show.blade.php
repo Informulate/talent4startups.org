@@ -7,6 +7,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=wavatar">
+			<input data-id="{{ $user->id }}" type="number" class="member-rating-view" value="{{ $user->rating() }}" }}>
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
@@ -45,5 +46,20 @@
 				</div>
 			@endif
 		</div>
+		@include('layouts.partials.socialshare')
 	</div>
+@stop
+
+@section('javascript')
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.member-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
+			});
+		});
+	</script>
 @stop

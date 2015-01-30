@@ -1,8 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Message;
-use Cmgmyr\Messenger\Models\Participant;
+use Informulate\Messenger\Participant;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -10,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Informulate\Messenger\Thread;
+use Informulate\Messenger\Message;
 use Informulate\Users\User;
 use Informulate\Users\UserRepository;
 
@@ -109,7 +109,7 @@ class MessagesController extends BaseController
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::user()->id,
-                'body'      => $input['message'],
+                'body'      => strip_tags($input['message']),
             ]
         );
 
@@ -161,7 +161,7 @@ class MessagesController extends BaseController
             [
                 'thread_id' => $thread->id,
                 'user_id'   => Auth::id(),
-                'body'      => Input::get('message'),
+                'body'      => strip_tags(Input::get('message')),
             ]
         );
 
@@ -180,7 +180,7 @@ class MessagesController extends BaseController
             $thread->addParticipants(Input::get('recipients'));
         }
 
-        return Redirect::to('messages/' . $id);
+        return Redirect::to('messages');
     }
 
     /**
@@ -212,6 +212,26 @@ class MessagesController extends BaseController
         }
 
         $thread->markAsRead(Auth::id());
+
+        return Redirect::to('messages/');
+    }
+
+    /**
+     * Mark thread unread
+     *
+     * @param $threadId
+     * @return mixed
+     */
+    public function markUnread($threadId)
+    {
+        try {
+            $thread = Thread::findOrFail($threadId);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The thread with ID: ' . $threadId . ' was not found.');
+
+            return Redirect::to('messages');
+        }
+        $thread->markAsUnRead(Auth::id());
 
         return Redirect::to('messages/');
     }

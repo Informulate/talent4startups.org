@@ -1,6 +1,11 @@
 <?php namespace Informulate\Startups;
 
 use DB;
+use Informulate\Startups\Events\UserApplied;
+use Informulate\Startups\Events\UserDenied;
+use Informulate\Startups\Events\UserJoined;
+use Informulate\Startups\Events\UserLeft;
+use Informulate\Startups\Events\UserLeftCreated;
 use Informulate\Users\User;
 
 class StartupRepository
@@ -44,6 +49,8 @@ class StartupRepository
                 'startup_id' => $startup->id,
                 'skill_id' => $needData['role'],
                 'quantity' => $needData['quantity'],
+                'commitment' => $needData['commitment'],
+                'description' => $needData['description'],
             ]);
 
             $need->save();
@@ -69,11 +76,11 @@ class StartupRepository
 
 		if ($needs) {
 			$results->whereHas('needs', function ($q) use ($needs) {
-				$q->where('skills.id', '=', $needs);
+				$q->where('needs.skill_id', '=', $needs);
 			});
 		}
 
-		$paginatedResults = $results->paginate(16);
+		$paginatedResults = $results->paginate(12);
 
 		if ($needs or $tag) {
 			$paginatedResults->appends(['needs' => $needs, 'tag' => $tag]);
@@ -93,6 +100,8 @@ class StartupRepository
 			$user->id,
 			'pending',
 		]);
+
+        $startup->raise(new UserApplied($startup, $user));
 	}
 
 	/**
@@ -105,6 +114,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $startup->raise(new UserJoined($startup, $user));
 	}
 
 	/**
@@ -117,6 +128,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $this->raise(new UserDenied($startup, $user));
 	}
 
 	/**
@@ -129,6 +142,8 @@ class StartupRepository
 			$startup->id,
 			$user->id
 		]);
+
+        $startup->raise(new UserLeft($startup, $user));
 	}
 
 	/**

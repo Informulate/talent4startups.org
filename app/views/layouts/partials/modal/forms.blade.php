@@ -10,7 +10,17 @@
 						<li id="sign-up-tab-link"><a href="#sign-up-tab" data-toggle="tab">Sign Up</a></li>
 					</ul>
 					<div class="tab-pane active" id="login-tab">
-						@include('layouts.partials.forms.login')
+						<div class="row">
+							<div class="col-sm-12">
+								<i class="social social-linked-in linked-in-btn"></i>
+								<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Sign In with LinkedIn</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<a href="{{ route('login_path') }}">Or Sign in with email instead</a>
+							</div>
+						</div>
 					</div>
 					<div class="tab-pane text-center" id="sign-up-tab">
 						<div class="row">
@@ -19,7 +29,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
-								<a id="register-linked_in" href="{{ route("login_linked_in") }}">Sign up with LinkedIn</a>
+								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
 							</div>
@@ -50,15 +60,15 @@
 
 		// User Type Selection feedback
 		$('#startup').on('click', function() {
-			$('#talent').removeClass('text-primary');
-			$(this).addClass('text-primary');
+			$('#talent').closest('label').removeClass('text-primary');
+			$(this).closest('label').addClass('text-primary');
 			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
 			$.get("{{ route("store_type_path", ['type' => 'startup']) }}");
 		});
 
 		$('#talent').on('click', function() {
-			$('#startup').removeClass('text-primary');
-			$(this).addClass('text-primary');
+			$('#startup').closest('label').removeClass('text-primary');
+			$(this).closest('label').addClass('text-primary');
 			// Since we need to know the user type, and users might register with a social network, store the selected user type on the session
 			$.get("{{ route("store_type_path", ['type' => 'talent']) }}");
 		});
@@ -86,7 +96,7 @@
 				alert('You must agree to the Terms of Use before getting started!');
 			}
 
-			if (false === $('#talent').hasClass('text-primary') && false === $('#startup').hasClass('text-primary')) {
+			if (false === $('label[for="talent"]').hasClass('text-primary') && false === $('label[for="startup"]').hasClass('text-primary')) {
 				errors++;
 				event.preventDefault();
 				alert('Are you a talent or a startup? Click the appropriate icon above!');
