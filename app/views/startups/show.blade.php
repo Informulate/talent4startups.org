@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
 			<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
 
@@ -26,7 +26,9 @@
 				@endforeach
 			</div>
 		</div>
-		<div class="col-md-4">
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 
 			@if($startup->owner == $currentUser)
 				<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
