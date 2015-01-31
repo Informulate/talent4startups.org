@@ -53,6 +53,7 @@ class StartupTableSeeder extends Seeder {
 				}
 
 				$needs = [];
+				$commitments = ['full-time', 'part-time'];
 				foreach (range(1, rand(2, 4)) as $i) {
 					$roleId = rand(1, (count($skills) - 1));
                     $needTags = [];
@@ -64,6 +65,8 @@ class StartupTableSeeder extends Seeder {
                         'role' => $roleId,
                         'quantity' => rand(1,10),
                         'skills' => implode(',', $needTags),
+						'commitment' => $commitments[rand(0, 1)],
+						'description' => $faker->text,
                     );
 
                     $this->repository->updateNeeds($startup, $needs);
