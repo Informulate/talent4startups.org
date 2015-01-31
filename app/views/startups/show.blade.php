@@ -73,9 +73,11 @@
 				rate($(this).attr('data-id'), 'user', {{ $startup->id }}, 'startup', value);
 			});
 
+			@if($currentUser)
 			$('.startup-rating').on('rating.change', function(event, value) {
 				rate($(this).attr('data-id'), 'startup', {{ $currentUser->id }}, 'user', value);
 			});
+			@endif
 
 			function rate(rated_id, rated_type, rated_by_id, rated_by_type, rating) {
 				$.post("/rating", {
