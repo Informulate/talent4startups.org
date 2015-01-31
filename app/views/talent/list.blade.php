@@ -7,7 +7,24 @@
 		</div>
 	</div>
 	<div class="row">
-		@foreach($talents as $talent)
+		@foreach($talents as $index => $talent)
+			@if ($index % 3 === 0 and $index > 0)
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+			@endif
 			<div class="col-lg-4 col-md-4 col-xs-6 thumb">
 				<div class="thumbnail">
 					<img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300&d=wavatar">
