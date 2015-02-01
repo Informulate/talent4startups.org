@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 Congratulations, your application to join {{ $startup->name }} has been accepted. Make room on your schedule!
 @endsection

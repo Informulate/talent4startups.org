@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 T4S: About your request to join {{ $startup->name }}
 @endsection

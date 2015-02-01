@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 You have been invited to be a part of {{ $startup->name }}.
 @endsection

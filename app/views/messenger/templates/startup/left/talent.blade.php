@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 You are no longer part of the project: {{ $startup->name }}
 @endsection

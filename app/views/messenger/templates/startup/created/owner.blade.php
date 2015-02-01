@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 T4S: {{ $startup->name }} has been created!
 @endsection
