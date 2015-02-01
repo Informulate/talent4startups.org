@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>Startups I’m involved in</h2>
-			@if(count($contributions) > 0)
+			@if(count($contributions) > 0 || count($startups) > 0)
 				@foreach($contributions as $startup)
 				<div class="col-sm-3">
 					<div class="clearfix">
@@ -40,6 +40,19 @@
 					</div>
 				</div>
 				@endforeach
+					@foreach($startups as $startup)
+						<div class="col-sm-3">
+							<div class="clearfix">
+								<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h4>
+								<p>{{ Str::limit( $startup->description, 50 ) }}</p>
+							</div>
+							<div class="clearfix">
+								@if ($currentUser and $currentUser->username == $user->username)
+									<p><a href="{{ route('edit_profile') }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
+								@endif
+							</div>
+						</div>
+					@endforeach
 			@else
 				<div class="alert alert-info">
 					I'm not currently involved in any startup.

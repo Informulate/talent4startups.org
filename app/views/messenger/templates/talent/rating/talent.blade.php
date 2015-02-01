@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 You have a new rating
 @endsection

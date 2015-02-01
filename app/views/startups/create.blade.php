@@ -7,7 +7,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<h1>New Startup</h1>
 
 			@include('layouts.partials.errors')
@@ -22,27 +22,19 @@
 @section('javascript')
 	<script src="{{{ asset( 'js/vendors/select2/select2.min.js' ) }}}"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#tags').select2({
-				'tags': [
-						@foreach($tags as $tag)
-							'{{ $tag }}',
-						@endforeach
-				]
-			});
-
-			$('#needs').select2({
-				'tags': [
-					@foreach($needs as $need)
-					'{{ $need }}',
-					@endforeach
-				]
-			});
+        $(document).ready(function() {
+            $('#tags').select2({
+                'tags': [
+                    @foreach($tags as $tag)
+                    '{{ $tag }}',
+                    @endforeach
+            ]
+            });
 
             $('#add-need').on('click', function() {
                 var formClone = $('#startup-needs-container div.need').clone();
 
-                $(this).parent('.startup-needs').append(formClone);
+                $('.startup-needs').append(formClone);
 
                 var cloneIndex = $('.startup-needs .need').length;
                 $('.startup-needs .need').find('*').each(function () {
@@ -55,27 +47,50 @@
                             this.name = 'needs[' + cloneIndex + '][' + name.replace('[]', '') + '][]';
                         }
                     }
-                    console.log(this.name);
                 });
 
                 $(formClone).find('.remove').on('click', function() {
-                      $(this).parent('.need').remove();
-                 });
+                    $(this).parent('.need').remove();
+                });
                 cloneIndex++;
 
                 $('.startup-needs .need .tags').select2({
                     'tags': [
-                            @foreach($tags as $tag)
-                                '{{ $tag }}',
-                            @endforeach
+                        @foreach($tags as $tag)
+                        '{{ $tag }}',
+                        @endforeach
                     ]
+                });
+
+                $('.startup-needs .need-header select').on('change', function() {
+                    if ($(this).attr('name').match(/(role)/)) {
+                        @foreach($needs as $need)
+                        $(this).closest('.need').removeClass('{{ strtolower($need) }}');
+                        @endforeach
+                        $(this).closest('.need').addClass($(this).children(':selected').text().toLowerCase());
+                    }
                 });
             });
 
             $('.need .remove').on('click', function() {
-            console.log($(this));
-                  $(this).parent('.need').remove();
-             });
-		});
+                $(this).parent('.need').remove();
+            });
+            $('.startup-needs .need .tags').select2({
+                'tags': [
+                    @foreach($tags as $tag)
+                    '{{ $tag }}',
+                    @endforeach
+                ]
+            });
+
+            $('.startup-needs .need-header select').on('change', function() {
+                if ($(this).attr('name').match(/(role)/)) {
+                    @foreach($needs as $need)
+                    $(this).closest('.need').removeClass('{{ strtolower($need) }}');
+                    @endforeach
+                    $(this).closest('.need').addClass($(this).children(':selected').text().toLowerCase());
+                }
+            });
+        });
 	</script>
 @stop

@@ -48,6 +48,11 @@ class StartupController extends BaseController
 	 */
 	public function index()
 	{
+		if (! Auth::User()) {
+			// Temporary lock per request on ticket #111
+			return View::make('layouts.partials.login-required')->render();
+		}
+
 		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
 
 		if (Request::ajax()) {
