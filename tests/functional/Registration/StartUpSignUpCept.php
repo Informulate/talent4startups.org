@@ -17,8 +17,8 @@ $I->amOnPage('/register?type=startup');
 
 $I->fillField('Username:', 'JohnDoe');
 $I->fillField('Email:', 'john@example.com');
-$I->fillField('Password:', 'demo');
-$I->fillField('Password Confirmation:', 'demo');
+$I->fillField('Password:', 'demoPassWith8');
+$I->fillField('Password Confirmation:', 'demoPassWith8');
 $I->click('#submit-registration'); // Since we have a "Sign Up" link on the top navigation bar and the submit button also has the text "Sign Up" we need to target the input by an ID instead.
 
 $I->amOnPage('/profile');
