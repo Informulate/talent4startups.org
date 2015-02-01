@@ -15,3 +15,54 @@
 #new-project-panel-btn {
   color: #fff !important;
 }
+
+.need.thumbnail {
+  height: 380px;
+  margin: 3px;
+  padding: 0;
+}
+
+.need .form-group {
+  padding: 3px;
+}
+
+.need .need-header {
+  background-color: #bbb;
+  height: 36px;
+}
+
+.need .need-header select {
+  margin: 4px 0;
+}
+
+.need.designer .need-header{
+  background-color: #24aadd;
+}
+
+.need.developer .need-header{
+  background-color: #f0ad4e;
+}
+
+.need.engineer .need-header{
+  background-color: #eaf098;
+}
+
+.need.musician .need-header{
+  background-color: #d9c5f0;
+}
+
+.need.visual .need-header{
+  background-color: #9d9cf0;
+}
+
+.need.filmmaker .need-header{
+  background-color: #b9f0d0;
+}
+
+.need.writer .need-header{
+  background-color: #ebf0d9;
+}
+
+.need.project .need-header{
+  background-color: #f0b4ad;
+}

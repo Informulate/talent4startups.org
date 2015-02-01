@@ -24,28 +24,29 @@
 </div>
 
 <div class="form-group startup-needs">
-
 	@if (isset( $startup ) and is_object( $startup ) and $startup->needs())
 	    @foreach ($startup->needs as $i => $need)
-	    <div class="need">
-            <span class="btn btn-sm btn-default remove pull-right">remove</span>
-            {{ Form::label('needs['.$i.'][role]', 'Role:') }}
-            {{ Form::select('needs['.$i.'][role]', $needs, ['name' => 'role[]', 'selected' => $need->skill_id]) }}
-            {{ Form::label('needs['.$i.'][commitment]', 'Commitment:') }}
-            {{ Form::select('needs['.$i.'][commitment]', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => $need->commitment]) }}
-            {{ Form::label('needs['.$i.'][quantity]', 'Quantity:') }}
-            {{ Form::select('needs['.$i.'][quantity]', array_combine(range(1,10), range(1,10)), $need->quantity) }}
+	    <div class="need col-md-5 thumbnail {{ strtolower($need->skill->name) }}">
+            <div class="need-header form-group">
+                <span class="btn btn-sm btn-default remove pull-right">X</span>
+                {{ Form::select('needs['.$i.'][role]', $needs, ['name' => 'role[]', 'selected' => $need->skill_id, 'class' => 'role-select']) }}
+                {{ Form::select('needs['.$i.'][quantity]', array_combine(range(1,10), range(1,10)), $need->quantity) }}
+                {{ Form::select('needs['.$i.'][commitment]', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => $need->commitment]) }}
+            </div>
             <div class="form-group">
                 {{ Form::label('needs['.$i.'][skills]', 'Skills:') }}
                 {{ Form::text('needs['.$i.'][skills]', implode(',', $need->tags->lists('name')), ['class' => 'tags form-control']) }}
             </div>
-            {{ Form::label('needs['.$i.'][description]', 'Description:') }}
-            {{ Form::text('needs['.$i.'][description]', $need->description, ['class' => 'form-control']) }}
+            <div class="form-group">
+                {{ Form::label('needs['.$i.'][description]', 'Description:') }}
+                {{ Form::textArea('needs['.$i.'][description]', $need->description, ['class' => 'form-control']) }}
+            </div>
         </div>
 	    @endforeach
 	@endif
-	<span class="btn btn-sm btn-success" id="add-need">Add Need</span>
 </div>
+<div class="clearfix"></div>
+<p class="btn btn-sm btn-success" id="add-need">Add Need</p>
 
 <div class="form-group">
 	{{ Form::label('video', 'link to startup video:') }}
@@ -57,19 +58,20 @@
 </div>
 
 <div id="startup-needs-container" style="display:none">
-    <div class="need">
-        <span class="btn btn-sm btn-default remove pull-right">remove</span>
-        {{ Form::label('role', 'Role:') }}
-        {{ Form::select('role', $needs, ['name' => 'role[]']) }}
-        {{ Form::label('commitment', 'Commitment:') }}
-        {{ Form::select('commitment', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => 'Part-Time']) }}
-        {{ Form::label('quantity', 'Quantity:') }}
-        {{ Form::select('quantity', array_combine(range(1,10), range(1,10))) }}
+    <div class="need col-md-5 thumbnail designer">
+        <div class="need-header form-group">
+            <span class="btn btn-sm btn-default remove pull-right">X</span>
+            {{ Form::select('role', $needs, ['name' => 'role[]', 'class' => 'role-select']) }}
+            {{ Form::select('quantity', array_combine(range(1,10), range(1,10))) }}
+            {{ Form::select('commitment', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => 'Part-Time']) }}
+        </div>
         <div class="form-group">
             {{ Form::label('skills', 'Skills:') }}
             {{ Form::text('skills', '', ['class' => 'tags form-control']) }}
         </div>
-        {{ Form::label('description', 'Description:') }}
-        {{ Form::text('description', '', ['class' => 'form-control']) }}
+        <div>
+            {{ Form::label('description', 'Description:') }}
+            {{ Form::textArea('description', '', ['class' => 'form-control']) }}
+        </div>
     </div>
 </div>
