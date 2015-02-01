@@ -43,6 +43,25 @@
 
 			@endif
 
+			@foreach($startup->needs as $need)
+				<div class="startup-need">
+					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-notes-2"></span> {{ $need->skill->name }}</h4>
+					<div class="clearfix"></div>
+					@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
+						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
+					@endif
+					@foreach($need->tags as $tag)
+						<span class="badge">{{ $tag->name }}</span>
+					@endforeach
+					<p>
+						{{ $need->description }}
+					</p>
+					<p class="text-muted">
+						Commitment: {{ $need->commitment }}
+					</p>
+				</div>
+			@endforeach
+
 			<h2>Startup Contributors</h2>
 			@foreach($members as $user)
 				<div class="row contributor">
