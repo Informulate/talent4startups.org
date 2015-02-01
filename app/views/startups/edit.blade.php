@@ -31,14 +31,6 @@
             ]
         });
 
-        $('#needs').select2({
-            'tags': [
-                @foreach($needs as $need)
-                '{{ $need }}',
-                @endforeach
-            ]
-        });
-
         $('#add-need').on('click', function() {
             var formClone = $('#startup-needs-container div.need').clone();
 

@@ -20,7 +20,7 @@
 
 <div class="form-group">
 	{{ Form::label('tags', 'Tags:') }}
-	{{ Form::text('tags', isset( $startup ) and is_object( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
+	{{ Form::text('tags', isset( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
 </div>
 
 <div class="form-group startup-needs">
