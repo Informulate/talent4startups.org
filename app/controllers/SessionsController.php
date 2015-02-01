@@ -54,8 +54,21 @@ class SessionsController extends BaseController
 
 			// If the user is missing it's profile, force them to update their details
 			$user = Auth::user();
-			if (is_null($user->profile) or is_null($user->profile->first_name)) {
+
+			if (is_null($user->profile) or empty($user->profile->first_name) or empty($user->profile->about) or $user->profile->skill_id === 0) {
 				return Redirect::to('profile');
+			} elseif ($user->type === 'talent' && count($user->startups) > 0 ) {
+				return Redirect::route('startups.show', ['url' => $user->startups[0]->url]);
+			} elseif ($user->type === 'startup' && count($user->startups) == 0) {
+				return Redirect::route('startups.create');
+			} elseif ($user->type === 'talent') {
+				if (!empty($user->profile->skill_id)) {
+					return Redirect::route('startups.index', ['needs' => $user->profile->skill_id]);
+				}
+			} else {
+				if (!empty($user->startups[0]->needs[0]->skill_id)) {
+					return Redirect::route('talents.index', ['describes' => $user->startups[0]->needs[0]->skill_id]);
+				}
 			}
 
 			return Redirect::intended('/');
