@@ -7,7 +7,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<h1>Edit Startup</h1>
 
 			@include('layouts.partials.errors')
@@ -34,7 +34,7 @@
         $('#add-need').on('click', function() {
             var formClone = $('#startup-needs-container div.need').clone();
 
-            $(this).parent('.startup-needs').append(formClone);
+            $('.startup-needs').append(formClone);
 
             var cloneIndex = $('.startup-needs .need').length;
             $('.startup-needs .need').find('*').each(function () {
@@ -61,6 +61,17 @@
                     @endforeach
                 ]
             });
+
+            $('.startup-needs .need-header select').on('change', function() {
+                console.log($(this).attr('name').lastIndexOf('needs', 0));
+                console.log($(this).attr('name'));
+                if ($(this).attr('name').lastIndexOf('needs', 0) === 0) {
+                    @foreach($needs as $need)
+                    $(this).closest('.need').removeClass('{{ strtolower($need) }}');
+                    @endforeach
+                    $(this).closest('.need').addClass($(this).children(':selected').text().toLowerCase());
+                }
+            });
         });
 
         $('.need .remove').on('click', function() {
@@ -73,6 +84,17 @@
                  @endforeach
              ]
          });
+
+        $('.startup-needs .need-header select').on('change', function() {
+            console.log($(this).attr('name').lastIndexOf('needs', 0));
+            console.log($(this).attr('name'));
+           if ($(this).attr('name').lastIndexOf('needs', 0) === 0) {
+                @foreach($needs as $need)
+                    $(this).closest('.need').removeClass('{{ strtolower($need) }}');
+                @endforeach
+                $(this).closest('.need').addClass($(this).children(':selected').text().toLowerCase());
+           }
+        });
     });
 	</script>
 @stop
