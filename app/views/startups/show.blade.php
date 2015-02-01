@@ -4,7 +4,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
-			<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
+			@if($startup->hasMember($currentUser))
+				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
+			@else
+				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
+			@endif
+
 
 			<img data-src="holder.js/750x300" alt="...">
 
@@ -99,6 +104,14 @@
 				rate($(this).attr('data-id'), 'startup', {{ $currentUser->id }}, 'user', value);
 			});
 			@endif
+
+			$('.startup-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
+			});
 
 			function rate(rated_id, rated_type, rated_by_id, rated_by_type, rating) {
 				$.post("/rating", {
