@@ -62,9 +62,11 @@ class StartupRepository
 	/**
 	 * @param null $tag
 	 * @param null $needs
+	 * @param null $orderBy
+	 * @param int $perPage
 	 * @return \Illuminate\Pagination\Paginator
 	 */
-	public function allActive($tag = null, $needs = null)
+	public function allActive($tag = null, $needs = null, $orderBy = null, $perPage = 12)
 	{
 		$results = Startup::where('published', '=', true);
 
@@ -80,7 +82,11 @@ class StartupRepository
 			});
 		}
 
-		$paginatedResults = $results->paginate(12);
+		if ($orderBy) {
+			$results->orderBy($orderBy);
+		}
+
+		$paginatedResults = $results->paginate($perPage);
 
 		if ($needs or $tag) {
 			$paginatedResults->appends(['needs' => $needs, 'tag' => $tag]);
