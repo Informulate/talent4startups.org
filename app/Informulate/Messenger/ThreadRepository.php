@@ -36,7 +36,7 @@ class ThreadRepository
                 [
                     'thread_id' => $thread->id,
                     'user_id' => $user->id,
-                    'body' => $messageParts['body'],
+                    'body' => $messageParts['body'] . $messageParts['footer'],
                     'type' => 'notification',
                 ]
             );

@@ -20,6 +20,7 @@ use Informulate\Startups\Events\UserApplied;
 use Informulate\Startups\Events\UserDenied;
 use Informulate\Startups\Events\UserJoined;
 use Informulate\Startups\Events\UserLeft;
+use Informulate\Users\Events\ProfileCreated;
 use Informulate\Users\ThreadRepository;
 
 ClassLoader::addDirectories(array(
@@ -100,8 +101,15 @@ require app_path() . '/filters.php';
 |
 */
 
-Event::listen('Informulate.Registration.Events.UserRegistered', function (UserRegistered $userRegistered) {
-    ThreadRepository::notification('auth.registration', $userRegistered->user, array());
+Event::listen('Informulate.Users.Events.ProfileCreated', function (ProfileCreated $profileCreated) {
+    switch ($profileCreated->user->type) {
+        case 'talent':
+            ThreadRepository::notification('auth.registration.talent', $profileCreated->user, array('user' => $profileCreated->user));
+            break;
+        case 'startup':
+            ThreadRepository::notification('auth.registration.startup', $profileCreated->user, array('user' => $profileCreated->user));
+            break;
+    }
 });
 
 Event::listen('Informulate.Startups.Events.StartupCreated', function (StartupCreated $startupCreated) {
@@ -114,7 +122,7 @@ Event::listen('Informulate.Startups.Events.UserApplied', function (UserApplied $
 
 Event::listen('Informulate.Startups.Events.UserJoined', function (UserJoined $userJoined) {
     ThreadRepository::notification('startup.join.talent', $userJoined->user, array('startup' => $userJoined->startup));
-    ThreadRepository::notification('startup.join.group', $userJoined->startup->members, array('startup' => $userJoined->startup, 'talent' => $userJoined->user));
+    ThreadRepository::notification('startup.join.owner', $userJoined->startup->owner, array('startup' => $userJoined->startup, 'talent' => $userJoined->user));
 });
 
 Event::listen('Informulate.Startups.Events.UserLeft', function (UserLeft $userLeft) {
