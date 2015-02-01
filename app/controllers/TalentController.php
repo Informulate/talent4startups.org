@@ -28,6 +28,11 @@ class TalentController extends BaseController
 	 */
 	public function index()
 	{
+		if (!Auth::User()) {
+			// Temporary lock per request on ticket #111
+			return View::make('layouts.partials.login-required')->render();
+		}
+
 		$talents = $this->userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'));
 
 		if (Request::ajax()) {

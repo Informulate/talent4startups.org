@@ -44,14 +44,14 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		// Activate the signup tab
-		$('#signup-link').on('click', function(event) {
+		$('#signup-link, .signup-link').on('click', function(event) {
 			event.preventDefault();
 			$('#login-tab, #login-tab-link').removeClass('active');
 			$('#sign-up-tab, #sign-up-tab-link').addClass('active');
 			$('#login-modal').modal();
 		});
 		// Activate the login tab
-		$('#login-link').on('click', function(event) {
+		$('#login-link, .login-link').on('click', function(event) {
 			event.preventDefault();
 			$('#login-tab, #login-tab-link').addClass('active');
 			$('#sign-up-tab, #sign-up-tab-link').removeClass('active');
