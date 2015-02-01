@@ -63,9 +63,7 @@
                 });
 
                 $('.startup-needs .need-header select').on('change', function() {
-                    console.log($(this).attr('name').lastIndexOf('needs', 0));
-                    console.log($(this).attr('name'));
-                    if ($(this).attr('name').lastIndexOf('needs', 0) === 0) {
+                    if ($(this).attr('name').match(/(role)/)) {
                         @foreach($needs as $need)
                         $(this).closest('.need').removeClass('{{ strtolower($need) }}');
                         @endforeach
@@ -86,9 +84,7 @@
             });
 
             $('.startup-needs .need-header select').on('change', function() {
-                console.log($(this).attr('name').lastIndexOf('needs', 0));
-                console.log($(this).attr('name'));
-                if ($(this).attr('name').lastIndexOf('needs', 0) === 0) {
+                if ($(this).attr('name').match(/(role)/)) {
                     @foreach($needs as $need)
                     $(this).closest('.need').removeClass('{{ strtolower($need) }}');
                     @endforeach
