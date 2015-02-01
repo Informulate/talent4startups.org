@@ -1,15 +1,3 @@
-@import "compass/css3";
-@import "compass/utilities";
-
-$designer-color : #24aadd;
-$developer-color : #f0ad4e;
-$engineer-color : #eaf098;
-$musician-color : #d9c5f0;
-$visual-color : #9d9cf0;
-$filmmaker-color : #b9f0d0;
-$writer-color : #ebf0d9;
-$project-color : #f0b4ad;
-
 .projects {
   height: 550px;
 }
@@ -48,80 +36,33 @@ $project-color : #f0b4ad;
 }
 
 .need.designer .need-header{
-  background-color: $designer-color;
+  background-color: #89b4dd;
 }
 
 .need.developer .need-header{
-  background-color: $developer-color;
+  background-color: #f0ca84;
 }
 
 .need.engineer .need-header{
-  background-color: $engineer-color;
+  background-color: #eaf098;
 }
 
 .need.musician .need-header{
-  background-color: $musician-color;
+  background-color: #d9c5f0;
 }
 
 .need.visual .need-header{
-  background-color: $visual-color;
+  background-color: #9d9cf0;
 }
 
 .need.filmmaker .need-header{
-  background-color: $filmmaker-color;
+  background-color: #b9f0d0;
 }
 
 .need.writer .need-header{
-  background-color: $writer-color;
+  background-color: #ebf0d9;
 }
 
 .need.project .need-header{
-  background-color: $project-color;
-}
-
-.startup-need {
-  border: 1px solid #bbb;
-  @include border-radius(10px);
-  padding: 5px;
-  padding-top: 0;
-  margin: 8px 0;
-}
-
-.startup-need h4 {
-  @include border-top-left-radius(10px);
-  @include border-top-right-radius(10px);
-  margin: 0px -5px 8px -5px !important;
-  padding: 2px 5px;
-}
-
-.startup-need h4.designer {
-  background-color: $designer-color;
-}
-
-.startup-need h4.developer {
-  background-color: $developer-color;
-}
-
-.startup-need h4.engineer {
-  background-color: $engineer-color;
-}
-
-.startup-need h4.musician {
-  background-color: $musician-color;
-}
-
-.startup-need h4.visual {
-  background-color: $visual-color;
-}
-
-.startup-need h4.filmmaker {
-  background-color: $filmmaker-color;
-}
-
-.startup-need h4.writer {
-  background-color: $writer-color;
-}
-
-.startup-need h4.project {
-  background-color: $project-color;
+  background-color: #f0b4ad;
 }
