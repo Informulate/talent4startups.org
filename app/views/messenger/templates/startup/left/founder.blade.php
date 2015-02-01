@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 {{ $talent->profile->first_name }} {{ $talent->profile->last_name }} has left {{ $startup->name }}
 @endsection

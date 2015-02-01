@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 {{ $startup->name }} has a new rating
 @endsection

@@ -1,3 +1,4 @@
+@extends('messenger.templates.base')
 @section('subject')
 {{ $talent->profile->first_name }} {{ $talent->profile->last_name }} has applied to join {{ $startup->name }}.
 @endsection
