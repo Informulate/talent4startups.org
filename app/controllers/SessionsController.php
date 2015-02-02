@@ -92,7 +92,7 @@ class SessionsController extends BaseController
 						'first_name' => $result['firstName'],
 						'last_name' => $result['lastName'],
 						'linked_in' => $result['siteStandardProfileRequest']['url'],
-						'published' => true
+						'published' => false
 					])
 				);
 
@@ -102,7 +102,7 @@ class SessionsController extends BaseController
 			if ($token) {
 				Auth::login($user);
 
-				if (is_null($user->profile)) {
+				if (is_null($user->profile) or empty($user->profile->tags)) {
 					return Redirect::route('edit_profile');
 				}
 
