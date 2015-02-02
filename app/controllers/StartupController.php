@@ -53,6 +53,7 @@ class StartupController extends BaseController
 			return View::make('layouts.partials.login-required')->render();
 		}
 
+
 		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
 
 		if (Request::ajax()) {
