@@ -74,6 +74,7 @@ class SessionsController extends BaseController
 		// get data from input
 		$code = Input::get('code');
 		$linkedInService = OAuth::consumer('Linkedin');
+		$type = Session::pull('type') ?: Input::get('type');
 
 		if (!empty($code)) {
 			$token = $linkedInService->requestAccessToken($code);
@@ -82,6 +83,16 @@ class SessionsController extends BaseController
 			$user = User::where('email', '=', $email)->first();
 
 			if (is_null($user) and $token) {
+				if (is_null($type)) {
+					Session::put('email', $email);
+					Session::put('code', $code);
+					Session::put('first_name', $result['firstName']);
+					Session::put('last_name', $result['lastName']);
+					Session::put('linked_in', $result['siteStandardProfileRequest']['url']);
+
+					return View::make('sessions.select_type');
+				}
+
 				// We should have the type stored on the session if for whatever reason that fails, default to talents then.
 				$user = $this->execute(
 					new RegisterUserCommand($email, $email, $code, $type = Session::get('type') ?: 'talent')
@@ -109,8 +120,6 @@ class SessionsController extends BaseController
 				return Redirect::intended('/');
 			}
 		}
-
-		$type = Session::get('type') ?: Input::get('type');
 
 		if (Route::currentRouteName() === 'register_linked_in' and is_null($type)) {
 			return View::make('registration.select_type');
