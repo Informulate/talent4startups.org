@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\RegistrationForm;
 use Informulate\Registration\Commands\RegisterUserCommand;
 use Informulate\Users\Commands\UpdateProfileCommand;
-use Informulate\Users\User;
 use Informulate\Core\CommandBus;
 
 class RegistrationController extends BaseController
@@ -63,5 +63,33 @@ class RegistrationController extends BaseController
 		Flash::message('Welcome to Talent4Startups');
 
 		return Redirect::to('profile');
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function linkedIn()
+	{
+		$type = Input::get('type');
+		$email = Session::pull('email');
+
+		$user = $this->execute(
+			new RegisterUserCommand($email, $email, Session::pull('code'), $type)
+		);
+
+		$this->execute(
+			new UpdateProfileCommand($user, [
+				'first_name' => Session::pull('first_name'),
+				'last_name' => Session::pull('last_name'),
+				'linked_in' => Session::pull('linked_in'),
+				'published' => false
+			])
+		);
+
+		Flash::message('Welcome to Talent4Startups');
+
+		Auth::login($user);
+
+		return Redirect::route('edit_profile');
 	}
 }

@@ -19,8 +19,8 @@ Route::post('register', [
 ]);
 
 Route::get('register/linked_in', [
-	'as' => 'register_linked_in',
-	'uses' => 'RegistrationController@registerWithLinkedin'
+	'as' => 'finish_linked_in_path',
+	'uses' => 'RegistrationController@linkedIn'
 ]);
 
 /**
