@@ -16,7 +16,7 @@ class Startup extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id', 'name', 'description', 'url', 'goal', 'stage_id', 'video'];
+	protected $fillable = ['user_id', 'name', 'description', 'url', 'goal', 'stage_id', 'video', 'published'];
 
 	/**
 	 * Create a new project

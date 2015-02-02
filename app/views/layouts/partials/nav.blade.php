@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons glyphicons-home"></i> Home</a></li>
-				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons glyphicons-group"></i> Talent</a></li>
+				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons glyphicons-person"></i> Talent</a></li>
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons glyphicons-lightbulb"></i> Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons glyphicons-asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'contact') class="active" @endif><a href="/contact"><i class="glyphicons glyphicons-circle-question-mark"></i> Contact</a></li>

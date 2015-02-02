@@ -26,19 +26,26 @@ class UserRepository
 		return User::whereUsername($username)->first();
 	}
 
-	/**
-	 * Returns a paginated list of all active talents
-	 *
-	 * @param null $tag
-	 * @param null $skill
-	 * @return \Illuminate\Pagination\Paginator
-	 */
-	public function findActiveTalents($tag = null, $skill = null)
+    /**
+     * Returns a paginated list of all active talents
+     *
+     * @param null $tag
+     * @param null $skill
+     * @param null $location
+     * @param null $orderBy
+     * @param int $perPage
+     * @return \Illuminate\Pagination\Paginator
+     */
+	public function findActiveTalents($tag = null, $skill = null, $location = null, $orderBy = null, $perPage = 12)
 	{
-		$results = User::whereHas('profile', function ($q) use ($tag, $skill) {
+		$results = User::whereHas('profile', function ($q) use ($tag, $skill, $location, $orderBy) {
 			$q->where('published', '=', true);
 
-			if ($tag) {
+            if ($location) {
+                $q->where('location', '=', $location);
+            }
+
+            if ($tag) {
 				$q->whereHas('tags', function ($q2) use ($tag) {
 					$q2->where('tags.name', '=', $tag);
 				});
@@ -49,9 +56,13 @@ class UserRepository
 					$q->where('id', '=', $skill);
 				});
 			}
+
+            if ($orderBy) {
+                $q->orderBy($orderBy);
+            }
 		});
 
-		$paginatedResults = $results->paginate(16);
+		$paginatedResults = $results->paginate($perPage);
 
 		if ($skill or $tag) {
 			$paginatedResults->appends(['needs' => $skill, 'tag' => $tag]);

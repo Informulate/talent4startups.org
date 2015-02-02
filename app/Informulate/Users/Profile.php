@@ -1,10 +1,12 @@
 <?php namespace Informulate\Users;
 
+use Illuminate\Support\Facades\Event;
+use Informulate\Users\Events\ProfileCreated;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
 
 class Profile extends Eloquent
-{ 
+{
 	use EventGenerator;
 
 	/**
@@ -51,8 +53,10 @@ class Profile extends Eloquent
 	{
 		$profile = $user->profile;
 
+		$isNew = false;
 		if (is_null($profile)) {
 			$profile = new static();
+			$isNew = true;
 		}
 
 		$profile->first_name = $attributes['first_name'];
@@ -63,8 +67,16 @@ class Profile extends Eloquent
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
 		$profile->youtube = array_key_exists('youtube', $attributes) ? $attributes['youtube'] : '';
-		$profile->published = array_key_exists('published', $attributes) ? true : false;
+		// Quick hack to enable all talent profiles by default.
+		// TODO: This should be turned into a flag on the user's profile where they can activate or deactivate the visibility of their profiles
+		//$profile->published = array_key_exists('published', $attributes) ? true : false;
+		$profile->published = $user->type === 'talent';
 		$profile->user_id = $user->id;
+
+		if ($isNew) {
+			$user->profile = $profile;
+			Event::fire('Informulate.Users.Events.ProfileCreated', array(new ProfileCreated($user)));
+		}
 
 		return $profile;
 	}

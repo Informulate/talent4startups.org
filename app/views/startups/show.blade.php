@@ -2,9 +2,14 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
-			<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
+			@if($startup->hasMember($currentUser))
+				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
+			@else
+				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
+			@endif
+
 
 			<img data-src="holder.js/750x300" alt="...">
 
@@ -26,7 +31,9 @@
 				@endforeach
 			</div>
 		</div>
-		<div class="col-md-4">
+	</div>
+	<div class="row">
+		<div class="col-md-12">
 
 			@if($startup->owner == $currentUser)
 				<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
@@ -40,6 +47,25 @@
 				@endforeach
 
 			@endif
+
+			@foreach($startup->needs as $need)
+				<div class="startup-need">
+					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-notes-2"></span> {{ $need->skill->name }}</h4>
+					<div class="clearfix"></div>
+					@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
+						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
+					@endif
+					@foreach($need->tags as $tag)
+						<span class="badge">{{ $tag->name }}</span>
+					@endforeach
+					<p>
+						{{ $need->description }}
+					</p>
+					<p class="text-muted">
+						Commitment: {{ $need->commitment }}
+					</p>
+				</div>
+			@endforeach
 
 			<h2>Startup Contributors</h2>
 			@foreach($members as $user)
@@ -63,6 +89,7 @@
 
 		</div>
 	</div>
+	@include('layouts.partials.socialshare')
 @stop
 
 @section('javascript')
@@ -72,8 +99,18 @@
 				rate($(this).attr('data-id'), 'user', {{ $startup->id }}, 'startup', value);
 			});
 
+			@if($currentUser)
 			$('.startup-rating').on('rating.change', function(event, value) {
 				rate($(this).attr('data-id'), 'startup', {{ $currentUser->id }}, 'user', value);
+			});
+			@endif
+
+			$('.startup-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
 			});
 
 			function rate(rated_id, rated_type, rated_by_id, rated_by_type, rating) {

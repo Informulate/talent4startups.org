@@ -8,7 +8,10 @@
 			{{ Form::select('describes', array('Browse:everyone') + $describes, null,['id'=>'describe','class' => 'form-control']); }}
 		</div>
 		<div class="form-group col-sm-3">
-			{{ Form::text('tag', null, ['id'=>'tag','class' => 'form-control']) }}
+			{{ Form::text('tag', null, ['id'=>'tag','class' => 'form-control', 'placeholder' => 'Enter tag']) }}
+		</div>
+		<div class="form-group col-sm-3">
+			{{ Form::text('location', null, ['id'=>'location','class' => 'form-control', 'placeholder' => 'Enter Location']) }}
 		</div>
 		<div class="form-group col-sm-3">
 			{{ Form::submit('Search', ['id'=>'search-button','class' => 'btn btn-primary']) }}
@@ -18,4 +21,5 @@
 <div id="talent-container">
 	@include('talent.list')
 </div>
+@include('layouts.partials.socialshare')
 @stop

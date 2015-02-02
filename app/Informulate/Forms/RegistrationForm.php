@@ -10,9 +10,9 @@ class RegistrationForm extends FormValidator
 	 * @var array
 	 */
 	protected $rules = [
-		'username' => 'required|unique:users',
+		'username' => 'required|unique:users|min:5',
 		'email' => 'required|email|unique:users',
-		'password' => 'required|confirmed',
+		'password' => 'required|confirmed|min:8|not_in:password,password1234,12345678,changeme',
 		'type' => 'required'
 	];
 }

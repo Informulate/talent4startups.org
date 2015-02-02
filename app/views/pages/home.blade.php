@@ -28,28 +28,98 @@
 			<h1 class="text-center"><small>Sub header section to reinforce the section title. Doesn’t have to be fancy. But should be relevant.</small></h1>
 		</div>
 	</div>
-	<div class="row feature">
-		<div class="col-sm-4">
-			<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-		</div>
-		<div class="col-sm-8">
-			<h2>To the students, the professionals - The Doers</h2>
-			<p>You know exactly what your career path should be. You are already doing the best you can to get trained and stay current but the opportunities to flex your muscles are hard to come by.</p>
-			<p>Students cannot get placed because of lack of experience. Professionals looking to broaden their skill set, cannot leverage past, unrelated experience. We can help. From now on, let there be no limit to your career aspirations.</p>
-			<p>Find the right projects to polish the specific skill you are looking for, bulk up your resume, and make real connections by delivering results. With each skill you acquire, with every level you attain... your ambitions get closer to reality.</p>
-			<a class="btn btn-success" href="#">See Current Opportunities</a>
-		</div>
+	<div class="col-lg-6">
+		@foreach($startups as $index => $startup)
+			@if ($index % 2 === 0 and $index > 0)
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+			@endif
+			<div class="clearfix">
+				<div class="thumbnail startups">
+					<img data-src="holder.js/300x300" alt="...">
+					<div class="caption">
+						<h3>{{ $startup->name }} <br/><small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h3>
+						<h6><i class="glyphicons glyphicons-google-maps"></i>Orlando, FL.</h6>
+						<p>Startup Needs: @foreach($startup->needs as $need ) {{ $need->quantity }} {{ $need->skill->name }} @endforeach</p>
+						<p>{{ Str::limit( $startup->description, 50 ) }}</p>
+						<p><a href="{{ route('startups.show', $startup->url) }}" class="btn btn-primary pull-right learn-more" role="button">Learn More</a></p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		@endforeach()
+	</div>
+	<div class="col-lg-6">
+		@foreach($talents as $index => $talent)
+			@if ($index % 2 === 0 and $index > 0)
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
+					<div class="thumbnail startups">
+						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+					</div>
+				</div>
+			@endif
+			<div class="thumb clearfix">
+				<div class="thumbnail">
+					<img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300&d=wavatar">
+					<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}" }}>
+					<div class="caption">
+						<h3><a href="{{ route('profile_path', $talent->username) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a></h3>
+						<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $talent->profile->location }}</h6>
+						<p>{{ $talent->profile->skill->name }}</p>
+						<p>{{ Str::limit($talent->profile->about, 160) }}</p>
+						<p><i class="glyphicon glyphicon-tags"></i>
+							@foreach($talent->profile->tags as $tag)
+								<span class="badge">{{ $tag->name }}</span>
+							@endforeach
+						</p>
+						<p><a href="{{ route('profile_path', $talent->username) }}" class="btn btn-primary pull-right" role="button">Learn More</a></p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		@endforeach()
 	</div>
 	<div class="row feature">
-		<div class="col-sm-8">
-			<h2>To the startups, the entrepreneurs - The Creators</h2>
-			<p>An idea is like a seed. It has great potential but needs many things to grow: funding (or management buy-in), talented resources, market timing, network, marketing etc.</p>
-			<p>Many startups never take off because of a vicious cycle: you need something tangible to get funding, you need resources to build things, but its hard to get resources without the funding in the first place. T4S gives you that impetus to break the cycle.</p>
-			<p>Use free resources to build out your concept, fine tune your strategy, test it in the market, and use real results to attract investment. Now you have no excuse. The universe awaits... Make that ripple!</p>
-			<a class="btn btn-success" href="#">Launch your own Startup</a>
-		</div>
-		<div class="col-sm-4">
-			<img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+		<div class="col-sm-10 col-sm-offset-2">
+				<img src="https:////storage.googleapis.com/support-kms-prod/SNP_40CDC3FE322AB07CD3E5860E126FF906B05D_2922298_en_v3">
 		</div>
 	</div>
+	@include('layouts.partials.socialshare')
+@stop
+
+@section('javascript')
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.member-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
+			});
+		});
+	</script>
 @stop

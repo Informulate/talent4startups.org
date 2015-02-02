@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Redirect;
+use Informulate\Core\CommandBus;
 use Informulate\Forms\SignInForm;
 use Informulate\Registration\Commands\RegisterUserCommand;
 use Informulate\Users\Commands\UpdateProfileCommand;
@@ -8,6 +9,8 @@ use Informulate\Users\User;
 
 class SessionsController extends BaseController
 {
+
+	use CommandBus;
 
 	/**
 	 * @var SignInForm
@@ -51,8 +54,47 @@ class SessionsController extends BaseController
 
 			// If the user is missing it's profile, force them to update their details
 			$user = Auth::user();
-			if (is_null($user->profile) or is_null($user->profile->first_name)) {
+
+			if (is_null($user->profile) or empty($user->profile->first_name) or empty($user->profile->last_name) or empty($user->profile->about) or $user->profile->skill_id < 1) {
+				$requiredMessage = '<h3>Your profile is incomplete</h3>';
+				if (empty($user->profile->first_name)) $requiredMessage .= 'Please provide your first name.<br>';
+				if (empty($user->profile->last_name)) $requiredMessage .= 'Please provide your last name.<br>';
+				if (empty($user->profile->about)) $requiredMessage .= 'Please describe yourself a little to get your future team interested.<br>';
+				if ($user->profile && $user->profile->skill_id < 1) $requiredMessage .= 'Please pick a role that best describes you.<br>';
+				Flash::message($requiredMessage);
 				return Redirect::to('profile');
+			} elseif ($user->type === 'talent' && count($user->startups) > 0 ) {
+				return Redirect::route('startups.show', ['url' => $user->startups[0]->url]);
+			} elseif ($user->type === 'startup' && count($user->startups) == 0) {
+				return Redirect::route('startups.create');
+			} elseif ($user->type === 'startup' && count($user->startups) > 0) {
+				$requiredMessage = '<h3>Your startup details are incomplete</h3>';
+				foreach ($user->startups as $index => $startup) {
+					if(empty($startup->name) or empty($startup->description) or $startup->stage_id < 1 or count($user->startups[$index]->needs) < 1) {
+						if(empty($startup->name)) {
+							$requiredMessage .= 'Give your startup project a clear name to get team members interested.<br>';
+						}
+						if(empty($startup->description)) {
+							$requiredMessage .= 'Please describe your idea simply and clearly.<br>';
+						}
+						if ($startup->stage_id < 1) {
+							$requiredMessage .= 'Please let people know how far you have taken this idea so far.<br>';
+						}
+						if (count($user->startups[$index]->needs) < 1) {
+							$requiredMessage .= 'You must have specify your need for at least one role in order to publish your startup. You can use tags to further describe your idea.<br>';
+						}
+						Flash::message($requiredMessage);
+						return Redirect::route('startups.edit', ['url' => $startup->url]);
+					}
+				}
+			} elseif ($user->type === 'talent') {
+				if (!empty($user->profile->skill_id)) {
+					return Redirect::route('startups.index', ['needs' => $user->profile->skill_id]);
+				}
+			} else {
+				if (!empty($user->startups[0]->needs[0]->skill_id)) {
+					return Redirect::route('talents.index', ['describes' => $user->startups[0]->needs[0]->skill_id]);
+				}
 			}
 
 			return Redirect::intended('/');
@@ -70,7 +112,8 @@ class SessionsController extends BaseController
 	{
 		// get data from input
 		$code = Input::get('code');
-		$linkedInService = OAuth::consumer('LinkedIn');
+		$linkedInService = OAuth::consumer('Linkedin');
+		$type = Session::pull('type') ?: Input::get('type');
 
 		if (!empty($code)) {
 			$token = $linkedInService->requestAccessToken($code);
@@ -79,6 +122,16 @@ class SessionsController extends BaseController
 			$user = User::where('email', '=', $email)->first();
 
 			if (is_null($user) and $token) {
+				if (is_null($type)) {
+					Session::put('email', $email);
+					Session::put('code', $code);
+					Session::put('first_name', $result['firstName']);
+					Session::put('last_name', $result['lastName']);
+					Session::put('linked_in', $result['siteStandardProfileRequest']['url']);
+
+					return View::make('sessions.select_type');
+				}
+
 				// We should have the type stored on the session if for whatever reason that fails, default to talents then.
 				$user = $this->execute(
 					new RegisterUserCommand($email, $email, $code, $type = Session::get('type') ?: 'talent')
@@ -89,7 +142,7 @@ class SessionsController extends BaseController
 						'first_name' => $result['firstName'],
 						'last_name' => $result['lastName'],
 						'linked_in' => $result['siteStandardProfileRequest']['url'],
-						'published' => true
+						'published' => false
 					])
 				);
 
@@ -99,7 +152,7 @@ class SessionsController extends BaseController
 			if ($token) {
 				Auth::login($user);
 
-				if (is_null($user->profile)) {
+				if (is_null($user->profile) or empty($user->profile->tags)) {
 					return Redirect::route('edit_profile');
 				}
 
@@ -107,9 +160,7 @@ class SessionsController extends BaseController
 			}
 		}
 
-		$type = Input::get('type');
-
-		if (is_null($type)) {
+		if (Route::currentRouteName() === 'register_linked_in' and is_null($type)) {
 			return View::make('registration.select_type');
 		}
 

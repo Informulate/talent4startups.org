@@ -19,8 +19,8 @@ Route::post('register', [
 ]);
 
 Route::get('register/linked_in', [
-	'as' => 'register_linked_in',
-	'uses' => 'RegistrationController@registerWithLinkedin'
+	'as' => 'finish_linked_in_path',
+	'uses' => 'RegistrationController@linkedIn'
 ]);
 
 /**
@@ -41,6 +41,11 @@ Route::get('login/linkedIn', [
 	'uses' => 'SessionsController@loginWithLinkedIn'
 ]);
 
+Route::get('register/linkedIn', [
+	'as' => 'register_linked_in',
+	'uses' => 'SessionsController@loginWithLinkedIn'
+]);
+
 Route::get('logout', [
 	'as' => 'logout_path',
 	'uses' => 'SessionsController@destroy'
@@ -55,6 +60,14 @@ Route::get('session/type', [
  * Startups!
  */
 Route::resource('startups', 'StartupController');
+Route::get('startups/{id}', [
+    'as' => 'startup_profile',
+    'uses' => 'StartupController@request'
+]);
+Route::get('startups/create', [
+	'as' => 'startup_create',
+	'uses' => 'StartupController@create'
+]);
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
@@ -67,6 +80,7 @@ Route::get('startups/{id}/membership/cancel', [
 	'as' => 'startup_membership_request_cancel',
 	'uses' => 'MembershipController@destroy'
 ]);
+
 
 /**
  * Talents!
@@ -168,6 +182,7 @@ Route::group(['prefix' => 'messages'], function () {
     Route::get('search/{query?}', ['as' => 'messages.search', 'uses' => 'MessagesController@searchRecipients']);
     Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
     Route::get('markread/{threadId}', ['as' => 'messages.markRead', 'uses' => 'MessagesController@markRead']);
+    Route::get('unread/{threadId}', ['as' => 'messages.unread', 'uses' => 'MessagesController@markUnread']);
     Route::get('delete/{threadId}', ['as' => 'messages.delete', 'uses' => 'MessagesController@delete']);
     Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
     Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
