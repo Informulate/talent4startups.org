@@ -66,7 +66,7 @@ class ProfileController extends BaseController
 	public function edit()
 	{
 		$user = Auth::user();
-		$describes = Skill::lists('name', 'id');
+		$describes = Skill::orderBy('name')->lists('name', 'id');
 		$skills = Tag::lists('name', 'id');
 		return View::make('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills);
 	}

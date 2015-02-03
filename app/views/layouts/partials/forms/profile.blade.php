@@ -17,7 +17,7 @@
 		 {{ Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null); }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('skills', 'I\'m skilled in :') }}
+		{{ Form::label('skills', 'I\'m skilled and looking for experience in :') }}
 		{{ Form::text('skills', is_object( $user->profile ) ? $user->profile->tags->implode('name', ',') : null, ['id' => 'skills', 'class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
