@@ -50,13 +50,20 @@ class StartupRepository
                 'skill_id' => $needData['role'],
                 'quantity' => $needData['quantity'],
                 'commitment' => $needData['commitment'],
-                'description' => $needData['description'],
+                'description' => $needData['desc'],
             ]);
 
             $need->save();
             $this->updateCollection($need, 'tags', self::TAG_CLASS, $tags);
             $needList[] = $need;
         }
+	}
+
+	public function updateImage(Startup $startup, $image)
+	{
+		if (isset($startup->image)) {
+			new \Illuminate\Filesystem\Filesystem();
+		}
 	}
 
 	/**
