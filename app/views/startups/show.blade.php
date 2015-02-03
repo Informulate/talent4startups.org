@@ -42,9 +42,9 @@
 
 				@foreach($requests as $user)
 					<div>
-						<a href="{{ route('profile_path', $user->username) }}"><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64&d=wavatar"> {{ $user->profile->first_name }} {{ $user->profile->last_name }}
+						<a href="{{ route('profile_path', $user->username) }}"><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64&d=wavatar"> {{ $user->profile->first_name }} {{ $user->profile->last_name }} ({{ $user->profile->skill->name }})
 						</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
-					</div>Messaging
+					</div>
 				@endforeach
 
 			@endif
