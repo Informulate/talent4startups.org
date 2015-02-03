@@ -71,6 +71,7 @@ class StartupRepository
 		$newName = $startup->id . '.' . $image->getClientOriginalExtension();
 		$image->move($newPath, $newName);
 		$startup->image = $newName;
+		$startup->save();
 	}
 
 	/**
