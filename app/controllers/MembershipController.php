@@ -34,6 +34,8 @@ class MembershipController extends \BaseController {
 
 		$this->execute(new RequestStartupMembershipCommand(Auth::user(), $startup));
 
+		Flash::message('Your request has been sent to the owner!');
+
 		return Redirect::route('startups.show', ['url' => $startup->url]);
 	}
 

@@ -15,9 +15,8 @@
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons glyphicons-person"></i> Talent</a></li>
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons glyphicons-lightbulb"></i> Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons glyphicons-asterisk"></i> About</a></li>
-				<li @if (Request::path() === 'contact') class="active" @endif><a href="/contact"><i class="glyphicons glyphicons-circle-question-mark"></i> Contact</a></li>
+				<li @if (Request::path() === 'manifesto') class="active" @endif><a href="/manifesto"><i class="glyphicons glyphicons-circle-question-mark"></i> Manifesto</a></li>
 				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons glyphicons-circle-info"></i> FAQ</a></li>
-				<li @if (Request::path() === 'knowledge-base') class="active" @endif><a href="/knowledge-base"><i class="glyphicons glyphicons-book-open"></i> Knowledge Base</a></li>
 				@if ($currentUser)
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">

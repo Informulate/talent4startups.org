@@ -151,6 +151,10 @@ Route::get('contact', array(
     'uses' => 'StaticController@contact',
     'as' => 'contact'
 ));
+Route::get('manifesto', array(
+	'uses' => 'StaticController@manifesto',
+	'as' => 'manifesto'
+));
 Route::get('faq', array(
     'uses' => 'StaticController@faq',
     'as' => 'faq'
