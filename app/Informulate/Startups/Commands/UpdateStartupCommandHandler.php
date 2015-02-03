@@ -48,8 +48,6 @@ class UpdateStartupCommandHandler implements CommandHandler
 			$this->repository->updateImage($startup, $command->data['image']);
 		}
 
-		$startup->save();
-
 		$this->dispatchEventsFor($startup);
 
 		return $startup;
