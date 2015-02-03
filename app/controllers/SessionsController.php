@@ -113,7 +113,7 @@ class SessionsController extends BaseController
 			if ($token) {
 				Auth::login($user);
 
-				if (is_null($user->profile) or empty($user->profile->tags)) {
+				if (is_null($user->profile) or count($user->profile->tags) === 0) {
 					return Redirect::route('edit_profile');
 				}
 
