@@ -97,7 +97,7 @@ class SessionsController extends BaseController
 				}
 			}
 
-			return Redirect::intended('/');
+			return Redirect::route('profile_path', ['username' => $user->username]);
 		}
 
 		return Redirect::to('login')->with('email', $formData['email'])->with('error', 'Wrong email/password entered.');
@@ -194,7 +194,7 @@ class SessionsController extends BaseController
 					}
 				}
 
-				return Redirect::intended('/');
+				return Redirect::route('profile_path', ['username' => $user->username]);
 			}
 		}
 
