@@ -16,7 +16,7 @@
                 @endif
                 <div class="media-body">
                     @if ($message->type == 'message')
-                        <h5 class="media-heading"><a href="{{ route('profile_path', $message->user->username) }}">{{$message->user->profile->first_name}} {{$message->user->profile->last_name}}</a></h5>
+                        <h5 class="media-heading"><a href="{{ route('profile_path', $message->user->id) }}">{{$message->user->profile->first_name}} {{$message->user->profile->last_name}}</a></h5>
                     @endif
                     <p>{{nl2br($message->linkify())}}</p>
                     <div class="text-muted"><small>Posted {{$message->created_at->diffForHumans()}}</small></div>

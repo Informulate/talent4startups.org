@@ -41,31 +41,26 @@
     <h3>Contributors</h3>
 
     <div class="about row">
-        <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/3/000/0cd/173/15b056a.jpg" class="pull-left img-thumbnail">
         <p><strong>Frank Bennett</strong></p>
         <p>Frank has had a long career in software, product, and business development. He has a passion for helping people find creative ways to reach their potential in business and the community.</p>
     </div>
 
     <div class="about row">
-        <img src="holder.js/100x100/text: " class="pull-left img-thumbnail">
         <p><strong>Ramya Jeyaraj</strong></p>
         <p>Ramya lives in Seattle with her family. She likes to test, keeping software defects at bay. When not testing, Ramya likes to spend time with her family and enjoys outdoor activity especially when it does not rain in Seattle :)</p>
     </div>
 
     <div class="about row">
-        <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/4/005/034/3f6/25416cc.jpg" class="pull-left img-thumbnail">
         <p><strong>Jesus Fernandez</strong></p>
         <p></p>
     </div>
 
     <div class="about row">
-        <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/p/4/005/0aa/00f/133c972.jpg" class="pull-left img-thumbnail">
         <p><strong>Ravi Gehlot</strong></p>
         <p>For over 8 years, Ravi worked as a Software Developer for several industries where he developed a passion for assisting clients with care and a focus on exceeding needs.</p>
     </div>
 
     <div class="about row">
-        <img src="https://media.licdn.com/media/p/1/000/121/09a/023ba16.jpg" class="pull-left img-thumbnail">
         <p><strong>Mike Bernat</strong></p>
         <p>Back-end web developer living in Orlando, FL. Developing highly-available social networking platforms.</p>
     </div>

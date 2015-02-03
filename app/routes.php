@@ -93,7 +93,7 @@ Route::get('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@edit'
 ]);
-Route::get('@{username}', [
+Route::get('/users/{id}', [
 	'as' => 'profile_path',
 	'uses' => 'ProfileController@show'
 ]);

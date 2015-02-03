@@ -17,7 +17,6 @@
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons glyphicons-asterisk"></i> About</a></li>
 				<li @if (Request::path() === 'manifesto') class="active" @endif><a href="/manifesto"><i class="glyphicons glyphicons-circle-question-mark"></i> Manifesto</a></li>
 				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons glyphicons-circle-info"></i> FAQ</a></li>
-				<li @if (Request::path() === 'knowledge-base') class="active" @endif><a href="/knowledge-base"><i class="glyphicons glyphicons-book-open"></i> Knowledge Base</a></li>
 				@if ($currentUser)
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -27,7 +26,7 @@
 						    <span class="caret"></span>
                         </a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ route('profile_path', $currentUser->username) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
+							<li><a href="{{ route('profile_path', $currentUser->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
 							<li>
 							    <a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if ($currentUser->newMessagesCount() > 0)  ({{ $currentUser->newMessagesCount() }}) @endif</a>
 

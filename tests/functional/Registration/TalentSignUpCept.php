@@ -12,9 +12,9 @@ $I->click('Or Sign up with email instead');
 
 $I->amOnPage('/register');
 
-$I->click('Sign Up As a StartUp');
+$I->click('Sign Up As a Talent');
 
-$I->amOnPage('/register?type=startup');
+$I->amOnPage('/register?type=talent');
 
 $I->fillField('Username:', 'JaneDoe');
 $I->fillField('Email:', 'jane@example.com');
@@ -30,6 +30,11 @@ $I->seeRecord('users', [
 	'email' => 'jane@example.com'
 ]);
 
+$I->dontSeeRecord('profiles', [
+	'first_name' => 'Jane',
+	'last_name' => 'Doe'
+]);
+
 $I->fillField('First Name:', 'Jane');
 $I->fillField('Last Name:', 'Doe');
 $I->selectOption('#describe', '1');
@@ -38,7 +43,7 @@ $I->fillField('about', 'This is my about summary');
 $I->click('#submit-profile');
 
 //$I->amOnPage('/startups/create');
-$I->seeRecord('profiles', [
-	'first_name' => 'Jane',
-	'last_name' => 'Doe'
-]);
+//$I->seeRecord('profiles', [
+//	'first_name' => 'Jane',
+//	'last_name' => 'Doe'
+//]);
