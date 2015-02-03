@@ -70,8 +70,8 @@
             {{ Form::text('skills', '', ['class' => 'tags form-control']) }}
         </div>
         <div>
-            {{ Form::label('description', 'Description:') }}
-            {{ Form::textArea('description', '', ['class' => 'form-control']) }}
+            {{ Form::label('desc', 'Description:') }}
+            {{ Form::textArea('desc', '', ['class' => 'form-control']) }}
         </div>
     </div>
 </div>
