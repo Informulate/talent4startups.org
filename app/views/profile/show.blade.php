@@ -3,6 +3,9 @@
 @section('content')
     <div class="pull-right">
         <a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a>
+		@if ($currentUser->id == $user->id)
+			<a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a>
+		@endif
 	</div>
 	<div class="row">
 		<div class="col-md-3">

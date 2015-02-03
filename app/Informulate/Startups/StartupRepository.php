@@ -1,6 +1,7 @@
 <?php namespace Informulate\Startups;
 
 use DB;
+use Illuminate\Support\Facades\Input;
 use Informulate\Startups\Events\UserApplied;
 use Informulate\Startups\Events\UserDenied;
 use Informulate\Startups\Events\UserJoined;
@@ -50,13 +51,26 @@ class StartupRepository
                 'skill_id' => $needData['role'],
                 'quantity' => $needData['quantity'],
                 'commitment' => $needData['commitment'],
-                'description' => $needData['description'],
+                'description' => $needData['desc'],
             ]);
 
             $need->save();
             $this->updateCollection($need, 'tags', self::TAG_CLASS, $tags);
             $needList[] = $need;
         }
+	}
+
+	public function updateImage(Startup $startup, $image)
+	{
+		$image = Input::file('image');
+		if (!empty($startup->image)) {
+			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $startup->image);
+		}
+
+		$newPath = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload';
+		$newName = $startup->id . '.' . $image->getClientOriginalExtension();
+		$image->move($newPath, $newName);
+		$startup->image = $newName;
 	}
 
 	/**
