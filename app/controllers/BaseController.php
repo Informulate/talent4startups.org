@@ -15,14 +15,12 @@ class BaseController extends Controller {
 		}
 
 		View::share([
-
 			'currentUser' 		=> Auth::user(),
 			'facebookFeed'		=> FeedReader::read(Config::get('feeds.facebookFeed'))->get_items(),
 			't4sBlogFeed' 		=> FeedReader::read(Config::get('feeds.blogFeed'))->get_items(),
 			'twitterFeed'	 	=> Twitter::getUserTimeline(array('screen_name' => Config::get('feeds.twitterScreenName'), 'count' => 3, 'format' => 'object')),
 			'twitterHomeFeed' 	=> Twitter::getHomeTimeline(array('screen_name' => Config::get('feeds.twitterScreenName'), 'count' => 3, 'format' => 'object')),
-			'displayAds' => getenv('DISPLAY_ADS')
-
+			'displayAds' 		=> getenv('DISPLAY_ADS')
 		]);
 	}
 
