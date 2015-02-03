@@ -10,8 +10,8 @@ class PagesController extends \BaseController {
 	{
 		$startupRepository = new StartupRepository;
 		$userRepository = new UserRepository();
-		$startups = $startupRepository->allActive(null, null, DB::raw('RAND()'), 5);
-		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 5);
+		$startups = $startupRepository->allActive(null, null, DB::raw('RAND()'), 2);
+		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 2);
 
 		if (Auth::check()) {
 			return View::make('pages.dashboard')

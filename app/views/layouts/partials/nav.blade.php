@@ -26,7 +26,7 @@
 						    <span class="caret"></span>
                         </a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="{{ route('profile_path', $currentUser->username) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
+							<li><a href="{{ route('profile_path', $currentUser->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
 							<li>
 							    <a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if ($currentUser->newMessagesCount() > 0)  ({{ $currentUser->newMessagesCount() }}) @endif</a>
 

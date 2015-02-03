@@ -48,12 +48,12 @@ class ProfileController extends BaseController
 	/**
 	 * Show the users public profile
 	 *
-	 * @param $username
+	 * @param $id
 	 * @return $this
 	 */
-	public function show($username)
+	public function show($id)
 	{
-		$user = $this->userRepository->findByUsername($username);
+		$user = User::find($id);
 
 		return View::make('profile.show')->with('user', $user)->with('startups', $user->startups)->with('contributions', $user->contributions);
 	}
