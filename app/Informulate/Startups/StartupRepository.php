@@ -1,6 +1,7 @@
 <?php namespace Informulate\Startups;
 
 use DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
 use Informulate\Startups\Events\UserApplied;
 use Informulate\Startups\Events\UserDenied;
@@ -138,7 +139,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $startup->raise(new UserJoined($startup, $user));
+        Event::fire('Informulate.Startups.Events.UserJoined', new UserJoined($startup, $user));
 	}
 
 	/**
@@ -152,7 +153,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $this->raise(new UserDenied($startup, $user));
+        Event::fire('Informulate.Startups.Events.UserDenied', new UserDenied($startup, $user));
 	}
 
 	/**
@@ -166,7 +167,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $startup->raise(new UserLeft($startup, $user));
+		Event::fire('Informulate.Startups.Events.UserLeft', new UserLeft($startup, $user));
 	}
 
 	/**
