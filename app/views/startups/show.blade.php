@@ -11,7 +11,11 @@
 			@endif
 
 
-			<img data-src="holder.js/750x300" alt="...">
+			@if ($startup->image)
+				<img src="/images/upload/{{ $startup->image }}" alt="...">
+			@else
+				<img data-src="holder.js/750x300" alt="...">
+			@endif
 
 			<p>{{ $startup->description }}</p>
 

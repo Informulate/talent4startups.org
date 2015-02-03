@@ -44,6 +44,12 @@ class UpdateStartupCommandHandler implements CommandHandler
 			$this->repository->updateNeeds($startup, $command->data['needs']);
 		}
 
+		if (isset($command->data['image'])) {
+			$this->repository->updateImage($startup, $command->data['image']);
+		}
+
+		$startup->save();
+
 		$this->dispatchEventsFor($startup);
 
 		return $startup;
