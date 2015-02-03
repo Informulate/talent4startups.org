@@ -54,6 +54,10 @@ class CreateNewStartupCommandHandler implements CommandHandler
 			$this->repository->updateNeeds($startup, $command->startup->needs);
 		}
 
+		if (isset($command->startup->image)) {
+			$this->repository->updateImage($startup, $command->startup->image);
+		}
+
 		$this->dispatchEventsFor($startup);
 
 		return $startup;
