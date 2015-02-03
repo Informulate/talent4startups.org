@@ -38,8 +38,8 @@
                 {{ Form::text('needs['.$i.'][skills]', implode(',', $need->tags->lists('name')), ['class' => 'tags form-control']) }}
             </div>
             <div class="form-group">
-                {{ Form::label('needs['.$i.'][description]', 'Description:') }}
-                {{ Form::textArea('needs['.$i.'][description]', $need->description, ['class' => 'form-control']) }}
+                {{ Form::label('needs['.$i.'][desc]', 'Description:') }}
+                {{ Form::textArea('needs['.$i.'][desc]', $need->description, ['class' => 'form-control']) }}
             </div>
         </div>
 	    @endforeach
