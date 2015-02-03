@@ -38,9 +38,9 @@
 			<div class="col-sm-6 col-md-4 col-lg-4">
 				<div class="thumbnail startups">
 					@if ($startup->image)
-						<img src="/images/upload/{{ $startup->image }}" alt="...">
+						<a href="{{ route('startups.show', $startup->url) }}"><img src="/images/upload/{{ $startup->image }}" alt="..."></a>
 					@else
-						<img data-src="holder.js/300x300" alt="...">
+						<a href="{{ route('startups.show', $startup->url) }}"><img data-src="holder.js/300x300" alt="..."></a>
 					@endif
 					<div class="caption">
 						<h3>{{ $startup->name }} <br/><small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h3>

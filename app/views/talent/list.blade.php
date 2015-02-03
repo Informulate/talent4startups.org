@@ -35,7 +35,7 @@
 			@endif
 			<div class="col-lg-4 col-md-4 col-xs-6 thumb">
 				<div class="thumbnail">
-					<img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300&d=wavatar">
+					<a href="{{ route('profile_path', $talent->username) }}"><img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=300&d=wavatar"></a>
 					<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}" }}>
 					<div class="caption">
 						<h3><a href="{{ route('profile_path', $talent->username) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a></h3>
