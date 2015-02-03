@@ -77,7 +77,7 @@
 			<h2>Startup Contributors</h2>
 			@foreach($members as $user)
 				<div class="row contributor">
-					<a href="{{ route('profile_path', $user->username) }}">
+					<a href="{{ route('profile_path', $user->id) }}">
 						<div class="col-xs-2">
 							<img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user->email))) ?>?s=50&d=wavatar">
 						</div>
