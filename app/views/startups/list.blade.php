@@ -6,25 +6,35 @@
 			{{ $startups->links() }}
 		</div>
 	</div>
+
 	<div class="row">
 		@foreach($startups as $index => $startup)
-			@if ($index % 3 === 0 and $index > 0)
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+			@if ($index % 3 === 0)
+				@if ($displayAds)
+					<div class="col-sm-12 adsense center-block">
+						<div>
+							<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- TextMain -->
+							<ins class="adsbygoogle"
+								 style="display:inline-block;width:728px;height:90px"
+								 data-ad-client="ca-pub-2707586338674770"
+								 data-ad-slot="4166570841"></ins>
+							<script>
+								(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
+				@else
+					<div class="col-sm-12 adsense center-block">
+						<div>
+							<img class="center-block" src="http://lh6.ggpht.com/41LFWBytPnxKsfZf6mivs6ba7qdOBtfk9-7MzWSMqwC3IFOvaXd8rejFiyeXKfBOK16mMEopeA=w716">
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-6 col-md-4 col-lg-4 adsense">
-					<div class="thumbnail startups">
-						<img class="center-block img-responsive" src="https://storage.googleapis.com/support-kms-prod/SNP_2922332_en_v0">
-					</div>
-				</div>
+				@endif
+
+				<div class="clearfix"></div>
 			@endif
+
 			<div class="col-sm-6 col-md-4 col-lg-4">
 				<div class="thumbnail startups">
 					<img data-src="holder.js/300x300" alt="...">

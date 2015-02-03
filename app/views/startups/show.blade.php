@@ -35,15 +35,16 @@
 	<div class="row">
 		<div class="col-md-12">
 
+			<div class="col-md-8">
 			@if($startup->owner == $currentUser)
 				<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
 				<h2>Member requests</h2>
 
 				@foreach($requests as $user)
 					<div>
-						<a href="{{ route('profile_path', $user->username) }}"><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64&d=wavatar"> {{ $user->profile->first_name }} {{ $user->profile->last_name }}
+						<a href="{{ route('profile_path', $user->username) }}"><img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=64&d=wavatar"> {{ $user->profile->first_name }} {{ $user->profile->last_name }} ({{ $user->profile->skill->name }})
 						</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
-					</div>Messaging
+					</div>
 				@endforeach
 
 			@endif
@@ -53,7 +54,7 @@
 					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-notes-2"></span> {{ $need->skill->name }}</h4>
 					<div class="clearfix"></div>
 					@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
-						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
+						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
 					@endif
 					@foreach($need->tags as $tag)
 						<span class="badge">{{ $tag->name }}</span>
@@ -66,7 +67,9 @@
 					</p>
 				</div>
 			@endforeach
+			</div>
 
+			<div class="col-md-4">
 			<h2>Startup Contributors</h2>
 			@foreach($members as $user)
 				<div class="row contributor">
@@ -76,7 +79,10 @@
 						</div>
 						<div class="col-xs-10">
 							{{ $user->profile->first_name }} {{ $user->profile->last_name }}
-							<br/> TODO: Contribution Type
+							<br/> {{ $user->profile->skill->name }}
+							@if ($startup->owner == $user)
+								<strong>owner</strong>
+							@endif
 						</div>
 					</a>
 				</div>
@@ -86,7 +92,7 @@
 					</div>
 				</div>
 			@endforeach
-
+		</div>
 		</div>
 	</div>
 	@include('layouts.partials.socialshare')

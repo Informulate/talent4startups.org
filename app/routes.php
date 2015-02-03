@@ -19,8 +19,8 @@ Route::post('register', [
 ]);
 
 Route::get('register/linked_in', [
-	'as' => 'register_linked_in',
-	'uses' => 'RegistrationController@registerWithLinkedin'
+	'as' => 'finish_linked_in_path',
+	'uses' => 'RegistrationController@linkedIn'
 ]);
 
 /**
@@ -150,6 +150,10 @@ Route::get('about', array(
 Route::get('contact', array(
     'uses' => 'StaticController@contact',
     'as' => 'contact'
+));
+Route::get('manifesto', array(
+	'uses' => 'StaticController@manifesto',
+	'as' => 'manifesto'
 ));
 Route::get('faq', array(
     'uses' => 'StaticController@faq',

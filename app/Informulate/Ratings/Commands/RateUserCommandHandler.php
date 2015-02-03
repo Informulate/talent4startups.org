@@ -2,6 +2,8 @@
 
 use Informulate\Ratings\Rating;
 use Informulate\Ratings\RatingRepository;
+use Informulate\Users\ThreadRepository;
+use Informulate\Users\User;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
@@ -58,7 +60,7 @@ class RateUserCommandHandler implements CommandHandler
 			default:
 				$command->rated_type = 'Informulate\\Users\\User';
 				$command->rated_by_type = 'Informulate\\Startups\\Startup';
-                ThreadRepository::notification('talent.rating.talent', $user, array());
+                ThreadRepository::notification('talent.rating.talent', User::find($command->rated_id), array());
 				break;
 		}
 	}

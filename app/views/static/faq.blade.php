@@ -26,11 +26,11 @@
         </li>
         <li>
             <p><strong>I have a full time job, how can I contribute?</strong></p>
-            <p>At T4S, you are often working with other people who also have more than one commitment. As long as you are aligning with our <>community manifesto<link to community manifesto> your contributions will still be valuable.</p>
+            <p>At T4S, you are often working with other people who also have more than one commitment. As long as you are aligning with our {{ link_to_route('manifesto', 'community manifesto') }} your contributions will still be valuable.</p>
         </li>
         <li>
             <p><strong>I don’t have experience, how can I contribute?</strong></p>
-            <p>T4S is specifically designed to help people who are trained (paid or self) to practice their skills in real world projects. Familiarize yourself with our <> community manifesto <link> and make sure that you set appropriate and conservative expectations with your team. In an upcoming version, we will introduce mentors into the community but in the meantime make sure to seek out your own mentors who can help you get past roadblocks.</p>
+            <p>T4S is specifically designed to help people who are trained (paid or self) to practice their skills in real world projects. Familiarize yourself with our {{ link_to_route('manifesto', 'community manifesto') }} and make sure that you set appropriate and conservative expectations with your team. In an upcoming version, we will introduce mentors into the community but in the meantime make sure to seek out your own mentors who can help you get past roadblocks.</p>
         </li>
         <li>
             <p><strong>What do I need to bring?</strong></p>

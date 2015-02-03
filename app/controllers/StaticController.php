@@ -34,6 +34,17 @@ class StaticController extends \BaseController {
     }
 
     /**
+     * The manifesto page
+     * Get /manifesto
+     *
+     * @return Response
+     */
+    public function manifesto()
+    {
+        return View::make('static.manifesto');
+    }
+
+    /**
      * The FAQ page
      * Get /faq
      *
