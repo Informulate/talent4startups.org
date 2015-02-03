@@ -35,6 +35,7 @@
 	<div class="row">
 		<div class="col-md-12">
 
+			<div class="col-md-8">
 			@if($startup->owner == $currentUser)
 				<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
 				<h2>Member requests</h2>
@@ -53,7 +54,7 @@
 					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-notes-2"></span> {{ $need->skill->name }}</h4>
 					<div class="clearfix"></div>
 					@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
-						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
+						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
 					@endif
 					@foreach($need->tags as $tag)
 						<span class="badge">{{ $tag->name }}</span>
@@ -66,7 +67,9 @@
 					</p>
 				</div>
 			@endforeach
+			</div>
 
+			<div class="col-md-4">
 			<h2>Startup Contributors</h2>
 			@foreach($members as $user)
 				<div class="row contributor">
@@ -76,7 +79,10 @@
 						</div>
 						<div class="col-xs-10">
 							{{ $user->profile->first_name }} {{ $user->profile->last_name }}
-							<br/> TODO: Contribution Type
+							<br/> {{ $user->profile->skill->name }}
+							@if ($startup->owner == $user)
+								<strong>owner</strong>
+							@endif
 						</div>
 					</a>
 				</div>
@@ -86,7 +92,7 @@
 					</div>
 				</div>
 			@endforeach
-
+		</div>
 		</div>
 	</div>
 	@include('layouts.partials.socialshare')

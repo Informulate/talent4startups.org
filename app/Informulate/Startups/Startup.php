@@ -78,7 +78,6 @@ class Startup extends Eloquent
 				DB::table('startup_user')
 					->where('startup_id', $this->id)
 					->where('user_id', $user->id)
-					->where('status', 'approved')
 					->first()
 			);
 		}

@@ -127,7 +127,7 @@ Event::listen('Informulate.Startups.Events.UserJoined', function (UserJoined $us
 
 Event::listen('Informulate.Startups.Events.UserLeft', function (UserLeft $userLeft) {
     ThreadRepository::notification('startup.left.talent', $userLeft->user, array('startup' => $userLeft->startup));
-    ThreadRepository::notification('startup.left.group', $userLeft->startup->members, array('startup' => $userLeft->startup, 'talent' => $userLeft->user));
+    ThreadRepository::notification('startup.left.founder', $userLeft->startup->owner, array('startup' => $userLeft->startup, 'talent' => $userLeft->user));
 });
 
 Event::listen('Informulate.Startups.Events.UserDenied', function (UserDenied $userDenied) {
