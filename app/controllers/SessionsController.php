@@ -87,6 +87,9 @@ class SessionsController extends BaseController
 						return Redirect::route('startups.edit', ['url' => $startup->url]);
 					}
 				}
+				if (!empty($user->startups[0]->needs[0]->skill_id)) {
+					return Redirect::route('talents.index', ['describes' => $user->startups[0]->needs[0]->skill_id]);
+				}
 			} elseif ($user->type === 'talent') {
 				if (!empty($user->profile->skill_id)) {
 					return Redirect::route('startups.index', ['needs' => $user->profile->skill_id]);
@@ -97,7 +100,7 @@ class SessionsController extends BaseController
 				}
 			}
 
-			return Redirect::route('profile_path', ['username' => $user->username]);
+			return Redirect::route('profile_path', ['username' => $user->id]);
 		}
 
 		return Redirect::to('login')->with('email', $formData['email'])->with('error', 'Wrong email/password entered.');
@@ -194,7 +197,7 @@ class SessionsController extends BaseController
 					}
 				}
 
-				return Redirect::route('profile_path', ['username' => $user->username]);
+				return Redirect::route('profile_path', ['username' => $user->id]);
 			}
 		}
 

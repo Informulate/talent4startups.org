@@ -85,9 +85,11 @@ class StartupRepository
 		$results = Startup::where('published', '=', true);
 
 		if ($tag) {
-			$results->whereHas('tags', function ($q) use ($tag) {
-				$q->where('tags.name', '=', $tag);
-			});
+			$results->join('needs', 'startups.id', '=', 'needs.startup_id')
+				->join('need_tag', 'need_tag.need_id', '=', 'needs.id')
+				->join('tags', 'need_tag.tag_id', '=', 'tags.id')
+				->where('tags.name', '=', $tag)
+				->select('startups.*');
 		}
 
 		if ($needs) {

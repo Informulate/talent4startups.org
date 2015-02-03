@@ -96,6 +96,18 @@
 					</div>
 				</div>
 			@endforeach
+				<div class="row contributor">
+					<a href="{{ route('profile_path', $startup->owner->id) }}">
+						<div class="col-xs-2">
+							<img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($startup->owner->email))) ?>?s=50&d=wavatar">
+						</div>
+						<div class="col-xs-10">
+							{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
+							<br/> {{ $startup->owner->profile->skill->name }}
+								<strong>owner</strong>
+						</div>
+					</a>
+				</div>
 		</div>
 		</div>
 	</div>

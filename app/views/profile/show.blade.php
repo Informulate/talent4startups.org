@@ -11,10 +11,17 @@
 		</div>
 	</div>
     <div class="pull-left">
-        <a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a>
 		@if ($currentUser->id == $user->id)
-			<a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a>
+			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
 		@endif
+		<p><a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a></p>
+		<div>
+			{{Form::open(['route' => 'invite_to_startup'])}}
+			{{ Form::hidden('user_id', $user->id) }}
+			{{ Form::submit('Invite To', ['class' => 'btn btn-primary']) }}
+			{{ Form::select('startup_id', $currentUser->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) }}
+			{{Form::close()}}
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
