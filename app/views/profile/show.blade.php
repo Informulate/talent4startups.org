@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			@if (!empty($user->profile->image))
-			<img class="img-responsive" src="/images/upload/{{ $user->profile->image }}" alt=""  height="250"/>
+			<img class="img-circle img-responsive img-rounded" src="/images/upload/{{ $user->profile->image }}" alt=""  height="250"/>
 			@else
 			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=mm">
 			@endif
