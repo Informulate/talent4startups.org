@@ -1,5 +1,7 @@
 <?php namespace Informulate\Users;
 
+use Illuminate\Support\Facades\Input;
+
 class ProfileRepository
 {
 	const TAG_CLASS = 'Informulate\\Tags\\Tag';
@@ -45,5 +47,19 @@ class ProfileRepository
 
 		$profile->{$property}()->detach();
 		$profile->{$property}()->attach($itemList);
+	}
+
+	public function updateImage(Profile $profile, $image)
+	{
+		$image = Input::file('image');
+		if (!empty($profile->image)) {
+			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $profile->image);
+		}
+
+		$newPath = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload';
+		$newName = $profile->id . '_t.' . $image->getClientOriginalExtension();
+		$image->move($newPath, $newName);
+		$profile->image = $newName;
+		$profile->save();
 	}
 }

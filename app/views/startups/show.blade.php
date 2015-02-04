@@ -14,7 +14,7 @@
 			@if ($startup->image)
 				<img src="/images/upload/{{ $startup->image }}" alt="...">
 			@else
-				<img data-src="holder.js/750x300" alt="...">
+				<img data-src="holder.js/300x300/text: " alt="...">
 			@endif
 
 
@@ -79,10 +79,14 @@
 			<h2>Startup Contributors</h2>
 			<div class="row contributor">
 				<a href="{{ route('profile_path', $startup->owner->id) }}">
-					<div class="col-xs-2">
-						<img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($startup->owner->email))) ?>?s=50&d=wavatar">
+					<div class="col-xs-4">
+						@if (!empty($startup->owner->profile->image))
+							<img class="img-responsive" src="/images/upload/{{ $startup->owner->profile->image }}" alt=""/>
+						@else
+							<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $startup->owner->email ) ) ) ?>?s=150&d=mm">
+						@endif
 					</div>
-					<div class="col-xs-10">
+					<div class="col-xs-8">
 						{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
 						<br/> {{ $startup->owner->profile->skill->name }}
 						<strong>owner</strong>
@@ -92,10 +96,14 @@
 			@foreach($members as $user)
 				<div class="row contributor">
 					<a href="{{ route('profile_path', $user->id) }}">
-						<div class="col-xs-2">
-							<img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user->email))) ?>?s=50&d=wavatar">
+						<div class="col-xs-4">
+							@if (!empty($user->profile->image))
+								<img class="img-responsive" src="/images/upload/{{ $user->profile->image }}" alt=""/>
+							@else
+								<img class="img-circle img-responsive" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=mm">
+							@endif
 						</div>
-						<div class="col-xs-10">
+						<div class="col-xs-8">
 							{{ $user->profile->first_name }} {{ $user->profile->last_name }}
 							<br/> {{ $user->profile->skill->name }}
 							@if ($startup->owner == $user)

@@ -171,6 +171,10 @@ Route::get('knowledge-base', array(
     'uses' => 'StaticController@knowledgebase',
     'as' => 'knowledgebase'
 ));
+Route::get('terms', array(
+	'uses' => 'StaticController@about',
+	'as' => 'terms'
+));
 
 
 /**

@@ -8,7 +8,7 @@
 
         <h3>{{ $subject }}</h3>
 		<div>
-			{{ $body }}
+			{{ nl2br($body) }}
 		</div>
 	</body>
 </html>

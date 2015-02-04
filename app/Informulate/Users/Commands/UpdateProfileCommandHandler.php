@@ -40,6 +40,10 @@ class UpdateProfileCommandHandler implements CommandHandler
 			$this->repository->updateSkills($profile, $command->profileInfo['skills']);
 		}
 
+		if (!empty($command->profileInfo['image'])) {
+			$this->repository->updateImage($profile, $command->profileInfo['image']);
+		}
+
 		$this->dispatchEventsFor($profile);
 
 		return $profile;
