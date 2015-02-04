@@ -52,7 +52,7 @@ class StartupController extends BaseController
 			// Temporary lock per request on ticket #111
 			return View::make('layouts.partials.login-required')->render();
 		}
-		
+
 		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
 
 		if (Request::ajax()) {
@@ -102,6 +102,11 @@ class StartupController extends BaseController
 	 */
 	public function show($startup)
 	{
+		if (!Auth::User()) {
+			// Temporary lock per request on ticket #111
+			return View::make('layouts.partials.login-required')->render();
+		}
+
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 		$requests = $startup->members()->where('status', 'pending')->get();
 		$members = $startup->members()->where('status', 'approved')->get();

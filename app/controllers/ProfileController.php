@@ -53,6 +53,11 @@ class ProfileController extends BaseController
 	 */
 	public function show($id)
 	{
+		if (!Auth::User()) {
+			// Temporary lock per request on ticket #111
+			return View::make('layouts.partials.login-required')->render();
+		}
+
 		$user = User::find($id);
 
 		return View::make('profile.show')->with('user', $user)->with('startups', $user->startups)->with('contributions', $user->contributions);
