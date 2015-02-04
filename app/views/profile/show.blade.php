@@ -22,19 +22,23 @@
 		<div>
 			{{Form::open(['route' => 'invite_to_startup'])}}
 			{{ Form::hidden('user_id', $user->id) }}
+			@if ($currentUser->startups()->lists('name','id') > 0)
 			{{ Form::submit('Invite To', ['class' => 'btn btn-primary']) }}
 			{{ Form::select('startup_id', $currentUser->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) }}
+			@endif
 			{{Form::close()}}
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>My Interests</h2>
-			@if(count($user->profile->skills) > 0)
-				@foreach($user->profile->skills as $skill)
-					<a href="#"><span class="badge">{{ $skill->name }}</span></a>
+			@if(count($user->profile->tags) > 0)
+				@foreach($user->profile->tags as $tag)
+					<a href="#"><span class="badge">{{ $tag->name }}</span></a>
 				@endforeach
 			@endif
+
+			<p> {{ $user->profile->about }}</p>
 		</div>
 	</div>
 	<div class="row">
