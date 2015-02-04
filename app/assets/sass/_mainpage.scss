@@ -39,6 +39,11 @@ body {
 
 .thumbnail {
   height: 550px;
+  overflow: hidden;
+}
+
+.thumbnail .caption {
+  margin-bottom: 35px;
 }
 
 .thumbnail .btn-primary {

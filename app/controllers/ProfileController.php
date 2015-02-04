@@ -1,15 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProfileForm;
 use Informulate\Forms\ResetForm;
 use Informulate\Core\CommandBus;
 use Informulate\Users\Commands\UpdateProfileCommand;
+use Informulate\Users\ThreadRepository;
 use Informulate\Users\User;
 use Informulate\Startups\Startup;
 use Informulate\Tags\Tag;
 use Informulate\Users\UserRepository;
 use Informulate\Skills\Skill;
+use Laracasts\Flash\Flash;
 
 class ProfileController extends BaseController
 {
@@ -100,6 +103,21 @@ class ProfileController extends BaseController
 		}
 
 		return Redirect::intended('/');
+	}
+
+	/**
+	 * Invite the user to a startup
+	 */
+	public function invite()
+	{
+		$userTo = User::findOrFail(Input::get('user_id'));
+		$startup = Startup::findOrFail(Input::get('startup_id'));
+		$userFrom = Auth::user();
+		ThreadRepository::notification('startup.join.invite.talent', $userTo, array('startup' => $startup, 'fromUser' => $userFrom));
+
+		Flash::message('You have successfully invited ' . $userTo->profile->first_name);
+
+		return Redirect::intended('/users/' . $userTo->id);
 	}
 
 	/**

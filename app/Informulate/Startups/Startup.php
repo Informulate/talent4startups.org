@@ -40,7 +40,7 @@ class Startup extends Eloquent
 		$startup->name = $attributes['name'];
 		$startup->description = $attributes['description'];
 		$startup->url = $slugify->slugify($attributes['name']);
-//		$startup->stage_id = $attributes['stage_id'];
+		$startup->stage_id = $attributes['stage_id'];
 		$startup->video = $attributes['video'];
 		$startup->published = true;
 

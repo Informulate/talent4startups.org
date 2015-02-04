@@ -101,6 +101,10 @@ Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'
 ]);
+Route::post('/profile/invite/', [
+	'as' => 'invite_to_startup',
+	'uses' => 'ProfileController@invite'
+]);
 
 
 /**

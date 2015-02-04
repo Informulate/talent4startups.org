@@ -17,11 +17,18 @@
 				<img data-src="holder.js/750x300" alt="...">
 			@endif
 
+
+			<div>
+				@foreach($startup->tags as $tag)
+					<span class="badge">{{ $tag->name }}</span> &nbsp;
+				@endforeach
+			</div>
+
 			<p>{{ $startup->description }}</p>
 
 			@if($startup->hasMember($currentUser))
 				@if($startup->hasPendingInvitationFrom($currentUser))
-					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}">cancel this request?</a>
+					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-default">cancel this request?</a>
 				@endif
 			@endif
 
@@ -29,11 +36,6 @@
 				<a class="btn btn-primary" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
 			@endif
 
-			<div>
-				@foreach($startup->tags as $tag)
-					<span class="badge">{{ $tag->name }}</span> &nbsp;
-				@endforeach
-			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -55,7 +57,7 @@
 
 			@foreach($startup->needs as $need)
 				<div class="startup-need">
-					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-notes-2"></span> {{ $need->skill->name }}</h4>
+					<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-chevron-right"></span> {{ $need->skill->name }}</h4>
 					<div class="clearfix"></div>
 					@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
 						<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
@@ -75,6 +77,18 @@
 
 			<div class="col-md-4">
 			<h2>Startup Contributors</h2>
+			<div class="row contributor">
+				<a href="{{ route('profile_path', $startup->owner->id) }}">
+					<div class="col-xs-2">
+						<img class="img-circle" src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($startup->owner->email))) ?>?s=50&d=wavatar">
+					</div>
+					<div class="col-xs-10">
+						{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
+						<br/> {{ $startup->owner->profile->skill->name }}
+						<strong>owner</strong>
+					</div>
+				</a>
+			</div>
 			@foreach($members as $user)
 				<div class="row contributor">
 					<a href="{{ route('profile_path', $user->id) }}">
