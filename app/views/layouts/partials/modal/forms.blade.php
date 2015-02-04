@@ -16,7 +16,7 @@
 								<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Sign In with LinkedIn</a>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row email-signin">
 							<div class="col-sm-12">
 								<a href="{{ route('login_path') }}">Or Sign in with email instead</a>
 							</div>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<input id="agree" type="checkbox" value="agree"/> I agree to the Terms of Use and am ready to get started.<br/>
+								<input id="agree" type="checkbox" value="agree"/> I agree to the {{ link_to('/terms', 'Terms of Use') }}, have read the {{ link_to('/privacy', 'Privacy Policy') }}, and am ready to get started.<br/>
 								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
@@ -111,7 +111,7 @@
 		 * @returns {string}
 		 */
 		function getType() {
-			return $('#talent').hasClass('text-primary') ? 'talent' : 'startup';
+			return $('#talent').parent().hasClass('text-primary') ? 'talent' : 'startup';
 		}
 	});
 </script>

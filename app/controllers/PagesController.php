@@ -14,6 +14,7 @@ class PagesController extends \BaseController {
 		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 2);
 
 		if (Auth::check()) {
+			return Redirect::to('/users/' . Auth::user()->id);
 			return View::make('pages.dashboard')
 				->with('myStartups', Auth::user()->startups)
 				->with('contributions', Auth::user()->contributions)
