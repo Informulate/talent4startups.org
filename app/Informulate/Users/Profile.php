@@ -74,6 +74,7 @@ class Profile extends Eloquent
 		$profile->user_id = $user->id;
 
 		if ($isNew) {
+			$profile->save();
 			$user->profile = $profile;
 			Event::fire('Informulate.Users.Events.ProfileCreated', array(new ProfileCreated($user)));
 		}

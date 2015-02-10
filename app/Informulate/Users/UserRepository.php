@@ -90,6 +90,9 @@ class UserRepository
 
         if (!$isAdmin) {
             $startups = Auth::user()->startups->lists('id');
+            if (empty($startups)) {
+                $startups = array(-1);
+            }
             $contributions = Auth::user()->contributions->lists('id');
             $startups = array_merge($startups, $contributions);
 

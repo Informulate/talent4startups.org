@@ -147,7 +147,7 @@ Event::listen('Informulate.Messenger.Events.NewMessage', function (NewMessage $n
 
     try {
         Mail::send('emails.message', array('subject' => $participant->thread->subject, 'body' => $participant->thread->latestMessage()->body), function ($message) use ($participant) {
-            $message->from('noreply@talent4startups.org')
+            $message->from('noreply@talent4startups.org', 'Talent4Startups')
                 ->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
                 ->subject($participant->thread->subject);
         });
