@@ -53,7 +53,7 @@ class ProfileRepository
 	{
 		$image = Input::file('image');
 		if (!empty($profile->image)) {
-			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $profile->image);
+			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $profile->image);
 		}
 
 		$newPath = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload';
