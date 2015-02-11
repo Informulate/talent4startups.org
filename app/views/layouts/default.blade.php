@@ -55,6 +55,7 @@
 
 	@yield('javascript')
 
+	@include('layouts.partials.tracking')
 	@include('layouts.partials.modal.forms')
 
 	</body>
