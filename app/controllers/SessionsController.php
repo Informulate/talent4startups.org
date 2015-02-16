@@ -49,6 +49,7 @@ class SessionsController extends BaseController
 		$formData = Input::only('email', 'password');
 		$this->signInForm->validate($formData);
 
+        // TODO: This controller method is doing way to much we need to abstract this and separate it into more manageable sections --jesusOmar
 		if (Auth::attempt($formData)) {
 			Flash::message('Welcome back to Talent4Startups!');
 
@@ -155,6 +156,7 @@ class SessionsController extends BaseController
 			if ($token) {
 				Auth::login($user);
 
+                // TODO: This clusterfudge needs to be refactor also --jesusOmar
 				if (is_null($user->profile) or empty($user->profile->first_name) or empty($user->profile->last_name) or empty($user->profile->about) or $user->profile->skill_id < 1) {
 					$requiredMessage = '<h3>Your profile is incomplete</h3>';
 					if (empty($user->profile->first_name)) $requiredMessage .= 'Please provide your first name.<br>';

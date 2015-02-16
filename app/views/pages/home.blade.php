@@ -39,11 +39,6 @@
 			</div>
 		@endforeach()
 	</div>
-	<div class="row feature">
-		<div class="col-sm-10 col-sm-offset-2">
-			<img src="https:////storage.googleapis.com/support-kms-prod/SNP_40CDC3FE322AB07CD3E5860E126FF906B05D_2922298_en_v3">
-		</div>
-	</div>
 	@include('layouts.partials.socialshare')
 @stop
 

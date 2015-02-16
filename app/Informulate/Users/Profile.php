@@ -67,11 +67,13 @@ class Profile extends Eloquent
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
 		$profile->youtube = array_key_exists('youtube', $attributes) ? $attributes['youtube'] : '';
-		// Quick hack to enable all talent profiles by default.
-		// TODO: This should be turned into a flag on the user's profile where they can activate or deactivate the visibility of their profiles
-		//$profile->published = array_key_exists('published', $attributes) ? true : false;
-		$profile->published = $user->type === 'talent';
+		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
+
+        // To prevent incomplete profiles from been shown, check if the main skill is missing.
+        if (is_null($profile->skill()) or $profile->skill_id == 0) {
+            $profile->published = false;
+        }
 
 		if ($isNew) {
 			$user->profile = $profile;
