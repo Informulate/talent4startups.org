@@ -1,5 +1,3 @@
-@import "compass/css3";
-@import "compass/utilities";
 
 $designer-color : #89b4dd;
 $developer-color : #f0ca84;
@@ -81,15 +79,12 @@ $project-color : #f0b4ad;
 
 .startup-need {
   border: 1px solid #bbb;
-  @include border-radius(10px);
   padding: 5px;
   padding-top: 0;
   margin: 5px 0;
 }
 
 .startup-need h4 {
-  @include border-top-left-radius(10px);
-  @include border-top-right-radius(10px);
   margin: 0px -5px 8px -5px !important;
   padding: 2px 5px;
 }
@@ -129,4 +124,26 @@ $project-color : #f0b4ad;
 .about img {
   height: 100px;
   margin-right: 5px;
+}
+
+.profile-image {
+  height: 250px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0px auto;
+}
+
+.profile-image-lg {
+  height: 300px;
+  width: 300px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.profile-image-sm {
+  height: 150px;
+  width: 150px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0px auto;
 }

@@ -12,7 +12,8 @@
 
 
 			@if ($startup->image)
-				<img src="/images/upload/{{ $startup->image }}" alt="...">
+				<div class="profile-image-lg" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
+				<div class="clearfix"></div>
 			@else
 				<img data-src="holder.js/300x300/text: " alt="...">
 			@endif
