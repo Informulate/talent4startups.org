@@ -4,11 +4,15 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
+			<div class="pull-right">
+			@include('layouts.partials.socialshare')
+			</div>
 			@if($startup->hasMember($currentUser))
 				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
 			@else
 				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
 			@endif
+
 
 
 			@if ($startup->image)
@@ -122,7 +126,6 @@
 		</div>
 		</div>
 	</div>
-	@include('layouts.partials.socialshare')
 @stop
 
 @section('javascript')
