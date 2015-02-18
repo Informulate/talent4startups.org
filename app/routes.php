@@ -97,6 +97,14 @@ Route::get('/users/{id}', [
 	'as' => 'profile_path',
 	'uses' => 'ProfileController@show'
 ]);
+Route::get('/profile/image', [
+	'as' => 'profile_image_path',
+	'uses' => 'ProfileController@image'
+]);
+Route::post('/profile/image', [
+	'as' => 'profile_image_path',
+	'uses' => 'ProfileController@image'
+]);
 Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'
