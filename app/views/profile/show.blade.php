@@ -12,6 +12,7 @@
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
+			@include('layouts.partials.socialshare')
 		</div>
 	</div>
 	<div class="pull-left">
@@ -78,7 +79,6 @@
 				</div>
 			@endif
 		</div>
-		@include('layouts.partials.socialshare')
 	</div>
 @stop
 
