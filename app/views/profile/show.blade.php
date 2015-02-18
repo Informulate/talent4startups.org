@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			@if (!empty($user->profile->image))
-				<div class="profile-image" style="background-image: url('/images/upload/{{ $user->profile->image }}')"></div>
+			<img class="img-circle img-responsive img-rounded" src="/images/upload/{{ $user->profile->image }}" alt=""  height="150" width="150"/>
 			@else
 			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=mm">
 			@endif
@@ -15,27 +15,28 @@
 			@include('layouts.partials.socialshare')
 		</div>
 	</div>
-    <div class="pull-left">
+	<div class="pull-left">
 		@if ($currentUser->id == $user->id)
 			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
+		@else
+			<p><a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a></p>
+			<div>
+				{{Form::open(['route' => 'invite_to_startup'])}}
+				{{ Form::hidden('user_id', $user->id) }}
+				@if ($currentUser->startups()->lists('name','id') > 0)
+					{{ Form::submit('Invite To', ['class' => 'btn btn-primary']) }}
+					{{ Form::select('startup_id', $currentUser->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) }}
+				@endif
+				{{Form::close()}}
+			</div>
 		@endif
-		<p><a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a></p>
-		<div>
-			{{Form::open(['route' => 'invite_to_startup'])}}
-			{{ Form::hidden('user_id', $user->id) }}
-			@if ($currentUser->startups()->lists('name','id') > 0)
-			{{ Form::submit('Invite To', ['class' => 'btn btn-primary']) }}
-			{{ Form::select('startup_id', $currentUser->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) }}
-			@endif
-			{{Form::close()}}
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>My Interests</h2>
 			@if(count($user->profile->tags) > 0)
 				@foreach($user->profile->tags as $tag)
-					<a href="#"><span class="badge">{{ $tag->name }}</span></a>
+					<a href="{{{ route('talents.index') }}}?tag={{ $tag->name }}"><span class="badge">{{ $tag->name }}</span></a>
 				@endforeach
 			@endif
 

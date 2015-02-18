@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Informulate\Forms\ProfileForm;
 use Informulate\Forms\ResetForm;
 use Informulate\Core\CommandBus;
@@ -67,6 +66,26 @@ class ProfileController extends BaseController
 	}
 
 	/**
+	 * @return $this
+	 */
+	public function image()
+	{
+		$user = Auth::User();
+
+		if (Request::method() === 'POST') {
+			$src = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $user->profile->image;
+
+			$image = Image::make($src);
+			$image->crop(Input::get('w'), Input::get('h'), Input::get('x'), Input::get('y'));
+			$image->save($src);
+
+			return Redirect::route('profile_path', ['id' => $user->id]);
+		}
+
+		return View::make('profile.image')->with('user', $user);
+	}
+
+	/**
 	 * Show the form for creating a user profile.
 	 *
 	 * @return Response
@@ -84,17 +103,22 @@ class ProfileController extends BaseController
 	 */
 	public function store()
 	{
-		$this->profileForm->validate(Input::all());
+		$data = Input::all();
+		$this->profileForm->validate($data);
 
 		$this->execute(
-			new UpdateProfileCommand(Auth::user(), Input::all())
+			new UpdateProfileCommand(Auth::user(), $data)
 		);
+
+		if ($data['image']) {
+			return Redirect::route('profile_image_path');
+		}
 
 		Flash::message('Your profile has been updated successfully!');
 
 		if (Input::get('type') == 'startup') {
 
-			// redirect to create projct if no project added by startup yet.
+			// redirect to create project if no project added by startup yet.
 			$projectsCount = Startup::where('user_id', '=', Auth::user()->id)->count();
 
 			if ($projectsCount == 0) {
