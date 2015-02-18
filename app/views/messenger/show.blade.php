@@ -7,6 +7,8 @@
         </div>
         <h1>{{$thread->subject}}</h1>
 
+        <hr />
+
         @foreach($messages as $message)
             <div class="media">
                 @if ($message->type == 'message')
