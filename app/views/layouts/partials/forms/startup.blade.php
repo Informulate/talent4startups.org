@@ -10,6 +10,7 @@
 
 <div class="form-group">
 	{{ Form::label('description', 'Description:') }}
+    <small>1000 character limit</small>
 	{{ Form::textarea('description', null, ['class' => 'form-control']) }}
 </div>
 
