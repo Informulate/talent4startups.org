@@ -42,6 +42,10 @@ class Startup extends Eloquent
 		$startup->url = $slugify->slugify($attributes['name']);
 		$startup->stage_id = $attributes['stage_id'];
 		$startup->video = $attributes['video'];
+		$startup->twitter = $attributes['twitter'];
+		$startup->linked_in = $attributes['linked_in'];
+		$startup->facebook = $attributes['facebook'];
+		$startup->website = $attributes['website'];
 		$startup->published = true;
 
 		return $startup;

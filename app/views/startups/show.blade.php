@@ -22,6 +22,23 @@
 				<img data-src="holder.js/300x300/text: " alt="...">
 			@endif
 
+			<div class="social-links">
+				@if ($startup->website)
+					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank" rel="nofollow">Website</a> </p>
+				@endif
+
+				@if ($startup->linked_in)
+					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank" rel="nofollow">LinkedIn</a></p>
+				@endif
+
+				@if ($startup->facebook)
+					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank" rel="nofollow">Facebook</a></p>
+				@endif
+
+				@if ($startup->twitter)
+					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank" rel="nofollow">Twitter</a></p>
+				@endif
+			</div>
 
 			<div>
 				@foreach($startup->tags as $tag)

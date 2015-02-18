@@ -55,6 +55,26 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('facebook', 'Facebook:') }}
+    {{ Form::text('facebook', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('twitter', 'Twitter Username:') }}
+    {{ Form::text('twitter', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('linked_in', 'LinkedIn:') }}
+    {{ Form::text('linked_in', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+    {{ Form::label('website', 'Website:') }}
+    {{ Form::text('website', null, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
 	{{ Form::submit( isset( $startup ) ? 'Update Project' : 'Save Project', ['id' => 'submit-startup','class' => 'btn btn-primary']) }}
 </div>
 
