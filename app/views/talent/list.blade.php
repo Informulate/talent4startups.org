@@ -24,11 +24,6 @@
 						</div>
 					</div>
 				@else
-					<div class="col-sm-12 adsense center-block">
-						<div>
-							<img class="center-block" src="http://lh6.ggpht.com/41LFWBytPnxKsfZf6mivs6ba7qdOBtfk9-7MzWSMqwC3IFOvaXd8rejFiyeXKfBOK16mMEopeA=w716">
-						</div>
-					</div>
 				@endif
 
 				<div class="clearfix"></div>

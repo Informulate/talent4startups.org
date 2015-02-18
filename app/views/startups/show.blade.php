@@ -4,6 +4,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
+			<div class="pull-right">
+			@include('layouts.partials.socialshare')
+			</div>
 			@if($startup->hasMember($currentUser))
 				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
 			@else
@@ -11,12 +14,31 @@
 			@endif
 
 
+
 			@if ($startup->image)
-				<img src="/images/upload/{{ $startup->image }}" alt="...">
+				<div class="profile-image-lg" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
+				<div class="clearfix"></div>
 			@else
 				<img data-src="holder.js/300x300/text: " alt="...">
 			@endif
 
+			<div class="social-links">
+				@if ($startup->website)
+					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank" rel="nofollow">Website</a> </p>
+				@endif
+
+				@if ($startup->linked_in)
+					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank" rel="nofollow">LinkedIn</a></p>
+				@endif
+
+				@if ($startup->facebook)
+					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank" rel="nofollow">Facebook</a></p>
+				@endif
+
+				@if ($startup->twitter)
+					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank" rel="nofollow">Twitter</a></p>
+				@endif
+			</div>
 
 			<div>
 				@foreach($startup->tags as $tag)
@@ -121,7 +143,6 @@
 		</div>
 		</div>
 	</div>
-	@include('layouts.partials.socialshare')
 @stop
 
 @section('javascript')

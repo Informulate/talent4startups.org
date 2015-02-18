@@ -65,7 +65,7 @@ class StartupRepository
 	{
 		$image = Input::file('image');
 		if (!empty($startup->image)) {
-			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $startup->image);
+			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $startup->image);
 		}
 
 		$newPath = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload';

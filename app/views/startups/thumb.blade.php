@@ -1,7 +1,7 @@
 <div class="thumbnail startups">
 	<a href="{{ route('startups.show', $startup->url) }}">
 		@if ($startup->image)
-			<img src="/images/upload/{{ $startup->image }}" alt="...">
+			<div class="profile-image" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
 		@else
 			<img data-src="holder.js/250x250" alt="...">
 		@endif
