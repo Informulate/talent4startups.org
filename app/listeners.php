@@ -7,6 +7,17 @@
 |
 */
 
+use Informulate\Messenger\Events\NewMessage;
+use Informulate\Ratings\Events\StartupRated;
+use Informulate\Ratings\Events\UserRated;
+use Informulate\Startups\Events\StartupCreated;
+use Informulate\Startups\Events\UserApplied;
+use Informulate\Startups\Events\UserDenied;
+use Informulate\Startups\Events\UserJoined;
+use Informulate\Startups\Events\UserLeft;
+use Informulate\Users\Events\ProfileCreated;
+use Informulate\Users\ThreadRepository;
+
 Event::listen('Informulate.Users.Events.ProfileCreated', function (ProfileCreated $profileCreated) {
 	switch ($profileCreated->user->type) {
 		case 'talent':
