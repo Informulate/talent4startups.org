@@ -1,9 +1,9 @@
 <div class="thumbnail">
 	<a href="{{ route('profile_path', $talent->id) }}">
 		@if (!empty($talent->profile->image))
-			<div class="profile-image-sm" style="background-image: url('/images/upload/{{ $talent->profile->image }}')"></div>
+			<img class="img-responsive" src="{{{ asset('images/upload/'.$talent->profile->image) }}}" width="250" height="250">
 		@else
-			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=150&d=mm">
+			<img class="img-responsive" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=250&d=mm">
 		@endif
 	</a>
 
