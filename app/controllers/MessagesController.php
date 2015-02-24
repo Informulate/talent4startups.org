@@ -81,7 +81,7 @@ class MessagesController extends BaseController
 		$users = User::where('id', '!=', Auth::id())->get();
 
 		if (!empty($recipient)) {
-			$recipient = User::where('username', '=', $recipient)->first();
+			$recipient = User::where('id', '=', $recipient)->first();
 		} else {
 			$recipient = new User();
 		}
@@ -129,9 +129,9 @@ class MessagesController extends BaseController
 
 			foreach ($recipients as $recipient) {
 				// Until further notice, remove the check to see if the participant is allowed to message each other
-//                if (UserRepository::canMessage($recipient)) {
+//				if (UserRepository::canMessage($recipient)) {
 					$recipientsAllowed[] = $recipient;
-//                }
+//				}
 			}
 
 			$thread->addParticipants($recipientsAllowed);

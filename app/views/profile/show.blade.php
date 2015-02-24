@@ -19,7 +19,7 @@
 		@if ($currentUser->id == $user->id)
 			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
 		@else
-			<p><a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a></p>
+			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
 			<div>
 				{{Form::open(['route' => 'invite_to_startup'])}}
 				{{ Form::hidden('user_id', $user->id) }}
