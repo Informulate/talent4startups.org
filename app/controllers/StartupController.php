@@ -108,6 +108,11 @@ class StartupController extends BaseController
 		}
 
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
+
+		if (Auth::User() != $startup->owner and $startup->published == false) {
+			App::abort(404);
+		}
+
 		$requests = $startup->members()->where('status', 'pending')->get();
 		$members = $startup->members()->where('status', 'approved')->get();
 
