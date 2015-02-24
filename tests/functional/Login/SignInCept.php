@@ -9,4 +9,4 @@ $I->signIn();
 
 $I->amOnPage('/profile');
 $I->assertTrue(Auth::check());
-$I->see('Welcome back to Talent4Startups!');
+$I->see('Your profile is incomplete');

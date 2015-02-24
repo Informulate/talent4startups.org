@@ -37,13 +37,14 @@ $I->dontSeeRecord('profiles', [
 
 $I->fillField('First Name:', 'Jane');
 $I->fillField('Last Name:', 'Doe');
+$I->fillField('location', 'Orlando, FL');
 $I->selectOption('#describe', '1');
 $I->fillField('skills', 'php');
 $I->fillField('about', 'This is my about summary');
 $I->click('#submit-profile');
 
-//$I->amOnPage('/startups/create');
-//$I->seeRecord('profiles', [
-//	'first_name' => 'Jane',
-//	'last_name' => 'Doe'
-//]);
+$I->amOnPage('/startups/create');
+$I->seeRecord('profiles', [
+	'first_name' => 'Jane',
+	'last_name' => 'Doe'
+]);
