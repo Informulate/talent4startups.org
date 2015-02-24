@@ -49,12 +49,19 @@ class SessionsController extends BaseController
 		$formData = Input::only('email', 'password');
 		$this->signInForm->validate($formData);
 
-        // TODO: This controller method is doing way to much we need to abstract this and separate it into more manageable sections --jesusOmar
+		// TODO: This controller method is doing way to much we need to abstract this and separate it into more manageable sections --jesusOmar
 		if (Auth::attempt($formData)) {
+			$user = Auth::user();
+
+			if ($user->banned) {
+				Auth::logout();
+				return Redirect::to('login')->with('email', $formData['email'])->with('error', 'Account banned!');
+			}
+
 			Flash::message('Welcome back to Talent4Startups!');
 
 			// If the user is missing it's profile, force them to update their details
-			$user = Auth::user();
+
 
 			if (is_null($user->profile) or empty($user->profile->first_name) or empty($user->profile->last_name) or empty($user->profile->about) or $user->profile->skill_id < 1) {
 				$requiredMessage = '<h3>Your profile is incomplete</h3>';
@@ -64,18 +71,18 @@ class SessionsController extends BaseController
 				if ($user->profile && $user->profile->skill_id < 1) $requiredMessage .= 'Please pick a role that best describes you.<br>';
 				Flash::message($requiredMessage);
 				return Redirect::to('profile');
-			} elseif ($user->type === 'talent' && count($user->startups) > 0 ) {
+			} elseif ($user->type === 'talent' && count($user->startups) > 0) {
 				return Redirect::route('startups.show', ['url' => $user->startups[0]->url]);
 			} elseif ($user->type === 'startup' && count($user->startups) == 0) {
 				return Redirect::route('startups.create');
 			} elseif ($user->type === 'startup' && count($user->startups) > 0) {
 				$requiredMessage = '<h3>Your startup details are incomplete</h3>';
 				foreach ($user->startups as $index => $startup) {
-					if(empty($startup->name) or empty($startup->description) or $startup->stage_id < 1 or count($user->startups[$index]->needs) < 1) {
-						if(empty($startup->name)) {
+					if (empty($startup->name) or empty($startup->description) or $startup->stage_id < 1 or count($user->startups[$index]->needs) < 1) {
+						if (empty($startup->name)) {
 							$requiredMessage .= 'Give your startup project a clear name to get team members interested.<br>';
 						}
-						if(empty($startup->description)) {
+						if (empty($startup->description)) {
 							$requiredMessage .= 'Please describe your idea simply and clearly.<br>';
 						}
 						if ($startup->stage_id < 1) {
@@ -125,6 +132,11 @@ class SessionsController extends BaseController
 			$email = json_decode($linkedInService->request('/people/~/email-address?format=json'), true);
 			$user = User::where('email', '=', $email)->first();
 
+			if ($user->banned) {
+				Auth::logout();
+				return Redirect::to('login')->with('error', 'Account banned!');
+			}
+
 			if (is_null($user) and $token) {
 				if (is_null($type)) {
 					Session::put('email', $email);
@@ -156,7 +168,7 @@ class SessionsController extends BaseController
 			if ($token) {
 				Auth::login($user);
 
-                // TODO: This clusterfudge needs to be refactor also --jesusOmar
+				// TODO: This clusterfudge needs to be refactor also --jesusOmar
 				if (is_null($user->profile) or empty($user->profile->first_name) or empty($user->profile->last_name) or empty($user->profile->about) or $user->profile->skill_id < 1) {
 					$requiredMessage = '<h3>Your profile is incomplete</h3>';
 					if (empty($user->profile->first_name)) $requiredMessage .= 'Please provide your first name.<br>';
@@ -165,18 +177,18 @@ class SessionsController extends BaseController
 					if ($user->profile && $user->profile->skill_id < 1) $requiredMessage .= 'Please pick a role that best describes you.<br>';
 					Flash::message($requiredMessage);
 					return Redirect::to('profile');
-				} elseif ($user->type === 'talent' && count($user->startups) > 0 ) {
+				} elseif ($user->type === 'talent' && count($user->startups) > 0) {
 					return Redirect::route('startups.show', ['url' => $user->startups[0]->url]);
 				} elseif ($user->type === 'startup' && count($user->startups) == 0) {
 					return Redirect::route('startups.create');
 				} elseif ($user->type === 'startup' && count($user->startups) > 0) {
 					$requiredMessage = '<h3>Your startup details are incomplete</h3>';
 					foreach ($user->startups as $index => $startup) {
-						if(empty($startup->name) or empty($startup->description) or $startup->stage_id < 1 or count($user->startups[$index]->needs) < 1) {
-							if(empty($startup->name)) {
+						if (empty($startup->name) or empty($startup->description) or $startup->stage_id < 1 or count($user->startups[$index]->needs) < 1) {
+							if (empty($startup->name)) {
 								$requiredMessage .= 'Give your startup project a clear name to get team members interested.<br>';
 							}
-							if(empty($startup->description)) {
+							if (empty($startup->description)) {
 								$requiredMessage .= 'Please describe your idea simply and clearly.<br>';
 							}
 							if ($startup->stage_id < 1) {
