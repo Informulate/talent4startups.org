@@ -110,7 +110,7 @@ class ProfileController extends BaseController
 			new UpdateProfileCommand(Auth::user(), $data)
 		);
 
-		if ($data['image']) {
+		if (array_key_exists('image', $data) and $data['image']) {
 			return Redirect::route('profile_image_path');
 		}
 

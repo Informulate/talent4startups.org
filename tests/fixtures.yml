@@ -5,9 +5,19 @@ Informulate\Users\User:
     created_at: $date
     updated_at: $date
 
+Informulate\Users\Profile:
+    first_name: $string
+    last_name: $string
+    user_id:
+        type: Informulate\Users\User
+    created_at: $date
+    updated_at: $date
+
 Informulate\Startups\Startup:
     user_id:
         type: Informulate\Users\User
+    skill_id:
+        type: Informulate\Skills\Skill
     name: $string
     description: $text
     created_at: $date

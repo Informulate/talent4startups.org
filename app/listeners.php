@@ -60,15 +60,18 @@ Event::listen('Informulate.Ratings.Events.UserRated', function (UserRated $userR
 });
 
 Event::listen('Informulate.Messenger.Events.NewMessage', function (NewMessage $newMessage) {
-	$participant = $newMessage->participant;
+	// To prevent codeception for hanging to long, only send the emails when in dev or prod
+	if (App::environment() !== 'testing') {
+		$participant = $newMessage->participant;
 
-	try {
-		Mail::send('emails.message', array('subject' => $participant->thread->subject, 'body' => $participant->thread->latestMessage()->body), function ($message) use ($participant) {
-			$message->from('noreply@talent4startups.org', 'Talent4Startups')
-				->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
-				->subject($participant->thread->subject);
-		});
-	} catch (Exception $e) {
+		try {
+			Mail::send('emails.message', array('subject' => $participant->thread->subject, 'body' => $participant->thread->latestMessage()->body), function ($message) use ($participant) {
+				$message->from('noreply@talent4startups.org', 'Talent4Startups')
+					->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
+					->subject($participant->thread->subject);
+			});
+		} catch (Exception $e) {
 
+		}
 	}
 });

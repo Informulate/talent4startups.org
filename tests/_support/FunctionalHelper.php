@@ -12,22 +12,25 @@ class FunctionalHelper extends \Codeception\Module
 
 	public function signIn()
 	{
-		$email = 'foo@example.com';
-		$password = 'foo';
+		$data = [
+			'email' => 'foo@example.com',
+			'password' => 'password',
+		];
 
-		$this->haveAnAccount(compact('email', 'password'));
+		$this->haveAnAccount($data);
 
 		$I = $this->getModule('Laravel4');
 
 		$I->amOnPage('/login');
-		$I->fillField('email', $email);
-		$I->fillField('Password:', $password);
+		$I->fillField('email', $data['email']);
+		$I->fillField('Password:', $data['password']);
 		$I->click('#submit-login');
 	}
 
 	public function createAProject($name, $description)
 	{
 		$I = $this->getModule('Laravel4');
+
 		$I->fillField('name', $name);
 		$I->fillField('description', $description);
 		$I->click('#submit-startup');
@@ -40,7 +43,20 @@ class FunctionalHelper extends \Codeception\Module
 
 	public function haveAnAccount($overrides = [])
 	{
-		return $this->have('Informulate\Users\User', $overrides);
+		$user = $this->have('Informulate\Users\User', $overrides);
+		$skill = $this->haveSkills();
+
+		$data = [
+			'first_name' => 'Foo',
+			'last_name' => 'Bar',
+			'user_id' => $user->id,
+			'skill_id' => $skill->id,
+		];
+
+		$profile = $this->have('Informulate\Users\Profile', $data);
+		$user->profile = $profile;
+
+		return $user;
 	}
 
 	public function haveSkills()
@@ -57,5 +73,4 @@ class FunctionalHelper extends \Codeception\Module
 
 		return $skills;
 	}
-
 }

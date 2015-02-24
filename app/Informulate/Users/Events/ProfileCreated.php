@@ -1,19 +1,25 @@
 <?php namespace Informulate\Users\Events;
 
+use Informulate\Users\Profile;
 use Informulate\Users\User;
 
 class ProfileCreated
 {
 	/**
-	 * @var User
+	 * @var Profile
+	 */
+	public $profile;
+	/**
+	 * @var User $user
 	 */
 	public $user;
 
 	/**
-	 * @param User $user
+	 * @param Profile $profile
 	 */
-	function __construct(User $user)
+	function __construct(Profile $profile)
 	{
-		$this->user = $user;
+		$this->profile = $profile;
+		$this->user = $profile->user;
 	}
 }
