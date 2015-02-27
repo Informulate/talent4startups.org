@@ -14,7 +14,6 @@ before_script:
 
 script:
   - php vendor/bin/codecept run
-  - php vendor/bin/codecept run functional
 
 notifications:
   slack: informulate:Io7yxfri2SwOzQ0h3KUG4OFB

@@ -13,7 +13,7 @@
 					<div class="carousel-caption">
 						<h1>Join the community. We do better, together!</h1>
 						<p id="sub-caption">Are you ready to take control?</p>
-						<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up for free</a></p>
+						<p><a class="btn btn-lg btn-primary signup-link" href="#" role="button">Sign up for free</a></p>
 					</div>
 				</div>
 			</div>
@@ -38,11 +38,6 @@
 				@include('talent.thumb')
 			</div>
 		@endforeach()
-	</div>
-	<div class="row feature">
-		<div class="col-sm-10 col-sm-offset-2">
-			<img src="https:////storage.googleapis.com/support-kms-prod/SNP_40CDC3FE322AB07CD3E5860E126FF906B05D_2922298_en_v3">
-		</div>
 	</div>
 	@include('layouts.partials.socialshare')
 @stop

@@ -1,6 +1,10 @@
 <div class="thumbnail">
 	<a href="{{ route('profile_path', $talent->id) }}">
-		<img src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($talent->email))) ?>?s=300&d=wavatar">
+		@if (!empty($talent->profile->image))
+			<img class="img-responsive" src="{{{ asset('images/upload/'.$talent->profile->image) }}}" width="250" height="250">
+		@else
+			<img class="img-responsive" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $talent->email ) ) ) ?>?s=250&d=mm">
+		@endif
 	</a>
 
 	<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}" }}>

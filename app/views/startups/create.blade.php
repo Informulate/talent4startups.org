@@ -12,7 +12,7 @@
 
 			@include('layouts.partials.errors')
 
-			{{ Form::open(['route' => ['startups.store'], 'method' => 'POST']) }}
+			{{ Form::open(['route' => ['startups.store'], 'method' => 'POST', 'files' => true]) }}
 				@include('layouts.partials.forms.startup')
 			{{ Form::close() }}
 		</div>
@@ -50,7 +50,7 @@
                 });
 
                 $(formClone).find('.remove').on('click', function() {
-                    $(this).parent('.need').remove();
+                    $(this).closest('.need').remove();
                 });
                 cloneIndex++;
 
@@ -73,7 +73,7 @@
             });
 
             $('.need .remove').on('click', function() {
-                $(this).parent('.need').remove();
+                $(this).closest('.need').remove();
             });
             $('.startup-needs .need .tags').select2({
                 'tags': [

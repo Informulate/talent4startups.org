@@ -5,6 +5,11 @@ Route::get('/', [
 	'uses' => 'PagesController@home'
 ]);
 
+Route::get('/launch', [
+	'as' => 'launch',
+	'uses' => 'PagesController@launch'
+]);
+
 /**
  * Registration!
  */
@@ -97,9 +102,21 @@ Route::get('/users/{id}', [
 	'as' => 'profile_path',
 	'uses' => 'ProfileController@show'
 ]);
+Route::get('/profile/image', [
+	'as' => 'profile_image_path',
+	'uses' => 'ProfileController@image'
+]);
+Route::post('/profile/image', [
+	'as' => 'profile_image_path',
+	'uses' => 'ProfileController@image'
+]);
 Route::post('profile', [
 	'as' => 'edit_profile',
 	'uses' => 'ProfileController@store'
+]);
+Route::post('/profile/invite/', [
+	'as' => 'invite_to_startup',
+	'uses' => 'ProfileController@invite'
 ]);
 
 
@@ -166,6 +183,10 @@ Route::get('sponsors', array(
 Route::get('knowledge-base', array(
     'uses' => 'StaticController@knowledgebase',
     'as' => 'knowledgebase'
+));
+Route::get('terms', array(
+	'uses' => 'StaticController@about',
+	'as' => 'terms'
 ));
 
 

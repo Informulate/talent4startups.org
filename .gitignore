@@ -1,6 +1,7 @@
 /app/config/development
 /bootstrap/compiled.php
 /vendor
+/public/images/upload/*
 composer.phar
 .env.local.php
 .env.php

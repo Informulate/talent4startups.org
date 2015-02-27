@@ -26,26 +26,26 @@ class UserRepository
 		return User::whereUsername($username)->first();
 	}
 
-    /**
-     * Returns a paginated list of all active talents
-     *
-     * @param null $tag
-     * @param null $skill
-     * @param null $location
-     * @param null $orderBy
-     * @param int $perPage
-     * @return \Illuminate\Pagination\Paginator
-     */
+	/**
+	 * Returns a paginated list of all active talents
+	 *
+	 * @param null $tag
+	 * @param null $skill
+	 * @param null $location
+	 * @param null $orderBy
+	 * @param int $perPage
+	 * @return \Illuminate\Pagination\Paginator
+	 */
 	public function findActiveTalents($tag = null, $skill = null, $location = null, $orderBy = null, $perPage = 12)
 	{
 		$results = User::whereHas('profile', function ($q) use ($tag, $skill, $location, $orderBy) {
 			$q->where('published', '=', true);
 
-            if ($location) {
-                $q->where('location', '=', $location);
-            }
+			if ($location) {
+				$q->where('location', '=', $location);
+			}
 
-            if ($tag) {
+			if ($tag) {
 				$q->whereHas('tags', function ($q2) use ($tag) {
 					$q2->where('tags.name', '=', $tag);
 				});
@@ -56,11 +56,11 @@ class UserRepository
 					$q->where('id', '=', $skill);
 				});
 			}
-
-            if ($orderBy) {
-                $q->orderBy($orderBy);
-            }
 		});
+
+		if ($orderBy) {
+			$results->orderBy($orderBy);
+		}
 
 		$paginatedResults = $results->paginate($perPage);
 
@@ -71,61 +71,64 @@ class UserRepository
 		return $paginatedResults;
 	}
 
-    /**
-     * Search username, first, and last name fields by term
-     *
-     * @param string $term
-     * @return mixed
-     */
-    public static function search($term, $isAdmin = false)
-    {
-        $results = User::where(function ($query) use ($term) {
-                $query->where('users.username', 'LIKE', $term . '%')
-                    ->orWhere('profiles.first_name', 'LIKE', $term . '%')
-                    ->orWhere('profiles.last_name', 'LIKE', $term . '%');
-            })
-            ->join('profiles', 'users.id', '=', 'profiles.user_id')
-            ->select('users.id', 'first_name', 'last_name')
-            ->groupBy('users.id');
+	/**
+	 * Search username, first, and last name fields by term
+	 *
+	 * @param string $term
+	 * @return mixed
+	 */
+	public static function search($term, $isAdmin = false)
+	{
+		$results = User::where(function ($query) use ($term) {
+				$query->where('users.username', 'LIKE', $term . '%')
+					->orWhere('profiles.first_name', 'LIKE', $term . '%')
+					->orWhere('profiles.last_name', 'LIKE', $term . '%');
+			})
+			->join('profiles', 'users.id', '=', 'profiles.user_id')
+			->select('users.id', 'first_name', 'last_name')
+			->groupBy('users.id');
 
-        if (!$isAdmin) {
-            $startups = Auth::user()->startups->lists('id');
-            $contributions = Auth::user()->contributions->lists('id');
-            $startups = array_merge($startups, $contributions);
+		if (!$isAdmin) {
+			$startups = Auth::user()->startups->lists('id');
+			if (empty($startups)) {
+				$startups = array(-1);
+			}
+			$contributions = Auth::user()->contributions->lists('id');
+			$startups = array_merge($startups, $contributions);
 
-            $results->join('startup_user', 'startup_user.user_id', '=', 'users.id')
-                ->whereIn('startup_user.startup_id', $startups);
-        }
+			$results->join('startup_user', 'startup_user.user_id', '=', 'users.id')
+				->whereIn('startup_user.startup_id', $startups);
+		}
 
-        $paginatedResults = $results->paginate(15);
+		$paginatedResults = $results->paginate(15);
 
-        return $paginatedResults;
-    }
+		return $paginatedResults;
+	}
 
-    /**
-     * Is the current user allowed to message another user
-     *
-     * @param $userId recipient
-     * @return bool
-     */
-    public static function canMessage($userId)
-    {
-        $startups = Auth::user()->startups->lists('id');
-        $contributions = Auth::user()->contributions->lists('id');
-        $startups = array_merge($startups, $contributions);
+	/**
+	 * Is the current user allowed to message another user
+	 *
+	 * @param $userId recipient
+	 * @return bool
+	 */
+	public static function canMessage($userId)
+	{
+		$startups = Auth::user()->startups->lists('id');
+		$contributions = Auth::user()->contributions->lists('id');
+		$startups = array_merge($startups, $contributions);
 
-        $results = User::where('users.id', '=', $userId)
-            ->join('profiles', 'users.id', '=', 'profiles.user_id')
-            ->join('startup_user', 'startup_user.user_id', '=', 'users.id')
-            ->whereIn('startup_user.startup_id', $startups)
-            ->select('users.id')
-            ->groupBy('users.id')
-            ->first();
+		$results = User::where('users.id', '=', $userId)
+			->join('profiles', 'users.id', '=', 'profiles.user_id')
+			->join('startup_user', 'startup_user.user_id', '=', 'users.id')
+			->whereIn('startup_user.startup_id', $startups)
+			->select('users.id')
+			->groupBy('users.id')
+			->first();
 
-        if (!empty($results['id'])) {
-            return true;
-        }
+		if (!empty($results['id'])) {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

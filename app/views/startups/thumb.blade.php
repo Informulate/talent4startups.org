@@ -1,7 +1,7 @@
 <div class="thumbnail startups">
 	<a href="{{ route('startups.show', $startup->url) }}">
 		@if ($startup->image)
-			<img src="/images/upload/{{ $startup->image }}" alt="...">
+			<div class="profile-image" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
 		@else
 			<img data-src="holder.js/250x250" alt="...">
 		@endif
@@ -16,7 +16,7 @@
 		<p>Startup
 			Needs: @foreach($startup->needs as $need ) {{ $need->quantity }} {{ $need->skill->name }} @endforeach</p>
 
-		<p>{{ Str::limit( $startup->description, 50 ) }}</p>
+		<p class="text-muted">{{ Str::limit( $startup->description, 50 ) }}</p>
 
 		<p><a href="{{ route('startups.show', $startup->url) }}" class="btn btn-primary pull-right learn-more"
 			  role="button">Learn More</a></p>

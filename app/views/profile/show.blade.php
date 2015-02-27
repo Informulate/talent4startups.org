@@ -3,27 +3,44 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-3">
-			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=wavatar">
+			@if (!empty($user->profile->image))
+			<img class="img-circle img-responsive img-rounded" src="/images/upload/{{ $user->profile->image }}" alt=""  height="150" width="150"/>
+			@else
+			<img class="img-circle img-responsive img-rounded" src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $user->email ) ) ) ?>?s=150&d=mm">
+			@endif
 			<input data-id="{{ $user->id }}" type="number" class="member-rating-view" value="{{ $user->rating() }}" }}>
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
+			@include('layouts.partials.socialshare')
 		</div>
 	</div>
-    <div class="pull-left">
-        <a href="{{ route('messages.create', $user->username) }}" class="btn btn-primary">Contact</a>
+	<div class="pull-left">
 		@if ($currentUser->id == $user->id)
-			<a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a>
+			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
+		@else
+			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
+			<div>
+				{{Form::open(['route' => 'invite_to_startup'])}}
+				{{ Form::hidden('user_id', $user->id) }}
+				@if ($currentUser->startups()->lists('name','id') > 0)
+					{{ Form::submit('Invite To', ['class' => 'btn btn-primary']) }}
+					{{ Form::select('startup_id', $currentUser->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) }}
+				@endif
+				{{Form::close()}}
+			</div>
 		@endif
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<h2>My Interests</h2>
-			@if(count($user->profile->skills) > 0)
-				@foreach($user->profile->skills as $skill)
-					<a href="#"><span class="badge">{{ $skill->name }}</span></a>
+			@if(count($user->profile->tags) > 0)
+				@foreach($user->profile->tags as $tag)
+					<a href="{{{ route('talents.index') }}}?tag={{ $tag->name }}"><span class="badge">{{ $tag->name }}</span></a>
 				@endforeach
 			@endif
+
+			<p> {{ $user->profile->about }}</p>
 		</div>
 	</div>
 	<div class="row">
@@ -62,7 +79,6 @@
 				</div>
 			@endif
 		</div>
-		@include('layouts.partials.socialshare')
 	</div>
 @stop
 

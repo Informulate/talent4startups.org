@@ -1,15 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Informulate\Forms\ProfileForm;
 use Informulate\Forms\ResetForm;
 use Informulate\Core\CommandBus;
 use Informulate\Users\Commands\UpdateProfileCommand;
+use Informulate\Users\ThreadRepository;
 use Informulate\Users\User;
 use Informulate\Startups\Startup;
 use Informulate\Tags\Tag;
 use Informulate\Users\UserRepository;
 use Informulate\Skills\Skill;
+use Laracasts\Flash\Flash;
 
 class ProfileController extends BaseController
 {
@@ -53,9 +55,34 @@ class ProfileController extends BaseController
 	 */
 	public function show($id)
 	{
+		if (!Auth::User()) {
+			// Temporary lock per request on ticket #111
+			return View::make('layouts.partials.login-required')->render();
+		}
+
 		$user = User::find($id);
 
 		return View::make('profile.show')->with('user', $user)->with('startups', $user->startups)->with('contributions', $user->contributions);
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function image()
+	{
+		$user = Auth::User();
+
+		if (Request::method() === 'POST') {
+			$src = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $user->profile->image;
+
+			$image = Image::make($src);
+			$image->crop(Input::get('w'), Input::get('h'), Input::get('x'), Input::get('y'));
+			$image->save($src);
+
+			return Redirect::route('profile_path', ['id' => $user->id]);
+		}
+
+		return View::make('profile.image')->with('user', $user);
 	}
 
 	/**
@@ -76,17 +103,22 @@ class ProfileController extends BaseController
 	 */
 	public function store()
 	{
-		$this->profileForm->validate(Input::all());
+		$data = Input::all();
+		$this->profileForm->validate($data);
 
 		$this->execute(
-			new UpdateProfileCommand(Auth::user(), Input::all())
+			new UpdateProfileCommand(Auth::user(), $data)
 		);
+
+		if (array_key_exists('image', $data) and $data['image']) {
+			return Redirect::route('profile_image_path');
+		}
 
 		Flash::message('Your profile has been updated successfully!');
 
 		if (Input::get('type') == 'startup') {
 
-			// redirect to create projct if no project added by startup yet.
+			// redirect to create project if no project added by startup yet.
 			$projectsCount = Startup::where('user_id', '=', Auth::user()->id)->count();
 
 			if ($projectsCount == 0) {
@@ -95,6 +127,21 @@ class ProfileController extends BaseController
 		}
 
 		return Redirect::intended('/');
+	}
+
+	/**
+	 * Invite the user to a startup
+	 */
+	public function invite()
+	{
+		$userTo = User::findOrFail(Input::get('user_id'));
+		$startup = Startup::findOrFail(Input::get('startup_id'));
+		$userFrom = Auth::user();
+		ThreadRepository::notification('startup.join.invite.talent', $userTo, array('startup' => $startup, 'fromUser' => $userFrom));
+
+		Flash::message('You have successfully invited ' . $userTo->profile->first_name);
+
+		return Redirect::intended('/users/' . $userTo->id);
 	}
 
 	/**

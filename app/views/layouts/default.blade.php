@@ -37,6 +37,7 @@
 					@yield('content')
 				</div>
 				<div class="col-sm-3">
+					@yield('side-content')
 					@include('layouts.partials.adsense-right')
 				</div>
 			</div>
@@ -55,6 +56,7 @@
 
 	@yield('javascript')
 
+	@include('layouts.partials.tracking')
 	@include('layouts.partials.modal.forms')
 
 	</body>

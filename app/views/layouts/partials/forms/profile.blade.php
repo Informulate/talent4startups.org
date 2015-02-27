@@ -1,4 +1,8 @@
-{{ Form::open(['route' => 'edit_profile','files'=>'true','name'=>'profile-form','id'=>'profile-form']) }}
+{{ Form::open(['route' => 'edit_profile','files'=>'true','name'=>'profile-form','id'=>'profile-form','files' => true]) }}
+	<div class="form-group">
+		{{ Form::label('image', 'Image:') }}
+		{{ Form::file('image', null, ['class' => 'form-control']) }}
+	</div>
 	<div class="form-group">
 		{{ Form::label('first_name', 'First Name:') }}
 		{{ Form::text('first_name',  is_object( $user->profile ) ? $user->profile->first_name : null, ['class' => 'form-control']) }}
@@ -35,6 +39,10 @@
 	<div class="form-group">
 		{{ Form::label('youtube', 'YouTube:') }}
 		{{ Form::text('youtube',is_object( $user->profile ) ? $user->profile->youtube : null, ['class' => 'form-control']) }}
+	</div>
+	<div class="form-group">
+		{{ Form::label('published', 'Allow others to find me in talent searches:') }}
+		{{ Form::checkbox('published', '1', is_object( $user->profile ) ? $user->profile->published : null) }}
 	</div>
 	<div class="form-group">
 		{{ Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) }}

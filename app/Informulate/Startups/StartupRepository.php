@@ -1,6 +1,7 @@
 <?php namespace Informulate\Startups;
 
 use DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
 use Informulate\Startups\Events\UserApplied;
 use Informulate\Startups\Events\UserDenied;
@@ -64,13 +65,14 @@ class StartupRepository
 	{
 		$image = Input::file('image');
 		if (!empty($startup->image)) {
-			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $startup->image);
+			unlink(public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $startup->image);
 		}
 
 		$newPath = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload';
 		$newName = $startup->id . '.' . $image->getClientOriginalExtension();
 		$image->move($newPath, $newName);
 		$startup->image = $newName;
+		$startup->save();
 	}
 
 	/**
@@ -85,9 +87,11 @@ class StartupRepository
 		$results = Startup::where('published', '=', true);
 
 		if ($tag) {
-			$results->whereHas('tags', function ($q) use ($tag) {
-				$q->where('tags.name', '=', $tag);
-			});
+			$results->join('needs', 'startups.id', '=', 'needs.startup_id')
+				->join('need_tag', 'need_tag.need_id', '=', 'needs.id')
+				->join('tags', 'need_tag.tag_id', '=', 'tags.id')
+				->where('tags.name', '=', $tag)
+				->select('startups.*');
 		}
 
 		if ($needs) {
@@ -135,7 +139,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $startup->raise(new UserJoined($startup, $user));
+        Event::fire('Informulate.Startups.Events.UserJoined', new UserJoined($startup, $user));
 	}
 
 	/**
@@ -149,7 +153,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $this->raise(new UserDenied($startup, $user));
+        Event::fire('Informulate.Startups.Events.UserDenied', new UserDenied($startup, $user));
 	}
 
 	/**
@@ -163,7 +167,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        $startup->raise(new UserLeft($startup, $user));
+		Event::fire('Informulate.Startups.Events.UserLeft', new UserLeft($startup, $user));
 	}
 
 	/**

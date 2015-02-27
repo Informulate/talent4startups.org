@@ -39,6 +39,11 @@ body {
 
 .thumbnail {
   height: 550px;
+  overflow: hidden;
+}
+
+.thumbnail .caption {
+  margin-bottom: 35px;
 }
 
 .thumbnail .btn-primary {
@@ -54,4 +59,8 @@ body {
 #sub-caption {
   font-size: 26px;
   margin-bottom: 0;
+}
+
+.email-signin {
+  margin-top: 20px;
 }

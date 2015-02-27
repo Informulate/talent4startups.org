@@ -1,6 +1,5 @@
 <?php namespace Informulate\Users;
 
-use Illuminate\Support\Facades\Event;
 use Informulate\Users\Events\ProfileCreated;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent;
@@ -14,7 +13,7 @@ class Profile extends Eloquent
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'twitter', 'youtube', 'published'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'twitter', 'youtube', 'published', 'image'];
 
 	/**
 	 * The database table used by the model.
@@ -30,7 +29,7 @@ class Profile extends Eloquent
 	 */
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo('Informulate\Users\User');
 	}
 
 	/**
@@ -52,11 +51,11 @@ class Profile extends Eloquent
 	public static function updateProfile(User $user, array $attributes)
 	{
 		$profile = $user->profile;
+		$new = false;
 
-		$isNew = false;
 		if (is_null($profile)) {
 			$profile = new static();
-			$isNew = true;
+			$new = true;
 		}
 
 		$profile->first_name = $attributes['first_name'];
@@ -67,15 +66,16 @@ class Profile extends Eloquent
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
 		$profile->youtube = array_key_exists('youtube', $attributes) ? $attributes['youtube'] : '';
-		// Quick hack to enable all talent profiles by default.
-		// TODO: This should be turned into a flag on the user's profile where they can activate or deactivate the visibility of their profiles
-		//$profile->published = array_key_exists('published', $attributes) ? true : false;
-		$profile->published = $user->type === 'talent';
+		$profile->published = array_key_exists('published', $attributes) ? true : false;
 		$profile->user_id = $user->id;
 
-		if ($isNew) {
-			$user->profile = $profile;
-			Event::fire('Informulate.Users.Events.ProfileCreated', array(new ProfileCreated($user)));
+		// To prevent incomplete profiles from been shown, check if the main skill is missing.
+		if (is_null($profile->skill()) or $profile->skill_id == 0) {
+			$profile->published = false;
+		}
+
+		if ($new) {
+			$profile->raise(new ProfileCreated($profile));
 		}
 
 		return $profile;
