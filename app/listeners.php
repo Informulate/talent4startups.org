@@ -65,13 +65,23 @@ Event::listen('Informulate.Messenger.Events.NewMessage', function (NewMessage $n
 		$participant = $newMessage->participant;
 
 		try {
-			Mail::send('emails.message', array('subject' => $participant->thread->subject, 'body' => $participant->thread->latestMessage()->body), function ($message) use ($participant) {
-				$message->from('noreply@talent4startups.org', 'Talent4Startups')
+			$content = [
+				'recipient' => [
+					'first_name' => $participant->user->profile->first_name,
+					'last_name' => $participant->user->profile->last_name,
+				],
+				'body' => $participant->thread->latestMessage()->body,
+			];
+
+			Mail::send('emails.message', $content, function ($message) use ($participant) {
+				$message
+					->from('noreply@talent4startups.org', 'Talent4Startups')
 					->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
-					->subject($participant->thread->subject);
+					->subject("Talent4Startups Message: {$participant->thread->subject}")
+				;
 			});
 		} catch (Exception $e) {
-
+			// TODO: Raise a Slack notification
 		}
 	}
 });
