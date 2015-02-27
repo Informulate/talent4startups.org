@@ -1,6 +1,6 @@
 <?php namespace Informulate\Messenger\Events;
 
-use Informulate\Messenger\Participant;
+use Cmgmyr\Messenger\Models\Participant;
 
 class NewMessage
 {
