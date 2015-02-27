@@ -47,7 +47,9 @@
 	@endif
 </div>
 <div class="clearfix"></div>
-<p class="btn btn-sm btn-success" id="add-need">Add Need</p>
+<div class="col-sm-12 text-center">
+    <p class="btn btn-lg btn-success" id="add-need">Add the roles you need for your startup</p>
+</div>
 
 <div class="form-group">
 	{{ Form::label('video', 'link to startup video:') }}
