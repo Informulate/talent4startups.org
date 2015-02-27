@@ -132,7 +132,7 @@ class SessionsController extends BaseController
 			$email = json_decode($linkedInService->request('/people/~/email-address?format=json'), true);
 			$user = User::where('email', '=', $email)->first();
 
-			if ($user->banned) {
+			if ($user and $user->banned) {
 				Auth::logout();
 				return Redirect::to('login')->with('error', 'Account banned!');
 			}
