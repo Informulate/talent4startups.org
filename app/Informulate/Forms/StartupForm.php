@@ -10,7 +10,7 @@ class StartupForm extends FormValidator
 	 * @var array
 	 */
 	protected $rules = [
-		'name' => 'required',
+		'name' => 'required|unique:startups',
 		'description' => ['required', 'max: 1000'],
 		'video' => ['Regex:/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i'],
 		'needs' => 'required'
