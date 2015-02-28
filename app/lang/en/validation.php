@@ -87,6 +87,9 @@ return array(
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
 		),
+		'needs' => array(
+			'required' => 'You must add at least 1 role you need to continue.'
+		)
 	),
 
 	/*
