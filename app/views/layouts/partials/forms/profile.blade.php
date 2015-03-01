@@ -17,7 +17,7 @@
 		{{ Form::text('location', is_object( $user->profile ) ? $user->profile->location : null, ['class' => 'form-control']) }}
 	</div>
 	<div class="form-group">
-		{{ Form::label('describe', 'I\'m best describes as a:') }}
+		{{ Form::label('describe', 'I\'m best described as a:') }}
 		 {{ Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null); }}
 	</div>
 	<div class="form-group">
