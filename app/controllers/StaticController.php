@@ -77,4 +77,26 @@ class StaticController extends \BaseController {
         return View::make('static.knowledgebase');
     }
 
+    /**
+     * The privacy page
+     * Get /privacy
+     *
+     * @return Response
+     */
+    public function privacy()
+    {
+        return View::make('static.privacy');
+    }
+
+    /**
+     * The terms of service page
+     * Get /termsofservice
+     *
+     * @return Response
+     */
+    public function termsOfService()
+    {
+        return View::make('static.termsOfService');
+    }
+
 }
