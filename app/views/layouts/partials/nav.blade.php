@@ -39,6 +39,7 @@
 					<li><a id="login-link" href="{{ route('login_path') }}"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
 					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a></form></li>
 				@endif
+				<li id="launch-event"><form><a href="{{ route('launch') }}" type="button" class="btn btn-success navbar-btn">Launch EVENT 3/13 @ Canvs</a></form></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
