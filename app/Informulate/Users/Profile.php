@@ -88,4 +88,19 @@ class Profile extends Eloquent
 	{
 		return $this->belongsToMany('Informulate\Tags\Tag');
 	}
+
+
+	/**
+	 * @return string
+	 */
+	public function avatar()
+	{
+		if (isset($this->image) and $this->image != '') {
+			return asset('images/upload/'.$this->image);;
+		}
+
+		$email = md5($this->user->email);
+
+		return "http://www.gravatar.com/avatar/{$email}";
+	}
 }
