@@ -7,7 +7,6 @@ use Informulate\Startups\Events\UserApplied;
 use Informulate\Startups\Events\UserDenied;
 use Informulate\Startups\Events\UserJoined;
 use Informulate\Startups\Events\UserLeft;
-use Informulate\Startups\Events\UserLeftCreated;
 use Informulate\Users\User;
 
 class StartupRepository
@@ -30,7 +29,7 @@ class StartupRepository
 	 */
 	public function updateTags(Startup $startup, $tags)
 	{
-		$items = explode(',', $tags);
+		$items = explode(',', strtolower($tags));
 		$this->updateCollection($startup, 'tags', self::TAG_CLASS, $items);
 	}
 
@@ -46,7 +45,7 @@ class StartupRepository
 
         $needList = array();;
         foreach ($needs as $needData) {
-            $tags = explode(',', $needData['skills']);
+            $tags = explode(',', strtolower($needData['skills']));
             $need = Need::create([
                 'startup_id' => $startup->id,
                 'skill_id' => $needData['role'],
