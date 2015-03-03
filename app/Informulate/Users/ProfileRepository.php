@@ -22,7 +22,7 @@ class ProfileRepository
 	 */
 	public function updateSkills(Profile $profile, $tags)
 	{
-		$items = explode(',', $tags);
+		$items = explode(',', strtolower($tags));
 		$this->updateCollection($profile, 'tags', self::TAG_CLASS, $items);
 	}
 
