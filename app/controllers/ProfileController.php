@@ -173,15 +173,15 @@ class ProfileController extends BaseController
 				$user->save();
 
 				Flash::message('Your password has been reset successfully!');
-				return redirect::route('reset_password');
+				return Redirect::route('reset_password');
 			} catch (Exception $e) {
 				// fail to update user, generate error and load view
 
 				Flash::message('Error in reset password. Try again later!');
-				return redirect::route('reset_password')->with('error', 'Error in reset password. Try again later!');
+				return Redirect::route('reset_password')->with('error', 'Error in reset password. Try again later!');
 			}
 		} else {
-			return redirect::route('reset_password')->with('error', 'Old password is incorrect!');
+			return Redirect::route('reset_password')->with('error', 'Old password is incorrect!');
 		}
 	}
 }
