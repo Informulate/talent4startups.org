@@ -10,6 +10,16 @@ Route::get('/launch', [
 	'uses' => 'PagesController@launch'
 ]);
 
+Route::get('/Launch', [
+	'as' => 'launch',
+	'uses' => 'PagesController@launch'
+]);
+
+Route::get('/LAUNCH', [
+	'as' => 'launch',
+	'uses' => 'PagesController@launch'
+]);
+
 /**
  * Registration!
  */
