@@ -124,13 +124,7 @@
 				<div class="row contributor">
 					<a href="{{ route('profile_path', $startup->owner->id) }}">
 						<div class="col-xs-4">
-							@if (!empty($startup->owner->profile->image))
-								<img class="img-responsive" src="/images/upload/{{ $startup->owner->profile->image }}"
-								     alt=""/>
-							@else
-								<img class="img-circle img-responsive"
-								     src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($startup->owner->email))) ?>?s=150&d=mm">
-							@endif
+							<img class="img-circle img-responsive" src="{{ $startup->owner->profile->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 						</div>
 						<div class="col-xs-8">
 							{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
@@ -143,13 +137,7 @@
 					<div class="row contributor">
 						<a href="{{ route('profile_path', $user->id) }}">
 							<div class="col-xs-4">
-								@if (!empty($user->profile->image))
-									<img class="img-responsive" src="/images/upload/{{ $user->profile->image }}"
-									     alt=""/>
-								@else
-									<img class="img-circle img-responsive"
-									     src="http://www.gravatar.com/avatar/<?php echo md5(strtolower(trim($user->email))) ?>?s=150&d=mm">
-								@endif
+								<img class="img-circle img-responsive" src="{{ $user->profile->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 							</div>
 							<div class="col-xs-8">
 								{{ $user->profile->first_name }} {{ $user->profile->last_name }}

@@ -74,6 +74,9 @@
 				<p><i class="glyphicons glyphicons-circle-question-mark"></i><a href="/contact"> Contact Form</a></p>
 
 				<p><i class="glyphicons glyphicons-earphone"></i> 866.222.2307</p>
+				<div class="footer-headline"><h5>Policies</h5></div>
+				<p><i class="glyphicons glyphicons-notes-2"></i><a href="/privacy"> Privacy Policy</a></p>
+				<p><i class="glyphicons glyphicons-notes-2"></i><a href="/termsofservice"> Terms of Service</a></p>
 			</div>
 		</div>
 	</div>

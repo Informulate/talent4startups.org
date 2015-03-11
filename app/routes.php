@@ -10,6 +10,16 @@ Route::get('/launch', [
 	'uses' => 'PagesController@launch'
 ]);
 
+Route::get('/Launch', [
+	'as' => 'launch',
+	'uses' => 'PagesController@launch'
+]);
+
+Route::get('/LAUNCH', [
+	'as' => 'launch',
+	'uses' => 'PagesController@launch'
+]);
+
 /**
  * Registration!
  */
@@ -188,7 +198,14 @@ Route::get('terms', array(
 	'uses' => 'StaticController@about',
 	'as' => 'terms'
 ));
-
+Route::get('privacy', array(
+	'uses' => 'StaticController@privacy',
+	'as' => 'privacy'
+));
+Route::get('termsofservice', array(
+	'uses' => 'StaticController@termsOfService',
+	'as' => 'termsOfService'
+));
 
 /**
  * Ratings

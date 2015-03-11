@@ -28,7 +28,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<input id="agree" type="checkbox" value="agree"/> I agree to the {{ link_to('/terms', 'Terms of Use') }}, have read the {{ link_to('/privacy', 'Privacy Policy') }}, and am ready to get started.<br/>
+								<input id="agree" type="checkbox" value="agree"/> I agree to the {{ link_to('/termsofservice', 'Terms of Service') }}, have read the {{ link_to('/privacy', 'Privacy Policy') }}, and am ready to get started.<br/>
 								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>

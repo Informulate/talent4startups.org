@@ -24,6 +24,10 @@
 	{{ Form::text('tags', isset( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) }}
 </div>
 
+<div class="col-sm-12 text-center">
+    <p class="btn btn-lg btn-success" id="add-need">Add the roles you need for your startup</p>
+</div>
+
 <div class="form-group startup-needs">
 	@if (isset( $startup ) and is_object( $startup ) and $startup->needs())
 	    @foreach ($startup->needs as $i => $need)
@@ -46,10 +50,8 @@
 	    @endforeach
 	@endif
 </div>
+
 <div class="clearfix"></div>
-<div class="col-sm-12 text-center">
-    <p class="btn btn-lg btn-success" id="add-need">Add the roles you need for your startup</p>
-</div>
 
 <div class="form-group">
 	{{ Form::label('video', 'link to startup video:') }}
