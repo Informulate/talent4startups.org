@@ -18,6 +18,8 @@ class MembershipController extends \BaseController {
 	function __construct()
 	{
 		$this->beforeFilter('auth');
+
+		parent::__construct();
 	}
 
 	/**

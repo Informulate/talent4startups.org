@@ -45,6 +45,8 @@ class ProfileController extends BaseController
 		$this->resetForm = $resetForm;
 		$this->userRepository = $userRepository;
 		$this->beforeFilter('auth', ['except' => ['show']]);
+
+		parent::__construct();
 	}
 
 	/**
@@ -162,7 +164,7 @@ class ProfileController extends BaseController
 		extract(Input::only('old_password', 'new_password', 'password_confirmation'));
 
 		if ($new_password != $password_confirmation) {
-			return redirect::route('reset_password')->with('error', 'Confirm password not match');
+			return Redirect::route('reset_password')->with('error', 'Confirm password not match');
 		}
 
 		//check if user entered old password correct

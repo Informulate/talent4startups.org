@@ -2,8 +2,6 @@
 
 use Informulate\Skills\Skill;
 use Informulate\Users\User;
-use Informulate\Users\Profile;
-use Informulate\Tags\Tag;
 use Informulate\Users\UserRepository;
 
 class TalentController extends BaseController
@@ -19,6 +17,8 @@ class TalentController extends BaseController
 	function __construct(UserRepository $userRepository)
 	{
 		$this->userRepository = $userRepository;
+
+		parent::__construct();
 	}
 
 	/**
