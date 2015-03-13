@@ -50,18 +50,16 @@ class BaseController extends Controller
 	}
 
 	/**
+	 * Before filter to validate the user has completed the profile
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function isProfileCompleteFilter()
 	{
-		if (Auth::user()) {
-			$user = Auth::user();
+		if (Auth::user() and Auth::user()->profileIsIncomplete() and Route::currentRouteName() !== 'edit_profile') {
+			Flash::error('You need to complete your profile before you can continue!');
 
-			if (is_null($user->profile) and Route::currentRouteName() !== 'edit_profile') {
-				Flash::error('You need to complete your profile before you can continue!');
-
-				return Redirect::route('edit_profile');
-			}
+			return Redirect::route('edit_profile');
 		}
 	}
 }

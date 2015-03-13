@@ -109,4 +109,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
 	}
+
+	/**
+	 * Validates that a user has properly completed all the required items for the profile.
+	 *
+	 * @return bool
+	 */
+	public function profileIsIncomplete()
+	{
+		if (is_null($this->profile)) {
+			return true;
+		}
+
+		if (trim($this->profile->first_name) == '') {
+			return true;
+		}
+
+		if (trim($this->profile->last_name) == '') {
+			return true;
+		}
+
+		if (is_null($this->profile->skill) or $this->profile->skill_id == 0) {
+			return true;
+		}
+
+		return false;
+	}
 }
