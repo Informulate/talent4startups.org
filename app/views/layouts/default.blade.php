@@ -38,7 +38,7 @@
 				<div class="col-sm-12 col-lg-9">
 					@yield('content')
 				</div>
-				<div class="col-sm-12 col-lg-3">
+				<div class="hidden-xs hidden-sm col-lg-3">
 					@yield('side-content')
 					@include('layouts.partials.adsense-right')
 				</div>
