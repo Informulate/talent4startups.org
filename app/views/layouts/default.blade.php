@@ -4,7 +4,9 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>{{ isset($pageTitle) ? $pageTitle : 'Talent4Startups' }}</title>
 		<link href="{{{ asset( 'css/vendors/social-likes/social-likes_flat.css') }}}" rel="stylesheet">
 		<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css' ) }}}" rel="stylesheet">
@@ -33,10 +35,10 @@
 			</div>
 		@else
 			<div class="row">
-				<div class="col-sm-9">
+				<div class="col-sm-12 col-lg-9">
 					@yield('content')
 				</div>
-				<div class="col-sm-3">
+				<div class="hidden-xs hidden-sm col-lg-3">
 					@yield('side-content')
 					@include('layouts.partials.adsense-right')
 				</div>

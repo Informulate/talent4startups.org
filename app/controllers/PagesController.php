@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\DB;
 use Informulate\Startups\StartupRepository;
 use Informulate\Users\UserRepository;
 
-class PagesController extends \BaseController {
+class PagesController extends \BaseController
+{
 
 	public function home()
 	{
@@ -25,7 +26,8 @@ class PagesController extends \BaseController {
 		return View::make('pages.home')->with('startups', $startups)->with('talents', $talent);
 	}
 
-	public function launch() {
+	public function launch()
+	{
 		return Redirect::to('http://www.eventbrite.com/e/talent4startups-launch-party-tickets-15821969938');
 	}
 }

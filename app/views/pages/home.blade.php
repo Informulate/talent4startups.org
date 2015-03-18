@@ -29,12 +29,12 @@
 	</div>
 	<div class="row">
 		@foreach($startups as $index => $startup)
-			<div class="col-md-3 col-xs-6 thumb">
+			<div class="col-md-3 col-xs-12 thumb">
 				@include('startups.thumb')
 			</div>
 		@endforeach()
 		@foreach($talents as $index => $talent)
-			<div class="col-md-3 col-xs-6 thumb">
+			<div class="col-md-3 col-xs-12 thumb">
 				@include('talent.thumb')
 			</div>
 		@endforeach()

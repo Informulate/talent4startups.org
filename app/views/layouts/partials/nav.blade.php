@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/t4s-identity.png') }}" style="width: 75px; height: 75px;" alt=""/></a>
+			<a class="navbar-brand" href="{{ route('home') }}"><img id="navbar-logo" src="{{ asset('images/t4s-identity.png') }}" alt=""/></a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,6 @@
 					<li><a id="login-link" href="{{ route('login_path') }}"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
 					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a></form></li>
 				@endif
-				<li id="launch-event"><form><a href="{{ route('launch') }}" target="_blank" type="button" class="btn btn-success navbar-btn">Launch EVENT 3/13 @ Canvs</a></form></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

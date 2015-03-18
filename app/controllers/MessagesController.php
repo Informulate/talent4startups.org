@@ -26,6 +26,8 @@ class MessagesController extends BaseController
 	{
 		$this->userRepository = $userRepository;
 		$this->beforeFilter('auth');
+
+		parent::__construct();
 	}
 	/**
 	 * Show all of the message threads to the user

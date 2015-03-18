@@ -39,6 +39,8 @@ class StartupController extends BaseController
 
 		$this->beforeFilter('auth', ['except' => ['index', 'show', 'search']]);
 		$this->beforeFilter('@isCurrentOwnerFilter', ['only' => ['edit', 'update']]);
+
+		parent::__construct();
 	}
 
 	/**
