@@ -46,7 +46,7 @@ class Startup extends Eloquent
 		$startup->linked_in = $attributes['linked_in'];
 		$startup->facebook = $attributes['facebook'];
 		$startup->website = $attributes['website'];
-		$startup->published = true;
+        $startup->published = array_key_exists('published', $attributes) ? true : false;
 
 		return $startup;
 	}
