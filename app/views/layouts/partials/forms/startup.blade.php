@@ -9,6 +9,11 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('published', 'Allow others to find startup in startup searches:') }}
+    {{ Form::checkbox('published', '1', isset( $startup ) ? $startup->published : null) }}
+</div>
+
+<div class="form-group">
 	{{ Form::label('description', 'Description:') }}
     <small>1000 character limit</small>
 	{{ Form::textarea('description', null, ['class' => 'form-control']) }}
