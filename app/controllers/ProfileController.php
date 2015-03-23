@@ -64,6 +64,10 @@ class ProfileController extends BaseController
 
 		$user = User::find($id);
 
+		if (!$user) {
+			App::abort(404);
+		}
+
 		return View::make('profile.show')->with('user', $user)->with('startups', $user->startups)->with('contributions', $user->contributions);
 	}
 
