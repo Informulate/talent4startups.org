@@ -64,7 +64,7 @@
 				@endif
 			@endif
 
-			@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
+			@if($startup->owner->id != $currentUser->id and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
 				<a class="btn btn-primary" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join
 					this startup</a>
 			@endif
@@ -75,7 +75,7 @@
 		<div class="col-md-12">
 
 			<div class="col-md-8">
-				@if($startup->owner == $currentUser)
+				@if($startup->owner->id == $currentUser->id)
 					<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit
 						Startup</a>
 					<h2>Member requests</h2>
@@ -100,7 +100,7 @@
 									class="glyphicons glyphicons-chevron-right"></span> {{ $need->skill->name }}</h4>
 
 						<div class="clearfix"></div>
-						@if($startup->owner != $currentUser and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
+						@if($startup->owner->id != $currentUser->id and false === $startup->hasPendingInvitationFrom($currentUser) and false == $startup->hasMember($currentUser))
 							<a class="btn btn-primary pull-right"
 							   href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
 						@endif
@@ -142,7 +142,7 @@
 							<div class="col-xs-8">
 								{{ $user->profile->first_name }} {{ $user->profile->last_name }}
 								<br/> {{ $user->profile->skill->name }}
-								@if ($startup->owner == $user)
+								@if ($startup->owner->id == $user->id)
 									<strong>owner</strong>
 								@endif
 							</div>
@@ -152,7 +152,7 @@
 						<div class="col-xs-12">
 							<input data-id="{{ $user->id }}" type="number" class="rating member-rating" min=0 max=5
 							       step=0.5 data-size="xs"
-							       value="{{ $user->rating() }}" {{ $startup->owner == $currentUser ? "" : "disabled='true'" }}>
+							       value="{{ $user->rating() }}" {{ $startup->owner->id == $currentUser->id ? "" : "disabled='true'" }}>
 						</div>
 					</div>
 				@endforeach
