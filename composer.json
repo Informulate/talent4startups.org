@@ -18,7 +18,8 @@
     "awjudd/feed-reader": "1.1.*",
     "thujohn/twitter": "dev-master",
     "cmgmyr/messenger": "1.*@dev",
-    "misd/linkify": "1.1.*"
+    "misd/linkify": "1.1.*",
+    "maknz/slack": "~1.5"
   },
   "require-dev": {
     "way/generators": "~2.0",

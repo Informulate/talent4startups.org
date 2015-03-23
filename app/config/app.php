@@ -132,6 +132,7 @@ return array(
 		'Awjudd\FeedReader\FeedReaderServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Maknz\Slack\SlackServiceProvider',
 
 	),
 
@@ -205,6 +206,7 @@ return array(
 		'FeedReader' => 'Awjudd\FeedReader\Facades\FeedReader',
 		'Twitter' => 'Thujohn\Twitter\TwitterFacade',
 		'Image' => 'Intervention\Image\Facades\Image',
+		'Slack' => 'Maknz\Slack\Facades\Slack',
 	),
 
 );

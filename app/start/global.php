@@ -1,5 +1,6 @@
 <?php
 
+use Laracasts\Validation\FormValidationException;
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -10,18 +11,6 @@
 | your classes in the "global" namespace without Composer updating.
 |
 */
-
-use Informulate\Messenger\Events\NewMessage;
-use Informulate\Ratings\Events\StartupRated;
-use Informulate\Ratings\Events\UserRated;
-use Informulate\Registration\Events\UserRegistered;
-use Informulate\Startups\Events\StartupCreated;
-use Informulate\Startups\Events\UserApplied;
-use Informulate\Startups\Events\UserDenied;
-use Informulate\Startups\Events\UserJoined;
-use Informulate\Startups\Events\UserLeft;
-use Informulate\Users\Events\ProfileCreated;
-use Informulate\Users\ThreadRepository;
 
 ClassLoader::addDirectories(array(
 
@@ -60,14 +49,22 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
 
 App::error(function (Exception $exception, $code) {
 	Log::error($exception);
+
+	// In production, we also want to send a slack notification right away
+	if (App::environment() == 'prod') {
+		$route = Route::currentRouteName();
+		Slack::send("The server {$_SERVER['SERVER_NAME']} generated the following exception: \n Exception: {$exception->getCode()}, {$exception->getMessage()} \n File: {$exception->getFile()} at line: {$exception->getLine()} \n Route Name: {$route}");
+	}
 });
 
-App::missing(function($exception)
-{
-	return Response::view('errors.missing', array(), 404);
+App::missing(function() {
+	// In production, display a friendly 404 error message
+	if (App::environment() == 'prod') {
+		return Redirect::to('404');
+	}
 });
 
-App::error(function (Laracasts\Validation\FormValidationException $exception, $code) {
+App::error(function(FormValidationException $exception, $code) {
 	return Redirect::back()->withInput()->withErrors($exception->getErrors());
 });
 

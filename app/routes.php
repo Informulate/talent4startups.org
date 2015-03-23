@@ -5,6 +5,11 @@ Route::get('/', [
 	'uses' => 'PagesController@home'
 ]);
 
+Route::get('/404', [
+	'as' => '404',
+	'uses' => 'PagesController@missing'
+]);
+
 Route::get('/launch', [
 	'as' => 'launch',
 	'uses' => 'PagesController@launch'

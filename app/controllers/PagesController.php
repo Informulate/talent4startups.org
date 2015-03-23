@@ -26,6 +26,11 @@ class PagesController extends \BaseController
 		return View::make('pages.home')->with('startups', $startups)->with('talents', $talent);
 	}
 
+	public function missing()
+	{
+		return Response::view('errors.missing', array(), 404);
+	}
+
 	public function launch()
 	{
 		return Redirect::to('http://www.eventbrite.com/e/talent4startups-launch-party-tickets-15821969938');
