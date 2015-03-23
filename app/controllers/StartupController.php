@@ -166,9 +166,8 @@ class StartupController extends BaseController
 	 */
 	public function update($startup)
 	{
-		$this->startupForm->validate(Input::all());
-
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
+		$this->startupForm->validate(Input::all(), $startup->id);
 
 		$this->execute(
 			new UpdateStartupCommand($startup, Input::all())

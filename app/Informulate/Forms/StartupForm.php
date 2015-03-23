@@ -15,4 +15,16 @@ class StartupForm extends FormValidator
 		'video' => ['Regex:/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i'],
 		'needs' => 'required'
 	];
+
+	/**
+	 * @inheritdoc
+	 */
+	public function validate(array $formData, $uniqueIdException = null)
+	{
+		if ($uniqueIdException) {
+			$this->rules['name'] = 'required|unique:startups,name,' . $uniqueIdException;
+		}
+
+		parent::validate($formData);
+	}
 }
