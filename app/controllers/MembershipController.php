@@ -54,7 +54,7 @@ class MembershipController extends \BaseController {
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		if ($startup->owner == Auth::user()) {
+		if ($this->currentUserIsOwner($startup->owner)) {
 			$user = User::find($user);
 			$this->execute(new UpdateStartupMembershipCommand($user, $startup, $action));
 		}

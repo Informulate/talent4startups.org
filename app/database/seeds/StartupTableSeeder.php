@@ -66,7 +66,7 @@ class StartupTableSeeder extends Seeder {
                         'quantity' => rand(1,10),
                         'skills' => implode(',', $needTags),
 						'commitment' => $commitments[rand(0, 1)],
-						'description' => $faker->text,
+						'desc' => $faker->text,
                     );
 
                     $this->repository->updateNeeds($startup, $needs);

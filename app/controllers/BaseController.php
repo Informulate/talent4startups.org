@@ -62,4 +62,14 @@ class BaseController extends Controller
 			return Redirect::route('edit_profile');
 		}
 	}
+
+
+	/**
+	 * @param $owner
+	 * @return bool
+	 */
+	public function currentUserIsOwner($owner)
+	{
+		return Auth::user() and $owner->id == Auth::user()->id;
+	}
 }

@@ -111,7 +111,7 @@ class StartupController extends BaseController
 
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		if (Auth::User() != $startup->owner and $startup->published == false) {
+		if (false === $this->currentUserIsOwner($startup->owner) and $startup->published == false) {
 			App::abort(404);
 		}
 
@@ -119,20 +119,6 @@ class StartupController extends BaseController
 		$members = $startup->members()->where('status', 'approved')->get();
 
 		return View::make('startups.show')->with('startup', $startup)->with('requests', $requests)->with('members', $members);
-	}
-
-	/**
-	 * @param $startup
-	 * @param $userId
-	 */
-	public function approveMember($startup, $userId)
-	{
-		if ($startup->owner == Auth::user()) {
-			$user = User::find($userId);
-			if (false == $startup->hasMember($user)) {
-				//
-			}
-		}
 	}
 
 	/*
@@ -199,7 +185,7 @@ class StartupController extends BaseController
 		$startup = $parameters['startups'];
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-		if ($startup->owner != Auth::user()) {
+		if (false === $this->currentUserIsOwner($startup->owner)) {
 			return Redirect::route('startups.show', ['startup' => $startup->url]);
 		}
 	}
