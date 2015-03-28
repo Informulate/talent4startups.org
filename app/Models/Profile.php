@@ -74,9 +74,9 @@ class Profile extends Model
 			$profile->published = false;
 		}
 
-		if ($new) {
-			$profile->raise(new ProfileCreated($profile));
-		}
+//		if ($new) {
+//			$profile->raise(new ProfileCreated($profile));
+//		}
 
 		return $profile;
 	}

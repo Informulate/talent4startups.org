@@ -21,8 +21,6 @@ class RatingController extends Controller
 		$this->repository = $repository;
 
 		$this->beforeFilter('auth');
-
-		parent::__construct();
 	}
 
 	/**

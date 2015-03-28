@@ -12,9 +12,9 @@
 
 			@include('layouts.partials.errors')
 
-			{{ Form::model($startup, ['route' => ['startups.update', $startup->url], 'method' => 'PUT', 'files' => true]) }}
+			{!! Form::model($startup, ['route' => ['startups.update', $startup->url], 'method' => 'PUT', 'files' => true]) !!}
 				@include('layouts.partials.forms.startup')
-			{{ Form::close() }}
+			{!! Form::close() !!}
 		</div>
 	</div>
 @stop

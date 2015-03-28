@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Need;
 use App\Models\Startup;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
@@ -12,8 +13,8 @@ use Informulate\Startups\Events\UserLeft;
 
 class StartupRepository
 {
-	const TAG_CLASS = 'Informulate\\Tags\\Tag';
-	const SKILL_CLASS = 'Informulate\\Skills\\Skill';
+	const TAG_CLASS = 'App\\Models\\Tag';
+	const SKILL_CLASS = 'App\\Models\\Skill';
 
 	/**
 	 * @param Startup $startup

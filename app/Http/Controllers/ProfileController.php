@@ -2,36 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProfile;
+use App\Http\Requests\Request;
 use App\Models\Skill;
 use App\Models\Startup;
 use App\Models\Tag;
 use App\Models\User;
 use App\Repositories\ThreadRepository;
-use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Auth;
-//use Informulate\Forms\ProfileForm;
-//use Informulate\Forms\ResetForm;
-//use Informulate\Users\Commands\UpdateProfileCommand;
+use App\Commands\UpdateProfile as UpdateProfileCommand;
+use Auth;
+use Flash;
+use Image;
+use Redirect;
 
 class ProfileController extends Controller
 {
 
 	/**
-	 * @var UserRepository
-	 */
-	private $userRepository;
-
-	/**
 	 * Constructor
-	 *
-	 * @param UserRepository $userRepository
 	 */
-	function __construct(UserRepository $userRepository)
+	function __construct()
 	{
-		$this->userRepository = $userRepository;
 		$this->middleware('auth');
-
-//		parent::__construct();
 	}
 
 	/**
@@ -50,15 +42,15 @@ class ProfileController extends Controller
 	/**
 	 * @return $this
 	 */
-	public function image()
+	public function image(Request $request)
 	{
 		$user = Auth::User();
 
-		if (Request::method() === 'POST') {
+		if ($request->isMethod('POST')) {
 			$src = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . $user->profile->image;
 
 			$image = Image::make($src);
-			$image->crop(Input::get('w'), Input::get('h'), Input::get('x'), Input::get('y'));
+			$image->crop($request->get('w'), $request->get('h'), $request->get('x'), $request->get('y'));
 			$image->save($src);
 
 			return Redirect::route('profile_path', ['id' => $user->id]);
@@ -70,7 +62,7 @@ class ProfileController extends Controller
 	/**
 	 * Show the form for creating a user profile.
 	 *
-	 * @return Response
+	 * @return $this
 	 */
 	public function edit()
 	{
@@ -82,23 +74,22 @@ class ProfileController extends Controller
 
 	/**
 	 * Save the user.
+	 * @param CreateProfile $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store()
+	public function store(CreateProfile $request)
 	{
-		$data = Input::all();
-		$this->profileForm->validate($data);
-
-		$this->execute(
-			new UpdateProfileCommand(Auth::user(), $data)
+		$this->dispatch(
+			new UpdateProfileCommand(Auth::user(), $request->all())
 		);
 
-		if (array_key_exists('image', $data) and $data['image']) {
+		if (array_key_exists('image', $request->all()) and $request->get('image')) {
 			return Redirect::route('profile_image_path');
 		}
 
 		Flash::message('Your profile has been updated successfully!');
 
-		if (Input::get('type') == 'startup') {
+		if ($request->get('type') == 'startup') {
 
 			// redirect to create project if no project added by startup yet.
 			$projectsCount = Startup::where('user_id', '=', Auth::user()->id)->count();

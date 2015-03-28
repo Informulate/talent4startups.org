@@ -20,9 +20,9 @@ class RegistrationController extends Controller
 	 *
 	 * @param RegistrationForm $registrationForm
 	 */
-	function __construct(RegistrationForm $registrationForm)
+	function __construct()//RegistrationForm $registrationForm)
 	{
-		$this->registrationForm = $registrationForm;
+//		$this->registrationForm = $registrationForm;
 
 		$this->beforeFilter('guest');
 	}

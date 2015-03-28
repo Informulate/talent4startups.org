@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Flash;
+use App\Models\Tag;
 use App\Models\Skill;
 use App\Models\Stage;
 use App\Models\Startup;
-use App\Models\Tag;
+use App\Http\Requests\CreateStartup;
+use App\Http\Requests\UpdateStartup;
 use App\Repositories\StartupRepository;
+use App\Commands\CreateStartup as CreateStartupCommand;
+use App\Commands\UpdateStartup as UpdateStartupCommand;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
@@ -61,13 +67,13 @@ class StartupController extends Controller
 
 	/**
 	 * Save the user.
+	 * @param CreateStartup $request
+	 * @return
 	 */
-	public function store()
+	public function store(CreateStartup $request)
 	{
-		$this->startupForm->validate(Input::all());
-
-		$startup = $this->execute(
-			new CreateNewStartupCommand(Auth::user(), (object) Input::all())
+		$startup = $this->dispatch(
+			new CreateStartupCommand(Auth::user(), (object) $request->all())
 		);
 
 		Flash::message('New Startup Created');
@@ -114,23 +120,17 @@ class StartupController extends Controller
 	}
 
 
-	/*
-	 * Update startup in storage
-	 *
-	 * @param $startup
-	 */
 	/**
+	 * @param UpdateStartup $request
 	 * @param $startup
 	 * @return mixed
-	 * @throws \Laracasts\Validation\FormValidationException
 	 */
-	public function update($startup)
+	public function update(UpdateStartup $request, $startup)
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
-		$this->startupForm->validate(Input::all(), $startup->id);
 
-		$this->execute(
-			new UpdateStartupCommand($startup, Input::all())
+		$this->dispatch(
+			new UpdateStartupCommand($startup, $request->all())
 		);
 
 		Flash::message('Startup updated successfully!');

@@ -12,9 +12,9 @@
 
 			@include('layouts.partials.errors')
 
-			{{ Form::open(['route' => ['startups.store'], 'method' => 'POST', 'files' => true]) }}
+			{!! Form::open(['route' => ['startups.store'], 'method' => 'POST', 'files' => true]) !!}
 				@include('layouts.partials.forms.startup')
-			{{ Form::close() }}
+			{!! Form::close() !!}
 		</div>
 	</div>
 @stop

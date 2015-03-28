@@ -2,12 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\Profile;
 use Illuminate\Support\Facades\Input;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileRepository
 {
-	const TAG_CLASS = 'Informulate\\Tags\\Tag';
+	const TAG_CLASS = 'App\\Models\\Tag';
 
 	/**
 	 * @param Profile $profile

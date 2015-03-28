@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Cocur\Slugify\Slugify;
-use Informulate\Startups\Events\StartupCreated;
-use Laracasts\Commander\Events\EventGenerator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,8 +24,6 @@ class Startup extends Model
 	public static function create(array $attributes)
 	{
 		$startup = new static($attributes);
-
-		$startup->raise(new StartupCreated($startup));
 
 		return $startup;
 	}

@@ -51,7 +51,7 @@
 					</div>
 					<div class="clearfix">
 						@if (Auth::user() and Auth::user()->username == $user->username)
-							<p><a href="{{ route('edit_profile') }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
+							<p><a href="{{ route('startups.edit', ['startup' => $startup->url]) }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
 						@endif
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 							</div>
 							<div class="clearfix">
 								@if (Auth::user() and Auth::user()->username == $user->username)
-									<p><a href="{{ route('edit_profile') }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
+									<p><a href="{{ route('startups.edit', ['startup' => $startup->url]) }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
 								@endif
 							</div>
 						</div>
