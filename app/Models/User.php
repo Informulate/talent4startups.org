@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cmgmyr\Messenger\Traits\Messagable;
+use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -88,7 +89,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		$user = new static(compact('username', 'email', 'password', 'type'));
 
-		$user->raise(new UserRegistered($user));
+//		$user->raise(new UserRegistered($user));
 
 		return $user;
 	}

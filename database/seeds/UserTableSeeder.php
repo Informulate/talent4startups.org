@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Repositories\ProfileRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
+use Illuminate\Contracts\Bus\Dispatcher;
+use App\Commands\UpdateProfile;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,15 +20,20 @@ class UserTableSeeder extends Seeder
 	 * @var ProfileRepository
 	 */
 	private $profileRepository;
+	/**
+	 * @var Dispatcher
+	 */
+	private $dispatcher;
 
 	/**
 	 * @param UserRepository $userRepository
 	 * @param ProfileRepository $profileRepository
 	 */
-	function __construct(UserRepository $userRepository, ProfileRepository $profileRepository)
+	function __construct(UserRepository $userRepository, ProfileRepository $profileRepository, Dispatcher $dispatcher)
 	{
 		$this->userRepository = $userRepository;
 		$this->profileRepository = $profileRepository;
+		$this->dispatcher = $dispatcher;
 	}
 
 	/**
@@ -66,9 +73,10 @@ class UserTableSeeder extends Seeder
 
 			$profileData['skills'] = $userSkills;
 
-			$this->execute(
-				new UpdateProfileCommand($user, $profileData)
+			$this->dispatcher->dispatch(
+				new UpdateProfile($user, $profileData)
 			);
+
 		}
 	}
 }

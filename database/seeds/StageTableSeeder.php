@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Informulate\Stages\Stage;
+use App\Models\Stage;
 
 class StageTableSeeder extends Seeder
 {

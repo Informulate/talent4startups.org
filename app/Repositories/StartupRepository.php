@@ -4,12 +4,14 @@ namespace App\Repositories;
 
 use App\Models\Need;
 use App\Models\Startup;
-use Illuminate\Support\Facades\Event;
+use App\Models\User;
+use DB;
+//use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Input;
-use Informulate\Startups\Events\UserApplied;
-use Informulate\Startups\Events\UserDenied;
-use Informulate\Startups\Events\UserJoined;
-use Informulate\Startups\Events\UserLeft;
+//use Informulate\Startups\Events\UserApplied;
+//use Informulate\Startups\Events\UserDenied;
+//use Informulate\Startups\Events\UserJoined;
+//use Informulate\Startups\Events\UserLeft;
 
 class StartupRepository
 {
@@ -126,7 +128,7 @@ class StartupRepository
 			'pending',
 		]);
 
-        $startup->raise(new UserApplied($startup, $user));
+//        $startup->raise(new UserApplied($startup, $user));
 	}
 
 	/**
@@ -140,7 +142,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        Event::fire('Informulate.Startups.Events.UserJoined', new UserJoined($startup, $user));
+//        Event::fire('Informulate.Startups.Events.UserJoined', new UserJoined($startup, $user));
 	}
 
 	/**
@@ -154,7 +156,7 @@ class StartupRepository
 			$user->id
 		]);
 
-        Event::fire('Informulate.Startups.Events.UserDenied', new UserDenied($startup, $user));
+//        Event::fire('Informulate.Startups.Events.UserDenied', new UserDenied($startup, $user));
 	}
 
 	/**
@@ -168,7 +170,7 @@ class StartupRepository
 			$user->id
 		]);
 
-		Event::fire('Informulate.Startups.Events.UserLeft', new UserLeft($startup, $user));
+//		Event::fire('Informulate.Startups.Events.UserLeft', new UserLeft($startup, $user));
 	}
 
 	/**
