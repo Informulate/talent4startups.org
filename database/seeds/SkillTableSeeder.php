@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Seeder;
 use Informulate\Skills\Skill;
 
 class SkillTableSeeder extends Seeder
