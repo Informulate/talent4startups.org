@@ -32,7 +32,7 @@
                 <img src="//www.gravatar.com/avatar/{{md5($thread->latestMessage()->user->email)}}?s=64&d=wavatar" alt="{{$thread->latestMessage()->user->profile->first_name}} {{$thread->latestMessage()->user->profile->last_name}}" class="img-circle">
             </a>
             @endif
-            <h4 class="media-heading">{{link_to('messages/' . $thread->id, $thread->subject)}}</h4>
+            <h4 class="media-heading">{!! link_to('messages/' . $thread->id, $thread->subject) !!}</h4>
             <p class=""> {{ $thread->updated_at->format('M j, Y') }} <small>{{ $thread->updated_at->diffForHumans() }}</small></p>
             <p>
                 @foreach($thread->participantsUsers() as $user)
@@ -42,7 +42,7 @@
                 @endforeach
                 @if(count($thread->messages) > 1) <strong>{{$thread->latestMessage()->user->profile->first_name}} {{$thread->latestMessage()->user->profile->last_name}}</strong> @endif
                 @if(count($thread->messages) > 1) ({{ count($thread->messages) }}) @endif
-                @if((count($thread->messages) > 1) && $thread->latestMessage()->user->id == $currentUser->id) <small>(Replied)</small> @endif
+                @if((count($thread->messages) > 1) && $thread->latestMessage()->user->id == Auth::user()->id) <small>(Replied)</small> @endif
             </p>
             <p class="text-muted">{{ str_limit($thread->latestMessage()->body, 15) }}</p>
             <div class="clearfix"></div>
@@ -65,7 +65,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            {{ $threads->links() }}
+            {{ $threads->render() }}
         </div>
     </div>
 @endsection

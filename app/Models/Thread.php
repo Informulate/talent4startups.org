@@ -28,7 +28,7 @@ class Thread extends CmgmyrThread
 			->whereNull('participants.deleted_at')
 			->selectRaw('threads.*, CASE WHEN threads.updated_at <= participants.last_read THEN 1 ELSE 0 END AS message_read')
 			->orderByRaw('message_read ASC, threads.updated_at DESC')
-			->groupBy('id');
+			->groupBy('threads.id');
 	}
 
 	/**
@@ -55,7 +55,7 @@ class Thread extends CmgmyrThread
 	 */
 	public function messages()
 	{
-		return $this->hasMany('Informulate\Messenger\Message');
+		return $this->hasMany('App\Models\Message');
 	}
 
 	/**
@@ -80,6 +80,6 @@ class Thread extends CmgmyrThread
 	 */
 	public function participants()
 	{
-		return $this->hasMany('Informulate\Messenger\Participant');
+		return $this->hasMany('App\Models\Participant');
 	}
 }

@@ -27,7 +27,7 @@
         @endforeach
         <div class="row">
             <div class="col-sm-12">
-                {{ $messages->links() }}
+                {{ $messages->render() }}
             </div>
         </div>
 

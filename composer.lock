@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "692064f91c5adab21f7975b79c2cdd9c",
+    "hash": "5781134eac8e31085db595d263e48934",
     "packages": [
         {
             "name": "awjudd/feed-reader",
@@ -106,20 +106,19 @@
         },
         {
             "name": "cmgmyr/messenger",
-            "version": "dev-master",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cmgmyr/laravel-messenger.git",
-                "reference": "3108ee1cc59e97231c792184628e31f86eba0b65"
+                "reference": "e03b37cfdd3127191e59b2405a81193918dde304"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cmgmyr/laravel-messenger/zipball/3108ee1cc59e97231c792184628e31f86eba0b65",
-                "reference": "3108ee1cc59e97231c792184628e31f86eba0b65",
+                "url": "https://api.github.com/repos/cmgmyr/laravel-messenger/zipball/e03b37cfdd3127191e59b2405a81193918dde304",
+                "reference": "e03b37cfdd3127191e59b2405a81193918dde304",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "~5.0",
                 "illuminate/database": "~5.0",
                 "illuminate/support": "~5.0",
                 "nesbot/carbon": "~1.0",
@@ -156,7 +155,7 @@
                 "messaging",
                 "user messaging"
             ],
-            "time": "2015-03-13 19:16:40"
+            "time": "2015-02-12 12:47:15"
         },
         {
             "name": "cocur/slugify",
@@ -3736,7 +3735,6 @@
         "simplepie/simplepie": 20,
         "awjudd/feed-reader": 20,
         "thujohn/twitter": 20,
-        "cmgmyr/messenger": 20,
         "barryvdh/laravel-ide-helper": 20,
         "fzaninotto/faker": 20
     },

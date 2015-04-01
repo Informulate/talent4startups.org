@@ -9,11 +9,7 @@ use App\Models\Thread;
 use App\Models\Message;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
+use Auth, Input, Redirect, Session;
 
 class MessagesController extends Controller
 {
@@ -65,7 +61,7 @@ class MessagesController extends Controller
 
 		// don't show the current user in list
 		$userId = Auth::user()->id;
-		$users = new ArrayObject(); //User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+		$users = new \ArrayObject(); //User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
 
 		$thread->markAsRead($userId);
 		$currentUserId = Auth::user()->id;
