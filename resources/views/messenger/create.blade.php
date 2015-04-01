@@ -2,37 +2,37 @@
 
 @section('content')
 <h1>Create a new message</h1>
-{{Form::open(['route' => 'messages.store'])}}
+{!! Form::open(['route' => 'messages.store']) !!}
 <div class="col-md-6">
     <!-- Subject Form Input -->
     <div class="form-group">
-        {{ Form::label('recipient_ac', 'To ', ['class' => 'control-label']) }}
-        {{ Form::text('recipient_ac', null, ['class' => 'form-control', 'autocomplete' => 'on', 'autofocus' => 'autofocus', 'placeholder' => 'Start typing the name(s) of others you are connected with']) }}
-        {{ Form::hidden('recipients', $recipient->id, ['class' => 'form-control', 'id' => 'recipients']) }}
+        {!! Form::label('recipient_ac', 'To ', ['class' => 'control-label']) !!}
+        {!! Form::text('recipient_ac', null, ['class' => 'form-control', 'autocomplete' => 'on', 'autofocus' => 'autofocus', 'placeholder' => 'Start typing the name(s) of others you are connected with']) !!}
+        {!! Form::hidden('recipients', $recipient->id, ['class' => 'form-control', 'id' => 'recipients']) !!}
         <ul id="recipient_list" class="list-inline">
             <span class="text-muted">Recipients: </span>
         @if ($recipient->id > 0)
             <li class="btn btn-default btn-xs" rel="{{ $recipient->id }}">{{ $recipient->profile->first_name }} {{ $recipient->profile->last_name }}</li>
         @endif
         </ul>
-        {{ Form::label('subject', 'Subject', ['class' => 'control-label']) }}
-        {{ Form::text('subject', null, ['class' => 'form-control']) }}
+        {!! Form::label('subject', 'Subject', ['class' => 'control-label']) !!}
+        {!! Form::text('subject', null, ['class' => 'form-control']) !!}
     </div>
 
     <!-- Message Form Input -->
     <div class="form-group">
-        {{ Form::label('message', 'Message', ['class' => 'control-label']) }}
-        {{ Form::textarea('message', null, ['class' => 'form-control']) }}
+        {!! Form::label('message', 'Message', ['class' => 'control-label']) !!}
+        {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
     </div>
 
 
 
     <!-- Submit Form Input -->
     <div class="form-group">
-        {{ Form::submit('Submit', ['class' => 'btn btn-primary form-control']) }}
+        {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
     </div>
 </div>
-{{Form::close()}}
+{!! Form::close() !!}
 @stop
 
 @section('javascript')

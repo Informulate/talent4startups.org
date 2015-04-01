@@ -33,10 +33,10 @@
 
         @if ($message->type == 'message')
         <h2>Reply</h2>
-        {{Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT'])}}
+        {!! Form::open(['route' => ['messages.update', $thread->id], 'method' => 'PUT']) !!}
         <!-- Message Form Input -->
         <div class="form-group">
-            {{ Form::textarea('message', null, ['class' => 'form-control']) }}
+            {!! Form::textarea('message', null, ['class' => 'form-control']) !!}
         </div>
 
         @if($users->count() > 0)
@@ -49,8 +49,8 @@
 
         <!-- Submit Form Input -->
         <div class="form-group">
-            {{ Form::submit('Submit', ['class' => 'btn btn-primary form-control']) }}
+            {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
         </div>
-        {{Form::close()}}
+        {!! Form::close() !!}
         @endif
 @endsection

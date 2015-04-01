@@ -10,6 +10,7 @@ use App\Models\Message;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth, Input, Redirect, Session;
+use Response;
 
 class MessagesController extends Controller
 {

@@ -41,7 +41,7 @@ class Message extends CmgmyrMessage
 
 			foreach ($participants as $participant) {
 				if ($participant->user->id != $message->user->id) {
-					Event::fire('Informulate.Messenger.Events.NewMessage', [new NewMessage($participant)]);
+//					Event::fire('Informulate.Messenger.Events.NewMessage', [new NewMessage($participant)]);
 				}
 			}
 
