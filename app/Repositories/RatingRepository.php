@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-use Informulate\Ratings\Events\StartupRated;
-use Informulate\Ratings\Events\UserRated;
-use Laracasts\Commander\Events\EventGenerator;
+use App\Models\Rating;
+//use Informulate\Ratings\Events\StartupRated;
+//use Informulate\Ratings\Events\UserRated;
+//use Laracasts\Commander\Events\EventGenerator;
 
 class RatingRepository
 {
-	use EventGenerator;
+//	use EventGenerator;
 
 	/**
 	 * Saves the rating
@@ -34,11 +35,11 @@ class RatingRepository
 		$rating = new Rating(compact('rating', 'rated_id', 'rated_type', 'rated_by_id', 'rated_by_type'));
 
 		switch ($rated_type) {
-			case '\\Informulate\\Startups\\Startup':
-				$rating->raise(new StartupRated($rated_id, $rated_by_id));
+			case '\\App\\Models\\Startup':
+				//$rating->raise(new StartupRated($rated_id, $rated_by_id));
 				break;
 			default:
-				$rating->raise(new UserRated($rated_id, $rated_by_id));
+				//$rating->raise(new UserRated($rated_id, $rated_by_id));
 				break;
 		}
 
@@ -51,7 +52,7 @@ class RatingRepository
 	 * @param $rated_type
 	 * @param $rated_by_id
 	 * @param $rated_by_type
-	 * @return \Illuminate\Database\Eloquent\Model|null|static
+	 * @return Rating
 	 */
 	public function update($rating, $rated_id, $rated_type, $rated_by_id, $rated_by_type)
 	{
@@ -66,11 +67,11 @@ class RatingRepository
 			$current->rating = $rating;
 
 			switch ($rated_type) {
-				case '\\Informulate\\Startups\\Startup':
-					$current->raise(new StartupRated($rated_id, $rated_by_id));
+				case '\\App\\Models\\Startup':
+//					$current->raise(new StartupRated($rated_id, $rated_by_id));
 					break;
 				default:
-					$current->raise(new UserRated($rated_id, $rated_by_id));
+//					$current->raise(new UserRated($rated_id, $rated_by_id));
 					break;
 			}
 		}

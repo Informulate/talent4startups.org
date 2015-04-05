@@ -179,39 +179,39 @@ Route::post('password/reset/{token}', array(
  * Static Pages
  */
 Route::get('about', array(
-	'uses' => 'StaticController@about',
+	'uses' => 'PagesController@about',
 	'as' => 'about'
 ));
 Route::get('contact', array(
-	'uses' => 'StaticController@contact',
+	'uses' => 'PagesController@contact',
 	'as' => 'contact'
 ));
 Route::get('manifesto', array(
-	'uses' => 'StaticController@manifesto',
+	'uses' => 'PagesController@manifesto',
 	'as' => 'manifesto'
 ));
 Route::get('faq', array(
-	'uses' => 'StaticController@faq',
+	'uses' => 'PagesController@faq',
 	'as' => 'faq'
 ));
 Route::get('sponsors', array(
-	'uses' => 'StaticController@sponsors',
+	'uses' => 'PagesController@sponsors',
 	'as' => 'sponsors'
 ));
 Route::get('knowledge-base', array(
-	'uses' => 'StaticController@knowledgebase',
+	'uses' => 'PagesController@knowledgebase',
 	'as' => 'knowledgebase'
 ));
 Route::get('terms', array(
-	'uses' => 'StaticController@about',
+	'uses' => 'PagesController@about',
 	'as' => 'terms'
 ));
 Route::get('privacy', array(
-	'uses' => 'StaticController@privacy',
+	'uses' => 'PagesController@privacy',
 	'as' => 'privacy'
 ));
 Route::get('termsofservice', array(
-	'uses' => 'StaticController@termsOfService',
+	'uses' => 'PagesController@termsOfService',
 	'as' => 'termsOfService'
 ));
 

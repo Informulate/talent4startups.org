@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Response, Password, Redirect, Input, App, Hash, Lang;
+
 class RemindersController extends Controller {
 
 	/**

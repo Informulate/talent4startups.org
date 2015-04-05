@@ -2,24 +2,14 @@
 
 namespace App\Http\Controllers;
 
-//use Informulate\Ratings\Commands\RateUserCommand;
-use App\Repositories\StartupRepository;
+use App\Commands\RateUser;
+use Input;
 
 class RatingController extends Controller
 {
 
-	/**
-	 * @var StartupRepository
-	 */
-	private $repository;
-
-	/**
-	 * @param StartupRepository $repository
-	 */
-	function __construct(StartupRepository $repository)
+	function __construct()
 	{
-		$this->repository = $repository;
-
 		$this->beforeFilter('auth');
 	}
 
@@ -29,9 +19,6 @@ class RatingController extends Controller
 	public function rate()
 	{
 		extract(Input::only('rating', 'rated_id', 'rated_type', 'rated_by_id', 'rated_by_type'));
-
-		$this->execute(
-			new RateUserCommand($rating, $rated_id, $rated_type, $rated_by_id, $rated_by_type)
-		);
+		$this->dispatch(new RateUser($rating, $rated_id, $rated_type, $rated_by_id, $rated_by_type));
 	}
 }

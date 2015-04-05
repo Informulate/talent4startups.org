@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\StartupRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Auth, DB, Response, Redirect;
 
 class WelcomeController extends Controller {
 
@@ -31,6 +30,8 @@ class WelcomeController extends Controller {
 	/**
 	 * Show the application welcome screen to the user.
 	 *
+	 * @param StartupRepository $startupRepository
+	 * @param UserRepository $userRepository
 	 * @return Response
 	 */
 	public function index(StartupRepository $startupRepository, UserRepository $userRepository)
@@ -47,7 +48,6 @@ class WelcomeController extends Controller {
 //				->with('talents', $talent);
 		}
 
-//		return view('home')->with('startups', $startups)->with('talents', $talent);
 		return view('welcome')->with('startups', $startups)->with('talents', $talent);
 	}
 

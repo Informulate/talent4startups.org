@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
-//use Informulate\Startups\UpdateStartupMembershipCommand;
-//use Informulate\Startups\CancelStartupMembershipRequestCommand;
-//use Informulate\Startups\RequestStartupMembershipCommand;
 use App\Models\Startup;
-use Laracasts\Flash\Flash;
+use App\Commands\RequestMembership;
+use App\Commands\UpdateMembership;
+use App\Commands\CancelMembership;
+use Flash, Auth, Redirect, Response;
 
 class MembershipController extends Controller {
 
@@ -18,8 +17,6 @@ class MembershipController extends Controller {
 	function __construct()
 	{
 		$this->middleware('auth');
-
-//		parent::__construct();
 	}
 
 	/**
@@ -33,7 +30,7 @@ class MembershipController extends Controller {
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-//		$this->execute(new RequestStartupMembershipCommand(Auth::user(), $startup));
+		$this->dispatch(new RequestMembership(Auth::user(), $startup));
 
 		Flash::message('Your request has been sent to the owner!');
 
@@ -55,7 +52,7 @@ class MembershipController extends Controller {
 
 		if ($this->currentUserIsOwner($startup->owner)) {
 			$user = User::findOrFail($user);
-//			$this->execute(new UpdateStartupMembershipCommand($user, $startup, $action));
+			$this->dispatch(new UpdateMembership($user, $startup, $action));
 		}
 
 		return Redirect::route('startups.show', ['url' => $startup->url]);
@@ -72,7 +69,7 @@ class MembershipController extends Controller {
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
 
-//		$this->execute(new CancelStartupMembershipRequestCommand(Auth::user(), $startup));
+		$this->dispatch(new CancelMembership(Auth::user(), $startup));
 
 		return Redirect::route('startups.show', ['url' => $startup->url]);
 	}

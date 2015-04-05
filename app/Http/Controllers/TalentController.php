@@ -5,35 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Models\Skill;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Input;
 
 class TalentController extends Controller
 {
 	/**
-	 * @var UserRepository
+	 *
 	 */
-	private $userRepository;
-
-	/**
-	 * @param UserRepository $userRepository
-	 */
-	function __construct(UserRepository $userRepository)
+	function __construct()
 	{
-		$this->userRepository = $userRepository;
 		$this->middleware('auth');
-
-//		parent::__construct();
 	}
 
 	/**
 	 * Display a list of active talents
 	 *
+	 * @param UserRepository $userRepository
 	 * @return $this
 	 */
-	public function index()
+	public function index(UserRepository $userRepository)
 	{
-		$talents = $this->userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'));
+		$talents = $userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'));
 		$describes = Skill::lists('name', 'id');
 
 		return view('talent.index')->with('talents', $talents)->with('describes', $describes);

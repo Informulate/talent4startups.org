@@ -25,9 +25,8 @@ class MessagesController extends Controller
 	{
 		$this->userRepository = $userRepository;
 		$this->middleware('auth');
-
-//		parent::__construct();
 	}
+
 	/**
 	 * Show all of the message threads to the user
 	 *

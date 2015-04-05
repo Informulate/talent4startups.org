@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Flash;
 use App\Models\Tag;
 use App\Models\Skill;
 use App\Models\Stage;
@@ -12,10 +11,8 @@ use App\Http\Requests\UpdateStartup;
 use App\Repositories\StartupRepository;
 use App\Commands\CreateStartup as CreateStartupCommand;
 use App\Commands\UpdateStartup as UpdateStartupCommand;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
+use App, Auth, Flash, Input, Redirect, Response;
 
 class StartupController extends Controller
 {
@@ -68,7 +65,7 @@ class StartupController extends Controller
 	/**
 	 * Save the user.
 	 * @param CreateStartup $request
-	 * @return
+	 * @return Response
 	 */
 	public function store(CreateStartup $request)
 	{
@@ -152,6 +149,8 @@ class StartupController extends Controller
 	/**
 	 * @param $route
 	 * @param $request
+	 *
+	 * @return RedirectResponse
 	 */
 	public function isCurrentOwnerFilter($route, $request)
 	{
