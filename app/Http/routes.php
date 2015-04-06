@@ -64,9 +64,9 @@ Route::get('login/linkedIn', [
 	'uses' => 'SessionsController@loginWithLinkedIn'
 ]);
 
-Route::get('register/linkedIn', [
+Route::get('auth/linkedin', [
 	'as' => 'register_linked_in',
-	'uses' => 'SessionsController@loginWithLinkedIn'
+	'uses' => 'Auth\\AuthController@linkedin'
 ]);
 
 Route::get('logout', [
@@ -74,9 +74,9 @@ Route::get('logout', [
 	'uses' => 'SessionsController@destroy'
 ]);
 
-Route::get('session/type', [
+Route::get('auth/type', [
 	'as' => 'store_type_path',
-	'uses' => 'SessionsController@storeUserType'
+	'uses' => 'Auth\\AuthController@type'
 ]);
 
 /**
@@ -136,43 +136,6 @@ Route::post('/profile/invite/', [
 	'as' => 'invite_to_startup',
 	'uses' => 'ProfileController@invite'
 ]);
-
-
-/**
- * Reset password
- */
-
-Route::get('reset_password', [
-	'as' => 'reset_password',
-	'uses' => 'ProfileController@resetPasswordForm'
-]);
-
-
-Route::post('reset_password', [
-	'as' => 'reset_password',
-	'uses' => 'ProfileController@resetPassword'
-]);
-
-
-/**
- * Forgot password
- */
-Route::get('password/reset', array(
-	'uses' => 'PasswordController@remind',
-	'as' => 'password.remind'
-));
-Route::post('password/reset', array(
-	'uses' => 'PasswordController@request',
-	'as' => 'password.request'
-));
-Route::get('password/reset/{token}', array(
-	'uses' => 'PasswordController@reset',
-	'as' => 'password.reset'
-));
-Route::post('password/reset/{token}', array(
-	'uses' => 'PasswordController@update',
-	'as' => 'password.update'
-));
 
 
 /**

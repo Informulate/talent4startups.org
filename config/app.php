@@ -157,6 +157,7 @@ return [
 		'Thujohn\Twitter\TwitterServiceProvider',
 		'Cmgmyr\Messenger\MessengerServiceProvider',
 		'Maknz\Slack\SlackServiceProvider',
+		'SocialiteProviders\Manager\ServiceProvider',
 
 	],
 
@@ -216,7 +217,8 @@ return [
 		'Image' 		=> 'Intervention\Image\Facades\Image',
 		'FeedReader' 	=> 'Awjudd\FeedReader\Facades\FeedReader',
 		'Twitter' 		=> 'Thujohn\Twitter\Facades\Twitter',
-		'Slack' => 'Maknz\Slack\Facades\Slack',
+		'Slack' 		=> 'Maknz\Slack\Facades\Slack',
+		'Socialite' 	=> 'Laravel\Socialite\Facades\Socialite',
 
 	],
 

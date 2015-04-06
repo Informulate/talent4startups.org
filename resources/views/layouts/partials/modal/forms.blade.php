@@ -18,7 +18,7 @@
 						</div>
 						<div class="row email-signin">
 							<div class="col-sm-12">
-								<a href="{{ route('login_path') }}">Or Sign in with email instead</a>
+								{!! link_to('/auth/login', 'Or Sign in with email instead') !!}
 							</div>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<input id="agree" type="checkbox" value="agree"/> I agree to the {{ link_to('/termsofservice', 'Terms of Service') }}, have read the {{ link_to('/privacy', 'Privacy Policy') }}, and am ready to get started.<br/>
+								<input id="agree" type="checkbox" value="agree"/> I agree to the {!! link_to('/termsofservice', 'Terms of Service') !!}, have read the {!! link_to('/privacy', 'Privacy Policy') !!}, and am ready to get started.<br/>
 								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
@@ -74,9 +74,16 @@
 		});
 
 		// Register via email
-		$('#register-email').on('click', function(event) {
-			$(this).attr('href', $(this).attr('href') + '?type=' + getType());
+		var typeSet = false;
+		var registerEmail = $('#register-email');
+		var originalUrl = registerEmail.attr('href');
+		registerEmail.on('click', function(event) {
 			validateRegistration(event);
+			var selectedType = getType();
+			if (typeSet == false || selectedType != typeSet) {
+				$(this).attr('href', originalUrl + '?type=' + selectedType);
+			}
+			typeSet = selectedType;
 		});
 
 		// Register via Linekdin

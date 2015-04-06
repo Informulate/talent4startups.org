@@ -14,6 +14,9 @@ class EventServiceProvider extends ServiceProvider {
 		'event.name' => [
 			'EventListener',
 		],
+		'SocialiteProviders\Manager\SocialiteWasCalled' => [
+			'SocialiteProviders\LinkedIn\LinkedInExtendSocialite@handle',
+		],
 	];
 
 	/**

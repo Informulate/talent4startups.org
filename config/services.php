@@ -34,4 +34,10 @@ return [
 		'secret' => '',
 	],
 
+	'linkedin' => [
+		'client_id' => getenv('LINKEDIN_KEY'),
+		'client_secret' => getenv('LINKEDIN_SECRET'),
+		'redirect' => getenv('LINKEDIN_REDIRECT_URI'),
+	],
+
 ];

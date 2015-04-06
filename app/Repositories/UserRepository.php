@@ -18,6 +18,17 @@ class UserRepository
 		return $user->save();
 	}
 
+	public function findOrCreate($userData, $type)
+	{
+		$user = User::where('email', '=', $userData->email)->first();
+
+		if (!$user) {
+			$user = User::register($userData->email, $userData->email, 'password' , $type);
+		}
+
+		return $user;
+	}
+
 	/**
 	 * Finds the user by their username
 	 *
