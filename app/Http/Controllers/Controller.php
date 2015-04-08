@@ -12,20 +12,6 @@ abstract class Controller extends BaseController {
 	use DispatchesCommands, ValidatesRequests;
 
 	/**
-	 * Before filter to validate the user has completed the profile
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function isProfileCompleteFilter()
-	{
-		if (Auth::user() and Auth::user()->profileIsIncomplete() and Route::currentRouteName() !== 'edit_profile') {
-			Flash::error('You need to complete your profile before you can continue!');
-
-			return Redirect::route('edit_profile');
-		}
-	}
-
-	/**
 	 * @param $owner
 	 * @return bool
 	 */

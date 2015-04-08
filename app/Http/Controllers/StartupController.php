@@ -32,6 +32,7 @@ class StartupController extends Controller
 		$this->repository = $repository;
 
 		$this->middleware('auth');
+		$this->middleware('profile.complete');
 		$this->beforeFilter('@isCurrentOwnerFilter', ['only' => ['edit', 'update']]);
 	}
 

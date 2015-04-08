@@ -23,6 +23,11 @@ class UserRepository
 		$user = User::where('email', '=', $userData->email)->first();
 
 		if (!$user) {
+			// If the user tried to login with out an account, default to talent when creating the user.
+			if (is_null($type)) {
+				$type = 'talent';
+			}
+
 			$user = User::register($userData->email, $userData->email, 'password' , $type);
 		}
 

@@ -11,16 +11,16 @@
 |
 */
 
+Route::get('/', [
+	'as' => 'home',
+	'uses' => 'WelcomeController@index'
+]);
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-]);
-
-Route::get('/', [
-	'as' => 'home',
-	'uses' => 'WelcomeController@index'
 ]);
 
 Route::get('/404', [
@@ -65,7 +65,7 @@ Route::get('login/linkedIn', [
 ]);
 
 Route::get('auth/linkedin', [
-	'as' => 'register_linked_in',
+	'as' => 'linked_in',
 	'uses' => 'Auth\\AuthController@linkedin'
 ]);
 

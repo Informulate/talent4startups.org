@@ -13,7 +13,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<i class="social social-linked-in linked-in-btn"></i>
-								<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("login_linked_in") }}">Sign In with LinkedIn</a>
+								<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("linked_in") }}">Sign In with LinkedIn</a>
 							</div>
 						</div>
 						<div class="row email-signin">
@@ -29,7 +29,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<input id="agree" type="checkbox" value="agree"/> I agree to the {!! link_to('/termsofservice', 'Terms of Service') !!}, have read the {!! link_to('/privacy', 'Privacy Policy') !!}, and am ready to get started.<br/>
-								<a id="register-linked_in" class="btn btn-primary" href="{{ route("register_linked_in") }}">Sign up with LinkedIn</a>
+								<a id="register-linked_in" class="btn btn-primary" href="{{ route("linked_in") }}">Sign up with LinkedIn</a>
 								<br/>
 								<a id="register-email" href="{{ route('register_path') }}">Or Sign up with email instead</a>
 							</div>

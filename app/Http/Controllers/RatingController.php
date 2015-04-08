@@ -11,6 +11,7 @@ class RatingController extends Controller
 	function __construct()
 	{
 		$this->beforeFilter('auth');
+		$this->middleware('profile.complete');
 	}
 
 	/**
