@@ -33,7 +33,7 @@ class StartupController extends Controller
 
 		$this->middleware('auth');
 		$this->middleware('profile.complete');
-		$this->beforeFilter('@isCurrentOwnerFilter', ['only' => ['edit', 'update']]);
+		$this->middleware('startup.owner', ['only' => ['edit', 'update']]);
 	}
 
 	/**
@@ -145,22 +145,5 @@ class StartupController extends Controller
 	public function destroy($id)
 	{
 		// TODO: Implement proper startup deactivation (We don't want to delete it we just want to deactivate it)
-	}
-
-	/**
-	 * @param $route
-	 * @param $request
-	 *
-	 * @return RedirectResponse
-	 */
-	public function isCurrentOwnerFilter($route, $request)
-	{
-		$parameters = $route->parameters();
-		$startup = $parameters['startups'];
-		$startup = Startup::where('url', '=', $startup)->firstOrFail();
-
-		if (false === $this->currentUserIsOwner($startup->owner)) {
-			return Redirect::route('startups.show', ['startup' => $startup->url]);
-		}
 	}
 }
