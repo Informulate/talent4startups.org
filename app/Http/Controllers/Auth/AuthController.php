@@ -40,6 +40,18 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	}
 
 	/**
+	 * @inheritdoc
+	 */
+	public function getRegister(Request $request)
+	{
+		if (!$request->get('type')) {
+			return Redirect::to('/');
+		}
+
+		return view('auth.register')->with('type', $request->get('type'));
+	}
+
+	/**
 	 * @param AuthenticateUser $authenticateUser
 	 * @param Request $request
 	 * @param Session $session

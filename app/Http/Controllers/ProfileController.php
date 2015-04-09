@@ -10,7 +10,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Repositories\ThreadRepository;
 use App\Commands\UpdateProfile as UpdateProfileCommand;
-use Auth, Flash, Image, Redirect, Exception;
+use Auth, Flash, Image, Redirect, Exception, Hash, Input;
 
 class ProfileController extends Controller
 {
