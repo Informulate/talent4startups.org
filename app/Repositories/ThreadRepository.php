@@ -2,10 +2,11 @@
 
 namespace App\Repositories;
 
-use Informulate\Messenger\Participant;
+use App\Models\Message;
+use App\Models\Thread;
+use App\Models\Participant;
+use App\Models\User;
 use Illuminate\Support\Facades\View;
-use Informulate\Messenger\Message;
-use Informulate\Messenger\Thread;
 
 class ThreadRepository
 {

@@ -36,10 +36,10 @@ class RatingRepository
 
 		switch ($rated_type) {
 			case '\\App\\Models\\Startup':
-				//$rating->raise(new StartupRated($rated_id, $rated_by_id));
+                Event::fire(new StartupRated($rated_id, $rated_by_id));
 				break;
 			default:
-				//$rating->raise(new UserRated($rated_id, $rated_by_id));
+                Event::fire(new UserRated($rated_id, $rated_by_id));
 				break;
 		}
 
@@ -68,10 +68,10 @@ class RatingRepository
 
 			switch ($rated_type) {
 				case '\\App\\Models\\Startup':
-//					$current->raise(new StartupRated($rated_id, $rated_by_id));
+                    Event::fire(new StartupRated($rated_id, $rated_by_id));
 					break;
 				default:
-//					$current->raise(new UserRated($rated_id, $rated_by_id));
+                    Event::fire(new UserRated($rated_id, $rated_by_id));
 					break;
 			}
 		}
