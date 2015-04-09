@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Informulate\Users\Events\ProfileCreated;
+use App\Events\ProfileCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
@@ -74,9 +74,9 @@ class Profile extends Model
 			$profile->published = false;
 		}
 
-//		if ($new) {
-//			$profile->raise(new ProfileCreated($profile));
-//		}
+		if ($new) {
+            Event::fire('App.Events.ProfileCreated', new ProfileCreated($profile));
+		}
 
 		return $profile;
 	}

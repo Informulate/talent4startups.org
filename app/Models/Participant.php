@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\NewMessage;
 use Cmgmyr\Messenger\Models\Participant as CmgmyrParticipant;
 use Illuminate\Support\Facades\Event;
-//use Informulate\Messenger\Events\NewMessage;
 
 class Participant extends CmgmyrParticipant
 {
@@ -24,7 +24,7 @@ class Participant extends CmgmyrParticipant
 	private static function raiseEvent()
 	{
 		return function ($participant) {
-			//Event::fire('Informulate.Messenger.Events.NewMessage', [new NewMessage($participant)]);
+			Event::fire(new NewMessage($participant));
 
 			return $participant;
 		};
