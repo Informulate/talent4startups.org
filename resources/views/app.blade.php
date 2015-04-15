@@ -10,7 +10,8 @@
 	<link href="{{{ asset( 'css/vendors/glyphicons/social.css' ) }}}" rel="stylesheet">
 	<link href="{{{ asset( 'css/vendors/bootstrap/bootstrap.min.css' ) }}}" rel="stylesheet">
 	<link href="{{{ asset( 'css/vendors/star-rating/star-rating.min.css' ) }}}" rel="stylesheet">
-	<link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
+    <link href="{{{ asset( 'css/vendors/sweet-alert/sweet-alert.css' ) }}}" rel="stylesheet">
+    <link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
 
 	@yield('css')
 
@@ -51,6 +52,7 @@
 <script src="{{{ asset('/js/vendors/modernizr/modernizr.js' ) }}}"></script>
 <script src="{{{ asset( 'js/vendors/holder/docs.min.js' ) }}}"></script>
 <script src="{{{ asset( 'js/vendors/star-rating/star-rating.min.js' ) }}}"></script>
+<script src="{{{ asset( 'js/vendors/sweet-alert/sweet-alert.min.js' ) }}}"></script>
 <script src="{{{ asset( 'js/script.js' ) }}}"></script>
 
 @yield('javascript')
