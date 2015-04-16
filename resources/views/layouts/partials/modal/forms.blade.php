@@ -100,13 +100,13 @@
 			if (false === $("#agree").is(':checked')) {
 				errors++;
 				event.preventDefault();
-				alert('You must agree to the Terms of Use before getting started!');
+                sweetAlert("Terms of Use", "You must agree to the Terms of Use before getting started!");
 			}
 
 			if (false === $('label[for="talent"]').hasClass('text-primary') && false === $('label[for="startup"]').hasClass('text-primary')) {
 				errors++;
 				event.preventDefault();
-				alert('Are you a talent or a startup? Click the appropriate icon above!');
+				sweetAlert('Talent or Startup','Are you a talent or a startup? Click the appropriate icon above!');
 			}
 
 			return errors;
