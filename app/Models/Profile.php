@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\ProfileCreated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
 
 class Profile extends Model
 {
@@ -75,7 +76,9 @@ class Profile extends Model
 		}
 
 		if ($new) {
-            Event::fire('App.Events.ProfileCreated', new ProfileCreated($profile));
+            $profile->save();
+            $user->profile = $profile;
+            Event::fire(new ProfileCreated($profile, $user));
 		}
 
 		return $profile;
