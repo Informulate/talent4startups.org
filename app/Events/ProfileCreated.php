@@ -3,6 +3,7 @@
 use App\Events\Event;
 
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 
 class ProfileCreated extends Event {
@@ -20,11 +21,12 @@ class ProfileCreated extends Event {
 
     /**
      * @param Profile $profile
+     * @param User $user
      */
-    function __construct(Profile $profile)
+    function __construct(Profile $profile, User $user)
     {
         $this->profile = $profile;
-        $this->user = $profile->user;
+        $this->user = $user;
     }
 
 }
