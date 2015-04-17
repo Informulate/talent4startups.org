@@ -4,3 +4,5 @@
 public/.DS_Store
 .idea
 .DS_Store
+
+tests/_output/*
