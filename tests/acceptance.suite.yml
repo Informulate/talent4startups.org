@@ -6,9 +6,7 @@
 
 class_name: AcceptanceTester
 modules:
-    enabled:
-        - PhpBrowser
-        - AcceptanceHelper
+    enabled: [Laravel5, PhpBrowser, AcceptanceHelper]
     config:
         PhpBrowser:
-            url: 'http://localhost/myapp/'
+            url: 'http://localhost'

@@ -36,7 +36,7 @@
 						</ul>
 					</li>
 				@else
-					<li><a id="login-link" href="{{ route('login_path') }}"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
+					<li><a id="login-link" href="/auth/login"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
 					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a></form></li>
 				@endif
 			</ul>
