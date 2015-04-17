@@ -46,7 +46,7 @@ class NewMessage {
                         ->subject("T4S: {$participant->thread->subject}")
                     ;
                 });
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 // TODO: Raise a Slack notification
             }
         }
