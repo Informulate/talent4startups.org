@@ -7,10 +7,13 @@ env:
   - DB_HOST="127.0.0.1" DB_NAME="codeception_test" DB_USERNAME="travis"
 
 before_script:
+  - cp .env.travis .env
   - composer self-update
   - composer install --dev --prefer-source --no-interaction
   - mysql -e 'create database codeception_test;'
   - php artisan migrate --force
+  - php vendor/bin/codecept build
+  - php artisan serve --port 80
 
 script:
   - php vendor/bin/codecept run

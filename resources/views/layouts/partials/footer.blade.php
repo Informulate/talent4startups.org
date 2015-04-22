@@ -5,7 +5,7 @@
 				<div class="footer-headline"><h5>Recent Articles</h5></div>
 				<?php $count = count($t4sBlogFeed) < 3 ? count($t4sBlogFeed) : 3; ?>
 				@for ($i = 0; $i < $count; $i++)
-					<a href="{{ $t4sBlogFeed[$i]->get_link() }}">{{ $t4sBlogFeed[$i]->get_title() }}</a>
+					<a href="{{ $t4sBlogFeed[$i]->get_link() }}" target="_blank">{{ $t4sBlogFeed[$i]->get_title() }}</a>
 					<p>
 						{{ $t4sBlogFeed[$i]->get_description() }}
 						{{ $t4sBlogFeed[$i]->get_date('j F Y | g:i a') }}
@@ -60,7 +60,7 @@
 				<div class="footer-headline"><h5>Facebook Posts</h5></div>
 				<?php $count = count($facebookFeed) < 3 ? count($facebookFeed) : 3; ?>
 				@for ($i = 0; $i < $count; $i++)
-					{{ $facebookFeed[$i]->get_description() }}
+					{!! $facebookFeed[$i]->get_description() !!}
 					{{ $facebookFeed[$i]->get_date('j F Y | g:i a') }}
 					<hr>
 				@endfor

@@ -1,6 +1,6 @@
 	<div class="row">
 		<div class="col-sm-12">
-			{{--{{ $startups->links() }}--}}
+			{!! $startups->render() !!}
 		</div>
 	</div>
 
@@ -42,7 +42,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-{{--			{{ $startups->links() }}--}}
+			{!! $startups->render() !!}
 		</div>
 		@include('layouts.partials.socialshare')
 	</div>

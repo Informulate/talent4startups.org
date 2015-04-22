@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Cmgmyr\Messenger\Models\Message as CmgmyrMessage;
 use Illuminate\Support\Facades\Event;
-use Informulate\Messenger\Events\NewMessage;
+use App\Events\NewMessage;
 use Misd\Linkify\Linkify;
 
 class Message extends CmgmyrMessage

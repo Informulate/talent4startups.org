@@ -68,7 +68,12 @@ class MessagesController extends Controller
 		$currentUserId = Auth::user()->id;
 		$messages = $thread->messages()->orderBy('created_at', 'desc')->paginate(5);
 
-		return view('messenger.show', compact('thread', 'messages', 'users', 'currentUserId'));
+		if (\Request::ajax()) {
+			$html = view('messenger.show', compact('thread', 'messages', 'users', 'currentUserId'))->renderSections(array('content'));
+			return $html['content'];
+		} else {
+			return view('messenger.show', compact('thread', 'messages', 'users', 'currentUserId'));
+		}
 	}
 
 	/**

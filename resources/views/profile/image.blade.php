@@ -48,7 +48,7 @@
 		function checkCoords()
 		{
 			if (parseInt($('#w').val())) return true;
-			alert('Please select a crop region then press submit.');
+			sweetAlert('Crop a Region','Please select a crop region then press submit.');
 			return false;
 		};
 

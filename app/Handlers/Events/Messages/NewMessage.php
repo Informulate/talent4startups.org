@@ -43,10 +43,10 @@ class NewMessage {
                     $message
                         ->from('noreply@talent4startups.org', 'Talent4Startups')
                         ->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
-                        ->subject("Talent4Startups Message: {$participant->thread->subject}")
+                        ->subject("T4S: {$participant->thread->subject}")
                     ;
                 });
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 // TODO: Raise a Slack notification
             }
         }

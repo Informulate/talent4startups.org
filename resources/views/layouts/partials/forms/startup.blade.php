@@ -1,4 +1,4 @@
-{!! Form::hidden('startup_id', $startup->id) !!}
+{!! Form::hidden('startup_id', isset($startup) ? $startup->id : null) !!}
 <div class="form-group">
 	{!! Form::label('name', 'The startup is titled:') !!}
 	{!! Form::text('name', null, ['class' => 'form-control']) !!}
