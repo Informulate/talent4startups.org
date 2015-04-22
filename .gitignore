@@ -3,3 +3,6 @@
 .env
 public/.DS_Store
 .idea
+.DS_Store
+tests/_output/*
+tests/*/*Tester.php
