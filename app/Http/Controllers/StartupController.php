@@ -11,7 +11,6 @@ use App\Http\Requests\UpdateStartup;
 use App\Repositories\StartupRepository;
 use App\Commands\CreateStartup as CreateStartupCommand;
 use App\Commands\UpdateStartup as UpdateStartupCommand;
-use Illuminate\Http\RedirectResponse;
 use App, Auth, Flash, Input, Redirect, Response;
 
 class StartupController extends Controller
