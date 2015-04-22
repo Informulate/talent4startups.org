@@ -41,3 +41,17 @@
 	</div>
 	@include('layouts.partials.socialshare')
 @endsection
+
+@section('javascript')
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.member-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
+			});
+		});
+	</script>
+@stop
