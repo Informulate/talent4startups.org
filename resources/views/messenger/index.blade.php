@@ -37,14 +37,14 @@
             <p>
                 @foreach($thread->participantsUsers() as $user)
                     @if ($user->id != $thread->latestMessage()->user->id && (count($thread->messages) > 1)) <strong>{{ $user->profile->first_name }} {{ $user->profile->last_name }}, </strong>
-                    @elseif ($user->id != $thread->latestMessage()->user->id) <strong>{{ $user->profile->first_name }} {{ $user->profile->last_name }} </strong> @endif
+                    @elseif ($user->id != $thread->latestMessage()->user->id) <strong>{{ $thread->latestMessage()->user->profile->first_name }} {{ $thread->latestMessage()->user->profile->last_name }} </strong> @endif
 
                 @endforeach
                 @if(count($thread->messages) > 1) <strong>{{$thread->latestMessage()->user->profile->first_name}} {{$thread->latestMessage()->user->profile->last_name}}</strong> @endif
                 @if(count($thread->messages) > 1) ({{ count($thread->messages) }}) @endif
                 @if((count($thread->messages) > 1) && $thread->latestMessage()->user->id == Auth::user()->id) <small>(Replied)</small> @endif
             </p>
-            <p class="text-muted">{{ str_limit($thread->latestMessage()->body, 15) }}</p>
+            <p class="text-muted">{{ str_limit(strip_tags(str_replace(array('&lt;', '&gt;'), array('<', '>'), $thread->latestMessage()->body)), 15) }}</p>
             <div class="clearfix"></div>
             <div class="pull-right actions">
                 @if($thread->isUnread($currentUserId))
