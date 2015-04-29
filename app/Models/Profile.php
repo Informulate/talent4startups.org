@@ -24,24 +24,6 @@ class Profile extends Model
 	protected $table = 'profiles';
 
 	/**
-	 * The owner of this profile
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function user()
-	{
-		return $this->belongsTo('App\Models\User');
-	}
-
-	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
-	 */
-	public function skill()
-	{
-		return $this->belongsTo('App\Models\Skill');
-	}
-
-	/**
 	 * Update a user's profile
 	 *
 	 * @param User $user
@@ -76,12 +58,30 @@ class Profile extends Model
 		}
 
 		if ($new) {
-            $profile->save();
-            $user->profile = $profile;
-            Event::fire(new ProfileCreated($profile, $user));
+			$profile->save();
+			$user->profile = $profile;
+			Event::fire(new ProfileCreated($profile, $user));
 		}
 
 		return $profile;
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function skill()
+	{
+		return $this->belongsTo('App\Models\Skill');
+	}
+
+	/**
+	 * The owner of this profile
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function user()
+	{
+		return $this->belongsTo('App\Models\User');
 	}
 
 	/**
@@ -92,14 +92,13 @@ class Profile extends Model
 		return $this->belongsToMany('App\Models\Tag');
 	}
 
-
 	/**
 	 * @return string
 	 */
 	public function avatar()
 	{
 		if (isset($this->image) and $this->image != '') {
-			return asset('images/upload/'.$this->image);;
+			return asset('images/upload/' . $this->image);;
 		}
 
 		$email = md5($this->user->email);
