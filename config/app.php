@@ -158,6 +158,7 @@ return [
 		'Cmgmyr\Messenger\MessengerServiceProvider',
 		'Maknz\Slack\SlackServiceProvider',
 		'SocialiteProviders\Manager\ServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	],
 
@@ -219,6 +220,7 @@ return [
 		'Twitter' 		=> 'Thujohn\Twitter\Facades\Twitter',
 		'Slack' 		=> 'Maknz\Slack\Facades\Slack',
 		'Socialite' 	=> 'Laravel\Socialite\Facades\Socialite',
+		'Debugbar'		=> 'Barryvdh\Debugbar\Facade',
 
 	],
 
