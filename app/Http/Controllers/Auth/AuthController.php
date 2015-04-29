@@ -26,6 +26,11 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	use AuthenticatesAndRegistersUsers;
 
 	/**
+	 * @var string
+	 */
+	protected $redirectPath;
+
+	/**
 	 * Create a new authentication controller instance.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard $auth
@@ -35,6 +40,7 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
+		$this->redirectPath = 'setup/profile';
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}

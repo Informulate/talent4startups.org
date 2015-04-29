@@ -12,6 +12,7 @@ use App\Repositories\StartupRepository;
 use App\Commands\CreateStartup as CreateStartupCommand;
 use App\Commands\UpdateStartup as UpdateStartupCommand;
 use App, Auth, Flash, Input, Redirect, Response;
+use Route;
 
 class StartupController extends Controller
 {
@@ -59,7 +60,7 @@ class StartupController extends Controller
 		$stages = Stage::lists('name', 'id');
 		$needs = Skill::lists('name', 'id');
 
-		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs);
+		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs)->with('route', Route::currentRouteName());
 	}
 
 	/**

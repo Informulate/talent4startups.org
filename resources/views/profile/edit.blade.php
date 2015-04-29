@@ -5,6 +5,12 @@
 	<link href="{{{ asset( 'css/vendors/select2/select2-bootstrap.css') }}}" rel="stylesheet">
 @stop
 
+@section('wide-content')
+	@if (Request::path() == 'setup/profile')
+		@include('partials.registration.steps')
+	@endif
+@endsection
+
 @section('content')
 	<div class="row">
 		<div class="col-md-6">
