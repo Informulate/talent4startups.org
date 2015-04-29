@@ -6,3 +6,4 @@ public/.DS_Store
 .DS_Store
 tests/_output/*
 tests/*/*Tester.php
+storage/debugbar
