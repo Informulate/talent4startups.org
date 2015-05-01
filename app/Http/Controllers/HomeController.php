@@ -33,7 +33,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return Redirect::to('/users/' . Auth::user()->id);
+		return view('dashboard');
 	}
 
 }

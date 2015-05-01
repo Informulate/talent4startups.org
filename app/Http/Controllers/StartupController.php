@@ -31,7 +31,7 @@ class StartupController extends Controller
 	{
 		$this->repository = $repository;
 
-		$this->middleware('auth');
+		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('profile.complete');
 		$this->middleware('startup.owner', ['only' => ['edit', 'update']]);
 	}

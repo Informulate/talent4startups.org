@@ -12,14 +12,14 @@
 		</div>
 	</div>
 	<div class="pull-left">
-		@if (Auth::user()->id == $user->id)
+		@if (Auth::user() and Auth::id() == $user->id)
 			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
 		@else
 			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
 			<div>
 				{!! Form::open(['route' => 'invite_to_startup']) !!}
 				{!! Form::hidden('user_id', $user->id) !!}
-				@if (Auth::user()->startups()->lists('name','id') > 0)
+				@if (Auth::user() and Auth::user()->startups()->lists('name','id') > 0)
 					{!! Form::submit('Invite To', ['class' => 'btn btn-primary']) !!}
 					{!! Form::select('startup_id', Auth::user()->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) !!}
 				@endif

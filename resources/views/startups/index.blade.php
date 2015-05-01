@@ -16,7 +16,9 @@
 		{!! Form::close() !!}
 	</div> <!-- display search fields ends -->
 
-	<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a>
+	@if(Auth::user())
+		<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a>
+	@endif
 
 	<div id="project-container">
 		@include('startups.list')

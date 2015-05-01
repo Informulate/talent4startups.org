@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider {
 			't4sBlogFeed' => FeedReader::read(Config::get('feeds.blogFeed'))->get_items(),
 			'twitterFeed' => $this->getTwitterFeed('twitterFeed'),
 			'twitterHomeFeed' => $this->getTwitterFeed('twitterHomeFeed'),
-			'displayAds' => getenv('DISPLAY_ADS')
+			'displayAds' => (strtolower(getenv('DISPLAY_ADS')) == 'true')
 		]);
 	}
 

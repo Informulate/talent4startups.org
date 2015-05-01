@@ -25,7 +25,7 @@
 <div id="main-container" class="container">
 	@include('flash::message')
 
-	@if(Route::current()->getName() == 'home')
+	@if(Route::current()->getName() == 'home' or $displayAds == false)
 		<div class="row">
 			<div class="col-sm-12">
 				@yield('content')

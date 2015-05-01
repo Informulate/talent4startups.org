@@ -307,3 +307,40 @@ body {
 #footer{
     word-wrap: break-word
 }
+
+.header .profile-image {
+    width: 180px;
+    height: 180px;
+    margin-right: 30px;
+}
+
+.header .profile-content .name {
+    color: #49515A;
+    font-size: 38px;
+    margin-bottom: 5px;
+    margin-top: 30px;
+}
+
+.header .profile-content .desc {
+    color: #778492;
+    font-family: "Lato",arial,sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.header .profile-content .social a {
+    background: none repeat scroll 0% 0% padding-box #B0B7BF;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    border-radius: 50%;
+    color: #FFF;
+    text-align: center;
+}
+
+.header .profile-content .social a .fa {
+    font-size: 20px;
+    padding-top: 8px;
+}
