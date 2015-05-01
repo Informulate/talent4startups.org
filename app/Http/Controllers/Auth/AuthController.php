@@ -91,7 +91,7 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 */
 	public function userHasLoggedIn($user)
 	{
-		return $user->profileIsIncomplete() ? Redirect::route('edit_profile') : Redirect::to('/');
+		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::to('/');
 	}
 
 }

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Auth, Hash;
 
 class UserRepository
 {
@@ -28,7 +28,7 @@ class UserRepository
 				$type = 'talent';
 			}
 
-			$user = User::register($userData->email, $userData->email, 'password' , $type);
+			$user = User::register($userData->email, $userData->email, Hash::make($userData->email) , $type);
 		}
 
 		return $user;

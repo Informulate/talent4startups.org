@@ -1,5 +1,6 @@
 <?php namespace App\Commands;
 
+use App\Models\Profile;
 use App\Listeners\AuthenticateUserListener;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -45,9 +46,17 @@ class AuthenticateUser extends Command implements SelfHandling {
 	{
 		if ( ! $hasCode) return $this->getAuthorizationFirst();
 
-		$user = $this->users->findOrCreate($this->getLinkedinUser(), $type);
+		$linkedInData = $this->getLinkedinUser();
+
+		$user = $this->users->findOrCreate($linkedInData, $type);
 
 		$this->auth->login($user, true);
+
+		if (is_null($user->profile)) {
+			$name = explode(' ', $linkedInData->name);
+			$profile = new Profile(['first_name' => head($name), 'last_name' => last($name)]);
+			$user->profile()->save($profile);
+		}
 
 		return $listener->userHasLoggedIn($user);
 	}
