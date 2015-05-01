@@ -1,7 +1,13 @@
 @extends('app')
 
 @section('wide-content')
-	@include('partials.registration.steps')
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				@include('partials.registration.steps')
+			</div>
+		</div>
+	</div>
 @endsection
 
 @section('content')
@@ -74,3 +80,6 @@
 		</div>
 	</div>
 @endsection
+
+@section('footer')
+@overwrite

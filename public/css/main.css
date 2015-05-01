@@ -1,346 +1,372 @@
 .profile-image, .profile-image-lg, .profile-image-sm {
-    background-repeat: no-repeat
+	background-repeat: no-repeat
 }
 
 body {
-    padding-top: 70px
+	padding-top: 70px
 }
 
 @media screen and (max-width: 767px) {
-    #navbar-logo {
-        width: 40px;
-        height: 40px;
-        margin-top: -10px
-    }
+	#navbar-logo {
+		width: 40px;
+		height: 40px;
+		margin-top: -10px
+	}
 }
 
 @media (min-width: 768px) {
-    #navbar-logo {
-        width: 75px;
-        height: 75px
-    }
+	#navbar-logo {
+		width: 75px;
+		height: 75px
+	}
 }
 
 #main-container {
-    margin-top: 40px
+	margin-top: 40px
 }
 
 .container h1:first-of-type {
-    margin-top: 0
+	margin-top: 0
 }
 
 .carousel {
-    margin-top: -20px;
-    margin-bottom: 40px;
-    height: 500px
+	margin-top: -20px;
+	margin-bottom: 40px;
+	height: 500px
 }
 
 .carousel-caption {
-    z-index: 10
+	z-index: 10
 }
 
 .carousel .item {
-    height: 500px;
-    background-color: #777
+	height: 500px;
+	background-color: #777
 }
 
 .carousel-inner > .item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 500px
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	height: 500px
 }
 
 .projects, .thumbnail {
-    height: 550px
+	height: 550px
 }
 
 .feature {
-    margin-bottom: 80px
+	margin-bottom: 80px
 }
 
 .thumbnail {
-    overflow: hidden
+	overflow: hidden
 }
 
 .thumbnail .caption {
-    margin-bottom: 35px
+	margin-bottom: 35px
 }
 
 .thumbnail .btn-primary {
-    position: absolute;
-    bottom: 30px;
-    right: 30px
+	position: absolute;
+	bottom: 30px;
+	right: 30px
 }
 
 .rating-container .rating-stars {
-    color: #A94442 !important
+	color: #A94442 !important
 }
 
 #sub-caption {
-    font-size: 26px;
-    margin-bottom: 0
+	font-size: 26px;
+	margin-bottom: 0
 }
 
 .email-signin {
-    margin-top: 20px
+	margin-top: 20px
 }
 
 #launch-event {
-    padding-left: 5px;
-    padding-right: 5px
+	padding-left: 5px;
+	padding-right: 5px
 }
 
 .learn-more {
-    position: absolute;
-    right: 25px;
-    bottom: 30px
+	position: absolute;
+	right: 25px;
+	bottom: 30px
 }
 
 .contributor {
-    margin-bottom: 10px
+	margin-bottom: 10px
 }
 
 #new-project-panel-btn {
-    color: #fff !important
+	color: #fff !important
 }
 
 .need.thumbnail {
-    height: 380px;
-    margin: 3px;
-    padding: 0
+	height: 380px;
+	margin: 3px;
+	padding: 0
 }
 
 .need .form-group {
-    padding: 3px
+	padding: 3px
 }
 
 .need .need-header {
-    background-color: #bbb;
-    height: 36px
+	background-color: #bbb;
+	height: 36px
 }
 
 .need .need-header select {
-    margin: 4px 0
+	margin: 4px 0
 }
 
 .need.designer .need-header {
-    background-color: #89b4dd
+	background-color: #89b4dd
 }
 
 .need.developer .need-header {
-    background-color: #f0ca84
+	background-color: #f0ca84
 }
 
 .need.engineer .need-header {
-    background-color: #eaf098
+	background-color: #eaf098
 }
 
 .need.musician .need-header {
-    background-color: #d9c5f0
+	background-color: #d9c5f0
 }
 
 .need.visual .need-header {
-    background-color: #9d9cf0
+	background-color: #9d9cf0
 }
 
 .need.filmmaker .need-header {
-    background-color: #b9f0d0
+	background-color: #b9f0d0
 }
 
 .need.writer .need-header {
-    background-color: #ebf0d9
+	background-color: #ebf0d9
 }
 
 .need.project .need-header {
-    background-color: #f0b4ad
+	background-color: #f0b4ad
 }
 
 .startup-need {
-    border: 1px solid #bbb;
-    padding: 0 5px 5px;
-    margin: 5px 0
+	border: 1px solid #bbb;
+	padding: 0 5px 5px;
+	margin: 5px 0
 }
 
 .startup-need h4 {
-    margin: 0 -5px 8px !important;
-    padding: 2px 5px
+	margin: 0 -5px 8px !important;
+	padding: 2px 5px
 }
 
 .startup-need h4.designer {
-    background-color: #89b4dd
+	background-color: #89b4dd
 }
 
 .startup-need h4.developer {
-    background-color: #f0ca84
+	background-color: #f0ca84
 }
 
 .startup-need h4.engineer {
-    background-color: #eaf098
+	background-color: #eaf098
 }
 
 .startup-need h4.musician {
-    background-color: #d9c5f0
+	background-color: #d9c5f0
 }
 
 .startup-need h4.visual {
-    background-color: #9d9cf0
+	background-color: #9d9cf0
 }
 
 .startup-need h4.filmmaker {
-    background-color: #b9f0d0
+	background-color: #b9f0d0
 }
 
 .startup-need h4.writer {
-    background-color: #ebf0d9
+	background-color: #ebf0d9
 }
 
 .startup-need h4.project {
-    background-color: #f0b4ad
+	background-color: #f0b4ad
 }
 
 .about img {
-    height: 100px;
-    margin-right: 5px
+	height: 100px;
+	margin-right: 5px
 }
 
 .profile-image {
-    height: 250px;
-    background-position: center center;
-    margin: 0 auto
+	height: 250px;
+	background-position: center center;
+	margin: 0 auto
 }
 
 .profile-image-lg {
-    height: 300px;
-    background-position: top left
+	height: 300px;
+	background-position: top left
 }
 
 .profile-image-sm {
-    height: 150px;
-    background-position: center center;
-    margin: 0 auto
+	height: 150px;
+	background-position: center center;
+	margin: 0 auto
 }
 
 .social-links p {
-    margin: 2px 5px
+	margin: 2px 5px
 }
 
 .social-links a {
-    padding-left: 5px
+	padding-left: 5px
 }
 
 #login-modal .tab-pane {
-    padding-top: 20px
+	padding-top: 20px
 }
 
 #startup, #talent {
-    display: block;
-    margin: 0 auto
+	display: block;
+	margin: 0 auto
 }
 
 .sign-up label {
-    cursor: pointer;
-    text-align: center
+	cursor: pointer;
+	text-align: center
 }
 
 .label-header {
-    display: block;
-    font-size: 30px
+	display: block;
+	font-size: 30px
 }
 
 .glyphicons.type {
-    font-size: 80px;
-    display: block
+	font-size: 80px;
+	display: block
 }
 
 .linked-in-btn {
-    font-size: 34px
+	font-size: 34px
 }
 
 #footer {
-    background: #303030;
-    margin: 0 auto;
-    padding: 15px 35px 0;
-    min-height: 200px;
-    color: #aaa;
-    font-size: 8pt
+	background: #303030;
+	margin: 0 auto;
+	padding: 15px 35px 0;
+	min-height: 200px;
+	color: #aaa;
+	font-size: 8pt
 }
 
 #footer img {
-    width: 70px;
-    height: auto
+	width: 70px;
+	height: auto
 }
 
 .footer-headline {
-    background: url(../images/footer-headline-bg.png) 0 50% repeat-x;
-    display: block;
-    margin: 15px 0 8px;
-    color: #fff
+	background: url(../images/footer-headline-bg.png) 0 50% repeat-x;
+	display: block;
+	margin: 15px 0 8px;
+	color: #fff
 }
 
 .footer-headline h1, .footer-headline h2, .footer-headline h3, .footer-headline h4, .footer-headline h5, .footer-headline h6 {
-    background-color: #303030;
-    color: #fff;
-    display: inline;
-    padding: 0 10px 0 0
+	background-color: #303030;
+	color: #fff;
+	display: inline;
+	padding: 0 10px 0 0
 }
 
 #adsense img {
-    padding-top: 50px
+	padding-top: 50px
 }
 
 .adsense div {
-    height: 100px;
-    margin-bottom: 30px;
-    padding: 10px
+	height: 100px;
+	margin-bottom: 30px;
+	padding: 10px
 }
 
 .ui-autocomplete-loading {
-    background: url(/images/spinner16.gif) right center no-repeat
+	background: url(/images/spinner16.gif) right center no-repeat
 }
 
 #recipient_list {
-    margin-top: 5px
+	margin-top: 5px
 }
 
-#footer{
-    word-wrap: break-word
+#footer {
+	word-wrap: break-word
 }
 
 .header .profile-image {
-    width: 180px;
-    height: 180px;
-    margin-right: 30px;
+	width: 180px;
+	height: 180px;
+	margin-right: 30px;
 }
 
 .header .profile-content .name {
-    color: #49515A;
-    font-size: 38px;
-    margin-bottom: 5px;
-    margin-top: 30px;
+	color: #49515A;
+	font-size: 38px;
+	margin-bottom: 5px;
+	margin-top: 30px;
 }
 
 .header .profile-content .desc {
-    color: #778492;
-    font-family: "Lato",arial,sans-serif;
-    font-weight: 400;
-    font-size: 24px;
-    margin-top: 0px;
-    margin-bottom: 15px;
+	color: #778492;
+	font-family: "Lato", arial, sans-serif;
+	font-weight: 400;
+	font-size: 24px;
+	margin-top: 0px;
+	margin-bottom: 15px;
 }
 
 .header .profile-content .social a {
-    background: none repeat scroll 0% 0% padding-box #B0B7BF;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    border-radius: 50%;
-    color: #FFF;
-    text-align: center;
+	background: none repeat scroll 0% 0% padding-box #B0B7BF;
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	border-radius: 50%;
+	color: #FFF;
+	text-align: center;
 }
 
 .header .profile-content .social a .fa {
-    font-size: 20px;
-    padding-top: 8px;
+	font-size: 20px;
+	padding-top: 8px;
+}
+
+.steps span {
+	background: none repeat scroll 0% 0% padding-box #B0B7BF;
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	border-radius: 50%;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	padding-top: 4px;
+}
+
+.steps .active span {
+	background-color: #337AB7;
+	border-color: #2E6DA4;
+	color: #fff;
+}
+
+.steps {
+	color: #777;
+}
+
+.steps .active {
+	color: #333;
 }

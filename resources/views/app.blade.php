@@ -44,7 +44,9 @@
 	@endif
 </div>
 
-@include('layouts.partials.footer')
+@section('footer')
+	@include('layouts.partials.footer')
+@show
 
 <script src="{{{ asset( 'js/vendors/jquery/jquery-2.1.1.min.js' ) }}}"></script>
 <script src="{{{ asset( 'js/vendors/social-likes/social-likes.min.js' ) }}}"></script>

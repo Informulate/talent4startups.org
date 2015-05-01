@@ -7,7 +7,13 @@
 
 @section('wide-content')
 	@if (Request::path() == 'setup/profile')
-		@include('partials.registration.steps')
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					@include('partials.registration.steps')
+				</div>
+			</div>
+		</div>
 	@endif
 @endsection
 
@@ -36,3 +42,9 @@
 		});
 	</script>
 @stop
+
+@section('footer')
+	@if (Request::path() == "profile")
+		@include('layouts.partials.footer')
+	@endif
+@overwrite
