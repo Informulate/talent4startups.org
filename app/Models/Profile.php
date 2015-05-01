@@ -92,17 +92,4 @@ class Profile extends Model
 		return $this->belongsToMany('App\Models\Tag');
 	}
 
-	/**
-	 * @return string
-	 */
-	public function avatar()
-	{
-		if (isset($this->image) and $this->image != '') {
-			return asset('images/upload/' . $this->image);;
-		}
-
-		$email = md5($this->user->email);
-
-		return "http://www.gravatar.com/avatar/{$email}";
-	}
 }

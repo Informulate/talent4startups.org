@@ -111,6 +111,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
 	}
 
+	public function avatar()
+	{
+		if (isset($this->profile)) {
+			if (isset($this->profile->image) and $this->profile->image != '') {
+				return asset('images/upload/' . $this->profile->image);
+			}
+		}
+
+		$email = md5($this->email);
+
+		return "http://www.gravatar.com/avatar/{$email}";
+	}
+
 	/**
 	 * Validates that a user has properly completed all the required items for the profile.
 	 *

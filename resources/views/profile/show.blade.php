@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-3">
-			<img class="img-circle img-responsive img-rounded" src="{{ $user->profile->avatar() }}?s=150&d=mm" alt=""  height="150" width="150"/>
+			<img class="img-circle img-responsive img-rounded" src="{{ $user->avatar() }}?s=150&d=mm" alt=""  height="150" width="150"/>
 			<input data-id="{{ $user->id }}" type="number" class="member-rating-view" value="{{ $user->rating() }}" }}>
 		</div>
 		<div class="col-md-9">
