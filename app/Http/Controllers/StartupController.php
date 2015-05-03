@@ -59,8 +59,9 @@ class StartupController extends Controller
 		$tags = Tag::lists('name', 'id');
 		$stages = Stage::lists('name', 'id');
 		$needs = Skill::lists('name', 'id');
+		$route = Route::currentRouteName() == 'setup_startup' ? 'setup_startup' : 'startups.store';
 
-		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs)->with('route', Route::currentRouteName());
+		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs)->with('route', $route);
 	}
 
 	/**

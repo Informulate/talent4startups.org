@@ -66,11 +66,10 @@ class ProfileController extends Controller
 	 */
 	public function edit()
 	{
-		$user = Auth::user();
 		$describes = Skill::orderBy('name')->lists('name', 'id');
 		$skills = Tag::orderBy('name')->lists('name', 'id');
 
-		return view('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills)->with('route', Route::currentRouteName());
+		return view('profile.edit')->with('user', Auth::user())->with('describes', $describes)->with('skills', $skills)->with('route', Route::currentRouteName());
 	}
 
 	/**
