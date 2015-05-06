@@ -1,6 +1,6 @@
 <div class="thumbnail">
 	<a href="{{ route('profile_path', $talent->id) }}">
-		<img class="img-responsive" src="{{{ $talent->profile->avatar() }}}?s=250&d=mm" width="250" height="250">
+		<img class="img-responsive" src="{{{ $talent->avatar() }}}?s=250&d=mm" width="250" height="250">
 	</a>
 
 	<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}">

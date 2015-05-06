@@ -25,7 +25,7 @@
 <div id="main-container" class="container">
 	@include('flash::message')
 
-	@if(Route::current()->getName() == 'home')
+	@if(Route::current()->getName() == 'home' or $displayAds == false)
 		<div class="row">
 			<div class="col-sm-12">
 				@yield('content')
@@ -44,7 +44,9 @@
 	@endif
 </div>
 
-@include('layouts.partials.footer')
+@section('footer')
+	@include('layouts.partials.footer')
+@show
 
 <script src="{{{ asset( 'js/vendors/jquery/jquery-2.1.1.min.js' ) }}}"></script>
 <script src="{{{ asset( 'js/vendors/social-likes/social-likes.min.js' ) }}}"></script>

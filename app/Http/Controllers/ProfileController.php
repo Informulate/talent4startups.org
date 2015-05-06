@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Repositories\ThreadRepository;
 use App\Commands\UpdateProfile as UpdateProfileCommand;
 use Auth, Flash, Image, Redirect, Exception, Hash, Input;
+use Route;
 
 class ProfileController extends Controller
 {
@@ -20,7 +21,7 @@ class ProfileController extends Controller
 	 */
 	function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware('auth', ['except' => ['show']]);
 		$this->middleware('profile.complete');
 	}
 
@@ -38,6 +39,7 @@ class ProfileController extends Controller
 	}
 
 	/**
+	 * @param Request $request
 	 * @return $this
 	 */
 	public function image(Request $request)
@@ -64,10 +66,10 @@ class ProfileController extends Controller
 	 */
 	public function edit()
 	{
-		$user = Auth::user();
 		$describes = Skill::orderBy('name')->lists('name', 'id');
 		$skills = Tag::orderBy('name')->lists('name', 'id');
-		return view('profile.edit')->with('user', $user)->with('describes', $describes)->with('skills', $skills);
+
+		return view('profile.edit')->with('user', Auth::user())->with('describes', $describes)->with('skills', $skills)->with('route', Route::currentRouteName());
 	}
 
 	/**
@@ -85,17 +87,11 @@ class ProfileController extends Controller
 			return Redirect::route('profile_image_path');
 		}
 
-		Flash::message('Your profile has been updated successfully!');
-
-		if ($request->get('type') == 'startup') {
-
-			// redirect to create project if no project added by startup yet.
-			$projectsCount = Startup::where('user_id', '=', Auth::user()->id)->count();
-
-			if ($projectsCount == 0) {
-				return Redirect::route('startups.create');
-			}
+		if (Route::currentRouteName() == 'setup_profile') {
+			return Redirect::route('setup_startup');
 		}
+
+		Flash::message('Your profile has been updated successfully!');
 
 		return Redirect::intended('/');
 	}
