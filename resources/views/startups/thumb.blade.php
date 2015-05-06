@@ -13,8 +13,7 @@
 		</h3>
 		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $startup->owner->profile->location }}</h6>
 
-		<p>Startup
-			Needs:
+		<p>Startup Needs:</p>
             @if (count($startup->needs) > 2)
                 <?php $needList = ""; ?>
                 @foreach($startup->needs as $need)
