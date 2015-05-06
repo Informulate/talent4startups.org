@@ -92,6 +92,27 @@ class Profile extends Model
 		return $this->belongsToMany('App\Models\Tag');
 	}
 
+    public function previewTags()
+    {
+        $charCount = 0;
+        $results = [];
+
+        foreach ($this->tags as $tag) {
+            $charCount += strlen($tag->name);
+
+            if (count($results) == 0 or $charCount < 20) {
+                $results[] = $tag;
+            } else {
+                return $results;
+            }
+        }
+
+        return $results;
+    }
+
+    public function hasHiddenTags() {
+        return count($this->previewTags()) < count($this->tags);
+    }
 
 	/**
 	 * @return string

@@ -14,9 +14,26 @@
 		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $startup->owner->profile->location }}</h6>
 
 		<p>Startup
-			Needs: @foreach($startup->needs as $need ) {{ $need->quantity }} {{ $need->skill->name }} @endforeach</p>
-
-		<p class="text-muted">{{ str_limit( $startup->description, 50 ) }}</p>
+			Needs:
+            @if (count($startup->needs) > 2)
+                <?php $needList = ""; ?>
+                @foreach($startup->needs as $need)
+                    <?php $needList .= '<p>' . $need->quantity . ' ' . $need->skill->name . '</p>'; ?>
+                @endforeach
+                <span class="badge" style="float:right; cursor: pointer;" data-toggle="popover"  title="<i class='glyphicon glyphicon-tags'></i> All needs for {{ $startup->name }}"
+                      data-content="{{ $needList }}" data-html="true" data-placement="left" >...</span>
+            @endif
+            <?php
+                $skillList = "";
+                $skillCount = 0;
+            ?>
+             @foreach($startup->needs as $need )
+                @if ($skillCount < 2)
+                    <p>{{ $need->quantity }} {{ $need->skill->name }}</p>
+                    <?php $skillCount++; ?>
+                @endif
+            @endforeach</p>
+ 		<p class="text-muted">{{ str_limit( $startup->description, 50 ) }}</p>
 
 		<p><a href="{{ route('startups.show', $startup->url) }}" class="btn btn-primary pull-right learn-more"
 			  role="button">Learn More</a></p>
