@@ -20,24 +20,22 @@
 				@if (Auth::user())
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						    <i class="glyphicons @if (Auth::user()->newMessagesCount() > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i>
-						    {{ Auth::user()->email }}
-						    @if (Auth::user()->newMessagesCount() > 0)  <span class="btn-xs btn btn-info"><strong>{{ Auth::user()->newMessagesCount() }}</strong></span> @endif
-						    <span class="caret"></span>
-                        </a>
+							<i class="glyphicons @if (Auth::user()->newMessagesCount() > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i> {{ Auth::user()->email }} @if (Auth::user()->newMessagesCount() > 0) <span class="btn-xs btn btn-info"><strong>{{ Auth::user()->newMessagesCount() }}</strong></span> @endif <span class="caret"></span>
+						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('profile_path', Auth::user()->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
-							<li>
-							    <a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (Auth::user()->newMessagesCount() > 0)  ({{ Auth::user()->newMessagesCount() }}) @endif</a>
-
-                            </li>
+							<li><a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (Auth::user()->newMessagesCount() > 0) ({{ Auth::user()->newMessagesCount() }}) @endif</a></li>
 							<li><a href="/auth/logout"><span class="glyphicons glyphicons-log-out"></span> Logout</a></li>
 							<li><a id="reset-link" href="/password/reset"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
 						</ul>
 					</li>
 				@else
 					<li><a id="login-link" href="/auth/login"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
-					<li><form><a id="signup-link" href="{{ route('register_path') }}" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a></form></li>
+					<li>
+						<form>
+							<a id="signup-link" href="/auth/register" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a>
+						</form>
+					</li>
 				@endif
 			</ul>
 		</div>

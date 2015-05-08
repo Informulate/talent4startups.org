@@ -9,42 +9,36 @@
 				@include('layouts.partials.socialshare')
 			</div>
 			@if($startup->hasMember(Auth::user()))
-				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5
-				          data-size="xs" value="{{ $startup->rating() }}"></p>
+				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
 			@else
-				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view"
-				          value="{{ $startup->rating() }}" }}></p>
+				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
 			@endif
-
-
 
 			@if ($startup->image)
 				<div class="profile-image-lg"
-				     style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
+					 style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
 				<div class="clearfix"></div>
 			@else
-				<img data-src="holder.js/300x300/text: " alt="...">
+				<div style="font-size: 300px;">
+					<span class="glyphicons glyphicons-lab thumbnail"></span>
+				</div>
 			@endif
 
 			<div class="social-links">
 				@if ($startup->website)
-					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank"
-					                                         rel="nofollow">Website</a></p>
+					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank" rel="nofollow">Website</a></p>
 				@endif
 
 				@if ($startup->linked_in)
-					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank"
-					                                                 rel="nofollow">LinkedIn</a></p>
+					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank" rel="nofollow">LinkedIn</a></p>
 				@endif
 
 				@if ($startup->facebook)
-					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank"
-					                                                rel="nofollow">Facebook</a></p>
+					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank" rel="nofollow">Facebook</a></p>
 				@endif
 
 				@if ($startup->twitter)
-					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank"
-					                                               rel="nofollow">Twitter</a></p>
+					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank" rel="nofollow">Twitter</a></p>
 				@endif
 			</div>
 
@@ -56,17 +50,14 @@
 
 			<p>{{ $startup->description }}</p>
 
-			@if($startup->hasMember(Auth::user()))
+			@if(Auth::user() and $startup->hasMember(Auth::user()))
 				@if($startup->hasPendingInvitationFrom(Auth::user()))
-					Your request is still been considered, would you like to <a
-							href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}"
-							class="btn btn-default">cancel this request?</a>
+					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-default">cancel this request?</a>
 				@endif
 			@endif
 
-			@if($startup->owner->id != Auth::user()->id and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
-				<a class="btn btn-primary" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join
-					this startup</a>
+			@if(Auth::user() and $startup->owner->id != Auth::id() and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
+				<a class="btn btn-primary" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
 			@endif
 
 		</div>
@@ -75,19 +66,16 @@
 		<div class="col-md-12">
 
 			<div class="col-md-8">
-				@if($startup->owner->id == Auth::user()->id)
-					<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit
-						Startup</a>
+				@if(Auth::user() and $startup->owner->id == Auth::id())
+					<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
 					<h2>Member requests</h2>
 
 					@foreach($requests as $user)
 						<div>
-							<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->profile->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/> {{ $user->profile->first_name }} {{ $user->profile->last_name }}
+							<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/> {{ $user->profile->first_name }} {{ $user->profile->last_name }}
 								({{ $user->profile->skill->name }})
-							</a> <a class="btn btn-primary btn-xs"
-							        href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a>
-							<a class="btn btn-primary btn-xs"
-							   href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
+							</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a>
+							<a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
 						</div>
 					@endforeach
 
@@ -95,13 +83,11 @@
 
 				@foreach($startup->needs as $need)
 					<div class="startup-need">
-						<h4 class="{{ strtolower($need->skill->name) }}"><span
-									class="glyphicons glyphicons-chevron-right"></span> {{ $need->skill->name }}</h4>
+						<h4 class="{{ strtolower($need->skill->name) }}"><span class="glyphicons glyphicons-chevron-right"></span> {{ $need->skill->name }}</h4>
 
 						<div class="clearfix"></div>
-						@if($startup->owner->id != Auth::user()->id and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
-							<a class="btn btn-primary pull-right"
-							   href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
+						@if(Auth::user() and $startup->owner->id != Auth::id() and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
+							<a class="btn btn-primary pull-right" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Apply</a>
 						@endif
 						@foreach($need->tags as $tag)
 							<span class="badge">{{ $tag->name }}</span>
@@ -123,7 +109,7 @@
 				<div class="row contributor">
 					<a href="{{ route('profile_path', $startup->owner->id) }}">
 						<div class="col-xs-4">
-							<img class="img-circle img-responsive" src="{{ $startup->owner->profile->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+							<img class="img-circle img-responsive" src="{{ $startup->owner->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 						</div>
 						<div class="col-xs-8">
 							{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
@@ -136,7 +122,7 @@
 					<div class="row contributor">
 						<a href="{{ route('profile_path', $user->id) }}">
 							<div class="col-xs-4">
-								<img class="img-circle img-responsive" src="{{ $user->profile->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+								<img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 							</div>
 							<div class="col-xs-8">
 								{{ $user->profile->first_name }} {{ $user->profile->last_name }}
@@ -149,9 +135,7 @@
 					</div>
 					<div class="row contributor">
 						<div class="col-xs-12">
-							<input data-id="{{ $user->id }}" type="number" class="rating member-rating" min=0 max=5
-							       step=0.5 data-size="xs"
-							       value="{{ $user->rating() }}" {{ $startup->owner->id == Auth::user()->id ? "" : "disabled='true'" }}>
+							<input data-id="{{ $user->id }}" type="number" class="rating member-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $user->rating() }}" {{ Auth::user() and $startup->owner->id == Auth::id() ? "" : "disabled='true'" }}>
 						</div>
 					</div>
 				@endforeach

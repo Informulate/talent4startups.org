@@ -13,7 +13,7 @@
             <div class="media">
                 @if ($message->type == 'message')
                 <a class="pull-left" href="#">
-                    <img src="{{ $message->user->profile->avatar() }}?s=64&d=mm" alt="{{ $message->user->profile->first_name }}" class="img-circle" width="64" height="64">
+                    <img src="{{ $message->user->avatar() }}?s=64&d=mm" alt="{{ $message->user->profile->first_name }}" class="img-circle" width="64" height="64">
                 </a>
                 @endif
                 <div class="media-body">

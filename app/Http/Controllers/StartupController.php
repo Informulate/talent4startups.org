@@ -12,6 +12,7 @@ use App\Repositories\StartupRepository;
 use App\Commands\CreateStartup as CreateStartupCommand;
 use App\Commands\UpdateStartup as UpdateStartupCommand;
 use App, Auth, Flash, Input, Redirect, Response;
+use Route;
 
 class StartupController extends Controller
 {
@@ -30,7 +31,7 @@ class StartupController extends Controller
 	{
 		$this->repository = $repository;
 
-		$this->middleware('auth');
+		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('profile.complete');
 		$this->middleware('startup.owner', ['only' => ['edit', 'update']]);
 	}
@@ -58,8 +59,9 @@ class StartupController extends Controller
 		$tags = Tag::lists('name', 'id');
 		$stages = Stage::lists('name', 'id');
 		$needs = Skill::lists('name', 'id');
+		$route = Route::currentRouteName() == 'setup_startup' ? 'setup_startup' : 'startups.store';
 
-		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs);
+		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs)->with('route', $route);
 	}
 
 	/**

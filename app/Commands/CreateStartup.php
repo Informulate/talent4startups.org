@@ -38,7 +38,7 @@ class CreateStartup extends Command implements SelfHandling {
 				'name' => $this->startup->name,
 				'description' => $this->startup->description,
 				'url' => $slugify->slugify($this->startup->name),
-				// 'stage_id' => $this->startup->stage_id,
+				'stage_id' => $this->startup->stage_id,
 				'video' => $this->startup->video,
 				'published' => true
 			]

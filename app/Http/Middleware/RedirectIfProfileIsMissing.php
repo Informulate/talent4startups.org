@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Auth\Guard;
 use Flash, Redirect, Closure, Route;
 use Illuminate\Contracts\Routing\Middleware;
+use Request;
 
 class RedirectIfProfileIsMissing implements Middleware {
 
@@ -32,14 +33,22 @@ class RedirectIfProfileIsMissing implements Middleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->check() and $this->auth->user()->profileIsIncomplete() and Route::currentRouteName() !== 'edit_profile')
+		if ($this->needToRedirect())
 		{
 			Flash::error('You need to complete your profile before you can continue!');
 
-			return Redirect::route('edit_profile');
+			return Redirect::to('setup/profile');
 		}
 
 		return $next($request);
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function needToRedirect()
+	{
+		return $this->auth->check() and $this->auth->user()->profileIsIncomplete() and Route::currentRouteName() !== 'edit_profile' and Request::path() != 'setup/profile';
 	}
 
 }

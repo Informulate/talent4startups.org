@@ -5,6 +5,18 @@
 	<link href="{{{ asset( 'css/vendors/select2/select2-bootstrap.css') }}}" rel="stylesheet">
 @stop
 
+@section('wide-content')
+	@if (Request::path() == 'setup/profile')
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					@include('partials.registration.steps')
+				</div>
+			</div>
+		</div>
+	@endif
+@endsection
+
 @section('content')
 	<div class="row">
 		<div class="col-md-6">
@@ -30,3 +42,9 @@
 		});
 	</script>
 @stop
+
+@section('footer')
+	@if (Request::path() == "profile")
+		@include('layouts.partials.footer')
+	@endif
+@overwrite

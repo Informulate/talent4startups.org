@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Hash;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -94,11 +93,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $user;
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
 	public function ratings()
 	{
 		return $this->morphMany('App\Models\Rating', 'rated');
 	}
 
+	/**
+	 * @return float|int
+	 */
 	public function rating()
 	{
 		$total_ratings = $score = 0;
@@ -109,6 +114,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function avatar()
+	{
+		if (isset($this->profile)) {
+			if (isset($this->profile->image) and $this->profile->image != '') {
+				return asset('images/upload/' . $this->profile->image);
+			}
+		}
+
+		$email = md5($this->email);
+
+		return "http://www.gravatar.com/avatar/{$email}";
 	}
 
 	/**
@@ -135,6 +156,74 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		return false;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function progressPercentage()
+	{
+		$total = $this->type == 'talent' ? 9 : 13;
+
+		// Username, Password and Email are the first 3 steps of registration
+		// If they don't do anything else that's the total number of items completed.
+		if (is_null($this->profile)) {
+			return 3;
+		}
+
+		$points = 3;
+
+		if (trim($this->profile->first_name) != '') {
+			$points++;
+		}
+
+		if (trim($this->profile->last_name) != '') {
+			$points++;
+		}
+
+		if (! is_null($this->profile->skill) and $this->profile->skill_id != 0) {
+			$points++;
+		}
+
+		if (trim($this->profile->location) != '') {
+			$points++;
+		}
+
+		if (trim($this->profile->about) != '') {
+			$points++;
+		}
+
+		if (trim($this->profile->location) != '') {
+			$points++;
+		}
+
+		if ($this->type == 'startup' and count($this->startups) > 0) {
+			$points++;
+
+			$startup = $this->startups[0];
+
+			if (trim($startup->description) != '') {
+				$points++;
+			}
+
+			if (trim($startup->image) != '') {
+				$points++;
+			}
+
+			if (trim($startup->video) != '') {
+				$points++;
+			}
+		}
+
+		$percentage = ($points / $total) * 100;
+		$percentage = $percentage > 100 ? 100 : $percentage;
+
+		return number_format($percentage);
+	}
+
+	public function progressClass()
+	{
+		return $this->progressPercentage() < 20 ? 'danger' : ($this->progressPercentage() < 80 ? 'warning' : 'success');
 	}
 
 }

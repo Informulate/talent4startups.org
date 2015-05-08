@@ -23,61 +23,44 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::group(['prefix' => 'auth'], function() {
+	Route::get('/linkedin', [
+		'as' => 'linked_in',
+		'uses' => 'Auth\\AuthController@linkedin'
+	]);
+
+	Route::get('/type', [
+		'as' => 'store_type_path',
+		'uses' => 'Auth\\AuthController@type'
+	]);
+});
+
 Route::get('/404', [
 	'as' => '404',
 	'uses' => 'PagesController@missing'
 ]);
 
 /**
- * Registration!
+ * Profile and Startup setup routes (used to display the steps breadcrumbs)
  */
-Route::get('register', [
-	'as' => 'register_path',
-	'uses' => 'RegistrationController@create'
-]);
-
-Route::post('register', [
-	'as' => 'register_path',
-	'uses' => 'RegistrationController@store'
-]);
-
-Route::get('register/linked_in', [
-	'as' => 'finish_linked_in_path',
-	'uses' => 'RegistrationController@linkedIn'
-]);
-
-/**
- * Sessions!
- */
-Route::get('login', [
-	'as' => 'login_path',
-	'uses' => 'SessionsController@create'
-]);
-
-Route::post('login', [
-	'as' => 'login_path',
-	'uses' => 'SessionsController@store'
-]);
-
-Route::get('login/linkedIn', [
-	'as' => 'login_linked_in',
-	'uses' => 'SessionsController@loginWithLinkedIn'
-]);
-
-Route::get('auth/linkedin', [
-	'as' => 'linked_in',
-	'uses' => 'Auth\\AuthController@linkedin'
-]);
-
-Route::get('logout', [
-	'as' => 'logout_path',
-	'uses' => 'SessionsController@destroy'
-]);
-
-Route::get('auth/type', [
-	'as' => 'store_type_path',
-	'uses' => 'Auth\\AuthController@type'
-]);
+Route::group(['prefix' => 'setup'], function() {
+	Route::get('/profile', [
+		'as' => 'setup_profile',
+		'uses' => 'ProfileController@edit',
+	]);
+	Route::post('/profile', [
+		'as' => 'setup_profile',
+		'uses' => 'ProfileController@store',
+	]);
+	Route::get('/startup', [
+		'as' => 'setup_startup',
+		'uses' => 'StartupController@create',
+	]);
+	Route::post('/startup', [
+		'as' => 'setup_startup',
+		'uses' => 'StartupController@store',
+	]);
+});
 
 /**
  * Startups!
