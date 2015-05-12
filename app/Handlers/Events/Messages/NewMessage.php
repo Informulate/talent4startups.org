@@ -39,7 +39,7 @@ class NewMessage {
                     'body' => $participant->thread->latestMessage()->body,
                 ];
 
-                Mail::send('emails.message', $content, function ($message) use ($participant) {
+                Mail::send(['html' => 'emails.message'], $content, function ($message) use ($participant) {
                     $message
                         ->from('noreply@talent4startups.org', 'Talent4Startups')
                         ->to($participant->user->email, $participant->user->profile->first_name . ' ' . $participant->user->profile->last_name)
