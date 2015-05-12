@@ -111,7 +111,7 @@ class MessagesController extends Controller
 		);
 
 		// Message
-		Message::create(
+		$message = Message::create(
 			[
 				'thread_id' => $thread->id,
 				'user_id'   => Auth::user()->id,
@@ -141,6 +141,14 @@ class MessagesController extends Controller
 			}
 
 			$thread->addParticipants($recipientsAllowed);
+		}
+
+		$participants = $message->thread->participants;
+
+		foreach ($participants as $participant) {
+			if ($participant->user->id != $message->user->id) {
+				Event::fire('App.Events.NewMessage', [new NewMessage($participant)]);
+			}
 		}
 
 		return Redirect::to('messages');
