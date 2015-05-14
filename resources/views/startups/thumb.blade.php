@@ -13,19 +13,24 @@
 		</h3>
 		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $startup->owner->profile->location }}</h6>
 
-            @if (count($startup->needs) > 2)
-                <?php $needList = ""; ?>
-                @foreach($startup->needs as $need)
-                    <?php $needList .= ' ' . $need->quantity . ' ' . $need->skill->name . ','; ?>
-                @endforeach
-                <?php $needList = rtrim($needList, ','); ?>
-                <span class="badge" style="float:right; cursor: pointer;" data-toggle="popover"  title="<i class='glyphicon glyphicon-tags'></i> All needs for {{ $startup->name }}"
-                      data-content="{{ $needList }}" data-html="true" data-placement="left" >...</span>
-            @endif
+        @foreach($startup->needs as $need)
+            <?php $needsArray[] = ' ' . $need->quantity . ' ' . $need->skill->name; ?>
+        @endforeach
+
+        @if (count($needsArray) > 2)
+            <?php $needList = ""; ?>
+            @foreach($needsArray as $need)
+                <?php $needList .= $need . ','; ?>
+            @endforeach
+
+            <?php $needList = rtrim($needList, ','); ?>
+
+            <span class="badge" style="float:right; cursor: pointer;" data-toggle="popover"  title="<i class='glyphicon glyphicon-tags'></i> All needs for {{ $startup->name }}"
+                  data-content="{{ $needList }}" data-html="true" data-placement="left" >...</span>
+        @endif
 
         <p>Startup Needs:
-            {{ $startup->needs[0]->quantity }} {{ $startup->needs[0]->skill->name }},
-            {{ $startup->needs[1]->quantity }} {{ $startup->needs[1]->skill->name }}
+            {{ $needsArray[0] }}, {{ $needsArray[1] }}
         </p>
  		<p class="text-muted">{{ str_limit( $startup->description, 300 ) }}</p>
 
