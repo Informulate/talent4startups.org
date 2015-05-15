@@ -41,7 +41,7 @@ class Startup extends Model
 		$startup->linked_in = $attributes['linked_in'];
 		$startup->facebook = $attributes['facebook'];
 		$startup->website = $attributes['website'];
-        $startup->published = array_key_exists('published', $attributes) ? true : false;
+		$startup->published = array_key_exists('published', $attributes) ? true : false;
 
 		return $startup;
 	}

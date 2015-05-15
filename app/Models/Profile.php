@@ -74,27 +74,28 @@ class Profile extends Model
 		return $this->belongsTo('App\Models\Skill');
 	}
 
-    public function previewTags()
-    {
-        $charCount = 0;
-        $results = [];
+	public function hasHiddenTags()
+	{
+		return count($this->previewTags()) < count($this->tags);
+	}
 
-        foreach ($this->tags as $tag) {
-            $charCount += strlen($tag->name);
+	public function previewTags()
+	{
+		$charCount = 0;
+		$results = [];
 
-            if (count($results) == 0 or $charCount < 20) {
-                $results[] = $tag;
-            } else {
-                return $results;
-            }
-        }
+		foreach ($this->tags as $tag) {
+			$charCount += strlen($tag->name);
 
-        return $results;
-    }
+			if (count($results) == 0 or $charCount < 20) {
+				$results[] = $tag;
+			} else {
+				return $results;
+			}
+		}
 
-    public function hasHiddenTags() {
-        return count($this->previewTags()) < count($this->tags);
-    }
+		return $results;
+	}
 
 	/**
 	 * The owner of this profile
