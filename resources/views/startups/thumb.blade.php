@@ -19,7 +19,7 @@
 			<?php $needsArray[] = ' ' . $need->quantity . ' ' . $need->skill->name; ?>
 		@endforeach
 
-		@if (count($needsArray) > 2)
+		@if (isset($needsArray) and count($needsArray) > 2)
 			<?php $needList = ""; ?>
 			@foreach($needsArray as $need)
 				<?php $needList .= $need . ','; ?>
@@ -31,7 +31,9 @@
 		@endif
 
 		<p>Startup Needs:
-			{{ $needsArray[0] }} {{ count($needsArray) > 1 ? ', ' . $needsArray[1] : '' }}
+			@if (isset($needsArray))
+			{{ count($needsArray) > 0 ? ', ' . $needsArray[0] : '' }} {{ count($needsArray) > 1 ? ', ' . $needsArray[1] : '' }}
+			@endif
 		</p>
 
 		<p class="text-muted">{{ str_limit( $startup->description, 60 ) }}</p>
