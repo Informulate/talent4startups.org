@@ -128,8 +128,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		$email = md5($this->email);
+		$default = urlencode('http://talent4startups.org/images/talent_generic.jpg');
 
-		return "http://www.gravatar.com/avatar/{$email}";
+		return "http://www.gravatar.com/avatar/{$email}?default={$default}";
 	}
 
 	/**
