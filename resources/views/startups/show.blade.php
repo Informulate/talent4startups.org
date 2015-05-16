@@ -18,10 +18,6 @@
 				<div class="profile-image-lg"
 					 style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
 				<div class="clearfix"></div>
-			@else
-				<div style="font-size: 300px;">
-					<span class="glyphicons glyphicons-lab thumbnail"></span>
-				</div>
 			@endif
 
 			<div class="social-links">

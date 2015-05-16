@@ -63,7 +63,7 @@ class Startup extends Model
 	 */
 	public function members()
 	{
-		return $this->belongsToMany('App\Models\User');
+		return $this->belongsToMany('App\Models\User')->with('profile');
 	}
 
 	/**
