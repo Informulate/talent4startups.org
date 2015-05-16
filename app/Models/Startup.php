@@ -135,4 +135,12 @@ class Startup extends Model
 
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
 	}
+
+	public function isNew()
+	{
+		$thisWeek = new \DateTime();
+		$thisWeek->sub(new \DateInterval('P7D'));
+
+		return $this->created_at > $thisWeek;
+	}
 }

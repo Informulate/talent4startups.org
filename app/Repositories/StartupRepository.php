@@ -105,6 +105,8 @@ class StartupRepository
 
 		if ($orderBy) {
 			$results->orderBy($orderBy);
+		} else {
+			$results->orderBy('id', 'DESC');
 		}
 
 		$paginatedResults = $results->paginate($perPage);

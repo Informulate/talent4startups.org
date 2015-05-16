@@ -10,7 +10,11 @@
 	<input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}>
 
 	<div class="caption">
-		<h3><a href="{{ route('startups.show', $startup->url) }}">{{ str_limit( $startup->name, 15 ) }}</a> <br/>
+		<h3><a href="{{ route('startups.show', $startup->url) }}">{{ str_limit( $startup->name, 15 ) }}</a>
+			@if ($startup->isNew())
+				<img src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
+			@endif
+			<br/>
 			<small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small>
 		</h3>
 		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $startup->owner->profile->location }}</h6>
