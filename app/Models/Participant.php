@@ -24,7 +24,9 @@ class Participant extends CmgmyrParticipant
 	private static function raiseEvent()
 	{
 		return function ($participant) {
-			Event::fire(new NewMessage($participant));
+			if ($participant->thread->latestMessage()->user_id != $participant->user_id) {
+				Event::fire(new NewMessage($participant));
+			}
 
 			return $participant;
 		};
