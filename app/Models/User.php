@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function contributions()
 	{
-		return $this->belongsToMany('App\Models\Startup');
+		return $this->belongsToMany('App\Models\Startup')->withPivot('status');
 	}
 
 	/**
