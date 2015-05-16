@@ -87,7 +87,7 @@ class StartupRepository
 	 */
 	public function allActive($tag = null, $needs = null, $orderBy = null, $perPage = 12)
 	{
-		$results = Startup::where('published', '=', true);
+		$results = Startup::where('published', '=', true)->with('owner')->with('needs')->with('tags')->with('ratings');
 
 		if ($tag) {
 			$results->join('needs', 'startups.id', '=', 'needs.startup_id')

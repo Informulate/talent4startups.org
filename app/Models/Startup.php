@@ -53,7 +53,7 @@ class Startup extends Model
 	 */
 	public function owner()
 	{
-		return $this->belongsTo('App\Models\User', 'user_id');
+		return $this->belongsTo('App\Models\User', 'user_id')->with('profile');
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Startup extends Model
 	 */
 	public function needs()
 	{
-		return $this->hasMany('App\Models\Need');
+		return $this->hasMany('App\Models\Need')->with('skill');
 	}
 
 	public function ratings()
