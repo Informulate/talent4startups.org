@@ -227,4 +227,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->progressPercentage() < 20 ? 'danger' : ($this->progressPercentage() < 80 ? 'warning' : 'success');
 	}
 
+	public function isNew()
+	{
+		$thisWeek = new \DateTime();
+		$thisWeek->sub(new \DateInterval('P7D'));
+
+		return $this->created_at > $thisWeek;
+	}
+
 }

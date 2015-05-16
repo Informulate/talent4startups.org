@@ -8,6 +8,9 @@
 	<div class="caption">
 		<h3>
 			<a href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>
+			@if ($talent->isNew())
+				<img src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
+			@endif
 		</h3>
 		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $talent->profile->location }}</h6>
 
