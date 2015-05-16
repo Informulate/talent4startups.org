@@ -44,6 +44,7 @@
 			<h2>Startups I’m involved in</h2>
 			@if(count($user->contributions) > 0 || count($user->startups) > 0)
 				@foreach($user->contributions as $startup)
+					@if($startup->pivot->status == 'approved')
 				<div class="col-sm-3">
 					<div class="clearfix">
 						<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h4>
@@ -55,6 +56,7 @@
 						@endif
 					</div>
 				</div>
+					@endif
 				@endforeach
 					@foreach($user->startups as $startup)
 						<div class="col-sm-3">
