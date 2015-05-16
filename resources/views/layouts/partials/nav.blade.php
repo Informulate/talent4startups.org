@@ -26,7 +26,7 @@
 							<li><a href="{{ route('profile_path', Auth::user()->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
 							<li><a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (Auth::user()->newMessagesCount() > 0) ({{ Auth::user()->newMessagesCount() }}) @endif</a></li>
 							<li><a href="/auth/logout"><span class="glyphicons glyphicons-log-out"></span> Logout</a></li>
-							<li><a id="reset-link" href="/password/reset"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
+							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
 						</ul>
 					</li>
 				@else
