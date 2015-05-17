@@ -20,11 +20,13 @@ class Thread extends CmgmyrThread
 	{
 		return $query->join('participants', 'threads.id', '=', 'participants.thread_id')
 			->join('messages', function ($join) {
-				$join->on('threads.id', '=', 'messages.thread_id')
-					->on('messages.user_id', '!=', DB::raw('participants.user_id'))
-					->orOn('messages.type', '=', DB::raw('"notification"'));
+				$join->on('threads.id', '=', 'messages.thread_id');
 			})
 			->where('participants.user_id', $userId)
+			->where(function($query) {
+				$query->where('messages.user_id', '!=', DB::raw('participants.user_id'))
+					->orWhere('messages.type', '=', DB::raw('"notification"'));
+			})
 			->whereNull('participants.deleted_at')
 			->selectRaw('threads.*, CASE WHEN threads.updated_at <= participants.last_read THEN 1 ELSE 0 END AS message_read')
 			->orderByRaw('message_read ASC, threads.updated_at DESC')

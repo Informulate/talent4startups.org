@@ -88,14 +88,14 @@ class StartupController extends Controller
 	 */
 	public function show($startup)
 	{
-		$startup = Startup::where('url', '=', $startup)->firstOrFail();
+		$startup = Startup::where('url', '=', $startup)->with('owner')->with('ratings')->with('needs')->with('tags')->firstOrFail();
 
 		if (false === $this->currentUserIsOwner($startup->owner) and $startup->published == false) {
 			App::abort(404);
 		}
 
-		$requests = $startup->members()->where('status', 'pending')->get();
-		$members = $startup->members()->where('status', 'approved')->get();
+		$requests = $startup->members()->where('status', 'pending')->with('profile')->get();
+		$members = $startup->members()->where('status', 'approved')->with('profile')->get();
 
 		return view('startups.show')->with('startup', $startup)->with('requests', $requests)->with('members', $members);
 	}

@@ -75,10 +75,12 @@ class UserRepository
 					$q->where('id', '=', $skill);
 				});
 			}
-		});
+		})->with('ratings')->with('profile');
 
 		if ($orderBy) {
 			$results->orderBy($orderBy);
+		} else {
+			$results->orderBy('id', 'DESC');
 		}
 
 		$paginatedResults = $results->paginate($perPage);

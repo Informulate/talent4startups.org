@@ -65,7 +65,10 @@ body {
 }
 
 .thumbnail .caption {
-	margin-bottom: 35px
+    height: 240px;
+    margin-bottom: 5px;
+    max-height: 240px;
+    overflow: hidden;
 }
 
 .thumbnail .btn-primary {

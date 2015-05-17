@@ -2,7 +2,7 @@
 
 use Laracasts\TestDummy\Factory;
 
-$I = new AcceptanceTester($scenario);
+$I = new FunctionalTester($scenario);
 $I->am('talent4startups member');
 $I->wantTo('login to my talent4startups account');
 

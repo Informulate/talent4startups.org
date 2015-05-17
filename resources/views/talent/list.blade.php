@@ -27,7 +27,7 @@
 			@endif
 		@endif
 
-		<div class="col-lg-4 col-md-4 col-sm-12 thumb">
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 thumb">
 			@include('talent.thumb')
 		</div>
 	@endforeach()
@@ -56,6 +56,18 @@
 				hoverEnabled: false,
 				size: 'xs'
 			});
-		});
+
+            $('[data-toggle="popover"]').popover();
+
+            $('body').on('click', function (e) {
+                $('[data-toggle="popover"]').each(function () {
+                    //the 'is' for buttons that trigger popups
+                    //the 'has' for icons within a button that triggers a popup
+                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                        $(this).popover('hide');
+                    }
+                });
+            });
+        });
 	</script>
 @stop

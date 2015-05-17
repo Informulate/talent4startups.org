@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function profile()
 	{
-		return $this->hasOne('App\Models\Profile');
+		return $this->hasOne('App\Models\Profile')->with('tags')->with('skill');
 	}
 
 	/**
@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function contributions()
 	{
-		return $this->belongsToMany('App\Models\Startup');
+		return $this->belongsToMany('App\Models\Startup')->withPivot('status');
 	}
 
 	/**
@@ -128,8 +128,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		$email = md5($this->email);
+		$default = urlencode('http://talent4startups.org/images/talent_generic.jpg');
 
-		return "http://www.gravatar.com/avatar/{$email}";
+		return "http://www.gravatar.com/avatar/{$email}?default={$default}";
 	}
 
 	/**
@@ -224,6 +225,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function progressClass()
 	{
 		return $this->progressPercentage() < 20 ? 'danger' : ($this->progressPercentage() < 80 ? 'warning' : 'success');
+	}
+
+	public function isNew()
+	{
+		$thisWeek = new \DateTime();
+		$thisWeek->sub(new \DateInterval('P7D'));
+
+		return $this->created_at > $thisWeek;
 	}
 
 }
