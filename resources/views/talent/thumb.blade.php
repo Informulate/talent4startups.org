@@ -9,14 +9,12 @@
 		<h3>
 			<a href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>
 			@if ($talent->isNew())
-				<img src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
+				<img class="new-badge" src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
 			@endif
 		</h3>
-		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $talent->profile->location }}</h6>
+		<h6>{{ $talent->profile->skill->name }} from {{ $talent->profile->location }} <i class="glyphicons glyphicons-google-maps"></i></h6>
 
-		<p>{{ $talent->profile->skill->name }}</p>
-
-		<p>{{ str_limit($talent->profile->about, 160) }}</p>
+		<p>{{ str_limit($talent->profile->about, 120) }}</p>
 
 		<p>
 			<i class="glyphicon glyphicon-tags"></i>

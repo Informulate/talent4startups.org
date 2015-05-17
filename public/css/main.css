@@ -373,3 +373,8 @@ body {
 .steps .active {
 	color: #333;
 }
+
+.new-badge {
+	position: absolute;
+	right: 20px;
+}
