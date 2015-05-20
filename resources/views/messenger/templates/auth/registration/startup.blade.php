@@ -13,5 +13,5 @@ To start, make sure you <b>update your startup profile</b> with the specific rol
 
 If you do not hear back from invitees, or if you have any questions at all do let us know at <a href="mailto:info@talent4startups.org">info@talent4startups.org</a>.
 
-We wish you all the best! Oh, and {{ link_to_route('profile_path', 'tell your friends', $user->username) }} about your project.
+We wish you all the best! Oh, and {!! link_to_route('profile_path', 'tell your friends', $user->username) !!} about your project.
 @endsection
