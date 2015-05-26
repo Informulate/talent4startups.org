@@ -2,14 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Events\StartupRated;
+use App\Events\UserRated;
 use App\Models\Rating;
-//use Informulate\Ratings\Events\StartupRated;
-//use Informulate\Ratings\Events\UserRated;
-//use Laracasts\Commander\Events\EventGenerator;
+use Event;
 
 class RatingRepository
 {
-//	use EventGenerator;
 
 	/**
 	 * Saves the rating
@@ -34,14 +33,7 @@ class RatingRepository
 	{
 		$rating = new Rating(compact('rating', 'rated_id', 'rated_type', 'rated_by_id', 'rated_by_type'));
 
-		switch ($rated_type) {
-			case '\\App\\Models\\Startup':
-                Event::fire(new StartupRated($rated_id, $rated_by_id));
-				break;
-			default:
-                Event::fire(new UserRated($rated_id, $rated_by_id));
-				break;
-		}
+		$this->raiseEvents($rated_id, $rated_type, $rated_by_id);
 
 		return $rating;
 	}
@@ -60,22 +52,31 @@ class RatingRepository
 			->where('rated_id', $rated_id)
 			->where('rated_by_type', $rated_by_type)
 			->where('rated_by_id', $rated_by_id)
-			->first()
-		;
+			->first();
 
 		if ($current) {
 			$current->rating = $rating;
 
-			switch ($rated_type) {
-				case '\\App\\Models\\Startup':
-                    Event::fire(new StartupRated($rated_id, $rated_by_id));
-					break;
-				default:
-                    Event::fire(new UserRated($rated_id, $rated_by_id));
-					break;
-			}
+			$this->raiseEvents($rated_id, $rated_type, $rated_by_id);
 		}
 
 		return $current;
+	}
+
+	/**
+	 * @param $rated_id
+	 * @param $rated_type
+	 * @param $rated_by_id
+	 */
+	private function raiseEvents($rated_id, $rated_type, $rated_by_id)
+	{
+		switch ($rated_type) {
+			case '\\App\\Models\\Startup':
+				Event::fire('App.Events.StartupRated', [new StartupRated($rated_id, $rated_by_id)]);
+				break;
+			default:
+				Event::fire('App.Events.UserRated', [new UserRated($rated_id, $rated_by_id)]);
+				break;
+		}
 	}
 }

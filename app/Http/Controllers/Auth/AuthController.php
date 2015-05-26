@@ -40,7 +40,7 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-		$this->redirectPath = 'setup/profile';
+		$this->redirectPath = '/';
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
