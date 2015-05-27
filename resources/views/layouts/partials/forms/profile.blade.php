@@ -25,6 +25,10 @@
 	{!! Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null, ['style' => 'width:100%']); !!}
 </div>
 <div class="form-group">
+	{!! Form::label('profession', 'My industry is best described as:') !!}
+	{!! Form::select('profession', $professions, is_object( $user->profile ) ? $user->profile->profession->id : null, ['style' => 'width:100%']); !!}
+</div>
+<div class="form-group">
 	{!! Form::label('skills', 'I\'m skilled and looking for experience in :') !!}
 	{!! Form::text('skills', is_object( $user->profile ) ? $user->profile->tags->implode('name', ',') : null, ['id' =>
 	'skills', 'class' => 'form-control']) !!}

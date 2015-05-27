@@ -145,6 +145,14 @@ class MessagesController extends Controller
 			$thread->addParticipants($recipientsAllowed);
 		}
 
+		$participants = $message->thread->participants;
+
+		foreach ($participants as $participant) {
+			if ($participant->user->id != $message->user->id) {
+				Event::fire('App.Events.NewMessage', [new NewMessage($participant)]);
+			}
+		}
+
 		return Redirect::to('messages');
 	}
 
