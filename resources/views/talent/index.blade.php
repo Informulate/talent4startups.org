@@ -9,6 +9,10 @@
 			Input::get('describes'),['id'=>'describe','class' => 'form-control']); !!}
 		</div>
 		<div class="form-group col-sm-3">
+			{!! Form::select('professions', array('Professions:all') + $professions,
+			Input::get('professions'),['id'=>'professions','class' => 'form-control']); !!}
+		</div>
+		<div class="form-group col-sm-3">
 			{!! Form::text('tag', Input::get('tag'), ['id'=>'tag','class' => 'form-control', 'placeholder' => 'Enter
 			tag']) !!}
 		</div>

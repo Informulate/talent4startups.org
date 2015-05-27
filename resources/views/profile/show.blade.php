@@ -8,6 +8,9 @@
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
+			@if($user->profile->profession)
+				<h4>I work in {!! $user->profile->profession->name !!}</h4>
+			@endif
 			@include('layouts.partials.socialshare')
 		</div>
 	</div>
