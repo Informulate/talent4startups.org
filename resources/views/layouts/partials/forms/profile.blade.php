@@ -26,7 +26,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('profession', 'My industry is best described as:') !!}
-	{!! Form::select('profession', $professions, is_object( $user->profile ) ? $user->profile->profession->id : null, ['style' => 'width:100%']); !!}
+	{!! Form::select('profession', $professions, is_object( $user->profile->profession ) ? $user->profile->profession->id : null, ['style' => 'width:100%']); !!}
 </div>
 <div class="form-group">
 	{!! Form::label('skills', 'I\'m skilled and looking for experience in :') !!}
