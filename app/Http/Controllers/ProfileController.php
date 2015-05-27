@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProfile;
 use App\Http\Requests\Request;
+use App\Models\Profession;
 use App\Models\Skill;
 use App\Models\Startup;
 use App\Models\Tag;
@@ -67,9 +68,20 @@ class ProfileController extends Controller
 	public function edit()
 	{
 		$describes = Skill::orderBy('name')->lists('name', 'id');
-		$skills = Tag::orderBy('name')->lists('name', 'id');
+		// We want other to be at the bottom
+		$other = array_search('Other', $describes);
+		unset($describes[$other]);
+		$describes[$other] = 'Other';
 
-		return view('profile.edit')->with('user', Auth::user())->with('describes', $describes)->with('skills', $skills)->with('route', Route::currentRouteName());
+		$skills = Tag::orderBy('name')->lists('name', 'id');
+		$professions = Profession::orderBy('name')->lists('name', 'id');
+		$professions[] = 'Other';
+
+		return view('profile.edit')->with('user', Auth::user())
+			->with('describes', $describes)
+			->with('skills', $skills)
+			->with('route', Route::currentRouteName())
+			->with('professions', $professions);
 	}
 
 	/**

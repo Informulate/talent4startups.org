@@ -45,6 +45,7 @@ class Profile extends Model
 		$profile->last_name = $attributes['last_name'];
 		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
 		$profile->skill_id = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
+		$profile->profession_id = array_key_exists('profession', $attributes) ? $attributes['profession'] : '';
 		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
@@ -72,6 +73,14 @@ class Profile extends Model
 	public function skill()
 	{
 		return $this->belongsTo('App\Models\Skill');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function profession()
+	{
+		return $this->belongsTo('App\Models\Profession');
 	}
 
 	public function hasHiddenTags()
