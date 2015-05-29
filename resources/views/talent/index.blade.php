@@ -9,7 +9,7 @@
 			Input::get('describes'),['id'=>'describe','class' => 'form-control']); !!}
 		</div>
 		<div class="form-group col-sm-3">
-			{!! Form::select('professions', array('Professions:all') + $professions,
+			{!! Form::select('professions', array('Industry:all') + $professions,
 			Input::get('professions'),['id'=>'professions','class' => 'form-control']); !!}
 		</div>
 		<div class="form-group col-sm-3">
