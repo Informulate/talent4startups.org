@@ -36,10 +36,8 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 * @param  \Illuminate\Contracts\Auth\Guard $auth
 	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct()
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
 		$this->redirectPath = '/';
 
 		$this->middleware('guest', ['except' => 'getLogout']);

@@ -67,14 +67,14 @@ class ProfileController extends Controller
 	 */
 	public function edit()
 	{
-		$describes = Skill::orderBy('name')->lists('name', 'id');
+		$describes = Skill::orderBy('name')->lists('name', 'id')->all();
 		// We want other to be at the bottom
 		$other = array_search('Other', $describes);
 		unset($describes[$other]);
 		$describes[$other] = 'Other';
 
-		$skills = Tag::orderBy('name')->lists('name', 'id');
-		$professions = Profession::orderBy('name')->lists('name', 'id');
+		$skills = Tag::orderBy('name')->lists('name', 'id')->all();
+		$professions = Profession::orderBy('name')->lists('name', 'id')->all();
 		$professions[] = 'Other';
 
 		return view('profile.edit')->with('user', Auth::user())

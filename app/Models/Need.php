@@ -22,7 +22,7 @@ class Need extends Model
      * @param $attributes
      * @return static
      */
-    public static function create(array $attributes)
+    public static function create(array $attributes = [])
     {
         $need = new static($attributes);
         return $need;
