@@ -44,7 +44,7 @@ class StartupController extends Controller
 	public function index()
 	{
 		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
-		$needs = Skill::lists('name', 'id');
+		$needs = Skill::lists('name', 'id')->all();
 
 		return view('startups.index')->with('startups', $startups)->with('needs', $needs);
 	}
@@ -56,9 +56,9 @@ class StartupController extends Controller
 	 */
 	public function create()
 	{
-		$tags = Tag::lists('name', 'id');
-		$stages = Stage::lists('name', 'id');
-		$needs = Skill::lists('name', 'id');
+		$tags = Tag::lists('name', 'id')->all();
+		$stages = Stage::lists('name', 'id')->all();
+		$needs = Skill::lists('name', 'id')->all();
 		$route = Route::currentRouteName() == 'setup_startup' ? 'setup_startup' : 'startups.store';
 
 		return view('startups.create')->with('tags', $tags)->with('startupTags', '')->with('stages', $stages)->with('needs', $needs)->with('route', $route);
@@ -111,9 +111,9 @@ class StartupController extends Controller
 	public function edit($startup)
 	{
 		$startup = Startup::where('url', '=', $startup)->firstOrFail();
-		$tags = Tag::lists('name', 'id');
-		$stages = Stage::lists('name', 'id');
-		$needs = Skill::lists('name', 'id');
+		$tags = Tag::lists('name', 'id')->all();
+		$stages = Stage::lists('name', 'id')->all();
+		$needs = Skill::lists('name', 'id')->all();
 
 		return view('startups.edit')->with('startup', $startup)->with('tags', $tags)->with('stages', $stages)->with('needs', $needs);
 	}

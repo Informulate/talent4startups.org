@@ -28,8 +28,8 @@ class TalentController extends Controller
 	public function index(UserRepository $userRepository)
 	{
 		$talents = $userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'), null, 12, Input::get('professions'));
-		$describes = Skill::lists('name', 'id');
-		$professions = Profession::lists('name', 'id');
+		$describes = Skill::lists('name', 'id')->all();
+		$professions = Profession::lists('name', 'id')->all();
 
 		return view('talent.index')->with('talents', $talents)->with('describes', $describes)->with('professions', $professions);
 	}
