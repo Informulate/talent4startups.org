@@ -20,6 +20,7 @@ class RatingController extends Controller
 	public function rate()
 	{
 		extract(Input::only('rating', 'rated_id', 'rated_type', 'rated_by_id', 'rated_by_type'));
+
 		$this->dispatch(new RateUser($rating, $rated_id, $rated_type, $rated_by_id, $rated_by_type));
 	}
 }
