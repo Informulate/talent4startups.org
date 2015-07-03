@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProfile;
 use App\Http\Requests\Request;
+use App\Http\Requests\ResetPassword;
 use App\Models\Profession;
 use App\Models\Skill;
 use App\Models\Startup;
@@ -134,10 +135,8 @@ class ProfileController extends Controller
 	/**
 	 * Reset requested password for user
 	 */
-	public function resetPassword()
+	public function resetPassword(ResetPassword $request)
 	{
-		$this->resetForm->validate(Input::all());
-
 		extract(Input::only('old_password', 'new_password', 'password_confirmation'));
 
 		if ($new_password != $password_confirmation) {
