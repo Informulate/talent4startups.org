@@ -29,10 +29,10 @@
 		@if(count($threads) > 0)
 			@foreach($threads as $thread)
 				<?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
-				<div class="media alert {{$class}} message {{ $thread->latestMessage()->type }}">
-					@if ($thread->latestMessage()->type == 'message')
+				<div class="media alert {{$class}} message {{ $thread->getLatestMessageAttribute()->type }}">
+					@if ($thread->getLatestMessageAttribute()->type == 'message')
 						<a class="pull-left" href="#">
-							<img src="{{ $thread->latestMessage()->user->avatar() }}&s=64" alt="{{$thread->latestMessage()->user->profile->first_name}} {{$thread->latestMessage()->user->profile->last_name}}" class="img-circle" width="64" height="64">
+							<img src="{{ $thread->getLatestMessageAttribute()->user->avatar() }}&s=64" alt="{{$thread->getLatestMessageAttribute()->user->profile->first_name}} {{$thread->getLatestMessageAttribute()->user->profile->last_name}}" class="img-circle" width="64" height="64">
 						</a>
 					@endif
 					<h4 class="media-heading">{!! link_to('messages/' . $thread->id, $thread->subject) !!}</h4>
@@ -42,19 +42,19 @@
 					</p>
 					<p>
 						@foreach($thread->participantsUsers() as $user)
-							@if ($user->id != $thread->latestMessage()->user->id && (count($thread->messages) > 1))
+							@if ($user->id != $thread->getLatestMessageAttribute()->user->id && (count($thread->messages) > 1))
 								<strong>{{ $user->profile->first_name }} {{ $user->profile->last_name }}, </strong>
-							@elseif ($user->id != $thread->latestMessage()->user->id)
-								<strong>{{ $thread->latestMessage()->user->profile->first_name }} {{ $thread->latestMessage()->user->profile->last_name }} </strong> @endif
+							@elseif ($user->id != $thread->getLatestMessageAttribute()->user->id)
+								<strong>{{ $thread->getLatestMessageAttribute()->user->profile->first_name }} {{ $thread->getLatestMessageAttribute()->user->profile->last_name }} </strong> @endif
 
 						@endforeach
 						@if(count($thread->messages) > 1)
-							<strong>{{$thread->latestMessage()->user->profile->first_name}} {{$thread->latestMessage()->user->profile->last_name}}</strong> @endif
+							<strong>{{$thread->getLatestMessageAttribute()->user->profile->first_name}} {{$thread->getLatestMessageAttribute()->user->profile->last_name}}</strong> @endif
 						@if(count($thread->messages) > 1) ({{ count($thread->messages) }}) @endif
-						@if((count($thread->messages) > 1) && $thread->latestMessage()->user->id == Auth::user()->id)
+						@if((count($thread->messages) > 1) && $thread->getLatestMessageAttribute()->user->id == Auth::user()->id)
 							<small>(Replied)</small> @endif
 					</p>
-					<p class="text-muted">{{ str_limit(strip_tags(str_replace(array('&lt;', '&gt;'), array('<', '>'), $thread->latestMessage()->body)), 15) }}</p>
+					<p class="text-muted">{{ str_limit(strip_tags(str_replace(array('&lt;', '&gt;'), array('<', '>'), $thread->getLatestMessageAttribute()->body)), 15) }}</p>
 
 					<div class="clearfix"></div>
 					<div class="pull-right actions">

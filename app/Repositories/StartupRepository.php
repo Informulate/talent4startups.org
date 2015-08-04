@@ -121,8 +121,9 @@ class StartupRepository
 	/**
 	 * @param User $user
 	 * @param Startup $startup
+	 * @param bool $fireEvent
 	 */
-	public function addMemberRequest(User $user, Startup $startup)
+	public function addMemberRequest(User $user, Startup $startup, $fireEvent = true)
 	{
 		DB::insert('insert into startup_user (startup_id, user_id, status, created_at, updated_at) values (?, ?, ?, NOW() , NOW())', [
 			$startup->id,
@@ -130,21 +131,26 @@ class StartupRepository
 			'pending',
 		]);
 
-        Event::fire(new UserApplied($startup, $user));
+		if ($fireEvent) {
+			Event::fire(new UserApplied($startup, $user));
+		}
 	}
 
 	/**
 	 * @param User $user
 	 * @param Startup $startup
+	 * @param bool $fireEvent
 	 */
-	public function approveMemberRequest(User $user, Startup $startup)
+	public function approveMemberRequest(User $user, Startup $startup, $fireEvent = true)
 	{
 		DB::update('update startup_user set status = "approved" where startup_id = ? and user_id = ?', [
 			$startup->id,
 			$user->id
 		]);
 
-        Event::fire(new UserJoined($startup, $user));
+		if ($fireEvent) {
+			Event::fire(new UserJoined($startup, $user));
+		}
 	}
 
 	/**
