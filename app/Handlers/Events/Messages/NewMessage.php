@@ -36,7 +36,7 @@ class NewMessage {
                         'first_name' => $participant->user->profile->first_name,
                         'last_name' => $participant->user->profile->last_name,
                     ],
-                    'body' => $participant->thread->latestMessage()->body,
+                    'body' => $participant->thread->getLatestMessageAttribute()->body,
                 ];
 
                 Mail::send(['html' => 'emails.message'], $content, function ($message) use ($participant) {
