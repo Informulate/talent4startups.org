@@ -45,6 +45,7 @@ class Profile extends Model
 		$profile->last_name = $attributes['last_name'];
 		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
 		$profile->skill_id = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
+		$profile->profession_id = array_key_exists('profession', $attributes) ? $attributes['profession'] : '';
 		$profile->about = array_key_exists('about', $attributes) ? $attributes['about'] : '';
 		$profile->facebook = array_key_exists('facebook', $attributes) ? $attributes['facebook'] : '';
 		$profile->twitter = array_key_exists('twitter', $attributes) ? $attributes['twitter'] : '';
@@ -74,27 +75,36 @@ class Profile extends Model
 		return $this->belongsTo('App\Models\Skill');
 	}
 
-    public function previewTags()
-    {
-        $charCount = 0;
-        $results = [];
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function profession()
+	{
+		return $this->belongsTo('App\Models\Profession');
+	}
 
-        foreach ($this->tags as $tag) {
-            $charCount += strlen($tag->name);
+	public function hasHiddenTags()
+	{
+		return count($this->previewTags()) < count($this->tags);
+	}
 
-            if (count($results) == 0 or $charCount < 20) {
-                $results[] = $tag;
-            } else {
-                return $results;
-            }
-        }
+	public function previewTags()
+	{
+		$charCount = 0;
+		$results = [];
 
-        return $results;
-    }
+		foreach ($this->tags as $tag) {
+			$charCount += strlen($tag->name);
 
-    public function hasHiddenTags() {
-        return count($this->previewTags()) < count($this->tags);
-    }
+			if (count($results) == 0 or $charCount < 20) {
+				$results[] = $tag;
+			} else {
+				return $results;
+			}
+		}
+
+		return $results;
+	}
 
 	/**
 	 * The owner of this profile

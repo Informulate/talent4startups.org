@@ -8,6 +8,9 @@
 		</div>
 		<div class="col-md-9">
 			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
+			@if($user->profile->profession)
+				<h4>I work in {!! $user->profile->profession->name !!}</h4>
+			@endif
 			@include('layouts.partials.socialshare')
 		</div>
 	</div>
@@ -44,6 +47,7 @@
 			<h2>Startups I’m involved in</h2>
 			@if(count($user->contributions) > 0 || count($user->startups) > 0)
 				@foreach($user->contributions as $startup)
+					@if($startup->pivot->status == 'approved')
 				<div class="col-sm-3">
 					<div class="clearfix">
 						<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h4>
@@ -55,6 +59,7 @@
 						@endif
 					</div>
 				</div>
+					@endif
 				@endforeach
 					@foreach($user->startups as $startup)
 						<div class="col-sm-3">

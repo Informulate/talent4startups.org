@@ -53,11 +53,12 @@ class UserRepository
 	 * @param null $location
 	 * @param null $orderBy
 	 * @param int $perPage
+	 * @param null $profession
 	 * @return \Illuminate\Pagination\Paginator
 	 */
-	public function findActiveTalents($tag = null, $skill = null, $location = null, $orderBy = null, $perPage = 12)
+	public function findActiveTalents($tag = null, $skill = null, $location = null, $orderBy = null, $perPage = 12, $profession = null)
 	{
-		$results = User::whereHas('profile', function ($q) use ($tag, $skill, $location, $orderBy) {
+		$results = User::whereHas('profile', function ($q) use ($tag, $skill, $location, $orderBy, $profession) {
 			$q->where('published', '=', true);
 
 			if ($location) {
@@ -75,10 +76,15 @@ class UserRepository
 					$q->where('id', '=', $skill);
 				});
 			}
-		});
+			if ($profession) {
+				$q->where('profession_id', '=', $profession);
+			}
+		})->with('ratings')->with('profile');
 
 		if ($orderBy) {
 			$results->orderBy($orderBy);
+		} else {
+			$results->orderBy('id', 'DESC');
 		}
 
 		$paginatedResults = $results->paginate($perPage);

@@ -4,5 +4,5 @@
 @endsection
 
 @section('body')
-{{ link_to_route('profile_path', $talent->profile->first_name . ' ' . $talent->profile->last_name, $talent->id) }} has applied to join {{ link_to_route('startup_profile', $startup->name, $startup->url) }}.
+{!! link_to_route('profile_path', $talent->profile->first_name . ' ' . $talent->profile->last_name, $talent->id) !!} has applied to join {!! link_to_route('startup_profile', $startup->name, $startup->url) !!}.
 @endsection

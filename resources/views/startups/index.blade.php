@@ -26,19 +26,27 @@
 @stop
 
 @section('javascript')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.startup-rating-view').rating({
+				readonly: true,
+				showClear: false,
+				showCaption: false,
+				hoverEnabled: false,
+				size: 'xs'
+			});
 
-            $('body').on('click', function (e) {
-                $('[data-toggle="popover"]').each(function () {
-                    //the 'is' for buttons that trigger popups
-                    //the 'has' for icons within a button that triggers a popup
-                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                        $(this).popover('hide');
-                    }
-                });
-            });
-        });
-    </script>
+			$('[data-toggle="popover"]').popover();
+
+			$('body').on('click', function (e) {
+				$('[data-toggle="popover"]').each(function () {
+					//the 'is' for buttons that trigger popups
+					//the 'has' for icons within a button that triggers a popup
+					if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+						$(this).popover('hide');
+					}
+				});
+			});
+		});
+	</script>
 @stop

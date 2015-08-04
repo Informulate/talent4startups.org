@@ -209,7 +209,7 @@ body {
 }
 
 .profile-image {
-	height: 250px;
+	height: 250px !important;
 	background-position: center center;
 	margin: 0 auto
 }
@@ -372,4 +372,9 @@ body {
 
 .steps .active {
 	color: #333;
+}
+
+.new-badge {
+	position: absolute;
+	right: 20px;
 }

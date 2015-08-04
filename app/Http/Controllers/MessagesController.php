@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Participant;
 use App\Models\Thread;
 use App\Models\Message;
 use App\Repositories\UserRepository;
+use Event;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth, Input, Redirect, Session;
 use Response;

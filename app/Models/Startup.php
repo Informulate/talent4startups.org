@@ -21,7 +21,7 @@ class Startup extends Model
 	 * @param $attributes
 	 * @return static
 	 */
-	public static function create(array $attributes)
+	public static function create(array $attributes = [])
 	{
 		$startup = new static($attributes);
 
@@ -41,7 +41,7 @@ class Startup extends Model
 		$startup->linked_in = $attributes['linked_in'];
 		$startup->facebook = $attributes['facebook'];
 		$startup->website = $attributes['website'];
-        $startup->published = array_key_exists('published', $attributes) ? true : false;
+		$startup->published = array_key_exists('published', $attributes) ? true : false;
 
 		return $startup;
 	}
@@ -53,7 +53,7 @@ class Startup extends Model
 	 */
 	public function owner()
 	{
-		return $this->belongsTo('App\Models\User', 'user_id');
+		return $this->belongsTo('App\Models\User', 'user_id')->with('profile');
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Startup extends Model
 	 */
 	public function members()
 	{
-		return $this->belongsToMany('App\Models\User');
+		return $this->belongsToMany('App\Models\User')->with('profile');
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Startup extends Model
 	 */
 	public function needs()
 	{
-		return $this->hasMany('App\Models\Need');
+		return $this->hasMany('App\Models\Need')->with('skill');
 	}
 
 	public function ratings()
@@ -134,5 +134,13 @@ class Startup extends Model
 		}
 
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
+	}
+
+	public function isNew()
+	{
+		$thisWeek = new \DateTime();
+		$thisWeek->sub(new \DateInterval('P7D'));
+
+		return $this->created_at > $thisWeek;
 	}
 }

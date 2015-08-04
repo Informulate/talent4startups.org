@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profession;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Models\Skill;
@@ -26,10 +27,11 @@ class TalentController extends Controller
 	 */
 	public function index(UserRepository $userRepository)
 	{
-		$talents = $userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'));
-		$describes = Skill::lists('name', 'id');
+		$talents = $userRepository->findActiveTalents(Input::get('tag'), Input::get('describes'), Input::get('location'), null, 12, Input::get('professions'));
+		$describes = Skill::lists('name', 'id')->all();
+		$professions = Profession::lists('name', 'id')->all();
 
-		return view('talent.index')->with('talents', $talents)->with('describes', $describes);
+		return view('talent.index')->with('talents', $talents)->with('describes', $describes)->with('professions', $professions);
 	}
 
 	/**
