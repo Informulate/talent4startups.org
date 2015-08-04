@@ -49,7 +49,7 @@ class StartupRepository
 
         $needList = array();;
         foreach ($needs as $needData) {
-            $tags = explode(',', strtolower($needData['skills']));
+            $tags = explode(',', strtolower(array_key_exists('skills', $needData) ? $needData['skills'] : $needData['tags']));
             $need = Need::create([
                 'startup_id' => $startup->id,
                 'skill_id' => $needData['role'],

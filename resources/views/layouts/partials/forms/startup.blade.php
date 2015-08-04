@@ -45,8 +45,8 @@
                 {!! Form::select('needs['.$i.'][commitment]', array('part-time' => 'Part Time', 'full-time' => 'Full Time'), ['name' => 'commitment[]', 'selected' => $need->commitment]) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('needs['.$i.'][skills]', 'Skills:') !!}
-                {!! Form::text('needs['.$i.'][skills]', implode(',', $need->tags->lists('name')), ['class' => 'tags form-control']) !!}
+                {!! Form::label('needs['.$i.'][tags]', 'Skills:') !!}
+                {!! Form::text('needs['.$i.'][tags]', implode(',', $need->tags->lists('name')->all()), ['class' => 'tags form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('needs['.$i.'][desc]', 'Description:') !!}
