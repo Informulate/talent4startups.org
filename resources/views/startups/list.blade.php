@@ -5,6 +5,19 @@
 	</div>
 
 	<div class="row">
+		@if(Auth::user() && Auth::user()->matches() && Auth::user()->matches()->limit(4)->get()->count() > 0)
+			<fieldset>
+			<legend>Matches</legend>
+			@foreach(Auth::user()->matches()->limit(4)->get() as $match)
+				<?php $startup = $match->startup; ?>
+				<div class="col-sm-6 col-md-3 col-lg-3">
+					<span class="glyphicons glyphicons-handshake" style="position: absolute; top:517px; left: 25px; cursor: help; color: #009AFF" title="Based on mutual interest in {{ str_replace(PHP_EOL, ', ', strtolower($match->description)) }}"> Matched</span>
+					@include('startups.thumb')
+				</div>
+			@endforeach()
+			</fieldset>
+		@endif
+
 		@foreach($startups as $index => $startup)
 			@if ($index % 3 === 0)
 				@if ($displayAds)

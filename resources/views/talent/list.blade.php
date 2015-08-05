@@ -7,6 +7,21 @@
 	</div>
 </div>
 <div class="row">
+	@if(Auth::user() && Auth::user()->startups()->count() > 0)
+		<?php $startup = Auth::user()->startups()->orderByRaw("RAND()")->first(); ?>
+		@if ($startup->matches()->count() > 0)
+		<fieldset>
+			<legend>Matches for {{ $startup->name }}</legend>
+			@foreach($startup->matches()->limit(4)->get() as $match)
+				<?php $talent = $match->user; ?>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 thumb">
+						<small class="glyphicons glyphicons-handshake" style="position: absolute; top:517px; left: 25px; cursor: help; color: #009AFF" title="Based on mutual interest in {{ str_replace(PHP_EOL, ', ', strtolower($match->description)) }}"> Matched</small>
+						@include('talent.thumb')
+					</div>
+			@endforeach()
+		</fieldset>
+		@endif
+	@endif
 	@foreach($talents as $index => $talent)
 		@if ($index % 3 === 0)
 			@if ($displayAds)

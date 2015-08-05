@@ -119,6 +119,14 @@ class Startup extends Model
 		return $this->hasMany('App\Models\Need')->with('skill');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function matches()
+	{
+		return $this->hasMany('App\Models\Match')->orderBy('weight', 'DESC')->where('ignored', '=', '0');;
+	}
+
 	public function ratings()
 	{
 		return $this->morphMany('App\Models\Rating', 'rated');

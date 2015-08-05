@@ -55,6 +55,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 	/**
+	 * The user's matches
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function matches()
+	{
+		return $this->hasMany('App\Models\Match')->orderBy('weight', 'DESC')->where('ignored', '=', '0');
+	}
+
+	/**
 	 * The projects the user contributes to
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
