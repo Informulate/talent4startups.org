@@ -16,7 +16,7 @@
 	</div>
 	<div class="pull-left">
 		@if (Auth::user() and Auth::id() == $user->id)
-			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
+			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit Profile</a></p>
 		@else
 			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
 			<div>
