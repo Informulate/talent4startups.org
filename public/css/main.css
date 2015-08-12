@@ -382,3 +382,8 @@ body {
 .accept {
 	margin-top: 20px;
 }
+
+#header-nav {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 200;
+}
