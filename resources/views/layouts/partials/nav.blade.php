@@ -20,11 +20,12 @@
 				@if (Auth::user())
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="glyphicons @if (Auth::user()->newMessagesCount() > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i> {{ Auth::user()->email }} @if (Auth::user()->newMessagesCount() > 0) <span class="btn-xs btn btn-info"><strong>{{ Auth::user()->newMessagesCount() }}</strong></span> @endif <span class="caret"></span>
+							<i class="glyphicons @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i> {{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-info"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('profile_path', Auth::user()->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
-							<li><a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (Auth::user()->newMessagesCount() > 0) ({{ Auth::user()->newMessagesCount() }}) @endif</a></li>
+							<li><a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (count(Auth::user()->getNewMessages()) > 0) ({{ count(Auth::user()->getNewMessages()) }}) @endif</a></li>
+							<li><a href="{{ route('messages') }}?filter=notifications"><i class="glyphicons glyphicons-wifi-alt"></i> Notifications @if (count(Auth::user()->getNewNotifications()) > 0) ({{ count(Auth::user()->getNewNotifications()) }}) @endif</a></li>
 							<li><a href="/auth/logout"><span class="glyphicons glyphicons-log-out"></span> Logout</a></li>
 							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
 						</ul>
