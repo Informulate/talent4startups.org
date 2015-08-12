@@ -1,6 +1,6 @@
 <?php namespace App\Exceptions;
 
-use Exception;
+use Exception, Slack;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler {
@@ -24,6 +24,10 @@ class Handler extends ExceptionHandler {
 	 */
 	public function report(Exception $e)
 	{
+		if (strtolower(getenv('SLACK_ENABLE')) === 'true') {
+			Slack::send("Exception: {$e->getMessage()} on file {$e->getFile()} at line {$e->getLine()}");
+		}
+
 		return parent::report($e);
 	}
 

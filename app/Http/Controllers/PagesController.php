@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
 	public function missing()
 	{
-		return Response::view('errors.missing', array(), 404);
+		return Response::view('errors.missing', [], 404);
 	}
 
 	/**

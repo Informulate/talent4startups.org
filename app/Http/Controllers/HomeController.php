@@ -24,6 +24,7 @@ class HomeController extends Controller {
 	{
 		$this->middleware('auth');
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**
@@ -33,7 +34,33 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return Redirect::to('/users/' . Auth::user()->id);
+		return Redirect::to('/users/' . Auth::id());
+	}
+
+	/**
+	 * Display the oldest announcement for the user if any.
+	 *
+	 * @return $this|\Illuminate\Http\RedirectResponse
+	 */
+	public function announcement()
+	{
+		if (Auth::user()->hasPendingAnnouncements()) {
+			return view('announcement')->with('announcement', Auth::user()->announcement());
+		}
+
+		return Redirect::to('/');
+	}
+
+	public function store()
+	{
+		$announcement = Auth::user()->announcement();
+
+		if ($announcement) {
+			$announcement->pivot->accepted = true;
+			$announcement->pivot->save();
+		}
+
+		return Redirect::to('/');
 	}
 
 }

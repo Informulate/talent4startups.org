@@ -13,7 +13,7 @@ return [
   |
   */
 
-  'endpoint' => 'https://hooks.slack.com/services/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',
+  'endpoint' => getenv('SLACK_ENDPOINT'),
 
   /*
   |-------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
   |
   */
 
-  'channel' => '#development',
+  'channel' => getenv('SLACK_CHANNEL'),
 
   /*
   |-------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
   |
   */
 
-  'username' => 'Robot',
+  'username' => getenv('SLACK_USERNAME'),
 
   /*
   |-------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
   |
   */
 
-  'icon' => ':space_invader:',
+  'icon' => getenv('SLACK_ICON'),
 
   /*
   |-------------------------------------------------------------

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Http\Requests\CreateProfile;
 use App\Http\Requests\Request;
 use App\Http\Requests\ResetPassword;
@@ -25,6 +26,7 @@ class ProfileController extends Controller
 	{
 		$this->middleware('auth', ['except' => ['show']]);
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**
@@ -36,6 +38,10 @@ class ProfileController extends Controller
 	public function show($id)
 	{
 		$user = User::findOrFail($id);
+
+		if (is_null($user->profile)) {
+			App::abort(404);
+		}
 
 		return view('profile.show')->with('user', $user);
 	}

@@ -18,6 +18,7 @@ class MembershipController extends Controller {
 	{
 		$this->middleware('auth');
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**

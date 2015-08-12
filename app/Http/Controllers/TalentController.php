@@ -17,6 +17,7 @@ class TalentController extends Controller
 	{
 		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**

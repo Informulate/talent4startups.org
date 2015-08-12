@@ -34,6 +34,7 @@ class StartupController extends Controller
 		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('profile.complete');
 		$this->middleware('startup.owner', ['only' => ['edit', 'update']]);
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**
