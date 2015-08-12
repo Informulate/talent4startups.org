@@ -27,8 +27,10 @@
 							<li><a href="{{ route('messages') }}"><i class="glyphicons glyphicons-message-new"></i> Messages @if (count(Auth::user()->getNewMessages()) > 0) ({{ count(Auth::user()->getNewMessages()) }}) @endif</a></li>
 							<li><a href="{{ route('messages') }}?filter=notifications"><i class="glyphicons glyphicons-wifi-alt"></i> Notifications @if (count(Auth::user()->getNewNotifications()) > 0) ({{ count(Auth::user()->getNewNotifications()) }}) @endif</a></li>
 							<li><a href="/auth/logout"><span class="glyphicons glyphicons-log-out"></span> Logout</a></li>
-							<li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
-						</ul>
+							@if (Auth::user()->authType == 'local')
+                            <li><a id="reset-link" href="{{ route('reset_password') }}"><span class="glyphicons glyphicons-warning-sign"></span> Reset Password</a></li>
+						    @endif
+                        </ul>
 					</li>
 				@else
 					<li><a id="login-link" href="/auth/login"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
