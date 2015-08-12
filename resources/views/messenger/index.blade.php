@@ -16,7 +16,6 @@
 			font-weight: bold;
 		}
 	</style>
-	<h3>My Messages</h3>
 	<div class="row">
 		<div class="col-md-2">
 			<p><a href="{{route('messages.create')}}" class="btn btn-info">New Message</a></p>
@@ -30,6 +29,7 @@
 			</ul>
 		</div>
 		<div class="col-md-9">
+	        <h3>&nbsp; My Messages</h3>
 			@if (Session::has('error_message'))
 				<div class="alert alert-danger" role="alert">
 					{{Session::get('error_message')}}
