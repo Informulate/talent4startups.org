@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\Messagable;
 use Cmgmyr\Messenger\Traits\Messagable as CmgmyrMessagable;
-use Cmgmyr\Messenger\Traits\Messagable;
 use App\Repositories\AnnouncementRepository;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
