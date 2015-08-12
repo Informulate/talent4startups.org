@@ -11,12 +11,10 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}"><i class="glyphicons glyphicons-home"></i> Home</a></li>
-				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}"><i class="glyphicons glyphicons-person"></i> Talent</a></li>
-				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}"><i class="glyphicons glyphicons-lightbulb"></i> Startups</a></li>
-				<li @if (Request::path() === 'about') class="active" @endif><a href="/about"><i class="glyphicons glyphicons-asterisk"></i> About</a></li>
-				<li @if (Request::path() === 'manifesto') class="active" @endif><a href="/manifesto"><i class="glyphicons glyphicons-circle-question-mark"></i> Manifesto</a></li>
-				<li @if (Request::path() === 'faq') class="active" @endif><a href="/faq"><i class="glyphicons glyphicons-circle-info"></i> FAQ</a></li>
+				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
+				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}">Browse Talents</a></li>
+				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}">Browse Startups</a></li>
+				<li @if (Request::path() === 'about') class="active" @endif><a href="/about">About</a></li>
 				@if (Auth::user())
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -33,12 +31,8 @@
                         </ul>
 					</li>
 				@else
-					<li><a id="login-link" href="/auth/login"><span class="glyphicons glyphicons-log-in"></span> Login</a></li>
-					<li>
-						<form>
-							<a id="signup-link" href="/auth/register" type="button" class="btn btn-primary navbar-btn"><span class="glyphicons glyphicons-cog"></span> Sign Up</a>
-						</form>
-					</li>
+					<li><a id="login-link" href="/auth/login">Login</a></li>
+					<li><a id="signup-link" href="/auth/register">Sign Up</a></li>
 				@endif
 			</ul>
 		</div>
