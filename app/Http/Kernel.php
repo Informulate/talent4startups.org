@@ -29,6 +29,7 @@ class Kernel extends HttpKernel {
 		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
 		'profile.complete' => 'App\Http\Middleware\RedirectIfProfileIsMissing',
 		'startup.owner' => 'App\Http\Middleware\RedirectIfIsNotStartupOwner',
+		'blocked.by.announcement' => 'App\Http\Middleware\RedirectIfRequiredAnnouncement',
 	];
 
 }

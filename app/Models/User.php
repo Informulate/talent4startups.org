@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Messagable;
 use Cmgmyr\Messenger\Traits\Messagable as CmgmyrMessagable;
+use App\Repositories\AnnouncementRepository;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -122,16 +123,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function avatar()
 	{
-		if (isset($this->profile)) {
+		if ($this->profile) {
 			if (isset($this->profile->image) and $this->profile->image != '') {
 				return asset('images/upload/' . $this->profile->image);
 			}
 		}
 
 		$email = md5($this->email);
-		$default = urlencode('http://talent4startups.org/images/talent_generic.jpg');
+		$default = urlencode('//talent4startups.org/images/talent_generic.jpg');
 
-		return "http://www.gravatar.com/avatar/{$email}?default={$default}";
+		return "//www.gravatar.com/avatar/{$email}?default={$default}";
 	}
 
 	/**
@@ -223,17 +224,76 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return number_format($percentage);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function progressClass()
 	{
 		return $this->progressPercentage() < 20 ? 'danger' : ($this->progressPercentage() < 80 ? 'warning' : 'success');
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isNew()
 	{
 		$thisWeek = new \DateTime();
 		$thisWeek->sub(new \DateInterval('P7D'));
 
 		return $this->created_at > $thisWeek;
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function announcements()
+	{
+		return $this->belongsToMany('App\Models\Announcement')->withTimestamps()->withPivot('accepted');
+	}
+
+	/**
+	 * Returns true if the user has any pending Announcements
+	 *
+	 * @return boolean
+	 */
+	public function hasPendingAnnouncements()
+	{
+		return count($this->pendingAnnouncements()) > 0 ?: false;
+	}
+
+	/**
+	 * Returns true if the user has pending Announcements and at least one of those Announcements is required.
+	 *
+	 * @return boolean
+	 */
+	public function hasRequiredAnnouncement()
+	{
+		$required = $this->pendingAnnouncements()->filter(function($announcement) {
+			return $announcement->required;
+		});
+
+		return count($required) > 0 ?: false;
+	}
+
+	/**
+	 * Returns a list of pending Announcements
+	 *
+	 * @return Collection
+	 */
+	public function pendingAnnouncements()
+	{
+		return $this->announcements->filter(function($announcement) {
+			return $announcement->pivot->accepted == false;
+		});
+	}
+
+
+	/**
+	 * @return null|Announcement
+	 */
+	public function announcement()
+	{
+		return $this->pendingAnnouncements()->first();
 	}
 
 }

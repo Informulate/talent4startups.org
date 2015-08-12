@@ -5,7 +5,7 @@
 		{!! Form::open(['route' => 'talents.index','name'=>'talent-search-form','id'=>'talent-search-form', 'method' =>
 		'get']) !!}
 		<div class="form-group col-sm-3">
-			{!! Form::select('describes', array('Browse:everyone') + $describes,
+			{!! Form::select('describes', array('Browse: All Roles') + $describes,
 			Input::get('describes'),['id'=>'describe','class' => 'form-control']); !!}
 		</div>
 		<div class="form-group col-sm-3">
@@ -15,10 +15,6 @@
 		<div class="form-group col-sm-3">
 			{!! Form::text('tag', Input::get('tag'), ['id'=>'tag','class' => 'form-control', 'placeholder' => 'Enter
 			tag']) !!}
-		</div>
-		<div class="form-group col-sm-3">
-			{!! Form::text('location', Input::get('location'), ['id'=>'location','class' => 'form-control',
-			'placeholder' => 'Enter Location']) !!}
 		</div>
 		<div class="form-group col-sm-3">
 			{!! Form::submit('Search', ['id'=>'search-button','class' => 'btn btn-primary']) !!}

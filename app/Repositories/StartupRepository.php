@@ -91,8 +91,11 @@ class StartupRepository
 
 		if ($tag) {
 			$results->join('needs', 'startups.id', '=', 'needs.startup_id')
+				->join('startup_tag', 'startup_tag.startup_id', '=', 'startups.id')
 				->join('need_tag', 'need_tag.need_id', '=', 'needs.id')
-				->join('tags', 'need_tag.tag_id', '=', 'tags.id')
+				->join('tags', function($join) {
+					$join->on('need_tag.tag_id', '=', 'tags.id')->orOn('startup_tag.tag_id', '=', 'tags.id');
+				})
 				->where('tags.name', '=', $tag)
 				->select('startups.*');
 		}

@@ -12,6 +12,7 @@ class RatingController extends Controller
 	{
 		$this->beforeFilter('auth');
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**

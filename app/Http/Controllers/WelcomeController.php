@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\StartupRepository;
 use App\Repositories\UserRepository;
-use Auth, DB, Response, Redirect;
+use DB, Response;
 
 class WelcomeController extends Controller {
 

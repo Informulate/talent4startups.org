@@ -22,6 +22,8 @@
 
 @yield('wide-content')
 
+@include('layouts.partials.announcement')
+
 <div id="main-container" class="container">
 	@include('flash::message')
 

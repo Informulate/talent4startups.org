@@ -16,6 +16,17 @@ Route::get('/', [
 	'uses' => 'WelcomeController@index'
 ]);
 
+Route::get('/announcement/accept', [
+	'as' => 'accept_announcement',
+	'uses' => 'HomeController@store'
+]);
+
+Route::get('/announcement', [
+	'as' => 'announcement',
+	'uses' => 'HomeController@announcement'
+]);
+
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
