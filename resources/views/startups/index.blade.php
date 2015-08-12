@@ -17,7 +17,7 @@
 	</div> <!-- display search fields ends -->
 
 	@if(Auth::user())
-		<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-xs btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a>
+		<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-lg btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a>
 	@endif
 
 	<div id="project-container">
