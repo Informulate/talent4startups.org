@@ -16,11 +16,19 @@ class Thread extends CmgmyrThread
 	 * @param $userId
 	 * @return mixed
 	 */
-	public function scopeForUserByPriority($query, $userId)
+	public function scopeForUserByPriority($query, $userId, $type = null)
 	{
 		return $query->join('participants', 'threads.id', '=', 'participants.thread_id')
-			->join('messages', function ($join) {
+			->join('messages', function ($join) use ($type) {
 				$join->on('threads.id', '=', 'messages.thread_id');
+				switch ($type) {
+					case 'message':
+						$join->on('messages.type', '=', \DB::raw('"message"'));
+						break;
+					case 'notification':
+						$join->on('messages.type', '=', 'notification');
+						break;
+				}
 			})
 			->where('participants.user_id', $userId)
 			->where(function($query) {

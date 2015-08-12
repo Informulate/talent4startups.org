@@ -38,7 +38,7 @@ class MessagesController extends Controller
 	public function index()
 	{
 		$currentUserId = Auth::user()->id;
-		$threads = Thread::ForUserByPriority($currentUserId)->paginate(10);
+		$threads = Thread::ForUserByPriority($currentUserId, \Request::get('filter', 'message'))->paginate(10);
 
 		return view('messenger.index', compact('threads', 'currentUserId'));
 	}

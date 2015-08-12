@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Cmgmyr\Messenger\Traits\Messagable;
+use App\Traits\Messagable;
+use Cmgmyr\Messenger\Traits\Messagable as CmgmyrMessagable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -11,7 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, Messagable;
+	use Authenticatable, CanResetPassword, Messagable, CmgmyrMessagable;
 
 	/**
 	 * The database table used by the model.
