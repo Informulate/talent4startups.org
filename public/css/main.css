@@ -289,6 +289,17 @@ body {
 	padding: 0 10px 0 0
 }
 
+.footer-text {
+    text-align: center;
+}
+
+.footer-banner {
+    background: #444 none repeat scroll 0 0;
+    border: 1px solid #222;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 #adsense img {
 	padding-top: 50px
 }
