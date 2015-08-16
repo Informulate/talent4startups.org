@@ -158,10 +158,6 @@ Route::get('contact', array(
 	'uses' => 'PagesController@contact',
 	'as' => 'contact'
 ));
-Route::get('manifesto', array(
-	'uses' => 'PagesController@manifesto',
-	'as' => 'manifesto'
-));
 Route::get('faq', array(
 	'uses' => 'PagesController@faq',
 	'as' => 'faq'

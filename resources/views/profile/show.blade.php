@@ -28,7 +28,8 @@
 					{!! Form::close() !!}
 				@endif
 			</div>
-			@foreach(Auth::user()->startups()->get() as $startup)
+            @if (Auth::user())
+			@foreach(Auth::user()->startups as $startup)
 				@foreach($startup->members()->where('status', 'pending')->where('user_id', $user->id)->with('profile')->get() as $user)
 				<div>
 					<a href="{{ route('profile_path', $user->id) }}">Applied to join {{ $startup->name }}
@@ -37,6 +38,7 @@
 				</div>
 				@endforeach
 			@endforeach
+            @endif
 		@endif
 	</div>
 	<div class="row">

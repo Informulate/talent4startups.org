@@ -34,17 +34,6 @@ class PagesController extends Controller
 	}
 
 	/**
-	 * The manifesto page
-	 * Get /manifesto
-	 *
-	 * @return Response
-	 */
-	public function manifesto()
-	{
-		return view('static.manifesto');
-	}
-
-	/**
 	 * The FAQ page
 	 * Get /faq
 	 *
