@@ -57,4 +57,9 @@ class Need extends Model
 	{
 		return $this->belongsToMany('App\Models\Tag');
 	}
+
+    public function matches()
+    {
+        return $this->hasMany('App\Models\Match');
+    }
 }

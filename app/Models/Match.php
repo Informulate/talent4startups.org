@@ -14,7 +14,7 @@ class Match extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id', 'startup_id', 'debug', 'description', 'ignored', 'weight'];
+	protected $fillable = ['user_id', 'startup_id', 'debug', 'description', 'ignored', 'weight', 'need_id'];
 
     /**
      * Create a new match
@@ -46,5 +46,10 @@ class Match extends Model
     public function startup()
     {
         return $this->belongsTo('App\Models\Startup', 'startup_id');
+    }
+
+    public function needs()
+    {
+        return $this->belongsToMany('App\Models\Need');
     }
 }

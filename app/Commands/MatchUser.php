@@ -29,7 +29,6 @@ class MatchUser extends Command implements SelfHandling
     /**
      * Execute the command.
      *
-     * @param UserRepository $user
      */
     public function handle()
     {
@@ -54,6 +53,7 @@ class MatchUser extends Command implements SelfHandling
                     'weight' => 10,
                     'debug' => 'Match based on user:skill and startup:need:skill (' . $skill->name . ')',
                     'description' => $skill->name,
+                    'need_id' => $need->id,
                 ];
 
                 $matchedStartups[$need->startup->id][] = $match;
@@ -66,14 +66,21 @@ class MatchUser extends Command implements SelfHandling
                 $startups = $startupRepository->allActive($user->profile->tags);
 
                 foreach ($startups as $startup) {
-                    $match = [
-                        'startup_id' => $startup->id,
-                        'weight' => 10,
-                        'debug' => 'Match based on user:tag and startup:need:tag (' . $tag->name . ')',
-                        'description' => $tag->name,
-                    ];
+                    foreach ($startup->needs as $need) {
+                        foreach($need->tags as $needTag) {
+                            if ($needTag->name == $tag->name) {
+                                $match = [
+                                    'startup_id' => $startup->id,
+                                    'weight' => 10,
+                                    'debug' => 'Match based on user:tag and startup:need:tag (' . $tag->name . ')',
+                                    'description' => $tag->name,
+                                    'need_id' => $need->id,
+                                ];
 
-                    $matchedStartups[$startup->id][] = $match;
+                                $matchedStartups[$startup->id][] = $match;
+                            }
+                        }
+                    }
                 }
 
                 $needs = Need::wherehas('tags', function ($q) use ($tag) {
@@ -87,6 +94,7 @@ class MatchUser extends Command implements SelfHandling
                         'weight' => 10,
                         'debug' => 'Match based on user:tag and startup:need:tag (' . $tag->name . ')',
                         'description' => $tag->name,
+                        'need_id' => $need->id,
                     ];
 
                     $matchedStartups[$need->startup->id][] = $match;
@@ -138,14 +146,19 @@ class MatchUser extends Command implements SelfHandling
                     $description[] = $matchData['description'];
                 }
                 $description = array_unique($description);
-                Match::create([
+
+                $matchModel = Match::create([
                     'user_id' => $user->id,
                     'startup_id' => $startup_id,
                     'description' => implode(PHP_EOL, $description),
                     'weight' => $weightTotal,
                     'debug' => var_export($matchedStartups[$startup_id], true),
-                ])->save();
-
+                ]);
+                $matchModel->save();
+                foreach ($matchedStartups[$startup_id] as $match) {
+                    $needModel = Need::findOrFail($match['need_id']);
+                    $matchModel->needs()->attach($needModel);
+                }
 
             }
 
