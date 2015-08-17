@@ -31,7 +31,7 @@
             @endif
 		</p>
 
-		<p><a href="{{ route('profile_path', $talent->id) }}" class="btn btn-primary pull-right" role="button">Learn More</a></p>
+		<p><a href="{{ route('profile_path', $talent->id) }}" class="btn btn-primary pull-right signup-link" role="button">Learn More</a></p>
 	</div>
 	<div class="clearfix"></div>
 </div>

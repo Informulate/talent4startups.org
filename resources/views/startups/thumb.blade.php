@@ -44,6 +44,6 @@
 
 	</div>
 	<div class="clearfix"></div>
-	<a href="{{ route('startups.show', $startup->url) }}" class="btn btn-primary pull-right learn-more" role="button">Learn More</a>
+	<a href="{{ route('startups.show', $startup->url) }}" class="btn btn-primary pull-right learn-more signup-link" role="button">Learn More</a>
 
 </div>
