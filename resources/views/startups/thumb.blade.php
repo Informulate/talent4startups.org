@@ -1,5 +1,5 @@
 <div class="thumbnail startups">
-	<a href="{{ route('startups.show', $startup->url) }}">
+	<a class="signup-link" href="{{ route('startups.show', $startup->url) }}">
 		@if ($startup->image)
 			<div class="profile-image" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
 		@else
@@ -10,7 +10,7 @@
 	<input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}>
 
 	<div class="caption">
-		<h3><a href="{{ route('startups.show', $startup->url) }}">{{ str_limit( $startup->name, 15 ) }}</a>
+		<h3><a class="signup-link" href="{{ route('startups.show', $startup->url) }}">{{ str_limit( $startup->name, 15 ) }}</a>
 			@if ($startup->isNew())
 				<img src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
 			@endif
