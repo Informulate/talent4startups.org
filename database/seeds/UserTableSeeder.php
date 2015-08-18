@@ -49,7 +49,7 @@ class UserTableSeeder extends Seeder
 		$skills = Skill::all();
 
 		for ($i = 0; $i < 50; $i++) {
-			$user = User::register($faker->unique()->userName, $faker->unique()->email, 'password', 'talent');
+			$user = User::register($faker->unique()->userName, $faker->unique()->email, bcrypt('password'), 'talent');
 			$this->userRepository->save($user);
 
 			$profileData = [

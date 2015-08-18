@@ -16,18 +16,29 @@
 	</div>
 	<div class="pull-left">
 		@if (Auth::user() and Auth::id() == $user->id)
-			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit</a></p>
+			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit Profile</a></p>
 		@else
 			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
 			<div>
-				{!! Form::open(['route' => 'invite_to_startup']) !!}
-				{!! Form::hidden('user_id', $user->id) !!}
-				@if (Auth::user() and Auth::user()->startups()->lists('name','id') > 0)
+				@if (Auth::user() and Auth::user()->startups()->lists('name','id')->count() > 0)
+					{!! Form::open(['route' => 'invite_to_startup']) !!}
+					{!! Form::hidden('user_id', $user->id) !!}
 					{!! Form::submit('Invite To', ['class' => 'btn btn-primary']) !!}
 					{!! Form::select('startup_id', Auth::user()->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) !!}
+					{!! Form::close() !!}
 				@endif
-				{!! Form::close() !!}
 			</div>
+            @if (Auth::user())
+			@foreach(Auth::user()->startups as $startup)
+				@foreach($startup->members()->where('status', 'pending')->where('user_id', $user->id)->with('profile')->get() as $user)
+				<div>
+					<a href="{{ route('profile_path', $user->id) }}">Applied to join {{ $startup->name }}
+					</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a>
+					<a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
+				</div>
+				@endforeach
+			@endforeach
+            @endif
 		@endif
 	</div>
 	<div class="row">

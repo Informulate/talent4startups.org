@@ -1,13 +1,13 @@
 <div class="thumbnail">
 	<a href="{{ route('profile_path', $talent->id) }}">
-		<img class="profile-image" src="{{{ $talent->avatar() }}}?s=250&d=mm" width="250" height="250">
+		<img class="profile-image signup-link" src="{{{ $talent->avatar() }}}?s=250&d=mm" width="250" height="250">
 	</a>
 
 	<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}">
 
 	<div class="caption">
 		<h3>
-			<a href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>
+			<a class="signup-link" href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>
 			@if ($talent->isNew())
 				<img class="new-badge" src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
 			@endif
@@ -31,7 +31,7 @@
             @endif
 		</p>
 
-		<p><a href="{{ route('profile_path', $talent->id) }}" class="btn btn-primary pull-right" role="button">Learn More</a></p>
+		<p><a href="{{ route('profile_path', $talent->id) }}" class="btn btn-primary pull-right signup-link" role="button">Learn More</a></p>
 	</div>
 	<div class="clearfix"></div>
 </div>

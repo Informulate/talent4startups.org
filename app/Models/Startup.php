@@ -21,7 +21,7 @@ class Startup extends Model
 	 * @param $attributes
 	 * @return static
 	 */
-	public static function create(array $attributes)
+	public static function create(array $attributes = [])
 	{
 		$startup = new static($attributes);
 

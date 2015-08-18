@@ -52,6 +52,9 @@ class AuthenticateUser extends Command implements SelfHandling {
 
 		$this->auth->login($user, true);
 
+        $user->authType = 'linkedin';
+        $user->save();
+
 		if (is_null($user->profile)) {
 			$name = explode(' ', $linkedInData->name);
 			$profile = new Profile(['first_name' => head($name), 'last_name' => last($name)]);

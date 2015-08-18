@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Http\Requests\CreateProfile;
 use App\Http\Requests\Request;
+use App\Http\Requests\ResetPassword;
 use App\Models\Profession;
 use App\Models\Skill;
 use App\Models\Startup;
@@ -24,6 +26,7 @@ class ProfileController extends Controller
 	{
 		$this->middleware('auth', ['except' => ['show']]);
 		$this->middleware('profile.complete');
+		$this->middleware('blocked.by.announcement');
 	}
 
 	/**
@@ -35,6 +38,10 @@ class ProfileController extends Controller
 	public function show($id)
 	{
 		$user = User::findOrFail($id);
+
+		if (is_null($user->profile)) {
+			App::abort(404);
+		}
 
 		return view('profile.show')->with('user', $user);
 	}
@@ -67,14 +74,14 @@ class ProfileController extends Controller
 	 */
 	public function edit()
 	{
-		$describes = Skill::orderBy('name')->lists('name', 'id');
+		$describes = Skill::orderBy('name')->lists('name', 'id')->all();
 		// We want other to be at the bottom
 		$other = array_search('Other', $describes);
 		unset($describes[$other]);
 		$describes[$other] = 'Other';
 
-		$skills = Tag::orderBy('name')->lists('name', 'id');
-		$professions = Profession::orderBy('name')->lists('name', 'id');
+		$skills = Tag::orderBy('name')->lists('name', 'id')->all();
+		$professions = Profession::orderBy('name')->lists('name', 'id')->all();
 		$professions[] = 'Other';
 
 		return view('profile.edit')->with('user', Auth::user())
@@ -134,10 +141,8 @@ class ProfileController extends Controller
 	/**
 	 * Reset requested password for user
 	 */
-	public function resetPassword()
+	public function resetPassword(ResetPassword $request)
 	{
-		$this->resetForm->validate(Input::all());
-
 		extract(Input::only('old_password', 'new_password', 'password_confirmation'));
 
 		if ($new_password != $password_confirmation) {

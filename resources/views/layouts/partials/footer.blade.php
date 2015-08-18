@@ -79,5 +79,8 @@
 				<p><i class="glyphicons glyphicons-notes-2"></i><a href="/termsofservice"> Terms of Service</a></p>
 			</div>
 		</div>
+        <div class="row">
+            <p class="text-center">&copy;{{ date('Y') }} Talent4Startups</p>
+        </div>
 	</div>
 </div>

@@ -16,6 +16,17 @@ Route::get('/', [
 	'uses' => 'WelcomeController@index'
 ]);
 
+Route::get('/announcement/accept', [
+	'as' => 'accept_announcement',
+	'uses' => 'HomeController@store'
+]);
+
+Route::get('/announcement', [
+	'as' => 'announcement',
+	'uses' => 'HomeController@announcement'
+]);
+
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
@@ -146,10 +157,6 @@ Route::get('about', array(
 Route::get('contact', array(
 	'uses' => 'PagesController@contact',
 	'as' => 'contact'
-));
-Route::get('manifesto', array(
-	'uses' => 'PagesController@manifesto',
-	'as' => 'manifesto'
 ));
 Route::get('faq', array(
 	'uses' => 'PagesController@faq',

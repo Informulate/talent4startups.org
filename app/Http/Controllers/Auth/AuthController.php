@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
-use Redirect, Session;
+use Redirect, Session, Validator;
 
 class AuthController extends Controller implements AuthenticateUserListener {
 
@@ -36,10 +36,8 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 * @param  \Illuminate\Contracts\Auth\Guard $auth
 	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct()
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
 		$this->redirectPath = '/';
 
 		$this->middleware('guest', ['except' => 'getLogout']);
@@ -92,6 +90,38 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	public function userHasLoggedIn($user)
 	{
 		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::to('/');
+	}
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	public function validator(array $data)
+	{
+		return Validator::make($data, [
+			'username' => 'required|max:255|unique:users',
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|confirmed|min:6',
+			'type' => 'required',
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array  $data
+	 * @return User
+	 */
+	public function create(array $data)
+	{
+		return User::create([
+			'username' => $data['username'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+			'type' => $data['type'],
+		]);
 	}
 
 }

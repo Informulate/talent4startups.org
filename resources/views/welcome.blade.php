@@ -39,7 +39,6 @@
 			</div>
 		@endforeach()
 	</div>
-	@include('layouts.partials.socialshare')
 @endsection
 
 @section('javascript')

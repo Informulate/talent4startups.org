@@ -8,7 +8,7 @@ class PagesController extends Controller
 {
 	public function missing()
 	{
-		return Response::view('errors.missing', array(), 404);
+		return Response::view('errors.missing', [], 404);
 	}
 
 	/**
@@ -31,17 +31,6 @@ class PagesController extends Controller
 	public function contact()
 	{
 		return view('static.contact');
-	}
-
-	/**
-	 * The manifesto page
-	 * Get /manifesto
-	 *
-	 * @return Response
-	 */
-	public function manifesto()
-	{
-		return view('static.manifesto');
 	}
 
 	/**

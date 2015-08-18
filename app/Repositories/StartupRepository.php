@@ -49,7 +49,7 @@ class StartupRepository
 
         $needList = array();;
         foreach ($needs as $needData) {
-            $tags = explode(',', strtolower($needData['skills']));
+            $tags = explode(',', strtolower(array_key_exists('skills', $needData) ? $needData['skills'] : $needData['tags']));
             $need = Need::create([
                 'startup_id' => $startup->id,
                 'skill_id' => $needData['role'],
@@ -91,8 +91,11 @@ class StartupRepository
 
 		if ($tag) {
 			$results->join('needs', 'startups.id', '=', 'needs.startup_id')
+				->join('startup_tag', 'startup_tag.startup_id', '=', 'startups.id')
 				->join('need_tag', 'need_tag.need_id', '=', 'needs.id')
-				->join('tags', 'need_tag.tag_id', '=', 'tags.id')
+				->join('tags', function($join) {
+					$join->on('need_tag.tag_id', '=', 'tags.id')->orOn('startup_tag.tag_id', '=', 'tags.id');
+				})
 				->where('tags.name', '=', $tag)
 				->select('startups.*');
 		}
@@ -121,8 +124,9 @@ class StartupRepository
 	/**
 	 * @param User $user
 	 * @param Startup $startup
+	 * @param bool $fireEvent
 	 */
-	public function addMemberRequest(User $user, Startup $startup)
+	public function addMemberRequest(User $user, Startup $startup, $fireEvent = true)
 	{
 		DB::insert('insert into startup_user (startup_id, user_id, status, created_at, updated_at) values (?, ?, ?, NOW() , NOW())', [
 			$startup->id,
@@ -130,21 +134,26 @@ class StartupRepository
 			'pending',
 		]);
 
-        Event::fire(new UserApplied($startup, $user));
+		if ($fireEvent) {
+			Event::fire(new UserApplied($startup, $user));
+		}
 	}
 
 	/**
 	 * @param User $user
 	 * @param Startup $startup
+	 * @param bool $fireEvent
 	 */
-	public function approveMemberRequest(User $user, Startup $startup)
+	public function approveMemberRequest(User $user, Startup $startup, $fireEvent = true)
 	{
 		DB::update('update startup_user set status = "approved" where startup_id = ? and user_id = ?', [
 			$startup->id,
 			$user->id
 		]);
 
-        Event::fire(new UserJoined($startup, $user));
+		if ($fireEvent) {
+			Event::fire(new UserJoined($startup, $user));
+		}
 	}
 
 	/**

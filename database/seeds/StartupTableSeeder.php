@@ -34,7 +34,7 @@ class StartupTableSeeder extends Seeder {
 		$skills = Skill::all();
 
 		foreach ($users as $user) {
-			foreach (range(1, rand(2, 4)) as $i) {
+			foreach (range(1, rand(2, 3)) as $i) {
 				$name = $faker->name;
 
 				$startup = Startup::create([
@@ -55,10 +55,10 @@ class StartupTableSeeder extends Seeder {
 
 				$needs = [];
 				$commitments = ['full-time', 'part-time'];
-				foreach (range(1, rand(2, 4)) as $i) {
+				foreach (range(1, rand(2, 3)) as $i) {
 					$roleId = rand(1, (count($skills) - 1));
                     $needTags = [];
-                    foreach (range(1, rand(2, 4)) as $i) {
+                    foreach (range(1, rand(2, 3)) as $i) {
                         $id = rand(1, (count($tags) - 1));
                         $needTags[] = $id;
                     }
@@ -75,13 +75,13 @@ class StartupTableSeeder extends Seeder {
 
 				$startup->tags()->attach($startupTags);
 
-				foreach (range(1, rand(2, 6)) as $i) {
+				foreach (range(1, rand(2, 3)) as $i) {
 					$id = rand(1, (count($users) - 1));
 
 					if ($startup->owner->id !== $id) {
-						$this->repository->addMemberRequest($users[$id], $startup);
+						$this->repository->addMemberRequest($users[$id], $startup, false);
 						if (rand(0,1)) {
-							$this->repository->approveMemberRequest($users[$id], $startup);
+							$this->repository->approveMemberRequest($users[$id], $startup, false);
 						}
 					}
 				}

@@ -18,6 +18,11 @@ class UserRepository
 		return $user->save();
 	}
 
+    /**
+     * @param $userData
+     * @param $type
+     * @return User
+     */
 	public function findOrCreate($userData, $type)
 	{
 		$user = User::where('email', '=', $userData->email)->first();

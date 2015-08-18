@@ -99,7 +99,7 @@ class MessageTableSeeder extends Seeder
                     }
                 }
 
-                if ($thread->latestMessage()->user->id == $user->id) {
+                if ($thread->getLatestMessageAttribute()->user->id == $user->id) {
                     $thread->markAsRead($user->id);
                 }
             }
