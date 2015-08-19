@@ -95,7 +95,7 @@ class UserRepository
 		$paginatedResults = $results->paginate($perPage);
 
 		if ($skill or $tag) {
-			$paginatedResults->appends(['needs' => $skill, 'tag' => $tag]);
+			$paginatedResults->appends(['describes' => $skill, 'tag' => $tag]);
 		}
 
 		return $paginatedResults;
