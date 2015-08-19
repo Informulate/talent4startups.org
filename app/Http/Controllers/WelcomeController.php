@@ -36,7 +36,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index(StartupRepository $startupRepository, UserRepository $userRepository)
 	{
-		$startups = $startupRepository->allActive(null, null, DB::raw('RAND()'), 2);
+		$startups = $startupRepository->allActive(null, null, null, DB::raw('RAND()'), 2);
 		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 2);
 
 		return view('welcome')->with('startups', $startups)->with('talents', $talent);
