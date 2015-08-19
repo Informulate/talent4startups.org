@@ -85,18 +85,20 @@ class StartupRepository
 	 * @param int $perPage
 	 * @return \Illuminate\Pagination\Paginator
 	 */
-	public function allActive($tag = null, $needs = null, $orderBy = null, $perPage = 12)
+	public function allActive($tags = null, $needs = null, $descriptionKeyword = null, $orderBy = null, $perPage = 12)
 	{
 		$results = Startup::where('published', '=', true)->with('owner')->with('needs')->with('tags')->with('ratings');
+        $results->where('startups.description', 'LIKE', "%$descriptionKeyword%");
 
-		if ($tag) {
+        if (count($tags) > 0) {
 			$results->join('needs', 'startups.id', '=', 'needs.startup_id')
 				->join('startup_tag', 'startup_tag.startup_id', '=', 'startups.id')
 				->join('need_tag', 'need_tag.need_id', '=', 'needs.id')
-				->join('tags', function($join) {
-					$join->on('need_tag.tag_id', '=', 'tags.id')->orOn('startup_tag.tag_id', '=', 'tags.id');
-				})
-				->where('tags.name', '=', $tag)
+                ->join('tags', function($join) {
+                    $join->on('need_tag.tag_id', '=', 'tags.id')->orOn('startup_tag.tag_id', '=', 'tags.id');
+                })
+                ->whereIn('tags.name', $tags)
+                ->groupBy('startups.id')
 				->select('startups.*');
 		}
 
@@ -114,8 +116,8 @@ class StartupRepository
 
 		$paginatedResults = $results->paginate($perPage);
 
-		if ($needs or $tag) {
-			$paginatedResults->appends(['needs' => $needs, 'tag' => $tag]);
+		if ($needs or $tags) {
+			$paginatedResults->appends(['needs' => $needs, 'tags' => implode($tags, ',')]);
 		}
 
 		return $paginatedResults;
