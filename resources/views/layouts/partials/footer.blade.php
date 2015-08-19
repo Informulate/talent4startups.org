@@ -66,6 +66,9 @@
 			</div>
 		</div>
         <div class="row footer-banner">
+			<div class="col-sm-12">
+				<hr/>
+			</div>
             <div class="col-sm-offset-1 col-sm-2 footer-text">
                 <a href="/privacy">Privacy Policy</a>
             </div>

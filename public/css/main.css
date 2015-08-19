@@ -3,6 +3,8 @@
 }
 
 body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 200;
 	padding-top: 70px
 }
 
@@ -294,10 +296,12 @@ body {
 }
 
 .footer-banner {
-    background: #444 none repeat scroll 0 0;
-    border: 1px solid #222;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.footer-banner hr {
+	border-color: rgba(127, 127, 127, 1.0);
 }
 
 #adsense img {
@@ -337,7 +341,6 @@ body {
 
 .header .profile-content .desc {
 	color: #778492;
-	font-family: "Lato", arial, sans-serif;
 	font-weight: 400;
 	font-size: 24px;
 	margin-top: 0px;
@@ -395,7 +398,5 @@ body {
 }
 
 #header-nav {
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 200;
 	font-size: 16px !important;
 }
