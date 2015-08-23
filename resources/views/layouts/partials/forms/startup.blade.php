@@ -3,37 +3,34 @@
 	{!! Form::label('name', 'The startup is titled:') !!}
 	{!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
-
+<div class="form-group">
+	{!! Form::label('tagline', 'Startup Tagline:') !!}
+	{!! Form::text('tagline', null, ['class' => 'form-control']) !!}
+</div>
 <div class="form-group">
 	{!! Form::label('stage_id', 'Stage my startup is :') !!}
 	{!! Form::select('stage_id', $stages); !!}
 </div>
-
 <div class="form-group">
     {!! Form::label('published', 'Allow others to find startup in startup searches:') !!}
     {!! Form::checkbox('published', '1', isset( $startup ) ? $startup->published : null) !!}
 </div>
-
 <div class="form-group">
 	{!! Form::label('description', 'Description:') !!}
     <small>1000 character limit</small>
 	{!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
 	{!! Form::label('image', 'Image:') !!}
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
 	{!! Form::label('tags', 'Tags:') !!}
 	{!! Form::text('tags', isset( $startup ) ? $startup->tags->implode('name', ',') : null, ['id' => 'tags', 'class' => 'form-control']) !!}
 </div>
-
 <div class="col-sm-12 text-center">
     <p class="btn btn-lg btn-success" id="add-need">Add the roles you need for your startup</p>
 </div>
-
 <div class="form-group startup-needs">
 	@if (isset( $startup ) and is_object( $startup ) and $startup->needs())
 	    @foreach ($startup->needs as $i => $need)
@@ -56,29 +53,23 @@
 	    @endforeach
 	@endif
 </div>
-
 <div class="clearfix"></div>
-
 <div class="form-group">
 	{!! Form::label('video', 'link to startup video:') !!}
 	{!! Form::text('video', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
     {!! Form::label('facebook', 'Facebook:') !!}
     {!! Form::text('facebook', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
     {!! Form::label('twitter', 'Twitter Username:') !!}
     {!! Form::text('twitter', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
     {!! Form::label('linked_in', 'LinkedIn:') !!}
     {!! Form::text('linked_in', null, ['class' => 'form-control']) !!}
 </div>
-
 <div class="form-group">
     {!! Form::label('website', 'Website:') !!}
     {!! Form::text('website', null, ['class' => 'form-control']) !!}
