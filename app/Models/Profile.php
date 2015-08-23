@@ -14,7 +14,7 @@ class Profile extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'twitter', 'youtube', 'published', 'image'];
+	protected $fillable = ['first_name', 'last_name', 'location', 'about', 'facebook', 'twitter', 'youtube', 'published', 'image', 'tagline'];
 
 	/**
 	 * The database table used by the model.
@@ -43,6 +43,7 @@ class Profile extends Model
 
 		$profile->first_name = $attributes['first_name'];
 		$profile->last_name = $attributes['last_name'];
+		$profile->tagline = array_key_exists('tagline', $attributes) ? $attributes['tagline'] : '';
 		$profile->location = array_key_exists('location', $attributes) ? $attributes['location'] : '';
 		$profile->skill_id = array_key_exists('describe', $attributes) ? $attributes['describe'] : '';
 		$profile->profession_id = array_key_exists('profession', $attributes) ? $attributes['profession'] : '';
