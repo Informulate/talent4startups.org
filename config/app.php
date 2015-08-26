@@ -159,6 +159,7 @@ return [
 		'Maknz\Slack\SlackServiceProvider',
 		'SocialiteProviders\Manager\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		Jonasva\FacebookInsights\FacebookInsightsServiceProvider::class,
 
 	],
 
@@ -213,14 +214,15 @@ return [
 		/*
 		 * Third Party Aliases...
 		 */
-		'Flash' 		=> 'Laracasts\Flash\Flash',
-		'Slugify' 		=> 'Cocur\Slugify\Bridge\Laravel\SlugifyFacade',
-		'Image' 		=> 'Intervention\Image\Facades\Image',
-		'FeedReader' 	=> 'Awjudd\FeedReader\Facades\FeedReader',
-		'Twitter' 		=> 'Thujohn\Twitter\Facades\Twitter',
-		'Slack' 		=> 'Maknz\Slack\Facades\Slack',
-		'Socialite' 	=> 'Laravel\Socialite\Facades\Socialite',
-		'Debugbar'		=> 'Barryvdh\Debugbar\Facade',
+		'Flash' 			=> 'Laracasts\Flash\Flash',
+		'Slugify' 			=> 'Cocur\Slugify\Bridge\Laravel\SlugifyFacade',
+		'Image' 			=> 'Intervention\Image\Facades\Image',
+		'FeedReader' 		=> 'Awjudd\FeedReader\Facades\FeedReader',
+		'Twitter' 			=> 'Thujohn\Twitter\Facades\Twitter',
+		'Slack' 			=> 'Maknz\Slack\Facades\Slack',
+		'Socialite' 		=> 'Laravel\Socialite\Facades\Socialite',
+		'Debugbar'			=> 'Barryvdh\Debugbar\Facade',
+		'FacebookInsights'	=> Jonasva\FacebookInsights\Facades\FacebookInsights::class,
 
 	],
 
