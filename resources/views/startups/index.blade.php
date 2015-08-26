@@ -1,5 +1,10 @@
 @extends('app')
 
+@section('css')
+    <link href="{{{ asset( 'css/vendors/select2/select2.css') }}}" rel="stylesheet">
+    <link href="{{{ asset( 'css/vendors/select2/select2-bootstrap.css') }}}" rel="stylesheet">
+@stop
+
 @section('content')
 
 	<div class="row"> <!-- display search fields -->
@@ -8,8 +13,11 @@
 				{!! Form::select('needs', array('Browse: All Roles') + $needs, Input::get('needs'),['id'=>'needs','class' => 'form-control']); !!}
 			</div>
 			<div class="form-group col-sm-3">
-				{!! Form::text('tag', Input::get('tag'), ['id'=>'tag','class' => 'form-control', 'placeholder' => 'Enter tag']) !!}
+                {!! Form::text('tags', input::get('tags'), ['id' => 'tags', 'class' => 'form-control', 'placeholder' => 'Enter Tag(s)']) !!}
 			</div>
+            <div class="form-group col-sm-3">
+                {!! Form::text('description', input::get('description'), ['id' => 'description', 'class' => 'form-control', 'placeholder' => 'Enter Description keyword']) !!}
+            </div>
 			<div class="form-group col-sm-3">
 				{!! Form::submit('Search', ['id'=>'search-button','class' => 'btn btn-primary']) !!}
 			</div>
@@ -26,6 +34,7 @@
 @stop
 
 @section('javascript')
+    <script src="{{{ asset( 'js/vendors/select2/select2.min.js' ) }}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 			$('.startup-rating-view').rating({
@@ -47,6 +56,15 @@
 					}
 				});
 			});
-		});
+
+            $('#tags').select2({
+                'tags': [
+                    @foreach($tags as $tag)
+                    '{{ $tag }}',
+                    @endforeach
+                ]
+            });
+
+        });
 	</script>
 @stop

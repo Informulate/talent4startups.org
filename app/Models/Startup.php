@@ -13,7 +13,7 @@ class Startup extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id', 'name', 'description', 'url', 'goal', 'stage_id', 'video', 'published'];
+	protected $fillable = ['user_id', 'name', 'description', 'url', 'goal', 'stage_id', 'video', 'published', 'tagline'];
 
 	/**
 	 * Create a new project
@@ -33,6 +33,7 @@ class Startup extends Model
 		$slugify = Slugify::create();
 
 		$startup->name = $attributes['name'];
+		$startup->tagline = $attributes['tagline'];
 		$startup->description = $attributes['description'];
 		$startup->url = $slugify->slugify($attributes['name']);
 		$startup->stage_id = $attributes['stage_id'];

@@ -44,10 +44,11 @@ class StartupController extends Controller
 	 */
 	public function index()
 	{
-		$startups = $this->repository->allActive(Input::get('tag'), Input::get('needs'));
-		$needs = Skill::lists('name', 'id')->all();
+        $tags = Tag::lists('name', 'id')->all();
+        $startups = $this->repository->allActive(explode(',', Input::get('tags')), Input::get('needs'), Input::get('description'));
+        $needs = Skill::lists('name', 'id')->all();
 
-		return view('startups.index')->with('startups', $startups)->with('needs', $needs);
+		return view('startups.index')->with('startups', $startups)->with('needs', $needs)->with('tags', $tags);
 	}
 
 	/**

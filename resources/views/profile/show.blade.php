@@ -11,6 +11,9 @@
 			@if($user->profile->profession)
 				<h4>I work in {!! $user->profile->profession->name !!}</h4>
 			@endif
+			@if($user->profile->tagline)
+				<h5 class="text-muted">{{ $user->profile->tagline }}</h5>
+			@endif
 			@include('layouts.partials.socialshare')
 		</div>
 	</div>

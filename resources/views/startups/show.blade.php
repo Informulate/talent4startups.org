@@ -4,6 +4,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ $startup->name }}</h1>
+			@if($startup->tagline)
+				<h5 class="text-muted">{{ $startup->tagline }}</h5>
+			@endif
 
 			<div class="pull-right">
 				@include('layouts.partials.socialshare')
