@@ -105,6 +105,7 @@ class UserRepository
 	 * Search username, first, and last name fields by term
 	 *
 	 * @param string $term
+	 * @param bool $isAdmin
 	 * @return mixed
 	 */
 	public static function search($term, $isAdmin = false)
@@ -119,11 +120,9 @@ class UserRepository
 			->groupBy('users.id');
 
 		if (!$isAdmin) {
-			$startups = Auth::user()->startups->lists('id');
-			if (empty($startups)) {
-				$startups = array(-1);
-			}
-			$contributions = Auth::user()->contributions->lists('id');
+			$startups = Auth::user()->startups->lists('id')->all();
+			$contributions = Auth::user()->contributions->lists('id')->all();
+
 			$startups = array_merge($startups, $contributions);
 
 			$results->join('startup_user', 'startup_user.user_id', '=', 'users.id')
