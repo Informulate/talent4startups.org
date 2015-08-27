@@ -27,10 +27,10 @@ class Handler extends ExceptionHandler {
 	public function report(Exception $e)
 	{
 		if (strtolower(getenv('SLACK_ENABLE')) === 'true' and false === in_array(get_class($e), $this->dontReport)) {
-			Slack::send("Exception: {$e->getMessage()} on file {$e->getFile()} at line {$e->getLine()}");
+			Slack::send(get_class($e) . ": {$e->getMessage()} on file {$e->getFile()} at line {$e->getLine()}");
 		}
 
-		return parent::report($e);
+		parent::report($e);
 	}
 
 	/**
