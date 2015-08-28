@@ -79,8 +79,9 @@ class StartupRepository
 	}
 
 	/**
-	 * @param null $tag
+	 * @param null $tags
 	 * @param null $needs
+	 * @param null $descriptionKeyword
 	 * @param null $orderBy
 	 * @param int $perPage
 	 * @return \Illuminate\Pagination\Paginator

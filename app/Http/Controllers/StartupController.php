@@ -44,9 +44,12 @@ class StartupController extends Controller
 	 */
 	public function index()
 	{
-        $tags = Tag::lists('name', 'id')->all();
-        $startups = $this->repository->allActive(explode(',', Input::get('tags')), Input::get('needs'), Input::get('description'));
-        $needs = Skill::lists('name', 'id')->all();
+		// If we explode a null tags, it creates an array with an empty string. We only want to explode if we are searching on tags.
+		$tags = Input::get('tags') ? explode(',', Input::get('tags')) : null;
+		$startups = $this->repository->allActive($tags, Input::get('needs'), Input::get('description'));
+
+		$tags = Tag::lists('name', 'id')->all(); // Re-use the tags variable for a list of all tags.
+		$needs = Skill::lists('name', 'id')->all();
 
 		return view('startups.index')->with('startups', $startups)->with('needs', $needs)->with('tags', $tags);
 	}
