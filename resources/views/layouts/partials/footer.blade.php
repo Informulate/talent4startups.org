@@ -10,7 +10,7 @@
 				@for ($i = 0; $i < $count; $i++)
 					<p>
 						{{ $twitterFeed[$i]->text }}, <a class="pull-right" target="_blank"
-														 href="http://twitter.com/{{ $twitterFeed[$i]->user->screen_name  }}/status/{{ $twitterFeed[$i]->id }}">View
+														 href="//twitter.com/{{ $twitterFeed[$i]->user->screen_name  }}/status/{{ $twitterFeed[$i]->id }}">View
 							tweet</a>
 					</p>
 					<p>
@@ -29,7 +29,7 @@
                 @for ($i = 0; $i < $count; $i++)
                     <p>
                         {{ $twitterHomeFeed[$i]->text }}, <a class="pull-right" target="_blank"
-                                                             href="http://twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View
+                                                             href="//twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View
                             tweet</a>
                     </p>
                     <p>

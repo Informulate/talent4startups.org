@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
+		<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
 
 		<style>
 			body {
