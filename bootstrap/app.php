@@ -15,6 +15,8 @@ $app = new Illuminate\Foundation\Application(
 	realpath(__DIR__.'/../')
 );
 
+Dotenv::makeMutable();
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
