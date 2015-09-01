@@ -7,8 +7,6 @@
 		@endif
 	</a>
 
-	<input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}>
-
 	<div class="caption">
 		<h3><a class="signup-link" href="{{ route('startups.show', $startup->url) }}">{{ str_limit( $startup->name, 15 ) }}</a>
 			@if ($startup->isNew())
