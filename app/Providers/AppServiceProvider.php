@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider {
 		$end = new \DateTime();
 
 		view()->share([
-			'facebookPosts' => strtolower(getenv('FACEBOOK_ENABLE')) == true ? FacebookInsights::getPagePosts($start, $end, 2) : [],
+			'facebookPosts' => strtolower(getenv('FACEBOOK_ENABLE')) == 'true' ? FacebookInsights::getPagePosts($start, $end, 2) : [],
 			't4sBlogFeed' => FeedReader::read(Config::get('feeds.blogFeed'))->get_items(),
 			'twitterFeed' => $this->getTwitterFeed('twitterFeed'),
 			'twitterHomeFeed' => $this->getTwitterFeed('twitterHomeFeed'),
