@@ -1,27 +1,16 @@
 <div id="footer" class="container-fluid">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3" style="display: none">
-				<div class="footer-headline"><h5>Recent Articles</h5></div>
-				<?php $count = count($t4sBlogFeed) < 3 ? count($t4sBlogFeed) : 3; ?>
-				@for ($i = 0; $i < $count; $i++)
-					<a href="{{ $t4sBlogFeed[$i]->get_link() }}" target="_blank">{{ $t4sBlogFeed[$i]->get_title() }}</a>
-					<p>
-						{{ $t4sBlogFeed[$i]->get_description() }}
-						{{ $t4sBlogFeed[$i]->get_date('j F Y | g:i a') }}
-					</p>
-				@endfor
-			</div>
-			<div class="col-sm-3">
-				<div class="footer-headline"><h5>Tweets</h5></div>
+			<div class="col-lg-3 hidden-xs">
+				<h5 class="footer-headline">Tweets</h5>
 				<?php $count = count($twitterFeed) < 2 ? count($twitterFeed) : 2; ?>
 				<?php if (!is_array($twitterFeed)) {
 					$count = 0;
 				} ?>
 				@for ($i = 0; $i < $count; $i++)
 					<p>
-						{{ $twitterFeed[$i]->text }}, <a target="_blank"
-														 href="http://twitter.com/{{ $twitterFeed[$i]->user->screen_name  }}/status/{{ $twitterFeed[$i]->id }}">View
+						{{ $twitterFeed[$i]->text }}, <a class="pull-right" target="_blank"
+														 href="//twitter.com/{{ $twitterFeed[$i]->user->screen_name  }}/status/{{ $twitterFeed[$i]->id }}">View
 							tweet</a>
 					</p>
 					<p>
@@ -31,16 +20,16 @@
 					</p>
 				@endfor
 			</div>
-            <div class="col-sm-3 col-sm-offset-2">
-                <div class="footer-headline"><h5>Tweets we follow</h5></div>
+            <div class="col-lg-3 hidden-xs">
+                <h5 class="footer-headline">Tweets we follow</h5>
                 <?php $count = count($twitterHomeFeed) < 2 ? count($twitterHomeFeed) : 2; ?>
                 <?php if (!is_array($twitterHomeFeed)) {
                     $count = 0;
                 } ?>
                 @for ($i = 0; $i < $count; $i++)
                     <p>
-                        {{ $twitterHomeFeed[$i]->text }}, <a target="_blank"
-                                                             href="http://twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View
+                        {{ $twitterHomeFeed[$i]->text }}, <a class="pull-right" target="_blank"
+                                                             href="//twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View
                             tweet</a>
                     </p>
                     <p>
@@ -50,19 +39,17 @@
                     </p>
                 @endfor
             </div>
-			<div class="col-sm-3" style="display: none">
-				<div class="footer-headline"><h5>Facebook Posts</h5></div>
-				<?php $count = count($facebookFeed) < 3 ? count($facebookFeed) : 3; ?>
-				@for ($i = 0; $i < $count; $i++)
-					{!! $facebookFeed[$i]->get_description() !!}
-					{{ $facebookFeed[$i]->get_date('j F Y | g:i a') }}
-				@endfor
-
+			<div class="col-lg-3 hidden-xs">
+				<h5 class="footer-headline">Facebook Posts</h5>
+				@foreach($facebookPosts as $post)
+					<p>{{ $post->message }}</p>
+					<p>{{ preg_replace('/(T)|(:\d\d\+)|(0000)/', ' ', $post->created_time) }} <a class="pull-right" target="_blank" href="https://www.facebook.com/talent4Startups">More Posts</a></p>
+				@endforeach
 			</div>
-			<div class="col-sm-2 col-sm-offset-2">
-				<div class="footer-headline"><h5>Contact</h5></div>
-				<p><a href="mailto:info@talent4startups.org"> info@talent4startups</a></p>
-				<p>866.222.2307</p>
+			<div class="col-lg-3 col-xs-12">
+				<h5 class="footer-headline">Contact</h5>
+				<p><a href="mailto:info@talent4startups.org">info@talent4startups</a></p>
+				<p class="text-primary">866.222.2307</p>
 			</div>
 		</div>
         <div class="row footer-banner">

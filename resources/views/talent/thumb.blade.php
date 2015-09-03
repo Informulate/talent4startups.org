@@ -3,8 +3,6 @@
 		<img class="profile-image signup-link" src="{{{ $talent->avatar() }}}?s=250&d=mm" width="250" height="250">
 	</a>
 
-	<input data-id="{{ $talent->id }}" type="number" class="member-rating-view" value="{{ $talent->rating() }}">
-
 	<div class="caption">
 		<h3>
 			<a class="signup-link" href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>

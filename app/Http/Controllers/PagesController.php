@@ -46,17 +46,6 @@ class PagesController extends Controller
 
 	/**
 	 * The sponsors
-	 * Get /sponsors
-	 *
-	 * @return Response
-	 */
-	public function sponsors()
-	{
-		return view('static.sponsors');
-	}
-
-	/**
-	 * The sponsors
 	 * Get /knowledge-base
 	 *
 	 * @return Response

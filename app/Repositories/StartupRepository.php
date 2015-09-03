@@ -117,8 +117,9 @@ class StartupRepository
 
 		$paginatedResults = $results->paginate($perPage);
 
-		if ($needs or $tags) {
-			$paginatedResults->appends(['needs' => $needs, 'tags' => implode($tags, ',')]);
+		if ($needs or $tags or $descriptionKeyword) {
+			$tags = is_array($tags) ? implode($tags, ',') : '';
+			$paginatedResults->appends(['needs' => $needs, 'tags' => $tags, 'description' => $descriptionKeyword]);
 		}
 
 		return $paginatedResults;

@@ -1,10 +1,7 @@
 <?php namespace App\Providers;
 
-use Awjudd\FeedReader\Facades\FeedReader;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
+use FacebookInsights, FeedReader, Cache, Config, Twitter;
 use Illuminate\Support\ServiceProvider;
-use Thujohn\Twitter\Facades\Twitter;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -15,8 +12,11 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		$start = new \DateTime('2015-01-01');
+		$end = new \DateTime();
+
 		view()->share([
-			'facebookFeed' => FeedReader::read(Config::get('feeds.facebookFeed'))->get_items(),
+			'facebookPosts' => strtolower(getenv('FACEBOOK_ENABLE')) == 'true' ? FacebookInsights::getPagePosts($start, $end, 2) : [],
 			't4sBlogFeed' => FeedReader::read(Config::get('feeds.blogFeed'))->get_items(),
 			'twitterFeed' => $this->getTwitterFeed('twitterFeed'),
 			'twitterHomeFeed' => $this->getTwitterFeed('twitterHomeFeed'),
@@ -41,21 +41,21 @@ class AppServiceProvider extends ServiceProvider {
 		);
 	}
 
-	protected function getTwitterFeed($feedname)
+	private function getTwitterFeed($name)
 	{
 
-		if (!Cache::has($feedname)) {
+		if (!Cache::has($name)) {
 
-			if (strpos($feedname, 'Home')) {
+			if (strpos($name, 'Home')) {
 				$timeline = Twitter::getHomeTimeline(array('screen_name' => Config::get('feeds.twitterScreenName'), 'count' => 3, 'format' => 'object'));
 			} else {
 				$timeline = Twitter::getUserTimeline(array('screen_name' => Config::get('feeds.twitterScreenName'), 'count' => 3, 'format' => 'object'));
 			}
 
-			Cache::add($feedname, $timeline, 60);
+			Cache::add($name, $timeline, 60);
 		}
 
-		return Cache::get($feedname);
+		return Cache::get($name);
 	}
 
 }

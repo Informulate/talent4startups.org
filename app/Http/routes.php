@@ -162,10 +162,6 @@ Route::get('faq', array(
 	'uses' => 'PagesController@faq',
 	'as' => 'faq'
 ));
-Route::get('sponsors', array(
-	'uses' => 'PagesController@sponsors',
-	'as' => 'sponsors'
-));
 Route::get('knowledge-base', array(
 	'uses' => 'PagesController@knowledgebase',
 	'as' => 'knowledgebase'

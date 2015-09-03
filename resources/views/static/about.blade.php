@@ -114,15 +114,6 @@
 
 	<p>&nbsp;</p>
 
-	<img src="/images/partners/sevenality.png" alt="Sevenality - branding. design. forward." class="center-block"/>
-	<p>
-		Sevenality (<a href="http://www.sevenality.com">www.sevenality.com</a>) is a Brand Strategy and Design Firm
-		dedicated to the community. Founded with the mission of providing solutions and not only services, we aim to
-		inspire, help, build and deliver experiences that meet and exceed the needs of any project. Sevenality works
-		closely with clients to create and execute brand strategies focused on creating sustainable futures and to
-		inspire, motivate, as well as deliver an exceptional experience.
-	</p>
-
 	<h3>Contributors</h3>
 
 	<div class="about">
@@ -144,13 +135,6 @@
 		<p><strong>Jesus Fernandez</strong></p>
 
 		<p></p>
-	</div>
-
-	<div class="about">
-		<p><strong>Ravi Gehlot</strong></p>
-
-		<p>For over 8 years, Ravi worked as a Software Developer for several industries where he developed a passion for
-			assisting clients with care and a focus on exceeding needs.</p>
 	</div>
 
 	<div class="about">

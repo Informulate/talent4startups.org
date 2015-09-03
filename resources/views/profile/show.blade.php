@@ -21,12 +21,12 @@
 		@if (Auth::user() and Auth::id() == $user->id)
 			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit Profile</a></p>
 		@else
-			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact</a></p>
+			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact {{ $user->profile->first_name }}</a></p>
 			<div>
 				@if (Auth::user() and Auth::user()->startups()->lists('name','id')->count() > 0)
 					{!! Form::open(['route' => 'invite_to_startup']) !!}
 					{!! Form::hidden('user_id', $user->id) !!}
-					{!! Form::submit('Invite To', ['class' => 'btn btn-primary']) !!}
+					{!! Form::submit('Invite ' . $user->profile->first_name . ' to:', ['class' => 'btn btn-primary']) !!}
 					{!! Form::select('startup_id', Auth::user()->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
 				@endif

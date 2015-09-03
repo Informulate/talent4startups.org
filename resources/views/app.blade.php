@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	@if(getenv('APP_ENV') !== 'prod')
+		{{-- Prevent search engines from indexing/linking to the beta and dev sites --}}
+		<meta name="robots" content="noindex,nofollow">
+	@endif
 	<title>{{ isset($pageTitle) ? $pageTitle : 'Talent4Startups' }}</title>
 	<link href="{{{ asset( 'css/vendors/social-likes/social-likes_flat.css') }}}" rel="stylesheet">
 	<link href="{{{ asset( 'css/vendors/glyphicons/glyphicons.css' ) }}}" rel="stylesheet">
@@ -12,13 +16,12 @@
 	<link href="{{{ asset( 'css/vendors/star-rating/star-rating.min.css' ) }}}" rel="stylesheet">
     <link href="{{{ asset( 'css/vendors/sweet-alert/sweet-alert.css' ) }}}" rel="stylesheet">
     <link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
 
 	@yield('css')
 
 </head>
 <body>
-
 @include('layouts.partials.nav')
 
 @yield('wide-content')
