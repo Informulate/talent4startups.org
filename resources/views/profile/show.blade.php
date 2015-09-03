@@ -75,19 +75,20 @@
 				</div>
 					@endif
 				@endforeach
-					@foreach($user->startups as $startup)
-						<div class="col-sm-3">
-							<div class="clearfix">
-								<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h4>
-								<p>{{ str_limit( $startup->description, 50 ) }}</p>
-							</div>
-							<div class="clearfix">
-								@if (Auth::user() and Auth::user()->username == $user->username)
-									<p><a href="{{ route('startups.edit', ['startup' => $startup->url]) }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
-								@endif
-							</div>
+				@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2>Startups I Own</h2>@endif;
+				@foreach($user->startups as $startup)
+					<div class="col-sm-3">
+						<div class="clearfix">
+							<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a><br /></h4>
+							<p>{{ str_limit( $startup->description, 50 ) }}</p>
 						</div>
-					@endforeach
+						<div class="clearfix">
+							@if (Auth::user() and Auth::user()->username == $user->username)
+								<p><a href="{{ route('startups.edit', ['startup' => $startup->url]) }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
+							@endif
+						</div>
+					</div>
+				@endforeach
 			@else
 				<div class="alert alert-info">
 					I'm not currently involved in any startup.
