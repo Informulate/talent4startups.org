@@ -113,6 +113,11 @@
 	</p>
 
 	<p>&nbsp;</p>
+	<img src="/images/partners/move2create.png" alt="move2create - A Boutique Creative Agency" class="center-block"/>
+	<p>Move2Create is a boutique creative agency specializing in brand creation, strategy and visual design.
+		We are visual storytellers. And we rock at gettin’ down to the nitty-gritty of what makes a brand exceptional.</p>
+
+	<p>&nbsp;</p>
 
 	<h3>Contributors</h3>
 
@@ -134,7 +139,7 @@
 	<div class="about">
 		<p><strong>Jesus Fernandez</strong></p>
 
-		<p></p>
+		<p>&nbsp;</p>
 	</div>
 
 	<div class="about">
@@ -142,6 +147,13 @@
 
 		<p>Back-end web developer living in Orlando, FL. Developing highly-available social networking platforms.</p>
 	</div>
+
+	<div class="about">
+		<p><strong>Giselle Hernandez</strong></p>
+
+		<p>Back-end web developer located in Colorado Springs, CO. She loves coding almost as much as she does fishing.</p>
+	</div>
+
 
 	@include('layouts.partials.socialshare')
 @stop
