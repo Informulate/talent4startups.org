@@ -173,7 +173,6 @@ class MessagesController extends Controller
 			return Redirect::to('messages');
 		}
 
-		$thread->activateAllParticipants();
 
 		// Message
 		Message::create(
@@ -193,6 +192,8 @@ class MessagesController extends Controller
 		);
 		$participant->last_read = new Carbon;
 		$participant->save();
+
+		$thread->activateAllParticipants();
 
 		// Recipients
 		if (Input::has('recipients')) {
