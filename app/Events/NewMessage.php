@@ -1,7 +1,7 @@
 <?php namespace App\Events;
 
 use App\Events\Event;
-use App\Models\Message;
+use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Illuminate\Queue\SerializesModels;
 
