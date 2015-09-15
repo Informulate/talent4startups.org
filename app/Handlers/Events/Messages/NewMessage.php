@@ -29,6 +29,7 @@ class NewMessage {
         // To prevent codeception for hanging to long, only send the emails when in dev or prod
         if (App::environment() !== 'testing') {
             $participant = $newMessage->participant;
+            $message = $newMessage->message;
 
             try {
                 $content = [
@@ -36,7 +37,7 @@ class NewMessage {
                         'first_name' => $participant->user->profile->first_name,
                         'last_name' => $participant->user->profile->last_name,
                     ],
-                    'body' => $participant->thread->getLatestMessageAttribute()->body,
+                    'body' => $message->body,
                 ];
 
                 Mail::send(['html' => 'emails.message'], $content, function ($message) use ($participant) {

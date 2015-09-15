@@ -150,7 +150,7 @@ class MessagesController extends Controller
 
 		foreach ($participants as $participant) {
 			if ($participant->user->id != $message->user->id) {
-				Event::fire('App.Events.NewMessage', [new NewMessage($participant)]);
+				Event::fire('App.Events.NewMessage', [new NewMessage($participant, $message)]);
 			}
 		}
 
