@@ -1,14 +1,15 @@
 html {
-  position: relative;
-  min-height: 100%;
+    font-family: 'Source Sans Pro', sans-serif !important;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 200;
+	font-weight: 500;
 	padding-top: 70px;
 	/* Margin bottom by footer height */
-  	margin-bottom: 320px;
+  	margin-bottom: 230px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 767px) {
@@ -272,22 +273,28 @@ body {
 	font-size: 34px
 }
 
-#footer {
-	#position: absolute;
-	#bottom: 0;
+.container-footer {
+    position: absolute;
+	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
-	height: 320px;
-	background: #303030;
-	margin: 60px 0 auto;
-	padding: 15px 35px 0;
-	color: #aaa;
+	height: 230px;
+    margin: 60px 0 auto;
+}
+
+#footer {
+	background: #ef4041;
+	color: #fff;
 	font-size: 8pt
 }
 
 #footer img {
 	width: 70px;
 	height: auto
+}
+
+#footer a {
+    color: #fff;
 }
 
 .footer-headline {
@@ -310,12 +317,17 @@ body {
 }
 
 .footer-banner {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 0;
 }
 
-.footer-banner hr {
-	border-color: rgba(127, 127, 127, 1.0);
+.footer-banner {
+    float:left;
+    width:100%;
+}
+
+.footer-banner .breadcrumb {
+    text-align: center !important;
+    margin-bottom: 0 !important;
 }
 
 #adsense img {
@@ -453,4 +465,16 @@ body {
 
 .social-likes__widget_plusone:hover {
     background-color: #8E2A20;
+}
+
+#community-header.carousel {
+    margin-bottom: 0;
+}
+
+#community-header.carousel .item {
+    background-color: black;
+}
+
+.community-sub-header.carousel .item {
+    background-color: #ef4041;
 }
