@@ -21,8 +21,10 @@ body {
 
 @media (min-width: 768px) {
 	#navbar-logo {
-		width: 75px;
-		height: 75px
+		width: 261px;
+        top: -76px;
+        position: absolute;
+
 	}
 }
 

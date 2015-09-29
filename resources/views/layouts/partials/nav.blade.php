@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="{{ route('home') }}"><img id="navbar-logo" src="{{ asset('images/t4s-identity.png') }}" alt=""/></a>
+			<a class="navbar-brand" href="{{ route('home') }}"><img id="navbar-logo" src="{{ asset('images/logo.png') }}" alt=""/></a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
