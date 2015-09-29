@@ -16,6 +16,7 @@
 	<link href="{{{ asset( 'css/vendors/star-rating/star-rating.min.css' ) }}}" rel="stylesheet">
     <link href="{{{ asset( 'css/vendors/sweet-alert/sweet-alert.css' ) }}}" rel="stylesheet">
     <link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
+    <link href="{{{ asset( 'css/theme.css' ) }}}" rel="stylesheet">
 	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
 
 	@yield('css')
