@@ -7,7 +7,7 @@
 			<input data-id="{{ $user->id }}" type="number" class="member-rating-view" value="{{ $user->rating() }}" }}>
 		</div>
 		<div class="col-md-9">
-			<h1>Hi, I’m {{ $user->profile->first_name }} {{ $user->profile->last_name }} located in {{ $user->profile->location }}.</h1>
+			<h1>Hi, I’m {{ $user->first_name }} {{ $user->last_name }} located in {{ $user->profile->location }}.</h1>
 			@if($user->profile->profession)
 				<h4>I work in {!! $user->profile->profession->name !!}</h4>
 			@endif
@@ -21,12 +21,12 @@
 		@if (Auth::user() and Auth::id() == $user->id)
 			<p><a href="{{ route('edit_profile') }}" class="btn btn-primary">Edit Profile</a></p>
 		@else
-			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact {{ $user->profile->first_name }}</a></p>
+			<p><a href="{{ route('messages.create', $user->id) }}" class="btn btn-primary">Contact {{ $user->first_name }}</a></p>
 			<div>
 				@if (Auth::user() and Auth::user()->startups()->lists('name','id')->count() > 0)
 					{!! Form::open(['route' => 'invite_to_startup']) !!}
 					{!! Form::hidden('user_id', $user->id) !!}
-					{!! Form::submit('Invite ' . $user->profile->first_name . ' to:', ['class' => 'btn btn-primary']) !!}
+					{!! Form::submit('Invite ' . $user->first_name . ' to:', ['class' => 'btn btn-primary']) !!}
 					{!! Form::select('startup_id', Auth::user()->startups()->lists('name','id'), null, ['class' => 'btn btn-default']) !!}
 					{!! Form::close() !!}
 				@endif
@@ -64,7 +64,7 @@
 					@if($startup->pivot->status == 'approved')
 				<div class="col-sm-3">
 					<div class="clearfix">
-						<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small></h4>
+						<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->first_name }} {{ $startup->owner->last_name }}</small></h4>
 						<p>{{ str_limit( $startup->description, 50 ) }}</p>
 					</div>
 					<div class="clearfix">

@@ -1,11 +1,11 @@
 @extends('messenger.templates.base')
 
 @section('subject')
-    Welcome to Talent4Startups, {{ $user->profile->first_name }}!
+    Welcome to Talent4Startups, {{ $user->first_name }}!
 @endsection
 
 @section('body')
-Hi {{ $user->profile->first_name }},
+Hi {{ $user->first_name }},
 
 Welcome to Talent4Startups! You've just taken a big step towards making your startup dream a reality. You are much more attractive to investors once you get market validation for your concept. If you bring commitment and respect, the T4S community will support you with your project execution.
 

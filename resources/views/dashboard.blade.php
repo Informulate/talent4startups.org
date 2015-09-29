@@ -3,9 +3,9 @@
 @section('content')
 	<header class="header">
 		<div class="container">
-			<img class="profile-image img-responsive img-circle img-thumbnail pull-left" src="{{{ Auth::user()->avatar() }}}?s=180&d=mm" width="180" height="180" alt="{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }}">
+			<img class="profile-image img-responsive img-circle img-thumbnail pull-left" src="{{{ Auth::user()->avatar() }}}?s=180&d=mm" width="180" height="180" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}">
 			<div class="profile-content pull-left">
-				<h1 class="name">{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }}</h1>
+				<h1 class="name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>
 				<h2 class="desc">{{ Auth::user()->profile->skill->name }}</h2>
 				<ul class="social list-inline">
 					<li><a href="#"><i class="fa fa-twitter"></i></a></li>

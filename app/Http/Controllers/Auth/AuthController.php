@@ -4,6 +4,7 @@ use App\Commands\AuthenticateUser;
 use App\Http\Controllers\Controller;
 use App\Listeners\AuthenticateUserListener;
 use App\Models\User;
+use Auth;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -29,16 +30,15 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 * @var string
 	 */
 	protected $redirectPath;
+	protected $loginPath;
 
 	/**
 	 * Create a new authentication controller instance.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
 	 */
 	public function __construct()
 	{
 		$this->redirectPath = '/';
+		$this->loginPath = '/auth/login';
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -48,25 +48,101 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 */
 	public function getRegister(Request $request)
 	{
-		if (!$request->get('type')) {
-			return Redirect::to('/');
+		return view('auth.register')->with('type', 'talent');
+	}
+
+	/**
+	 * Handle a registration request for the application.
+	 * Overwritten to allow direct registrations to communities.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function postRegister(Request $request)
+	{
+		$validator = $this->validator($request->all());
+
+		if ($validator->fails()) {
+			$this->throwValidationException(
+				$request, $validator
+			);
 		}
 
-		return view('auth.register')->with('type', $request->get('type'));
+		$user = $this->create($request->all());
+		Auth::login($user);
+
+		if ($request->has('join')) {
+			$url = $request->get('join');
+			$this->redirectPath = '/discussions';
+			$user->join($url);
+		}
+
+		return redirect($this->redirectPath());
+	}
+
+	/**
+	 * Handle a login request to the application.
+	 * Overwritten to allow direct registrations to communities.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function postLogin(Request $request)
+	{
+		$this->validate($request, [
+			$this->loginUsername() => 'required', 'password' => 'required',
+		]);
+
+		if ($request->has('join')) {
+			$url = $request->get('join');
+			$this->redirectPath = '/discussions';
+			$this->loginPath = route('community.login', ['url' => $url]);
+		}
+
+		// If the class is using the ThrottlesLogins trait, we can automatically throttle
+		// the login attempts for this application. We'll key this by the username and
+		// the IP address of the client making these requests into this application.
+		$throttles = $this->isUsingThrottlesLoginsTrait();
+
+		if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+			return $this->sendLockoutResponse($request);
+		}
+
+		$credentials = $this->getCredentials($request);
+
+		if (Auth::attempt($credentials, $request->has('remember'))) {
+			return $this->handleUserWasAuthenticated($request, $throttles);
+		}
+
+		// If the login attempt was unsuccessful we will increment the number of attempts
+		// to login and redirect the user back to the login form. Of course, when this
+		// user surpasses their maximum number of attempts they will get locked out.
+		if ($throttles) {
+			$this->incrementLoginAttempts($request);
+		}
+
+		return redirect($this->loginPath())
+			->withInput($request->only($this->loginUsername(), 'remember'))
+			->withErrors([
+				$this->loginUsername() => $this->getFailedLoginMessage(),
+			]);
 	}
 
 	/**
 	 * @param AuthenticateUser $authenticateUser
 	 * @param Request $request
-	 * @param Session $session
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function getLinkedin(AuthenticateUser $authenticateUser, Request $request, Session $session)
+	public function getLinkedin(AuthenticateUser $authenticateUser, Request $request)
 	{
-		$hasCode = $request->has('code');
-		$type = Session::get('type');
+		if ($request->has('join')) {
+			// Since we are about to redirect to LinkedIn, we need to store the community url in the session.
+			Session::put('join', $request->get('join'));
+		}
 
-		return $authenticateUser->execute($hasCode, $this, $type);
+		$hasCode = $request->has('code');
+
+		return $authenticateUser->execute($hasCode, $this);
 	}
 
 	/**
@@ -89,7 +165,23 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 */
 	public function userHasLoggedIn($user)
 	{
+		if (Session::has('join')) {
+			Session::remove('join');
+			return Redirect::to('/discussions');
+		}
+
 		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::to('/');
+	}
+
+	public function authenticated($request, $user)
+	{
+		if (Session::has('join')) {
+			$user->join(Session::get('join'));
+			$user->save();
+			Session::remove('join');
+		}
+
+		return redirect()->intended($this->redirectPath());
 	}
 
 	/**
@@ -101,7 +193,8 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'username' => 'required|max:255|unique:users',
+			'first_name' => 'required|max:255',
+			'last_name' => 'required|max:255',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
 			'type' => 'required',
@@ -117,7 +210,9 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	public function create(array $data)
 	{
 		return User::create([
-			'username' => $data['username'],
+			'first_name' => $data['first_name'],
+			'last_name' => $data['last_name'],
+			'username' => $data['email'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 			'type' => $data['type'],

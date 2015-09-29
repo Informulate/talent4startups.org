@@ -13,9 +13,9 @@
 				<img src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
 			@endif
 			<br/>
-			<small>By: {{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}</small>
+			<small>By: {{ $startup->owner->first_name }} {{ $startup->owner->last_name }}</small>
 		</h3>
-		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ $startup->owner->profile->location }}</h6>
+		<h6><i class="glyphicons glyphicons-google-maps"></i>{{ isset($startup->owner->profile) ? $startup->owner->profile->location : '' }}</h6>
 
 		@foreach($startup->needs as $need)
 			<?php $needsArray[] = ' ' . $need->quantity . ' ' . $need->skill->name; ?>

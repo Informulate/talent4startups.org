@@ -5,7 +5,7 @@
 
 	<div class="caption">
 		<h3>
-			<a class="signup-link" href="{{ route('profile_path', $talent->id) }}">{{ $talent->profile->first_name }} {{ $talent->profile->last_name }}</a>
+			<a class="signup-link" href="{{ route('profile_path', $talent->id) }}">{{ $talent->first_name }} {{ $talent->last_name }}</a>
 			@if ($talent->isNew())
 				<img class="new-badge" src="{{ asset('images/new-badge-red-128.png') }}" alt="new" width="25" height="25"/>
 			@endif
@@ -24,7 +24,7 @@
                 @foreach($talent->profile->tags as $tag)
                     <?php $tagList .= '<span class="badge" style="margin-right: 3px;">' . str_limit($tag->name, 20) . '</span>'; ?>
                 @endforeach
-                <span class="badge" style="margin-top: 3px; float: right;cursor: pointer;" data-toggle="popover"  title="<i class='glyphicon glyphicon-tags'></i> All tags for {{ $talent->profile->first_name }} {{ $talent->profile->last_name }}"
+                <span class="badge" style="margin-top: 3px; float: right;cursor: pointer;" data-toggle="popover"  title="<i class='glyphicon glyphicon-tags'></i> All tags for {{ $talent->first_name }} {{ $talent->last_name }}"
                       data-content="{{ $tagList }}" data-html="true" data-placement="left" >...</span>
             @endif
 		</p>

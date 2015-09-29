@@ -1,11 +1,12 @@
 <?php namespace App\Commands;
 
-use App\Models\Profile;
 use App\Listeners\AuthenticateUserListener;
+use App\Models\Community;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 use Illuminate\Auth\Guard as Auth;
+use Session;
 
 class AuthenticateUser extends Command implements SelfHandling {
 
@@ -39,27 +40,23 @@ class AuthenticateUser extends Command implements SelfHandling {
 	/**
 	 * @param boolean $hasCode
 	 * @param AuthenticateUserListener $listener
-	 * @param $type
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function execute($hasCode, AuthenticateUserListener $listener, $type)
+	public function execute($hasCode, AuthenticateUserListener $listener)
 	{
 		if ( ! $hasCode) return $this->getAuthorizationFirst();
 
-		$linkedInData = $this->getLinkedinUser();
-
-		$user = $this->users->findOrCreate($linkedInData, $type);
+		$user = $this->users->findOrCreate($this->getLinkedinUser(), Session::get('type'), 'linkedin');
 
 		$this->auth->login($user, true);
 
         $user->authType = 'linkedin';
-        $user->save();
 
-		if (is_null($user->profile)) {
-			$name = explode(' ', $linkedInData->name);
-			$profile = new Profile(['first_name' => head($name), 'last_name' => last($name)]);
-			$user->profile()->save($profile);
+		if (Session::has('join')) {
+			$user->join(Session::get('join'));
 		}
+
+		$user->save();
 
 		return $listener->userHasLoggedIn($user);
 	}

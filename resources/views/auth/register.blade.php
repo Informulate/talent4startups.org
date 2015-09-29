@@ -1,84 +1,32 @@
 @extends('app')
 
-@section('wide-content')
-	<div class="container">
+@section('content')
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+			<div class="col-lg-4 col-lg-offset-4">
 				@include('partials.registration.steps')
+
+				<div class="well well-sm">
+					<div class="text-center">
+						<i class="social social-linked-in linked-in-btn"></i>
+						<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("linked_in") }}">Sign Up with LinkedIn</a>
+					</div>
+
+					<p class="text-muted text-divider"><span>Or</span></p>
+
+					<form class="form" role="form" method="POST" action="{{ url('/auth/register') }}">
+						{!! Form::hidden('type', $type) !!}
+						@include('partials.registration.form')
+					</form>
+					@include('partials.forms.agreement')
+				</div>
 			</div>
 		</div>
 	</div>
 @endsection
 
-@section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">Register</div>
-					<div class="panel-body">
-						@if (count($errors) > 0)
-							<div class="alert alert-danger">
-								<strong>Whoops!</strong> There were some problems with your input.<br><br>
-								<ul>
-									@foreach ($errors->all() as $error)
-										<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-						@endif
-
-						<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Username</label>
-
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="username"
-										   value="{{ old('username') }}">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">E-Mail Address</label>
-
-								<div class="col-md-6">
-									<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Password</label>
-
-								<div class="col-md-6">
-									<input type="password" class="form-control" name="password">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Confirm Password</label>
-
-								<div class="col-md-6">
-									<input type="password" class="form-control" name="password_confirmation">
-								</div>
-							</div>
-
-							{!! Form::hidden('type', $type) !!}
-
-							<div class="form-group">
-								<div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">
-										Register
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+@section('javascript')
+	@include('partials.forms.js')
 @endsection
 
 @section('footer')

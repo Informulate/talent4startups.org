@@ -81,10 +81,6 @@ Route::get('startups/{id}', [
 	'as' => 'startup_profile',
 	'uses' => 'StartupController@request'
 ]);
-Route::get('startups/create', [
-	'as' => 'startup_create',
-	'uses' => 'StartupController@create'
-]);
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
@@ -103,6 +99,17 @@ Route::get('startups/{id}/membership/cancel', [
  * Talents!
  */
 Route::resource('talents', 'TalentController');
+/**
+ * Roles
+ */
+Route::resource('roles', 'RoleController');
+/**
+ * Communities
+ */
+Route::group(['prefix' => 'communities'], function() {
+	Route::get('{url}/join', ['as' => 'community.join', 'uses' => 'CommunityController@join']);
+	Route::get('{url}/login', ['as' => 'community.login', 'uses' => 'CommunityController@login']);
+});
 /**
  * Profile!
  */

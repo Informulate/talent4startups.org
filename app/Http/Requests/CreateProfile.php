@@ -22,8 +22,6 @@ class CreateProfile extends Request {
 	public function rules()
 	{
 		return [
-			'first_name' => 'required',
-			'last_name' => 'required',
 			'skills' => 'required'
 		];
 	}

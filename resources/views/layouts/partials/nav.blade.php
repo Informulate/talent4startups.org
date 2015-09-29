@@ -16,9 +16,10 @@
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}">Browse Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about">About</a></li>
 				@if (Auth::user())
+					<li @if (Request::path() === 'discussions') class="active" @endif><a href="/discussions">Discussions</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="glyphicons @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0)  glyphicons-user-asterisk @else glyphicons-user @endif"></i> {{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-info"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
+							{{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-info"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('profile_path', Auth::user()->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>
