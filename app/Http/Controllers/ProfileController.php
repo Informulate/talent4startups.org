@@ -153,7 +153,7 @@ class ProfileController extends Controller
 		$user = User::find(Auth::id());
 		if (Hash::check($old_password, $user->password)) {
 			try {
-				$user->password = $new_password;
+				$user->setPasswordAttribute(bcrypt($new_password));
 				$user->save();
 
 				Flash::message('Your password has been reset successfully!');
