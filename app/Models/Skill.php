@@ -18,6 +18,6 @@ class Skill extends Model
 	 */
 	public function profiles()
 	{
-		return $this->belongsToMany('Informulate\Users\Profile');
+		return $this->belongsToMany('App\Model\Profile');
 	}
 }

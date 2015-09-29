@@ -140,11 +140,12 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
+		App\Providers\AppServiceProvider::class,
+		App\Providers\BusServiceProvider::class,
+		App\Providers\ConfigServiceProvider::class,
+		App\Providers\EventServiceProvider::class,
+		App\Providers\RouteServiceProvider::class,
+		//App\Providers\AuthServiceProvider::class,
 
 		/*
 		 * Third Party Service Providers...
@@ -159,6 +160,7 @@ return [
 		'Maknz\Slack\SlackServiceProvider',
 		'SocialiteProviders\Manager\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Riari\Forum\ForumServiceProvider',
 		Jonasva\FacebookInsights\FacebookInsightsServiceProvider::class,
 
 	],
@@ -189,6 +191,7 @@ return [
 		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
 		'Event'     => 'Illuminate\Support\Facades\Event',
 		'File'      => 'Illuminate\Support\Facades\File',
+		'Gate'      => Illuminate\Support\Facades\Gate::class,
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
 		'Input'     => 'Illuminate\Support\Facades\Input',
 		'Inspiring' => 'Illuminate\Foundation\Inspiring',

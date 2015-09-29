@@ -125,7 +125,7 @@ class ProfileController extends Controller
 		$userFrom = Auth::user();
 		ThreadRepository::notification('startup.join.invite.talent', $userTo, array('startup' => $startup, 'fromUser' => $userFrom));
 
-		Flash::message('You have successfully invited ' . $userTo->profile->first_name);
+		Flash::message('You have successfully invited ' . $userTo->first_name);
 
 		return Redirect::intended('/users/' . $userTo->id);
 	}

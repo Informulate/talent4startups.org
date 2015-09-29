@@ -5,16 +5,6 @@
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('first_name', 'First Name:') !!}
-	{!! Form::text('first_name', is_object( $user->profile ) ? $user->profile->first_name : null, ['class' =>
-	'form-control']) !!}
-</div>
-<div class="form-group">
-	{!! Form::label('last_name', 'Last Name:') !!}
-	{!! Form::text('last_name', is_object( $user->profile ) ? $user->profile->last_name : null, ['class' =>
-	'form-control']) !!}
-</div>
-<div class="form-group">
 	{!! Form::label('tagline', 'Tagline:') !!}
 	{!! Form::text('tagline', is_object( $user->profile ) ? $user->profile->tagline : null, ['class' =>
 	'form-control']) !!}

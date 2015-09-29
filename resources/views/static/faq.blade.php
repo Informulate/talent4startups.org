@@ -50,7 +50,7 @@
         </li>
         <li>
             <p><strong>I have a startup idea, but where do I start?</strong></p>
-            <p>Create a profile for your {!! link_to_route('startup_create', 'startup here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos. Remember to tag your startup with appropriate keywords and to set up the roles (with its own tags) you need to execute fully. You can then search our database of talented contributors and invite them to your project. Once you get your team together, you can use existing tools such as Github, Zoho, basecamp etc., to manage the project and take the idea to market. Refer to our {!! link_to_route('knowledgebase', 'knowledge base for more advice') !!} on managing your project.</p>
+            <p>Create a profile for your {!! link_to_route('startup.create', 'startup here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos. Remember to tag your startup with appropriate keywords and to set up the roles (with its own tags) you need to execute fully. You can then search our database of talented contributors and invite them to your project. Once you get your team together, you can use existing tools such as Github, Zoho, basecamp etc., to manage the project and take the idea to market. Refer to our {!! link_to_route('knowledgebase', 'knowledge base for more advice') !!} on managing your project.</p>
         </li>
         <li>
             <p><strong>I have a startup idea, but I’m afraid that someone will steal it</strong></p>
@@ -58,7 +58,7 @@
         </li>
         <li>
             <p><strong>I want to work on something relevant, where do I start?</strong></p>
-            <p>Create a profile for {!! link_to_route('startup_create', 'yourself here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos.</p>
+            <p>Create a profile for {!! link_to_route('startup.create', 'yourself here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos.</p>
         </li>
         <li>
             <p><strong>I love it, how do I spread the word?</strong></p>

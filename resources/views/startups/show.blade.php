@@ -71,7 +71,7 @@
 
 						@foreach($requests as $user)
 							<div>
-								<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/> {{ $user->profile->first_name }} {{ $user->profile->last_name }}
+								<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/> {{ $user->first_name }} {{ $user->last_name }}
 									({{ $user->profile->skill->name }})
 								</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a>
 								<a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
@@ -111,7 +111,7 @@
 								<img class="img-circle img-responsive" src="{{ $startup->owner->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 							</div>
 							<div class="col-xs-8">
-								{{ $startup->owner->profile->first_name }} {{ $startup->owner->profile->last_name }}
+								{{ $startup->owner->first_name }} {{ $startup->owner->last_name }}
 								<br/> {{ $startup->owner->profile->skill->name }}
 								<strong>owner</strong>
 							</div>
@@ -124,7 +124,7 @@
 									<img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
 								</div>
 								<div class="col-xs-8">
-									{{ $user->profile->first_name }} {{ $user->profile->last_name }}
+									{{ $user->first_name }} {{ $user->last_name }}
 									<br/> {{ $user->profile->skill->name }}
 									@if ($startup->owner->id == $user->id)
 										<strong>owner</strong>

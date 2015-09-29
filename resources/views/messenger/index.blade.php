@@ -46,7 +46,7 @@
 					<div class="media alert {{$class}} message {{ $thread->getLatestMessageAttribute()->type }}">
 						@if ($thread->getLatestMessageAttribute()->type == 'message')
 							<a class="pull-left" href="#">
-								<img src="{{ $thread->getLatestMessageAttribute()->user->avatar() }}&s=64" alt="{{$thread->getLatestMessageAttribute()->user->profile->first_name}} {{$thread->getLatestMessageAttribute()->user->profile->last_name}}" class="img-circle" width="64" height="64">
+								<img src="{{ $thread->getLatestMessageAttribute()->user->avatar() }}&s=64" alt="{{$thread->getLatestMessageAttribute()->user->first_name}} {{$thread->getLatestMessageAttribute()->user->last_name}}" class="img-circle" width="64" height="64">
 							</a>
 						@endif
 						<h4 class="media-heading">{!! link_to('messages/' . $thread->id, $thread->subject) !!}</h4>
@@ -57,13 +57,13 @@
 						<p>
 							@foreach($thread->participantsUsers() as $user)
 								@if ($user->id != $thread->getLatestMessageAttribute()->user->id && (count($thread->messages) > 1))
-									<strong>{{ $user->profile->first_name }} {{ $user->profile->last_name }}, </strong>
+									<strong>{{ $user->first_name }} {{ $user->last_name }}, </strong>
 								@elseif ($user->id != $thread->getLatestMessageAttribute()->user->id)
-									<strong>{{ $thread->getLatestMessageAttribute()->user->profile->first_name }} {{ $thread->getLatestMessageAttribute()->user->profile->last_name }} </strong> @endif
+									<strong>{{ $thread->getLatestMessageAttribute()->user->first_name }} {{ $thread->getLatestMessageAttribute()->user->last_name }} </strong> @endif
 
 							@endforeach
 							@if(count($thread->messages) > 1)
-								<strong>{{$thread->getLatestMessageAttribute()->user->profile->first_name}} {{$thread->getLatestMessageAttribute()->user->profile->last_name}}</strong> @endif
+								<strong>{{$thread->getLatestMessageAttribute()->user->first_name}} {{$thread->getLatestMessageAttribute()->user->last_name}}</strong> @endif
 							@if(count($thread->messages) > 1) ({{ count($thread->messages) }}) @endif
 							@if((count($thread->messages) > 1) && $thread->getLatestMessageAttribute()->user->id == Auth::user()->id)
 								<small>(Replied)</small> @endif

@@ -13,12 +13,12 @@
             <div class="media">
                 @if ($message->type == 'message')
                 <a class="pull-left" href="#">
-                    <img src="{{ $message->user->avatar() }}?s=64&d=mm" alt="{{ $message->user->profile->first_name }}" class="img-circle" width="64" height="64">
+                    <img src="{{ $message->user->avatar() }}?s=64&d=mm" alt="{{ $message->user->first_name }}" class="img-circle" width="64" height="64">
                 </a>
                 @endif
                 <div class="media-body">
                     @if ($message->type == 'message')
-                        <h5 class="media-heading"><a href="{{ route('profile_path', $message->user->id) }}">{{$message->user->profile->first_name}} {{$message->user->profile->last_name}}</a></h5>
+                        <h5 class="media-heading"><a href="{{ route('profile_path', $message->user->id) }}">{{$message->user->first_name}} {{$message->user->last_name}}</a></h5>
                     @endif
                     <p>{!! str_replace(array('&lt;', '&gt;'), array('<', '>'), nl2br($message->body)) !!}</p>
                     <div class="text-muted"><small>Posted {{$message->created_at->diffForHumans()}}</small></div>
@@ -42,7 +42,7 @@
         @if($users->count() > 0)
         <div class="checkbox">
             @foreach($users as $user)
-                <label title="{{$user->profile->first_name}} {{$user->profile->last_name}}"><input type="checkbox" name="recipients[]" value="{{$user->id}}">{{$user->profile->first_name}}</label>
+                <label title="{{$user->first_name}} {{$user->last_name}}"><input type="checkbox" name="recipients[]" value="{{$user->id}}">{{$user->first_name}}</label>
             @endforeach
         </div>
         @endif

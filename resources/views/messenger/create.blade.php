@@ -12,7 +12,7 @@
         <ul id="recipient_list" class="list-inline">
             <span class="text-muted">Recipients: </span>
         @if ($recipient->id > 0)
-            <li class="btn btn-default btn-xs" rel="{{ $recipient->id }}">{{ $recipient->profile->first_name }} {{ $recipient->profile->last_name }}</li>
+            <li class="btn btn-default btn-xs" rel="{{ $recipient->id }}">{{ $recipient->first_name }} {{ $recipient->last_name }}</li>
         @endif
         </ul>
         {!! Form::label('subject', 'Subject', ['class' => 'control-label']) !!}

@@ -35,11 +35,11 @@ class UpdateMembership extends Command implements SelfHandling {
 		switch ($this->action) {
 			case 'approve':
 				$repository->approveMemberRequest($this->user, $this->startup);
-				Flash::message("Congratulations! {$this->user->profile->first_name} {$this->user->profile->last_name} has been accepted into your startup!");
+				Flash::message("Congratulations! {$this->user->first_name} {$this->user->last_name} has been accepted into your startup!");
 				break;
 			case 'reject':
 				$repository->rejectMemberRequest($this->user, $this->startup);
-				Flash::message("{$this->user->profile->first_name} {$this->user->profile->last_name} has been rejected from your startup!");
+				Flash::message("{$this->user->first_name} {$this->user->last_name} has been rejected from your startup!");
 				break;
 		}
 

@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username', 'email', 'password', 'type', 'authType'];
+	protected $fillable = ['first_name', 'last_name', 'username', 'email', 'password', 'type', 'authType'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -79,16 +79,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	/**
 	 * Register a new user
 	 *
+	 * @param $first_name
+	 * @param $last_name
 	 * @param $username
 	 * @param $email
 	 * @param $password
 	 * @param $type
-	 *
 	 * @return static
 	 */
-	public static function register($username, $email, $password, $type)
+	public static function register($first_name, $last_name, $username, $email, $password, $type)
 	{
-		$user = new static(compact('username', 'email', 'password', 'type'));
+		$user = new static(compact('first_name', 'last_name', 'username', 'email', 'password', 'type'));
 
 //		$user->raise(new UserRegistered($user));
 
@@ -146,11 +147,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			return true;
 		}
 
-		if (trim($this->profile->first_name) == '') {
+		if (trim($this->first_name) == '') {
 			return true;
 		}
 
-		if (trim($this->profile->last_name) == '') {
+		if (trim($this->last_name) == '') {
 			return true;
 		}
 
@@ -294,6 +295,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function announcement()
 	{
 		return $this->pendingAnnouncements()->first();
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function communities()
+	{
+		return $this->belongsToMany('App\Models\Community');
+	}
+
+	public function join($community)
+	{
+		$community = Community::where('url', '=', $community)->firstOrFail();
+
+		if (false == $this->communities->contains($community)) {
+			$this->communities()->save($community);
+		}
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function posts()
+	{
+		return $this->hasMany('App\Models\Post');
 	}
 
 }
