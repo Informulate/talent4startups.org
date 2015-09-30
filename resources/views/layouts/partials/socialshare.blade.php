@@ -1,9 +1,8 @@
 @if (Auth::user())
-    <div class="social-likes" style="margin: 10px 0;">
-        <h4>Tell your friends: </h4>
-        <br/>
-        <a href="#"><i class="social social-facebook"></i></a> <a href="#"><i class="social social-twitter"></i></a> <a href="#"><i class="social social-google-plus"></i></a>
+    <div class="social-likes social-likes_vertical social-likes_light" style="margin: 10px 0;">
+        <h4>Tell your friends @if(isset($user)) about {{ $user->first_name }} @elseif(isset($startup)) about {{ $startup->name }} @endif: </h4>
+        <div class="facebook" title="Share link on Facebook">Facebook</div>
+        <div class="twitter" title="Share link on Twitter">Twitter</div>
+        <div class="plusone" title="Share link on Google+">Google+</div>
     </div>
-@else
-    <div style="margin: 10px 0;">&nbsp;</div>
 @endif

@@ -455,16 +455,16 @@ body {
 	margin-left: 15px;
 }
 
-.social-likes__widget_facebook:hover {
-    background-color: #243658;
+.social-likes__button_facebook:hover {
+    color: #243658;
 }
 
-.social-likes__widget_twitter:hover {
-    background-color: #146584;
+.social-likes__button_twitter:hover {
+    color: #146584;
 }
 
-.social-likes__widget_plusone:hover {
-    background-color: #8E2A20;
+.social-likes__button_plusone:hover {
+    color: #8E2A20;
 }
 
 #community-header.carousel {
