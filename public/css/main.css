@@ -5,6 +5,7 @@ html {
 }
 
 body {
+    font-family: 'Source Sans Pro', sans-serif !important;
 	font-weight: 500;
 	padding-top: 70px;
 	/* Margin bottom by footer height */
@@ -469,13 +470,33 @@ body {
 
 #community-header.carousel {
     margin-bottom: 0;
+    height: 775px;
+}
+
+#community-header.carousel h1 {
+    margin-bottom: 200px;
 }
 
 #community-header.carousel .item {
-    background-color: black;
+    background: url("/images/oix/DSC_6362_Fotor.jpg") 50% 0%;
+    width: 100%;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    height: 775px;
 }
 
 .community-sub-header.carousel .item {
     background-color: #ef4041;
     height: 400px;
+}
+
+.overlay:before {
+    background-color: #333333;
+    opacity: 0.5;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 805px;
+    z-index: 1;
+    top: 0px;
 }

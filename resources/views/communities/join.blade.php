@@ -1,17 +1,20 @@
 @extends('app')
 
 @section('wide-content')
-	<div id="community-header" class="carousel slide" data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="container">
-					<div class="carousel-caption">
-						<h1>OIX Welcome Text</h1>
+	<div class="overlay">
+		<div id="community-header" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="item active">
+					<div class="container">
+						<div class="carousel-caption">
+							<img class="logo" src="/images/oix/OiX_mark_countdown2.png" alt="OiX mark countdown2">
+							<h1>Welcome OrlandoIX Attendees</h1>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div><!-- /.carousel -->
+		</div><!-- /.carousel -->
+	</div>
 	<div class="community-sub-header carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="item active">
