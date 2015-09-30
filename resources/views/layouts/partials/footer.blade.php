@@ -50,7 +50,7 @@
 				<div class="col-lg-3 col-xs-12">
 					<h5 class="footer-headline">Contact</h5>
 					<p><a href="mailto:info@talent4startups.org">info@talent4startups</a></p>
-					<p class="text-primary">866.222.2307</p>
+					<p>866.222.2307</p>
 				</div>
 			</div>
 		</div>
