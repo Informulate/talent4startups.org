@@ -12,7 +12,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
-				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}">Browse Talents</a></li>
+				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}">Browse Talent</a></li>
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}">Browse Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about">About</a></li>
 				@if (Auth::user())
