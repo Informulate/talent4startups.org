@@ -57,7 +57,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<h2>Startups I’m involved in</h2>
+					<h2>Startups I’m involved in @if(Auth::id() == $user->id) <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-success"><i class="glyphicons glyphicons-plus"></i> Add your startup</a> @endif</h2>
 					@if(count($user->contributions) > 0 || count($user->startups) > 0)
 						@foreach($user->contributions as $startup)
 							@if($startup->pivot->status == 'approved')

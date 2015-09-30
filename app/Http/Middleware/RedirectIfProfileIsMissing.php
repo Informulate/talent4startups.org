@@ -35,7 +35,7 @@ class RedirectIfProfileIsMissing implements Middleware {
 	{
 		if ($this->needToRedirect())
 		{
-			Flash::error('You need to complete your profile before you can continue!');
+			Flash::error('Please complete your personal profile in order to continue.');
 
 			return Redirect::to('setup/profile');
 		}

@@ -8,7 +8,7 @@ body {
 	font-weight: 500;
 	padding-top: 70px;
 	/* Margin bottom by footer height */
-  	margin-bottom: 230px;
+  	margin-bottom: 240px;
     font-size: 15px;
 }
 
@@ -278,7 +278,7 @@ body {
 	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
-	height: 230px;
+	height: 240px;
     margin: 60px 0 auto;
 }
 
@@ -301,7 +301,7 @@ body {
 	display: block;
 	margin: 15px 0 8px;
 	color: #fff;
-	border-bottom: solid #7F7F7F 1px;
+	border-bottom: solid #fff 1px;
 	padding-bottom: 5px;
 }
 
@@ -477,4 +477,5 @@ body {
 
 .community-sub-header.carousel .item {
     background-color: #ef4041;
+    height: 400px;
 }

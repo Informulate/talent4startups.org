@@ -20,7 +20,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Create a New Startup @if (isset($route) and $route == 'setup_startup') <small>or skip and <a href="{{ route('startups.index') }}">browse startups</a></small>@endif</h1>
+			<h1>Would you like to create a profile for a startup? <br/><small>or skip to <a href="{{ route('startups.index') }}">continue</a>.</small></h1>
 
 			@include('layouts.partials.errors')
 

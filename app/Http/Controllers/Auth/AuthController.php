@@ -73,59 +73,10 @@ class AuthController extends Controller implements AuthenticateUserListener {
 
 		if ($request->has('join')) {
 			$url = $request->get('join');
-			$this->redirectPath = '/discussions';
 			$user->join($url);
 		}
 
 		return redirect($this->redirectPath());
-	}
-
-	/**
-	 * Handle a login request to the application.
-	 * Overwritten to allow direct registrations to communities.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function postLogin(Request $request)
-	{
-		$this->validate($request, [
-			$this->loginUsername() => 'required', 'password' => 'required',
-		]);
-
-		if ($request->has('join')) {
-			$url = $request->get('join');
-			$this->redirectPath = '/discussions';
-			$this->loginPath = route('community.login', ['url' => $url]);
-		}
-
-		// If the class is using the ThrottlesLogins trait, we can automatically throttle
-		// the login attempts for this application. We'll key this by the username and
-		// the IP address of the client making these requests into this application.
-		$throttles = $this->isUsingThrottlesLoginsTrait();
-
-		if ($throttles && $this->hasTooManyLoginAttempts($request)) {
-			return $this->sendLockoutResponse($request);
-		}
-
-		$credentials = $this->getCredentials($request);
-
-		if (Auth::attempt($credentials, $request->has('remember'))) {
-			return $this->handleUserWasAuthenticated($request, $throttles);
-		}
-
-		// If the login attempt was unsuccessful we will increment the number of attempts
-		// to login and redirect the user back to the login form. Of course, when this
-		// user surpasses their maximum number of attempts they will get locked out.
-		if ($throttles) {
-			$this->incrementLoginAttempts($request);
-		}
-
-		return redirect($this->loginPath())
-			->withInput($request->only($this->loginUsername(), 'remember'))
-			->withErrors([
-				$this->loginUsername() => $this->getFailedLoginMessage(),
-			]);
 	}
 
 	/**
@@ -165,12 +116,7 @@ class AuthController extends Controller implements AuthenticateUserListener {
 	 */
 	public function userHasLoggedIn($user)
 	{
-		if (Session::has('join')) {
-			Session::remove('join');
-			return Redirect::to('/discussions');
-		}
-
-		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::to('/');
+		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::route('talents.index');
 	}
 
 	public function authenticated($request, $user)

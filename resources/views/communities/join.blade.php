@@ -17,7 +17,11 @@
 			<div class="item active">
 				<div class="container">
 					<div class="carousel-caption">
-						<h1>Call to action</h1>
+						<h1>What is T4S?</h1>
+						<h2>T4S.US builds local communities that connect audacious startups to brilliant talents</h2>
+						<h2>Joining the Orlando Chapter is easy, quick and free.</h2>
+						<h2>Scroll down and sign up.</h2>
+						<h2><span class="round-border"><i class="glyphicons glyphicons-chevron-down"></i></span></h2>
 					</div>
 				</div>
 			</div>

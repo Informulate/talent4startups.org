@@ -4,12 +4,12 @@
 	{!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('tagline', 'Startup Tagline:') !!}
+	{!! Form::label('tagline', 'One line introduction:') !!}
 	{!! Form::text('tagline', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('stage_id', 'Stage my startup is :') !!}
-	{!! Form::select('stage_id', $stages); !!}
+	{!! Form::select('stage_id', $stages, null, ['class' => 'form-control']); !!}
 </div>
 <div class="form-group">
     {!! Form::label('published', 'Allow others to find startup in startup searches:') !!}

@@ -5,7 +5,7 @@
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('tagline', 'Tagline:') !!}
+	{!! Form::label('tagline', 'One line introduction:') !!}
 	{!! Form::text('tagline', is_object( $user->profile ) ? $user->profile->tagline : null, ['class' =>
 	'form-control']) !!}
 </div>
