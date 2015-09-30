@@ -3,8 +3,6 @@
 @section('content')
 @include('forum::partials.breadcrumbs')
 
-<h2>{{ $category->title }}</h2>
-
 @if (!$category->subcategories->isEmpty())
 <table class="table table-category">
 	<thead>

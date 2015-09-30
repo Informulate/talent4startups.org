@@ -16,7 +16,7 @@
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}">Browse Startups</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about">About</a></li>
 				@if (Auth::user())
-					<li @if (Request::path() === 'discussions') class="active" @endif><a href="/discussions">Discussions</a></li>
+					<li @if (Request::path() === 'discussions') class="active" @endif><a href="/discussions/1-threads">Discussions</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							{{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-info"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
