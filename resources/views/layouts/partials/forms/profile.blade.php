@@ -49,7 +49,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('published', 'Allow others to find me in talent searches:') !!}
-	{!! Form::checkbox('published', '1', is_object( $user->profile ) ? $user->profile->published : null) !!}
+	{!! Form::checkbox('published', '1', is_object( $user->profile ) ? $user->profile->published : true) !!}
 </div>
 <div class="form-group">
 	{!! Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) !!}

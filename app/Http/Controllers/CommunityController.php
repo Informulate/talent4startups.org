@@ -10,7 +10,7 @@ class CommunityController extends Controller
 	{
 		$community = Community::where('url', '=', $url)->firstOrFail();
 
-		return view('communities.join')->with(compact('community'));
+		return view('communities.join2')->with(compact('community'));
 	}
 
 	public function login($url)

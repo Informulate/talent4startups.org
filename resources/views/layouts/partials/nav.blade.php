@@ -20,7 +20,7 @@
 					<li @if (Request::path() === 'discussions') class="active" @endif><a href="/discussions/1-threads">Discussions</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							{{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-info"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
+							{{ Auth::user()->email }} @if (count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) > 0) <span class="btn-xs btn btn-primary"><strong>{{ count(Auth::user()->getNewMessages()) + count(Auth::user()->getNewNotifications()) }}</strong></span> @endif <span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ route('profile_path', Auth::user()->id) }}"><i class="glyphicons glyphicons-user"></i> My Profile</a></li>

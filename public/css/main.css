@@ -470,11 +470,11 @@ body {
 
 #community-header.carousel {
     margin-bottom: 0;
-    height: 775px;
+    height: 1000px;
 }
 
 #community-header.carousel h1 {
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 
 #community-header.carousel .item {
@@ -482,7 +482,26 @@ body {
     width: 100%;
     background-size: cover !important;
     background-position: 50% 50% !important;
-    height: 775px;
+    height: 1000px;
+}
+
+.community-logo {
+    margin-top: 100px;
+}
+
+#community-join {
+    color: #fff;
+    z-index: 999;
+    position: relative;
+}
+
+#community-join a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#email-form {
+    text-align: left;
 }
 
 .community-sub-header.carousel .item {
@@ -496,7 +515,7 @@ body {
     position: absolute;
     content: '';
     width: 100%;
-    height: 805px;
+    height: 100%;
     z-index: 1;
     top: 0px;
 }
