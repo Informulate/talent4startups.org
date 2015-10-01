@@ -67,7 +67,7 @@
 						</div>
 						<div class="col-xs-8">
 							{{ $user->first_name }} {{ $user->last_name }}
-							<br/> {{ $user->profile->skill->name }}
+							<br/> {{ isset($user->profile) and isset($user->profile->skill) ? $user->profile->skill->name : '' }}
 							@if ($startup->owner->id == $user->id)
 								<strong>owner</strong>
 							@endif
