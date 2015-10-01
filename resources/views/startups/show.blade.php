@@ -54,7 +54,7 @@
 					</div>
 					<div class="col-xs-8">
 						{{ $startup->owner->first_name }} {{ $startup->owner->last_name }}
-						<br/> {{ $startup->owner->profile->skill->name }}
+						<br/> {{ isset($startup->owner->profile) and isset($startup->owner->profile->skill) ? $startup->owner->profile->skill->name : '' }}
 						<strong>owner</strong>
 					</div>
 				</a>
