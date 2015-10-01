@@ -9,6 +9,7 @@
 			</button>
 			<a class="navbar-brand" href="{{ route('home') }}"><img id="navbar-logo" src="{{ asset('images/logo.png') }}" alt=""/></a>
 		</div>
+		@section('navbar')
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
@@ -37,6 +38,7 @@
 				@endif
 			</ul>
 		</div>
+		@show
 		<!--/.nav-collapse -->
 	</div>
 </nav>

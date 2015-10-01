@@ -1,30 +1,26 @@
 @extends('app')
 
+@section('navbar')
+@overwrite
+
 @section('content')
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="text-center">Welcome {{ $community->name }} Users
-				<small>Join the Talent4Startups {{ $community->name }} Community</small>
-			</h1>
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4">
-			<h4 class="text-center">Login to continue to the {{ $community->name }} community</h4>
+			<h4 class="text-center">Login to continue.</h4>
 
 			<div class="well well-sm">
+				@include('partials.forms.agreement')
 				<div class="text-center">
-					<i class="social social-linked-in linked-in-btn"></i>
-					<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("linked_in", ['join' => $community->url]) }}">Sign In with LinkedIn</a>
+					<a id="sign-in-linked_in" href="{{ route("linked_in", ['join' => $community->url]) }}" alt="Signin with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
 				</div>
-				<p class="text-muted text-divider"><span>Or</span></p>
-				<form class="form" role="form" method="POST" action="{{ url('/auth/login') }}">
+				<p class="text-muted text-center"><a id="email-form-link" href="#">Or Signin with email</a></p>
+				<div class="clearfix"></div>
+				<form id="email-form" class="form" style="display: none;" role="form" method="POST" action="{{ url('/auth/login') }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					{!! Form::hidden('join', $community->url) !!}
 
 					@include('partials.login.form')
 				</form>
-				@include('partials.forms.agreement')
 			</div>
 
 			<div class="well well-sm">
@@ -37,3 +33,6 @@
 @section('javascript')
 	@include('partials.forms.js')
 @endsection
+
+@section('footer')
+@overwrite

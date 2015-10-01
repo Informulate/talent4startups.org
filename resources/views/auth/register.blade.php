@@ -1,5 +1,8 @@
 @extends('app')
 
+@section('navbar')
+@overwrite
+
 @section('content')
 	<div class="container-fluid">
 		<div class="row">
@@ -7,18 +10,21 @@
 				@include('partials.registration.steps')
 
 				<div class="well well-sm">
+					@include('partials.forms.agreement')
 					<div class="text-center">
-						<i class="social social-linked-in linked-in-btn"></i>
-						<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("linked_in") }}">Sign Up with LinkedIn</a>
+						<a id="sign-in-linked_in" href="{{ route("linked_in") }}" alt="Sign Up with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
 					</div>
-
-					<p class="text-muted text-divider"><span>Or</span></p>
-
-					<form class="form" role="form" method="POST" action="{{ url('/auth/register') }}">
+					<p class="text-muted text-center"><a id="email-form-link" href="#">Or Signup with email</a></p>
+					<div class="clearfix"></div>
+					<form id="email-form" class="form" style="display: none;" role="form" method="POST" action="{{ url('/auth/register') }}">
 						{!! Form::hidden('type', $type) !!}
 						@include('partials.registration.form')
 					</form>
 					@include('partials.forms.agreement')
+				</div>
+
+				<div class="well well-sm">
+					<p class="text-center">Already have an account? <a href="{{ url('/auth/login') }}">Log in</a></p>
 				</div>
 			</div>
 		</div>

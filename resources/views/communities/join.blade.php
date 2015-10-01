@@ -1,5 +1,8 @@
 @extends('app')
 
+@section('navbar')
+@overwrite
+
 @section('wide-content')
 	<div class="overlay">
 		<div id="community-header" class="carousel slide" data-ride="carousel">
@@ -36,6 +39,7 @@
 	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4">
 			<div class="well well-sm">
+				@include('partials.forms.agreement')
 				<div class="text-center">
 					<a id="sign-in-linked_in" href="{{ route("linked_in", ['join' => $community->url]) }}" alt="Sign Up with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
 				</div>
@@ -47,7 +51,6 @@
 					{!! Form::hidden('join', $community->url) !!}
 					@include('partials.registration.form')
 				</form>
-				@include('partials.forms.agreement')
 			</div>
 
 			<div class="well well-sm">
@@ -59,14 +62,6 @@
 
 @section('javascript')
 	@include('partials.forms.js')
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#email-form-link').on('click', function(event){
-				event.preventDefault();
-				$('#email-form').slideDown("slow");
-			})
-		});
-	</script>
 @endsection
 
 @section('footer')

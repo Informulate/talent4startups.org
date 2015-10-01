@@ -1,5 +1,8 @@
 @extends('app')
 
+@section('navbar')
+@overwrite
+
 @section('content')
 <div class="container-fluid">
 	<div class="row">
@@ -7,17 +10,17 @@
 			<h4 class="text-center">Login to continue to the talent4startups</h4>
 
 			<div class="well well-sm">
+				@include('partials.forms.agreement')
 				<div class="text-center">
-					<i class="social social-linked-in linked-in-btn"></i>
-					<a id="sign-in-linked_in" class="btn btn-primary" href="{{ route("linked_in") }}">Sign In with LinkedIn</a>
+					<a id="sign-in-linked_in" href="{{ route("linked_in") }}" alt="Signin with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
 				</div>
-				<p class="text-muted text-divider"><span>Or</span></p>
-				<form class="form" role="form" method="POST" action="{{ url('/auth/login') }}">
+				<p class="text-muted text-center"><a id="email-form-link" href="#">Or Signin with email</a></p>
+				<div class="clearfix"></div>
+				<form id="email-form" style="display: none;" class="form" role="form" method="POST" action="{{ url('/auth/login') }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 					@include('partials.login.form')
 				</form>
-				@include('partials.forms.agreement')
+
 			</div>
 
 			<div class="well well-sm">
@@ -31,3 +34,6 @@
 @section('javascript')
 	@include('partials.forms.js')
 @endsection
+
+@section('footer')
+@overwrite
