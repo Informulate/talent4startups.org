@@ -6,7 +6,8 @@
 <body>
 <div style="margin: 0px auto; text-align: center; max-width: 670px">
     <img src="{{ asset('images/logo.png') }}" alt="Talent4Startups - Shape, Fuel, Build" id="t4s-logo" height="300" />
-    <br/><br/>
+    <h2>Hi {{ $recipient->first_name }}!</h2>
+    <br/>
     <div>
         {!! nl2br($body) !!}
     </div>
