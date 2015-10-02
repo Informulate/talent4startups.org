@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			<h1>{{ $startup->name }}</h1>
-			@if($startup->hasMember(Auth::user()))
+			@if(Auth::user() and $startup->isApprovedMember(Auth::user()))
 				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
 			@else
 				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>

@@ -28,6 +28,11 @@ class Startup extends Model
 		return $startup;
 	}
 
+	/**
+	 * @param Startup $startup
+	 * @param array $attributes
+	 * @return Startup
+	 */
 	public static function updateStartup(Startup $startup, array $attributes)
 	{
 		$slugify = Slugify::create();
@@ -89,6 +94,21 @@ class Startup extends Model
 	 * @param User $user
 	 * @return bool
 	 */
+	public function isApprovedMember(User $user)
+	{
+		return !is_null(
+			DB::table('startup_user')
+				->where('startup_id', $this->id)
+				->where('user_id', $user->id)
+				->where('status', 'approved')
+				->first()
+		);
+	}
+
+	/**
+	 * @param User $user
+	 * @return bool
+	 */
 	public function hasPendingInvitationFrom(User $user = null)
 	{
 		if ($user) {
@@ -120,11 +140,17 @@ class Startup extends Model
 		return $this->hasMany('App\Models\Need')->with('skill');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
 	public function ratings()
 	{
 		return $this->morphMany('App\Models\Rating', 'rated');
 	}
 
+	/**
+	 * @return float|int
+	 */
 	public function rating()
 	{
 		$total_ratings = $score = 0;
@@ -137,6 +163,9 @@ class Startup extends Model
 		return $total_ratings > 0 ? round(($score / $total_ratings) * 2, 0, PHP_ROUND_HALF_UP) / 2 : 0;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isNew()
 	{
 		$thisWeek = new \DateTime();
