@@ -229,7 +229,8 @@ body {
 
 .profile-image-lg {
 	height: 300px;
-	background-position: top left
+	background-position: top left;
+	margin-bottom: 20px;
 }
 
 .profile-image-sm {

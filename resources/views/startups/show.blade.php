@@ -2,94 +2,9 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-3">
-			<h1>{{ $startup->name }}</h1>
-			@if(Auth::user() and $startup->isApprovedMember(Auth::user()))
-				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
-			@else
-				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
-			@endif
-			<div class="social-links">
-				@if ($startup->website)
-					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank" rel="nofollow">Website</a></p>
-				@endif
-
-				@if ($startup->linked_in)
-					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank" rel="nofollow">LinkedIn</a></p>
-				@endif
-
-				@if ($startup->facebook)
-					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank" rel="nofollow">Facebook</a></p>
-				@endif
-
-				@if ($startup->twitter)
-					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank" rel="nofollow">Twitter</a></p>
-				@endif
-			</div>
-
-			@if(Auth::user() and $startup->owner->id == Auth::id())
-				<a class="btn btn-primary btn-xs pull-right" href="{{ route('startups.edit', $startup->url) }}">Edit Startup</a>
-				<h2>Member requests</h2>
-
-				@foreach($requests as $user)
-					<div>
-						<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/> {{ $user->first_name }} {{ $user->last_name }}
-							({{ $user->profile->skill->name }})
-						</a> <a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}">Approve</a>
-						<a class="btn btn-primary btn-xs" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}">Reject</a>
-					</div>
-				@endforeach
-
-			@endif
-
-			<h2>Startup Contributors</h2>
-			@if(Auth::user() and $startup->owner->id != Auth::id() and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
-				<a class="btn btn-primary" style="margin-bottom: 20px;" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
-			@endif
-
-			<div class="row contributor">
-				<a href="{{ route('profile_path', $startup->owner->id) }}">
-					<div class="col-xs-4">
-						<img class="img-circle img-responsive" src="{{ $startup->owner->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
-					</div>
-					<div class="col-xs-8">
-						{{ $startup->owner->first_name }} {{ $startup->owner->last_name }}
-						<br/> {{ isset($startup->owner->profile) and isset($startup->owner->profile->skill) ? $startup->owner->profile->skill->name : '' }}
-						<strong>owner</strong>
-					</div>
-				</a>
-			</div>
-			@foreach($members as $user)
-				<div class="row contributor">
-					<a href="{{ route('profile_path', $user->id) }}">
-						<div class="col-xs-4">
-							<img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
-						</div>
-						<div class="col-xs-8">
-							{{ $user->first_name }} {{ $user->last_name }}
-							<br/> {{ isset($user->profile) and isset($user->profile->skill) ? $user->profile->skill->name : '' }}
-							@if ($startup->owner->id == $user->id)
-								<strong>owner</strong>
-							@endif
-						</div>
-					</a>
-				</div>
-				<div class="row contributor">
-					<div class="col-xs-12">
-						<input data-id="{{ $user->id }}" type="number" class="rating member-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $user->rating() }}" @if(Auth::user() and $startup->owner->id != Auth::id()) disabled=true @endif />
-					</div>
-				</div>
-			@endforeach
-
-			@if(Auth::user() and $startup->hasMember(Auth::user()))
-				@if($startup->hasPendingInvitationFrom(Auth::user()))
-					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-primary">cancel this request?</a>
-				@endif
-			@endif
-
-			@include('layouts.partials.socialshare')
-		</div>
 		<div class="col-md-9">
+			<h1>{{ $startup->name }} @if(Auth::id() == $startup->owner->id) <a class="btn btn-primary btn-xs" href="{{ route('startups.edit', $startup->url) }}">Edit</a> @endif</h1>
+
 			@if ($startup->image)
 				<div class="profile-image-lg"
 					 style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
@@ -128,6 +43,79 @@
 					</p>
 				</div>
 			@endforeach
+
+			@include('layouts.partials.socialshare')
+		</div>
+		<div class="col-md-3">
+			<h4>Startup Rating</h4>
+
+			@if(Auth::user() and $startup->isApprovedMember(Auth::user()))
+				<p><input data-id="{{ $startup->id }}" type="number" class="rating startup-rating" min=0 max=5 step=0.5 data-size="xs" value="{{ $startup->rating() }}"></p>
+			@else
+				<p><input data-id="{{ $startup->id }}" type="number" class="startup-rating-view" value="{{ $startup->rating() }}" }}></p>
+			@endif
+			<div class="social-links">
+				@if ($startup->website)
+					<p class="glyphicons glyphicons-home"><a href="{{ $startup->website }}" target="_blank" rel="nofollow">Website</a></p>
+				@endif
+
+				@if ($startup->linked_in)
+					<p class="glyphicons social social-linked-in"><a href="{{ $startup->linked_in }}" target="_blank" rel="nofollow">LinkedIn</a></p>
+				@endif
+
+				@if ($startup->facebook)
+					<p class="glyphicons social social-facebook"><a href="{{ $startup->facebook }}" target="_blank" rel="nofollow">Facebook</a></p>
+				@endif
+
+				@if ($startup->twitter)
+					<p class="glyphicons social social-twitter"><a href="{{ $startup->twitter}}" target="_blank" rel="nofollow">Twitter</a></p>
+				@endif
+			</div>
+
+			@if(Auth::user() and $startup->owner->id == Auth::id())
+				<h4>New Member requests</h4>
+
+				@if (count($requests) == 0)
+					<div class="alert alert-info" role="alert">No Pending Requests</div>
+				@endif
+
+				@foreach($requests as $user)
+					<div>
+						<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/></a>
+						<div class="text-center" style="width: 64px;">
+							<a class="text-success" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}"><i class="glyphicon glyphicon-ok"></i></a>
+						<a href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}"><i class="glyphicon glyphicon-remove"></i></a>
+						</div>
+					</div>
+				@endforeach
+
+			@endif
+
+			<h4>Current Startup Contributors</h4>
+			@if(Auth::user() and $startup->owner->id != Auth::id() and false === $startup->hasPendingInvitationFrom(Auth::user()) and false == $startup->hasMember(Auth::user()))
+				<a class="btn btn-primary" style="margin-bottom: 20px;" href="{{ route('startup_membership_request', ['url' => $startup->url]) }}">Join this startup</a>
+			@endif
+
+			<div class="row contributor">
+				<a href="{{ route('profile_path', $startup->owner->id) }}">
+					<div class="col-xs-4">
+						<img class="img-circle img-responsive" src="{{ $startup->owner->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+					</div>
+				</a>
+				@foreach($members as $user)
+					<a href="{{ route('profile_path', $user->id) }}">
+						<div class="col-xs-4">
+							<img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+						</div>
+					</a>
+				@endforeach
+			</div>
+
+			@if(Auth::user() and $startup->hasMember(Auth::user()))
+				@if($startup->hasPendingInvitationFrom(Auth::user()))
+					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-xs btn-primary">cancel this request?</a>
+				@endif
+			@endif
 		</div>
 	</div>
 @stop
