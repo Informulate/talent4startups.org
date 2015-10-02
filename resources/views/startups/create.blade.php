@@ -20,7 +20,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Would you like to create a profile for a startup? <br/><small>or skip to <a href="{{ route('startups.index') }}">continue</a>.</small></h1>
+			<h1>Would you like to create a profile for a startup? <br/><small>or Skip to <a href="{{ route('startups.index') }}">Continue</a>.</small></h1>
 
 			@include('layouts.partials.errors')
 
