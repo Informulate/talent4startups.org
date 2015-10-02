@@ -2,6 +2,7 @@
 
 <div class="form-group">
 	{!! Form::label('image', 'Image:') !!}
+	<small>Tip: Use a square image of at least 200 x 200 px for best results</small>
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
