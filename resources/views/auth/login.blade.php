@@ -7,7 +7,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4">
-			<h4 class="text-center">Login to continue to the talent4startups</h4>
+			<h4 class="text-center">Log in to enter the Talent4Startups community</h4>
 
 			<div class="well well-sm">
 				@include('partials.forms.agreement')
