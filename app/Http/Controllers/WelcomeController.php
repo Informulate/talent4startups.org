@@ -36,7 +36,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index(StartupRepository $startupRepository, UserRepository $userRepository)
 	{
-		if ($_SERVER['HTTP_REFERER'] == 't4s.us') {
+		if (array_key_exists('HTTP_REFERER', $_SERVER) and $_SERVER['HTTP_REFERER'] == 't4s.us') {
 			return Redirect::to('/oix');
 		}
 
