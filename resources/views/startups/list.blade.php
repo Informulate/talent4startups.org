@@ -42,5 +42,4 @@
 		<div class="col-sm-12">
 			{!! $startups->render() !!}
 		</div>
-		@include('layouts.partials.socialshare')
 	</div>
