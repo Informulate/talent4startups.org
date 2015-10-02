@@ -48,7 +48,7 @@ class NewMessage {
                     $message
                         ->from('noreply@talent4startups.org', 'Talent4Startups')
                         ->to($participant->user->email, $participant->user->first_name . ' ' . $participant->user->last_name)
-                        ->subject("T4S: {$participant->thread->subject}")
+                        ->subject(trim("T4S: {$participant->thread->subject}", '?'))
                     ;
                 });
             } catch (\Exception $e) {
