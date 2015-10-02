@@ -51,8 +51,8 @@
 							<a href="{{{ route('talents.index') }}}?tag={{ $tag->name }}"><span class="badge">{{ $tag->name }}</span></a>
 						@endforeach
 					@endif
-
-					<p> {{ $user->profile->about }}</p>
+					<p></p>
+					<p class="alert alert-normal"> {{ $user->profile->about }}</p>
 				</div>
 			</div>
 			<div class="row">
