@@ -13,6 +13,7 @@
     {{{ $thread->title }}}
 </h2>
 
+
 @if ($thread->canLock || $thread->canPin || $thread->canDelete)
     <div class="thread-tools dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="thread-actions" data-toggle="dropdown" aria-expanded="true">
@@ -34,6 +35,7 @@
     <hr>
 @endif
 
+@include('layouts.partials.flag')
 @if ($thread->canReply)
     <div class="row">
         <div class="col-xs-4">

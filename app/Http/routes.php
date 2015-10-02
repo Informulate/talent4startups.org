@@ -16,6 +16,11 @@ Route::get('/', [
 	'uses' => 'WelcomeController@index'
 ]);
 
+Route::post('/flag', [
+	'as' => 'flag',
+	'uses' => 'HomeController@flag'
+]);
+
 Route::get('/announcement/accept', [
 	'as' => 'accept_announcement',
 	'uses' => 'HomeController@store'

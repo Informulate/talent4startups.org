@@ -120,6 +120,7 @@
 					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-xs btn-primary">cancel this request?</a>
 				@endif
 			@endif
+			@include('layouts.partials.flag')
 		</div>
 	</div>
 @stop
