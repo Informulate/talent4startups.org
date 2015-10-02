@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-3">
-			<img class="img-circle img-responsive img-rounded" src="{{ $user->avatar() }}?s=150&d=mm" alt=""  height="150" width="150"/>
+			<img class="" src="{{ $user->avatar() }}?s=150&d=mm" alt=""  height="250" width="250"/>
 			<input data-id="{{ $user->id }}" type="number" class="member-rating-view" value="{{ $user->rating() }}" }}>
 			<div class="pull-left">
 				@if (Auth::user() and Auth::id() == $user->id)
@@ -74,9 +74,9 @@
 						</div>
 							@endif
 						@endforeach
-						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2>Startups I Own</h2>@endif
+						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2 style="clear: both">Startups I Own</h2>@endif;
 						@foreach($user->startups as $startup)
-							<div class="col-sm-3">
+							<div class="col-sm-3 alert alert-danger">
 								<div class="clearfix">
 									<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a><br /></h4>
 									<p>{{ str_limit( $startup->description, 50 ) }}</p>
