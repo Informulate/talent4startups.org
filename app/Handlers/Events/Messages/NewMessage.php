@@ -31,6 +31,10 @@ class NewMessage {
             $participant = $newMessage->participant;
             $message = $newMessage->message;
 
+            if ($message->type == 'message') {
+                $message->body = 'You are receiving this email because ' . $message->user->first_name . ' ' . $message->user->last_name . ' contacted you on Talent4Startups. Here is what they said:<br/><br/>' . $message->body;
+            }
+
             try {
                 $content = [
                     'recipient' => [
