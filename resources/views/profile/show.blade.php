@@ -45,7 +45,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h2>My Interests</h2>
+					<h3>My Interests</h3>
 					@if(count($user->profile->tags) > 0)
 						@foreach($user->profile->tags as $tag)
 							<a href="{{{ route('talents.index') }}}?tag={{ $tag->name }}"><span class="badge">{{ $tag->name }}</span></a>
@@ -57,7 +57,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<h2>Startups I’m involved in @if(Auth::id() == $user->id) <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-success"><i class="glyphicons glyphicons-plus"></i> Add your startup</a> @endif</h2>
+					<h3>Startups I’m involved in @if(Auth::id() == $user->id) <a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-success"><i class="glyphicons glyphicons-plus"></i> Add your startup</a> @endif</h3>
 					@if(count($user->contributions) > 0 || count($user->startups) > 0)
 						@foreach($user->contributions as $startup)
 							@if($startup->pivot->status == 'approved')
@@ -74,7 +74,7 @@
 						</div>
 							@endif
 						@endforeach
-						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2 style="clear: both">Startups I Own</h2>@endif
+						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h3 style="clear: both">Startups I Own</h3>@endif
 						@foreach($user->startups as $startup)
 							<div class="col-sm-3">
 								<div class="clearfix alert alert-normal">
