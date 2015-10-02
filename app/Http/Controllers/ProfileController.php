@@ -24,7 +24,7 @@ class ProfileController extends Controller
 	 */
 	function __construct()
 	{
-		$this->middleware('auth', ['except' => ['show']]);
+		$this->middleware('auth');
 		$this->middleware('profile.complete');
 		$this->middleware('blocked.by.announcement');
 	}
