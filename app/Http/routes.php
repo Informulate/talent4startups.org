@@ -106,10 +106,8 @@ Route::resource('roles', 'RoleController');
 /**
  * Communities
  */
-Route::group(['prefix' => 'communities'], function() {
-	Route::get('{url}/join', ['as' => 'community.join', 'uses' => 'CommunityController@join']);
-	Route::get('{url}/login', ['as' => 'community.login', 'uses' => 'CommunityController@login']);
-});
+Route::get('{url}', ['as' => 'community.join', 'uses' => 'CommunityController@join']);
+Route::get('{url}/login', ['as' => 'community.login', 'uses' => 'CommunityController@login']);
 /**
  * Profile!
  */
