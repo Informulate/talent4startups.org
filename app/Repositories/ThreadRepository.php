@@ -26,7 +26,6 @@ class ThreadRepository
 				]
 			);
 
-die('asdf');
 			// Message
 			Message::create(
 				[

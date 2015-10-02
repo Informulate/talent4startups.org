@@ -13,6 +13,8 @@
     </div>
     <br/><br/>
     <p style="font-size: .9em; font-style: italic">Tip: Quick engagement and consistent follow up while providing specific feedback, usually earns higher ratings form your team members. In other words, consistency and integrity can earn you some serious cred!</p>
+    <p></p>
+    <p></p>
     <hr/>
     <p>The T4S team is powered by:</p>
     <ul style="list-style: none;">
