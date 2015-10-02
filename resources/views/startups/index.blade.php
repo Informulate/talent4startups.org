@@ -20,13 +20,12 @@
             </div>
 			<div class="form-group col-sm-3">
 				{!! Form::submit('Search', ['id'=>'search-button','class' => 'btn btn-primary']) !!}
+                @if(Auth::user())
+            		<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-success"><i class="glyphicons glyphicons-plus"></i> Add your startup</a>
+            	@endif
 			</div>
 		{!! Form::close() !!}
 	</div> <!-- display search fields ends -->
-
-	@if(Auth::user())
-		<a id="new-project-panel-btn" href="{{ route('startups.create') }}" class="pull-right btn btn-lg btn-success"><i class="glyphicons glyphicons-plus"></i> New startup</a>
-	@endif
 
 	<div id="project-container">
 		@include('startups.list')

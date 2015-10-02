@@ -33,7 +33,8 @@ class UserRepository
 				$type = 'talent';
 			}
 
-			$user = User::register($userData->email, $userData->email, Hash::make($userData->email) , $type);
+			$name = explode(' ', $userData->name);
+			$user = User::register(head($name), last($name), $userData->email, $userData->email, Hash::make($userData->email) , $type);
 		}
 
 		return $user;
@@ -112,8 +113,8 @@ class UserRepository
 	{
 		$results = User::where(function ($query) use ($term) {
 				$query->where('users.username', 'LIKE', $term . '%')
-					->orWhere('profiles.first_name', 'LIKE', $term . '%')
-					->orWhere('profiles.last_name', 'LIKE', $term . '%');
+					->orWhere('users.first_name', 'LIKE', $term . '%')
+					->orWhere('users.last_name', 'LIKE', $term . '%');
 			})
 			->join('profiles', 'users.id', '=', 'profiles.user_id')
 			->select('users.id', 'first_name', 'last_name')

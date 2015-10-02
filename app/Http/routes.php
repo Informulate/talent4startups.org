@@ -81,10 +81,6 @@ Route::get('startups/{id}', [
 	'as' => 'startup_profile',
 	'uses' => 'StartupController@request'
 ]);
-Route::get('startups/create', [
-	'as' => 'startup_create',
-	'uses' => 'StartupController@create'
-]);
 Route::get('startups/{id}/membership', [
 	'as' => 'startup_membership_request',
 	'uses' => 'MembershipController@request'
@@ -103,6 +99,10 @@ Route::get('startups/{id}/membership/cancel', [
  * Talents!
  */
 Route::resource('talents', 'TalentController');
+/**
+ * Roles
+ */
+Route::resource('roles', 'RoleController');
 /**
  * Profile!
  */
@@ -201,3 +201,9 @@ Route::group(['prefix' => 'messages'], function () {
 	Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
 	Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
+
+/**
+ * Communities MUST BE LAST SINCE IS A DYNAMIC URL!!! KKTHXBAI
+ */
+Route::get('{url}', ['as' => 'community.join', 'uses' => 'CommunityController@join']);
+Route::get('{url}/login', ['as' => 'community.login', 'uses' => 'CommunityController@login']);

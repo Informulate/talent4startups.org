@@ -2,20 +2,11 @@
 
 <div class="form-group">
 	{!! Form::label('image', 'Image:') !!}
+	<small>Tip: Use a square image of at least 200 x 200 px for best results</small>
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('first_name', 'First Name:') !!}
-	{!! Form::text('first_name', is_object( $user->profile ) ? $user->profile->first_name : null, ['class' =>
-	'form-control']) !!}
-</div>
-<div class="form-group">
-	{!! Form::label('last_name', 'Last Name:') !!}
-	{!! Form::text('last_name', is_object( $user->profile ) ? $user->profile->last_name : null, ['class' =>
-	'form-control']) !!}
-</div>
-<div class="form-group">
-	{!! Form::label('tagline', 'Tagline:') !!}
+	{!! Form::label('tagline', 'One line introduction:') !!}
 	{!! Form::text('tagline', is_object( $user->profile ) ? $user->profile->tagline : null, ['class' =>
 	'form-control']) !!}
 </div>
@@ -26,7 +17,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('describe', 'I\'m best described as a:') !!}
-	{!! Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null, ['style' => 'width:100%']) !!}
+	{!! Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->skill->id : null, ['style' => 'width:100%', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('profession', 'My industry is best described as:') !!}
@@ -57,9 +48,9 @@
 	{!! Form::text('youtube',is_object( $user->profile ) ? $user->profile->youtube : null, ['class' => 'form-control'])
 	!!}
 </div>
-<div class="form-group">
-	{!! Form::label('published', 'Allow others to find me in talent searches:') !!}
-	{!! Form::checkbox('published', '1', is_object( $user->profile ) ? $user->profile->published : null) !!}
+<div class="form-group checkbox text-larger">
+	{!! Form::checkbox('published', '1', is_object( $user->profile ) ? $user->profile->published : true) !!}
+	{!! Form::label('published', 'Allow others to find me in talent searches') !!}
 </div>
 <div class="form-group">
 	{!! Form::submit('Continue', ['id' => 'submit-profile','class' => 'btn btn-primary']) !!}

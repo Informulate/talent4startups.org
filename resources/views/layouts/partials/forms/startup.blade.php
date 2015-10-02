@@ -4,24 +4,25 @@
 	{!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-	{!! Form::label('tagline', 'Startup Tagline:') !!}
+	{!! Form::label('tagline', 'One line introduction:') !!}
 	{!! Form::text('tagline', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('stage_id', 'Stage my startup is :') !!}
-	{!! Form::select('stage_id', $stages); !!}
+	{!! Form::select('stage_id', $stages, null, ['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    {!! Form::label('published', 'Allow others to find startup in startup searches:') !!}
-    {!! Form::checkbox('published', '1', isset( $startup ) ? $startup->published : null) !!}
+<div class="form-group checkbox text-larger">
+	{!! Form::checkbox('published', '1', isset( $startup ) ? $startup->published : true) !!}
+	{!! Form::label('published', 'Allow others to find startup in startup searches') !!}
 </div>
 <div class="form-group">
 	{!! Form::label('description', 'Description:') !!}
-    <small>1000 character limit</small>
-	{!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    <small><span id="remaining">1000</span> characters remaining</small>
+	{!! Form::textarea('description', null, ['class' => 'form-control', 'maxlength' => '1000', 'rows' => 7]) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('image', 'Image:') !!}
+    <small>Tip: Use a square image of at least 200 x 200 px for best results</small>
 	{!! Form::file('image', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">

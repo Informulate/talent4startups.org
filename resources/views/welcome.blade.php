@@ -13,7 +13,7 @@
 					<div class="carousel-caption">
 						<h1>Join the community. We do better, together!</h1>
 						<p id="sub-caption">Are you ready to take control?</p>
-						<p><a class="btn btn-lg btn-primary signup-link" href="#" role="button">Sign up for free</a></p>
+						<p><a class="btn btn-lg btn-primary signup-link" href="/auth/register" role="button">Sign up for free</a></p>
 					</div>
 				</div>
 			</div>

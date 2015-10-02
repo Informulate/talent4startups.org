@@ -24,7 +24,7 @@ class ProfileController extends Controller
 	 */
 	function __construct()
 	{
-		$this->middleware('auth', ['except' => ['show']]);
+		$this->middleware('auth');
 		$this->middleware('profile.complete');
 		$this->middleware('blocked.by.announcement');
 	}
@@ -125,7 +125,7 @@ class ProfileController extends Controller
 		$userFrom = Auth::user();
 		ThreadRepository::notification('startup.join.invite.talent', $userTo, array('startup' => $startup, 'fromUser' => $userFrom));
 
-		Flash::message('You have successfully invited ' . $userTo->profile->first_name);
+		Flash::message('You have successfully invited ' . $userTo->first_name);
 
 		return Redirect::intended('/users/' . $userTo->id);
 	}
@@ -153,7 +153,7 @@ class ProfileController extends Controller
 		$user = User::find(Auth::id());
 		if (Hash::check($old_password, $user->password)) {
 			try {
-				$user->password = $new_password;
+				$user->setPasswordAttribute(bcrypt($new_password));
 				$user->save();
 
 				Flash::message('Your password has been reset successfully!');

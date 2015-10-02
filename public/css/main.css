@@ -1,11 +1,16 @@
-.profile-image, .profile-image-lg, .profile-image-sm {
-	background-repeat: no-repeat
+html {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 200;
-	padding-top: 70px
+    font-family: 'Source Sans Pro', sans-serif !important;
+	font-weight: 500;
+	padding-top: 70px;
+	/* Margin bottom by footer height */
+  	margin-bottom: 240px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 767px) {
@@ -18,8 +23,10 @@ body {
 
 @media (min-width: 768px) {
 	#navbar-logo {
-		width: 75px;
-		height: 75px
+		width: 170px;
+		top: 0px;
+        position: absolute;
+
 	}
 }
 
@@ -52,6 +59,10 @@ body {
 	left: 0;
 	min-width: 100%;
 	height: 500px
+}
+
+.profile-image, .profile-image-lg, .profile-image-sm {
+	background-repeat: no-repeat
 }
 
 .projects, .thumbnail {
@@ -218,7 +229,8 @@ body {
 
 .profile-image-lg {
 	height: 300px;
-	background-position: top left
+	background-position: top left;
+	margin-bottom: 20px;
 }
 
 .profile-image-sm {
@@ -263,12 +275,18 @@ body {
 	font-size: 34px
 }
 
+.container-footer {
+    position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 240px;
+    margin: 60px 0 auto;
+}
+
 #footer {
-	background: #303030;
-	margin: 60px 0 auto;
-	padding: 15px 35px 0;
-	min-height: 200px;
-	color: #aaa;
+	background: #ef4041;
+	color: #fff;
 	font-size: 8pt
 }
 
@@ -277,11 +295,15 @@ body {
 	height: auto
 }
 
+#footer a {
+    color: #fff;
+}
+
 .footer-headline {
 	display: block;
 	margin: 15px 0 8px;
 	color: #fff;
-	border-bottom: solid #7F7F7F 1px;
+	border-bottom: solid #fff 1px;
 	padding-bottom: 5px;
 }
 
@@ -297,12 +319,17 @@ body {
 }
 
 .footer-banner {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: 0;
 }
 
-.footer-banner hr {
-	border-color: rgba(127, 127, 127, 1.0);
+.footer-banner {
+    float:left;
+    width:100%;
+}
+
+.footer-banner .breadcrumb {
+    text-align: center !important;
+    margin-bottom: 0 !important;
 }
 
 #adsense img {
@@ -400,4 +427,105 @@ body {
 
 #header-nav {
 	font-size: 16px !important;
+}
+
+.text-divider {
+	overflow: hidden;
+	margin: 20px 0;
+	text-align: center;
+	position: relative;
+}
+.text-divider span {
+	display: inline-block;
+	position: relative;
+}
+.text-divider span:before,
+.text-divider span:after {
+	content: "";
+	position: absolute;
+	height: 50%;
+	border-bottom: 1px solid #666666;
+	top: 0;
+	width: 2048px;
+}
+.text-divider span:before {
+	right: 100%;
+	margin-right: 15px;
+}
+.text-divider span:after {
+	left: 100%;
+	margin-left: 15px;
+}
+
+.social-likes__button_facebook:hover {
+    color: #243658;
+}
+
+.social-likes__button_twitter:hover {
+    color: #146584;
+}
+
+.social-likes__button_plusone:hover {
+    color: #8E2A20;
+}
+
+#community-header.carousel {
+    margin-bottom: 0;
+    height: 1000px;
+}
+
+#community-header.carousel h1 {
+    margin-bottom: 100px;
+}
+
+#community-header.carousel .item {
+    background: url("/images/oix/DSC_6362_Fotor.jpg") 50% 0%;
+    width: 100%;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    height: 1000px;
+}
+
+.community-logo {
+    margin-top: 100px;
+}
+
+#community-join {
+    color: #fff;
+    z-index: 999;
+    position: relative;
+}
+
+#community-join a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#email-form {
+    text-align: left;
+}
+
+.community-sub-header.carousel .item {
+    background-color: #ef4041;
+    height: 400px;
+}
+
+.overlay:before {
+    background-color: #333333;
+    opacity: 0.5;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0px;
+}
+
+.text-larger {
+	font-size: 20px;
+}
+
+.alert-normal {
+	background-color: #F8F8F8;
+	border-color: #E7E7E7;
 }

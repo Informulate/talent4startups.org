@@ -31,7 +31,6 @@
 	<script src="{{{ asset( 'js/vendors/select2/select2.min.js' ) }}}"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$('#describe').select2();
 			$('#skills').select2({
 				'tags': [
 					@foreach($skills as $tag)
