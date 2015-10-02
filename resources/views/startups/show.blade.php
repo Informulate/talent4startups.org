@@ -19,7 +19,7 @@
 
 			<div>
 				@foreach($startup->tags as $tag)
-					<span class="badge">{{ $tag->name }}</span> &nbsp;
+					<a href="{{{ route('startups.index') }}}?tag={{ $tag->name }}"><span class="badge">{{ $tag->name }}</span></a>&nbsp;
 				@endforeach
 			</div>
 
