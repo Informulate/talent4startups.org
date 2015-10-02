@@ -524,3 +524,8 @@ body {
 .text-larger {
 	font-size: 20px;
 }
+
+.alert-normal {
+	background-color: #F8F8F8;
+	border-color: #E7E7E7;
+}

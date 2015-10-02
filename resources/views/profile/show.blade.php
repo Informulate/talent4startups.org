@@ -62,7 +62,7 @@
 						@foreach($user->contributions as $startup)
 							@if($startup->pivot->status == 'approved')
 						<div class="col-sm-3">
-							<div class="clearfix alert alert-danger">
+							<div class="clearfix alert alert-normal">
 								<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->first_name }} {{ $startup->owner->last_name }}</small></h4>
 								<p>{{ str_limit( $startup->description, 50 ) }}</p>
 								<div class="clearfix">
@@ -77,7 +77,7 @@
 						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2 style="clear: both">Startups I Own</h2>@endif
 						@foreach($user->startups as $startup)
 							<div class="col-sm-3">
-								<div class="clearfix alert alert-danger">
+								<div class="clearfix alert alert-normal">
 									<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a><br /></h4>
 									<p>{{ str_limit( $startup->description, 50 ) }}</p>
 									<div class="clearfix">
