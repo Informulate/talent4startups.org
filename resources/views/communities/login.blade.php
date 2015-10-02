@@ -25,6 +25,7 @@
 
 			<div class="well well-sm">
 				<p class="text-center">Don't have an account? <a href="{{ route('community.join', ['url' => $community->url]) }}">Sign up</a></p>
+				<p class="text-center"><a href="/password/email/">Forgot your password?</a></p>
 			</div>
 		</div>
 	</div>
