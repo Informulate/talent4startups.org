@@ -65,11 +65,6 @@
 							<div class="clearfix alert alert-normal">
 								<h4><a href="{{ route('startups.show', $startup->url) }}">{{ $startup->name }}</a> <small>By: {{ $startup->owner->first_name }} {{ $startup->owner->last_name }}</small></h4>
 								<p>{{ str_limit( $startup->description, 50 ) }}</p>
-								<div class="clearfix">
-									@if (Auth::user() and Auth::user()->username == $user->username)
-										<p><a href="{{ route('startups.edit', ['startup' => $startup->url]) }}" class="btn btn-primary btn-xs pull-right" role="button">Edit</a></p>
-									@endif
-								</div>
 							</div>
 						</div>
 							@endif
