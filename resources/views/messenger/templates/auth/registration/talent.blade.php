@@ -5,8 +5,6 @@
 @endsection
 
 @section('body')
-Hi {{ $user->first_name }},
-
 Welcome to Talent4Startups! You've taken a big step towards taking control of your career. Get ahead of the competition with real world experience If you bring commitment, the T4S community will challenge you to be accountable for your skill development.
 
 To start, make sure you <b>tag your profile</b> with the specific skills you are looking to develop. Then, go to our startup listing page, and use our filters to <b>find the projects</b> you want to contribute to. Once you find projects that look interesting, please make sure you read and understand the requirements and conditions. If you like what you see, simply <b>click the APPLY button</b>. Its that easy.
