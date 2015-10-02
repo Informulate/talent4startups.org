@@ -20,13 +20,13 @@ class ThreadRepository
 		foreach ($recipient as $user) {
 
 			$messageParts = View::make('messenger.templates.' . $template, $variables)->renderSections();
-
 			$thread = Thread::create(
 				[
-					'subject' => $messageParts['subject'],
+					'subject' => trim($messageParts['subject']),
 				]
 			);
 
+die('asdf');
 			// Message
 			Message::create(
 				[
