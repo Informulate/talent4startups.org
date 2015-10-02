@@ -83,7 +83,7 @@
 
 			@if(Auth::user() and $startup->hasMember(Auth::user()))
 				@if($startup->hasPendingInvitationFrom(Auth::user()))
-					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-default">cancel this request?</a>
+					Your request is still been considered, would you like to <a href="{{ route('startup_membership_request_cancel', ['url' => $startup->url]) }}" class="btn btn-primary">cancel this request?</a>
 				@endif
 			@endif
 

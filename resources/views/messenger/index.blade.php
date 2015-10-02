@@ -45,8 +45,8 @@
 					<?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
 					<div class="media alert {{$class}} message {{ $thread->getLatestMessageAttribute()->type }}">
 						@if ($thread->getLatestMessageAttribute()->type == 'message')
-							<a class="pull-left" href="#">
-								<img src="{{ $thread->getLatestMessageAttribute()->user->avatar() }}&s=64" alt="{{$thread->getLatestMessageAttribute()->user->first_name}} {{$thread->getLatestMessageAttribute()->user->last_name}}" class="img-circle" width="64" height="64">
+							<a class="pull-left" href="{{ route('profile_path', $thread->getLatestMessageAttribute()->user->id) }}">
+								<img src="{{ $thread->getLatestMessageAttribute()->user->avatar() }}" alt="{{$thread->getLatestMessageAttribute()->user->first_name}} {{$thread->getLatestMessageAttribute()->user->last_name}}" class="img-circle" width="64" height="64">
 							</a>
 						@endif
 						<h4 class="media-heading">{!! link_to('messages/' . $thread->id, $thread->subject) !!}</h4>

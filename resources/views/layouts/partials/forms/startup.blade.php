@@ -17,8 +17,8 @@
 </div>
 <div class="form-group">
 	{!! Form::label('description', 'Description:') !!}
-    <small><span id="remaining">1000</span> character limit</small>
-	{!! Form::textarea('description', null, ['class' => 'form-control', 'maxlength' => '1000']) !!}
+    <small><span id="remaining">1000</span> characters remaining</small>
+	{!! Form::textarea('description', null, ['class' => 'form-control', 'maxlength' => '1000', 'rows' => 7]) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('image', 'Image:') !!}

@@ -1,7 +1,7 @@
 <div class="thumbnail startups">
 	<a class="signup-link" href="{{ route('startups.show', $startup->url) }}">
 		@if ($startup->image)
-			<div class="profile-image" style="background-image: url('/images/upload/{{ $startup->image }}')"></div>
+			<img src="/images/upload/{{ $startup->image }}" style="width: 250px; height: 250px;" />
 		@else
 			<img src="{{ asset('images/startups_generic.jpg') }}" alt="Startup"/>
 		@endif
