@@ -74,7 +74,7 @@
 						</div>
 							@endif
 						@endforeach
-						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2 style="clear: both">Startups I Own</h2>@endif;
+						@if(count($user->contributions) > 0 || count($user->startups) > 0)<h2 style="clear: both">Startups I Own</h2>@endif
 						@foreach($user->startups as $startup)
 							<div class="col-sm-3 alert alert-danger">
 								<div class="clearfix">
