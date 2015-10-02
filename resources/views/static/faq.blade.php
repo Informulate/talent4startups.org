@@ -58,7 +58,7 @@
         </li>
         <li>
             <p><strong>I want to work on something relevant, where do I start?</strong></p>
-            <p>Create a profile for {!! link_to_route('startup.create', 'yourself here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos.</p>
+            <p>Create a profile for {!! link_to_route('startups.create', 'yourself here') !!}. Your profile is your face to the world, so pretty it up with a simple, clear message, images and preferably videos.</p>
         </li>
         <li>
             <p><strong>I love it, how do I spread the word?</strong></p>
