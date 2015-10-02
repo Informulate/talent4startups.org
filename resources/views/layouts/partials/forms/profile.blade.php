@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 	{!! Form::label('describe', 'I\'m best described as a:') !!}
-	{!! Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->describe : null, ['style' => 'width:100%']) !!}
+	{!! Form::select('describe', $describes, is_object( $user->profile ) ? $user->profile->skill->id : null, ['style' => 'width:100%', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('profession', 'My industry is best described as:') !!}
