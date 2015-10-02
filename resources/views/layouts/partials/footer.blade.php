@@ -21,25 +21,6 @@
 						</p>
 					@endfor
 				</div>
-	            <div class="col-lg-3 hidden-xs">
-	                <h5 class="footer-headline">Tweets we follow</h5>
-	                <?php $count = count($twitterHomeFeed) < 2 ? count($twitterHomeFeed) : 2; ?>
-	                <?php if (!is_array($twitterHomeFeed)) {
-	                    $count = 0;
-	                } ?>
-	                @for ($i = 0; $i < $count; $i++)
-	                    <p>
-	                        {{ $twitterHomeFeed[$i]->text }}, <a class="pull-right" target="_blank"
-	                                                             href="//twitter.com/{{ $twitterHomeFeed[$i]->user->screen_name  }}/status/{{ $twitterHomeFeed[$i]->id }}">View
-	                            tweet</a>
-	                    </p>
-	                    <p>
-	                        {{ $twitterHomeFeed[$i]->user->name }} (&#64;{{ $twitterHomeFeed[$i]->user->screen_name }}
-	                        ), {{ date("d F Y",strtotime($twitterHomeFeed[$i]->created_at)) }}
-	                        | {{ date("g:ha",strtotime($twitterHomeFeed[$i]->created_at)) }}
-	                    </p>
-	                @endfor
-	            </div>
 				<div class="col-lg-3 hidden-xs">
 					<h5 class="footer-headline">Facebook Posts</h5>
 					@foreach($facebookPosts as $post)
