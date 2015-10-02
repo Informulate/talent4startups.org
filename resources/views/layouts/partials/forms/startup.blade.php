@@ -9,11 +9,11 @@
 </div>
 <div class="form-group">
 	{!! Form::label('stage_id', 'Stage my startup is :') !!}
-	{!! Form::select('stage_id', $stages, null, ['class' => 'form-control']); !!}
+	{!! Form::select('stage_id', $stages, null, ['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    {!! Form::label('published', 'Allow others to find startup in startup searches:') !!}
-    {!! Form::checkbox('published', '1', isset( $startup ) ? $startup->published : true) !!}
+<div class="form-group checkbox text-larger">
+	{!! Form::checkbox('published', '1', isset( $startup ) ? $startup->published : true) !!}
+	{!! Form::label('published', 'Allow others to find startup in startup searches') !!}
 </div>
 <div class="form-group">
 	{!! Form::label('description', 'Description:') !!}

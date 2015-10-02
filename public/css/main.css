@@ -519,3 +519,7 @@ body {
     z-index: 1;
     top: 0px;
 }
+
+.text-larger {
+	font-size: 20px;
+}
