@@ -4,8 +4,8 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div style="margin: 0px auto; text-align: center; max-width: 600px">
-    <img src="{{ asset('images/logo.png') }}" alt="Talent4Startups - Shape, Fuel, Build" id="t4s-logo" />
+<div style="margin: 0px auto; text-align: center; max-width: 670px">
+    <img src="{{ asset('images/logo.png') }}" alt="Talent4Startups - Shape, Fuel, Build" id="t4s-logo" height="300" />
     <br/><br/>
     <div>
         {!! nl2br($body) !!}
@@ -14,9 +14,10 @@
     <hr/>
     <p>The T4S team is proudly sponsored by:</p>
     <ul id="t4s-sponsors">
-        <li style="display: inline"><a href="http://www.vaco.com/" target="_blank"><img src="{{ asset('/images/partners/vaco.png') }}" alt="Vaco - Free Yourself" class="" height="95" /></a></li>
         <li style="display: inline"><a href="http://www.informulate.com" target="_blank"><img src="{{ asset('/images/partners/informulate.png') }}" alt="Informulate"  height="95" /></a></li>
-        <li style="display: inline"><a href="http://move2create.com/" target="_blank"><img src="{{ asset('/images/partners/move2create.png') }}" alt="move2create - A Boutique Creative Agency" class="" height="95" /></a></li>
+        <li style="clear: both;"></li>
+        <li style="display: inline"><a href="http://www.vaco.com/" target="_blank"><img src="{{ asset('/images/partners/vaco.png') }}" alt="Vaco - Free Yourself" class="" height="65" /></a></li>
+        <li style="display: inline"><a href="http://move2create.com/" target="_blank"><img src="{{ asset('/images/partners/move2create.png') }}" alt="move2create - A Boutique Creative Agency" class="" height="65" /></a></li>
     </ul>
 </div>
 </body>
