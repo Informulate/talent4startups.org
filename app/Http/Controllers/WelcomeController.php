@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\StartupRepository;
 use App\Repositories\UserRepository;
-use DB, Response;
+use DB, Response, Redirect;
 
 class WelcomeController extends Controller {
 
@@ -36,6 +36,10 @@ class WelcomeController extends Controller {
 	 */
 	public function index(StartupRepository $startupRepository, UserRepository $userRepository)
 	{
+		if ($_SERVER['HTTP_REFERER'] == 't4s.us') {
+			return Redirect::to('/oix');
+		}
+
 		$startups = $startupRepository->allActive(null, null, null, DB::raw('RAND()'), 2);
 		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 2);
 
