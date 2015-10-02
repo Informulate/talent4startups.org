@@ -82,9 +82,11 @@
 				@foreach($requests as $user)
 					<div>
 						<a href="{{ route('profile_path', $user->id) }}"><img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=64&d=mm" alt="" width="64" height="64"/></a>
+
 						<div class="text-center" style="width: 64px;">
 							<a class="text-success" href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'approve']) }}"><i class="glyphicon glyphicon-ok"></i></a>
-						<a href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}"><i class="glyphicon glyphicon-remove"></i></a>
+							<a href="{{ route('startup_membership_update', ['startup' => $startup->url, 'userId' => $user->id, 'action' => 'reject']) }}"><i class="glyphicon glyphicon-remove"></i></a>
+							<p><a href="{{ route('profile_path', $user->id) }}">{{ $user->first_name }} {{ $user->last_name }}</a></p>
 						</div>
 					</div>
 				@endforeach
@@ -100,12 +102,14 @@
 				<a href="{{ route('profile_path', $startup->owner->id) }}">
 					<div class="col-xs-4">
 						<img class="img-circle img-responsive" src="{{ $startup->owner->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+						<p style="text-align: center;">{{ $startup->owner->first_name }} {{ $startup->owner->last_name }}</p>
 					</div>
 				</a>
 				@foreach($members as $user)
 					<a href="{{ route('profile_path', $user->id) }}">
 						<div class="col-xs-4">
 							<img class="img-circle img-responsive" src="{{ $user->avatar() }}?s=150&d=mm" alt="" width="150" height="150"/>
+							<p style="text-align: center;">{{ $user->first_name }} {{ $user->last_name }}</p>
 						</div>
 					</a>
 				@endforeach
