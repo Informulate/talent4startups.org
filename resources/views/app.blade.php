@@ -18,7 +18,7 @@
 	<link href="{{{ asset( 'css/theme.css' ) }}}" rel="stylesheet">
     <link href="{{{ asset( 'css/main.css' ) }}}" rel="stylesheet">
 	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
-	<link rel="shortcut icon" href="{{ asset('favicon.png') }}?v=2" />
+	<link rel="shortcut icon" href="{{ asset('favicon.png') }}?v=8" />
 
 	@yield('css')
 
