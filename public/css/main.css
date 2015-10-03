@@ -488,7 +488,8 @@ body {
 }
 
 .community-logo {
-    margin-top: 100px;
+    margin-top: 50px;
+	width: 30%;
 }
 
 #community-join {
