@@ -26,3 +26,11 @@
 	</div>
 	@include('layouts.partials.socialshare')
 @stop
+
+@section('javascript')
+	<script type="text/javascript">
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("TalentList:View");
+		@endif
+	</script>
+@stop

@@ -106,5 +106,9 @@
 				size: 'xs'
 			});
 		});
+
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("TalentDetail:View");
+		@endif
 	</script>
 @stop

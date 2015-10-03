@@ -122,3 +122,11 @@
 	</div>
 </div>
 @overwrite
+
+@section('javascript')
+	<script type="text/javascript">
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("Discussions:View");
+		@endif
+	</script>
+@stop

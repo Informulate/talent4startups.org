@@ -86,3 +86,11 @@
     </div>
 @endif
 @overwrite
+
+@section('javascript')
+    <script type="text/javascript">
+        @if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("DiscussionThread:View");
+        @endif
+    </script>
+@stop
