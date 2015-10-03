@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use Request;
 
 class CommunityController extends Controller
 {
@@ -17,6 +18,6 @@ class CommunityController extends Controller
 	{
 		$community = Community::where('url', '=', $url)->firstOrFail();
 
-		return view('communities.login')->with(compact('community'));
+		return view('communities.login')->with(compact('community'))->with('referrer', Request::server('HTTP_REFERRER'));
 	}
 }
