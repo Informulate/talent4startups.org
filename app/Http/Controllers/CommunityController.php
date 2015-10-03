@@ -16,8 +16,9 @@ class CommunityController extends Controller
 
 	public function login($url)
 	{
+		$referrer = Request::server('HTTP_REFERRER');
 		$community = Community::where('url', '=', $url)->firstOrFail();
 
-		return view('communities.login')->with(compact('community'))->with('referrer', Request::server('HTTP_REFERRER'));
+		return view('communities.login')->with(compact('community'));//->with('referrer', $referrer);
 	}
 }
