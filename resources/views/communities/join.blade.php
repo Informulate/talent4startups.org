@@ -62,6 +62,13 @@
 
 @section('javascript')
 	@include('partials.forms.js')
+	<script type="text/javascript">
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("OIXLanding:View", {
+				"UrlReferrer": '{{ $referrer }}'
+			});
+		@endif
+	</script>
 @endsection
 
 @section('footer')
