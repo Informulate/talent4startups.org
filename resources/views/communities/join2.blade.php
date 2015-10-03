@@ -22,34 +22,27 @@
 					<div class="container">
 						<div id="community-join">
 							<div class="col-lg-12 text-center">
-								<img class="community-logo" src="/images/oix/OiX_mark_countdown2.png" alt="OiX mark countdown2">
-								<h1>Welcome OrlandoIX Attendees</h1>
-							</div>
-							<div class="col-md-4 col-md-offset-2" style="border-right: 1px solid #fff;">
-								<div>
-									<div class="text-center">
-										<h2 style="margin-top: 0; margin-bottom: 30px;">Sign up is free and easy</h2>
-										<div style="margin-bottom: 20px;">
-											<a id="sign-in-linked_in" href="{{ route("linked_in", ['join' => $community->url]) }}" alt="Sign Up with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
-										</div>
-										<p class="text-muted"><a id="email-form-link" href="#">Or Signup with email</a></p>
-										<div class="clearfix"></div>
-										<form id="email-form" class="form" style="display: none;" role="form" method="POST" action="{{ url('/auth/register') }}">
-											{{-- Todo: Remove type all together --}}
-											{!! Form::hidden('type', 'talent') !!}
-											{!! Form::hidden('join', $community->url) !!}
-											@include('partials.registration.form')
-										</form>
+								<img src="/images/logo-white.png" alt="T4S White Logo" width="45%" style="margin: 20px 0;"/>
+								<h4 style="font-size: 2.2em; font-weight: bold; margin-bottom: 23px;">We connect audacious startups to brilliant talent</h4>
+								<hr width="55%"/>
+								<h4 style="font-weight: bold; margin-bottom: 25px;">Talent4Startups is proud to welcome OiX attendees to our community!</h4>
+								<div class="text-center">
+									<div style="margin-bottom: 20px;">
+										<a id="sign-in-linked_in" href="{{ route("linked_in", ['join' => $community->url]) }}" alt="Sign Up with LinkedIn"><img src="{{ asset('images/signin-linkedin.png') }}" alt="" /></a>
 									</div>
-
-									<div>
-										<p class="text-center">Already have an account? <a href="{{ route('community.login', ['url' => $community->url]) }}">Log in</a></p>
-									</div>
+									<p class="" style="font-weight: normal; font-size: 1.5em; "><a id="email-form-link" href="#" style="text-decoration: none">Or Signup with email</a></p>
+									<p class="text-center">Already have an account? <a href="{{ route('community.login', ['url' => $community->url]) }}">Log in</a></p>
+									<div class="clearfix"></div>
+									<form id="email-form" class="form" style="display: none;" role="form" method="POST" action="{{ url('/auth/register') }}">
+										{{-- Todo: Remove type all together --}}
+										{!! Form::hidden('type', 'talent') !!}
+										{!! Form::hidden('join', $community->url) !!}
+										@include('partials.registration.form')
+									</form>
 								</div>
-							</div>
-							<div class="col-md-4 text-center">
-								<img src="/images/logo-white.png" alt="T4S White Logo" width="75%" />
-								<p>T4S.US builds local communities that connects audacious startups to brilliant talent</p>
+								<img class="community-logo" src="/images/oix/OiX_mark_countdown2.png" alt="OiX mark countdown2">
+								<div class="clearfix"></div>
+								<p style="" class="col-lg-6 col-md-offset-3">OiX attendees registering during the event October 2-6, 2015 will be automatically entered in a drawing to win one of our fabulous T4S T-Shirts!</p>
 							</div>
 						</div>
 					</div>
