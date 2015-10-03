@@ -11,14 +11,13 @@ class CommunityController extends Controller
 	{
 		$community = Community::where('url', '=', $url)->firstOrFail();
 
-		return view('communities.join2')->with(compact('community'));
+		return view('communities.join2')->with(compact('community'))->with('referrer', Request::server('HTTP_REFERRER'));
 	}
 
 	public function login($url)
 	{
-		$referrer = Request::server('HTTP_REFERRER');
 		$community = Community::where('url', '=', $url)->firstOrFail();
 
-		return view('communities.login')->with(compact('community'));//->with('referrer', $referrer);
+		return view('communities.login')->with(compact('community'));
 	}
 }
