@@ -65,5 +65,9 @@
             });
 
         });
+
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("StartupList:View");
+		@endif
 	</script>
 @stop

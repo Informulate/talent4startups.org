@@ -48,3 +48,11 @@
 	</div>
 </div>
 @endsection
+
+@section('javascript')
+	<script type="text/javascript">
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("ForgotPassword:View");
+		@endif
+	</script>
+@stop

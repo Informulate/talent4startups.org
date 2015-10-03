@@ -32,6 +32,7 @@
 		            @endif
 				@endif
 				@include('layouts.partials.socialshare')
+				@include('layouts.partials.flag')
 			</div>
 		</div>
 		<div class="col-md-9">
@@ -52,7 +53,7 @@
 						@endforeach
 					@endif
 					<p></p>
-					<p class="alert alert-normal"> {{ $user->profile->about }}</p>
+					@if($user->profile->about) <p class="alert alert-normal"> {{ $user->profile->about }}</p> @endif
 				</div>
 			</div>
 			<div class="row">
@@ -105,5 +106,9 @@
 				size: 'xs'
 			});
 		});
+
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("TalentDetail:View");
+		@endif
 	</script>
 @stop

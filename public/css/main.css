@@ -31,7 +31,8 @@ body {
 }
 
 #main-container {
-	margin-top: 40px
+	margin-top: 40px;
+	padding-bottom: 50px;
 }
 
 .container h1:first-of-type {
@@ -528,4 +529,14 @@ body {
 .alert-normal {
 	background-color: #F8F8F8;
 	border-color: #E7E7E7;
+}
+
+.flag-content {
+	clear: both;
+	font-size: .8em;
+	color: #ef4041;
+}
+
+.flag-content:hover {
+	cursor: pointer;
 }

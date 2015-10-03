@@ -63,6 +63,12 @@
 					}
 				});
 			});
+
+			@if(getenv('APP_ENV') == 'prod')
+				mixpanel.track("Home Page view", {
+					"UrlReferrer": '{{ $referrer }}'
+				});
+			@endif
 		});
 	</script>
 @stop

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\StartupRepository;
 use App\Repositories\UserRepository;
 use DB, Response, Redirect;
+use Request;
 
 class WelcomeController extends Controller {
 
@@ -36,14 +37,15 @@ class WelcomeController extends Controller {
 	 */
 	public function index(StartupRepository $startupRepository, UserRepository $userRepository)
 	{
-		if (array_key_exists('HTTP_REFERER', $_SERVER) and $_SERVER['HTTP_REFERER'] == 't4s.us') {
+		$referrer = Request::server('HTTP_REFERRER');
+		if ($referrer and $referrer == 't4s.us') {
 			return Redirect::to('/oix');
 		}
 
 		$startups = $startupRepository->allActive(null, null, null, DB::raw('RAND()'), 2);
 		$talent = $userRepository->findActiveTalents(null, null, null, DB::raw('RAND()'), 2);
 
-		return view('welcome')->with('startups', $startups)->with('talents', $talent);
+		return view('welcome')->with('startups', $startups)->with('talents', $talent)->with('referrer', $referrer);
 	}
 
 }

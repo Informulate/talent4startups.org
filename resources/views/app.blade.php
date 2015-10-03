@@ -22,6 +22,7 @@
 
 	@yield('css')
 
+	@include('layouts.partials.mixpanel')
 </head>
 <body>
 @include('layouts.partials.nav')

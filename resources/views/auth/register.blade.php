@@ -33,6 +33,11 @@
 
 @section('javascript')
 	@include('partials.forms.js')
+	<script type="text/javascript">
+		@if(getenv('APP_ENV') == 'prod')
+			mixpanel.track("Register:View");
+		@endif
+	</script>
 @endsection
 
 @section('footer')
