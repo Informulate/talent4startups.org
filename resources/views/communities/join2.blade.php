@@ -40,9 +40,9 @@
 										@include('partials.registration.form')
 									</form>
 								</div>
-								<img class="community-logo" src="/images/oix/OiX_mark_countdown2.png" alt="OiX mark countdown2">
+								<p style="font-weight: bold" class="col-lg-6 col-md-offset-3">OiX attendee, register during the event October 2-6, 2015 and tweet your profile to win one of our fabulous T4S T-Shirts!</p>
 								<div class="clearfix"></div>
-								<p style="" class="col-lg-6 col-md-offset-3">OiX attendees registering during the event October 2-6, 2015 will be automatically entered in a drawing to win one of our fabulous T4S T-Shirts!</p>
+								<img class="community-logo" src="/images/oix/OiX_mark_countdown2.png" alt="OiX mark countdown2">
 							</div>
 						</div>
 					</div>
