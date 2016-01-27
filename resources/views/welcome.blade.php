@@ -11,8 +11,8 @@
 				</div>
 				<div class="container">
 					<div class="carousel-caption">
-						<h1>Join the community. We do better, together!</h1>
-						<p id="sub-caption">Are you ready to take control?</p>
+						<h1>A NON-PROFIT COMMUNITY THAT MATCHES TALENT TO STARTUPS</h1>
+						<p id="sub-caption"><span class="text-danger">Shape</span> talent. <span class="text-danger">Fuel</span> innovation. <span class="text-danger">Build</span> your network.</p>
 						<p><a class="btn btn-lg btn-primary signup-link" href="/auth/register" role="button">Sign up for free</a></p>
 					</div>
 				</div>
