@@ -76,6 +76,12 @@ class AuthController extends Controller implements AuthenticateUserListener {
 			$user->join($url);
 		}
 
+		if ($request->session()->has('referral')) {
+			$user->referrer = $request->session()->get('referral');
+			$request->session()->remove('referral');
+			$user->save();
+		}
+
 		return redirect($this->redirectPath());
 	}
 
@@ -119,7 +125,7 @@ class AuthController extends Controller implements AuthenticateUserListener {
 		return $user->profileIsIncomplete() ? Redirect::route('setup_profile') : Redirect::route('talents.index');
 	}
 
-	public function authenticated($request, $user)
+	public function authenticated(Request $request, $user)
 	{
 		if (Session::has('join')) {
 			$user->join(Session::get('join'));
