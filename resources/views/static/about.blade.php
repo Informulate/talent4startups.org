@@ -20,6 +20,8 @@
 		please {!! link_to_route('contact', 'contact us') !!}.
 	</p>
 
+	<iframe width="1140" height="695" src="https://www.youtube.com/embed/JG74pXvY4Ug" frameborder="0" allowfullscreen></iframe>
+
 	<h2>Community Manifesto</h2>
 
 	<p>
