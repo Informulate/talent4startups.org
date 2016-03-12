@@ -15,6 +15,7 @@
 				<li @if (Request::path() === '/') class="active" @endif><a href="{{ route('home') }}">Home</a></li>
 				<li @if (Request::path() === 'talents') class="active" @endif><a href="{{ route('talents.index') }}">Browse Talent</a></li>
 				<li @if (Request::path() === 'startups') class="active" @endif><a href="{{ route('startups.index') }}">Browse Startups</a></li>
+				<li><a href="http://blog.talent4startups.org">Blog</a></li>
 				<li @if (Request::path() === 'about') class="active" @endif><a href="/about">About</a></li>
 				@if (Auth::user())
 					<li @if (Request::path() === 'discussions') class="active" @endif><a href="/discussions/1-threads">Discussions</a></li>
