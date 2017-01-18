@@ -49,11 +49,7 @@ class UserTableSeeder extends Seeder
 		$skills = Skill::all();
 
 		for ($i = 0; $i < 50; $i++) {
-		    // Faker generates real email accounts so to prevent mail from delivering to real email accounts just use t4s.dev as the email.
-		    $username = $faker->unique()->userName;
-		    $email = $username . "@t4s.dev";
-
-			$user = User::register($faker->firstName, $faker->lastName, $username, $email, bcrypt('password'), 'talent');
+			$user = User::register($faker->firstName, $faker->lastName, $faker->unique()->userName, $faker->unique()->safeEmail, bcrypt('password'), 'talent');
 			$this->userRepository->save($user);
 
 			$profileData = [
