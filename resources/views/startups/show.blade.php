@@ -15,7 +15,7 @@
 				<h5 class="text-muted">{{ $startup->tagline }}</h5>
 			@endif
 
-			<p>{{ $startup->description }}</p>
+			@markdown($startup->description)
 
 			<div>
 				@foreach($startup->tags as $tag)
@@ -34,9 +34,9 @@
 					@foreach($need->tags as $tag)
 						<span class="badge">{{ $tag->name }}</span>
 					@endforeach
-					<p>
-						{{ $need->description }}
-					</p>
+					<div>
+						@markdown($need->description)
+					</div>
 
 					<p class="text-muted">
 						Commitment: {{ $need->commitment }}
