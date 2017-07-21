@@ -53,7 +53,11 @@
 						@endforeach
 					@endif
 					<p></p>
-					@if($user->profile->about) <p class="alert alert-normal"> {{ $user->profile->about }}</p> @endif
+					@if($user->profile->about) 
+					<div class="alert alert-normal">
+						@markdown($user->profile->about)
+					</div> 
+					@endif
 				</div>
 			</div>
 			<div class="row">

@@ -19,7 +19,8 @@
 	  	"laravel/socialite": "~2.0",
 		"socialiteproviders/linkedin": "~1.0",
 		"jonasva/laravel-facebook-insights": "dev-master",
-		"riari/laravel-forum": "~2.0"
+		"riari/laravel-forum": "~2.0",
+		"graham-campbell/markdown": "^7.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

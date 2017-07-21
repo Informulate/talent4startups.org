@@ -1,6 +1,6 @@
 <?php namespace App\Providers;
 
-use FacebookInsights, FeedReader, Cache, Config, Twitter;
+use FacebookInsights, FeedReader, Cache, Config, Twitter, Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider {
 			'twitterHomeFeed' => $this->getTwitterFeed('twitterHomeFeed'),
 			'displayAds' => (strtolower(getenv('DISPLAY_ADS')) == 'true')
 		]);
+		
+		Blade::directive('markdown', function($expression) {
+			return "<?php echo Markdown::convertToHtml(trim($expression)); ?>";
+		});
 	}
 
 	/**

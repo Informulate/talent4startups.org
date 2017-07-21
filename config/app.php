@@ -162,6 +162,7 @@ return [
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Riari\Forum\ForumServiceProvider',
 		Jonasva\FacebookInsights\FacebookInsightsServiceProvider::class,
+		GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
 	],
 
@@ -226,6 +227,7 @@ return [
 		'Socialite' 		=> 'Laravel\Socialite\Facades\Socialite',
 		'Debugbar'			=> 'Barryvdh\Debugbar\Facade',
 		'FacebookInsights'	=> Jonasva\FacebookInsights\Facades\FacebookInsights::class,
+		'Markdown'          => GrahamCampbell\Markdown\Facades\Markdown::class,
 
 	],
 
