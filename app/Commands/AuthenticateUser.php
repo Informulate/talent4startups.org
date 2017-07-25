@@ -5,7 +5,7 @@ use App\Models\Community;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Laravel\Socialite\Contracts\Factory as Socialite;
-use Illuminate\Auth\Guard as Auth;
+use Illuminate\Contracts\Auth\Guard as Auth;
 use Session;
 
 class AuthenticateUser extends Command implements SelfHandling {

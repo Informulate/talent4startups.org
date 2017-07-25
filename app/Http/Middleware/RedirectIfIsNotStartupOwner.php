@@ -3,9 +3,8 @@
 use App\Models\Startup;
 use Illuminate\Contracts\Auth\Guard;
 use Auth, Redirect, Closure;
-use Illuminate\Contracts\Routing\Middleware;
 
-class RedirectIfIsNotStartupOwner implements Middleware {
+class RedirectIfIsNotStartupOwner {
 
 	/**
 	 * The Guard implementation.

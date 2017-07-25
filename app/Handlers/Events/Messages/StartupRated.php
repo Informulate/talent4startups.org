@@ -4,7 +4,6 @@ use App\Events\StartupRated as StartupRatedEvent;
 
 use App\Repositories\ThreadRepository;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class StartupRated {
 

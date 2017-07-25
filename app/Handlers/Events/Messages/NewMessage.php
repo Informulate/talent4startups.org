@@ -4,7 +4,6 @@ use App;
 use App\Events\NewMessage as NewMessageEvent;
 
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Support\Facades\Mail;
 
 class NewMessage {

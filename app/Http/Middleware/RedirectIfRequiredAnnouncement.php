@@ -2,10 +2,9 @@
 
 use Illuminate\Contracts\Auth\Guard;
 use Flash, Redirect, Closure, Route;
-use Illuminate\Contracts\Routing\Middleware;
 use Request;
 
-class RedirectIfRequiredAnnouncement implements Middleware {
+class RedirectIfRequiredAnnouncement {
 
 	/**
 	 * The Guard implementation.

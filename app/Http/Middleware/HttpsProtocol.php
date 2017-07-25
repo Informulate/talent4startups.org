@@ -1,9 +1,8 @@
 <?php namespace App\Http\Middleware;
 
 use Redirect, Closure;
-use Illuminate\Contracts\Routing\Middleware;
 
-class HttpsProtocol implements Middleware {
+class HttpsProtocol {
 
 	/**
 	 * Handle an incoming request.

@@ -4,7 +4,6 @@ use App\Events\ProfileCreated as ProfileCreatedEvent;
 
 use App\Repositories\ThreadRepository;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class ProfileCreated {
 

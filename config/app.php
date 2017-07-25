@@ -4,6 +4,19 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Application Environment
+	|--------------------------------------------------------------------------
+	|
+	| This value determines the "environment" your application is currently
+	| running in. This may determine how you prefer to configure various
+	| services your application utilizes. Set this in your ".env" file.
+	|
+	*/
+
+	'env' => env('APP_ENV', 'production'),
+
+	/*
+	|--------------------------------------------------------------------------
 	| Application Debug Mode
 	|--------------------------------------------------------------------------
 	|
@@ -80,7 +93,7 @@ return [
 
 	'key' => env('APP_KEY', 'SomeRandomString'),
 
-	'cipher' => MCRYPT_RIJNDAEL_128,
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -113,12 +126,10 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
-		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Bus\BusServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
 		'Illuminate\Encryption\EncryptionServiceProvider',
@@ -135,13 +146,12 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
+		Collective\Html\HtmlServiceProvider::class,
 
 		/*
 		 * Application Service Providers...
 		 */
 		App\Providers\AppServiceProvider::class,
-		App\Providers\BusServiceProvider::class,
 		App\Providers\ConfigServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
@@ -151,10 +161,10 @@ return [
 		 * Third Party Service Providers...
 		 */
 		'Laracasts\Flash\FlashServiceProvider',
-		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		//'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Cocur\Slugify\Bridge\Laravel\SlugifyServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
-		'Awjudd\FeedReader\FeedReaderServiceProvider',
+		Awjudd\FeedReader\FeedReaderServiceProvider::class,
 		'Thujohn\Twitter\TwitterServiceProvider',
 		'Cmgmyr\Messenger\MessengerServiceProvider',
 		'Maknz\Slack\SlackServiceProvider',
@@ -212,8 +222,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'Form'		=> 'Illuminate\Html\FormFacade',
-		'Html'		=> 'Illuminate\Html\HtmlFacade',
+		'Form' 		=> Collective\Html\FormFacade::class,
+      	'Html' 		=> Collective\Html\HtmlFacade::class,
 
 		/*
 		 * Third Party Aliases...
@@ -221,7 +231,7 @@ return [
 		'Flash' 			=> 'Laracasts\Flash\Flash',
 		'Slugify' 			=> 'Cocur\Slugify\Bridge\Laravel\SlugifyFacade',
 		'Image' 			=> 'Intervention\Image\Facades\Image',
-		'FeedReader' 		=> 'Awjudd\FeedReader\Facades\FeedReader',
+	    'FeedReader' 		=> Awjudd\FeedReader\Facade::class,
 		'Twitter' 			=> 'Thujohn\Twitter\Facades\Twitter',
 		'Slack' 			=> 'Maknz\Slack\Facades\Slack',
 		'Socialite' 		=> 'Laravel\Socialite\Facades\Socialite',

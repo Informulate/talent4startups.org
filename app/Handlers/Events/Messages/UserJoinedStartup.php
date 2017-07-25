@@ -4,7 +4,6 @@ use App\Events\UserJoinedStartup as UserJoinedStartupEvent;
 
 use App\Repositories\ThreadRepository;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldBeQueued;
 
 class UserJoinedStartup {
 
