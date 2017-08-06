@@ -1,6 +1,6 @@
 <div class="thumbnail">
 	<a href="{{ route('profile_path', $talent->id) }}">
-		<img class="profile-image signup-link" src="{{{ $talent->avatar() }}}?s=250&d=mm" width="250" height="250">
+		<img class="profile-image signup-link" src="{{{ $talent->avatar() }}}?d=mm">
 	</a>
 
 	<div class="caption">
