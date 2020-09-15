@@ -94,7 +94,7 @@
 	<h3>Sponsors/Partners</h3>
 
 
-	<img src="/images/partners/informulate.png" alt="Informulate" class="center-block"/>
+	<img src="/images/partners/informulate_new.png" alt="Informulate" width="405px" class="center-block"/>
 	<p>
 		Informulate (<a href="http://www.informulate.com">www.informulate.com</a>) is a trusted partner to clients in
 		higher education, startups, and small to mid-sized business. It operates two complementary lines of service -
