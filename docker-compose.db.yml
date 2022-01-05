@@ -1,0 +1,27 @@
+version: "3"
+services:
+  app:
+    depends_on:
+      - mariadb
+    links:
+      - mariadb:mariadb
+  nginx:
+    links:
+      - mariadb:mariadb
+  mariadb:
+    image: mariadb
+    networks:
+      - t4s-network
+    ports:
+      - ${DB_PORT_FWD}:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PORT: ${DB_PORT}
+volumes:
+  mariadb:
+    driver: local

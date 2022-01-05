@@ -1,0 +1,31 @@
+version: "3.9"
+networks:
+  t4s-network:
+    driver: bridge
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/var/www/html
+    networks:
+      - t4s-network
+    expose:
+      - 9000
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+      args:
+        - SERVER_NAME=${APP_SERVER_NAME}
+    depends_on:
+      - app
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    networks:
+      - t4s-network
+    ports:
+      - ${APP_PORT}:80
+      - ${APP_PORT_SSL}:443
+    volumes:
+      - ./public:/var/www/html/public
